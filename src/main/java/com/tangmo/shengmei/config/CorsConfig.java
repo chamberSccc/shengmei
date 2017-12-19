@@ -9,7 +9,7 @@ import org.springframework.web.filter.CorsFilter;
 /**
  * @author Chamber
  * @date 17/12/19
- * @description 跨域配置
+ * @description: Cross field Configuration
  */
 @Configuration
 public class CorsConfig {
