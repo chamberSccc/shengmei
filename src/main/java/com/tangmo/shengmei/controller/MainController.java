@@ -6,8 +6,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  *
- * @author Chamber1
- * @date 2017-09-12
+ * @author Chamber
+ * @date 17/12/19
+ * @description 主页面接口
  */
 @RestController
 @RequestMapping("/main")
