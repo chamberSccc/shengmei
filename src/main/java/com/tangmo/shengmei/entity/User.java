@@ -7,4 +7,5 @@ package com.tangmo.shengmei.entity;
  */
 
 public class User {
+
 }
