@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
  * @description: Main Page Controller
  */
 @RestController
-@RequestMapping("/main")
-public class MainController {
+@RequestMapping("/user")
+public class UserController {
 
-    @GetMapping("/test")
-    public String findOnlineCourse(){
+    @GetMapping("")
+    public String getUserInfo(){
         return "aaaaa";
     }
 }
