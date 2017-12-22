@@ -18,4 +18,12 @@ public interface UserService {
      * @return
      */
     Result addUser(User user);
+
+    /**
+     * 修改用户信息
+     *
+     * @param user
+     * @return
+     */
+    Result changeUser(User user);
 }

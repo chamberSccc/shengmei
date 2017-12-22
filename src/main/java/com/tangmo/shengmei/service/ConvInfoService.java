@@ -18,4 +18,12 @@ public interface ConvInfoService {
      * @return
      */
     Result addConvInfo(ConvInfo convInfo);
+
+    /**
+     * 修改便民信息
+     *
+     * @param convInfo
+     * @return
+     */
+    Result changeConvInfo(ConvInfo convInfo);
 }

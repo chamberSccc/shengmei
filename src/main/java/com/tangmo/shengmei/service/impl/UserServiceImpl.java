@@ -6,6 +6,7 @@ import com.tangmo.shengmei.service.UserService;
 import com.tangmo.shengmei.utility.code.Result;
 import com.tangmo.shengmei.utility.code.ResultUtil;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
@@ -20,6 +21,7 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
 
     @Override
+    @Transactional
     public Result addUser(User user) {
         if (user.getPassword() == null || user.getMobile() == null) {
             return ResultUtil.fail();
@@ -29,5 +31,15 @@ public class UserServiceImpl implements UserService {
             return ResultUtil.success();
         }
         return ResultUtil.fail();
+    }
+
+    @Override
+    @Transactional
+    public Result changeUser(User user) {
+        if(user.getUserId() == null){
+            return ResultUtil.fail();
+        }
+        userDao.updateById(user);
+        return ResultUtil.success();
     }
 }

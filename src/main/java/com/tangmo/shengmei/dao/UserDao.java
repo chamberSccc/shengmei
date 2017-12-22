@@ -5,7 +5,7 @@ import com.tangmo.shengmei.entity.User;
 /**
  * @author boge
  * @date 17/12/20
- * @description 用户实体类
+ * @description 用户信息Dao接口
  */
 public interface UserDao {
     /**
@@ -23,4 +23,12 @@ public interface UserDao {
      * @return
      */
     User selectByPrimaryKey(Integer id);
+
+    /**
+     * 通过主键修改用户信息
+     *
+     * @param user
+     * @return
+     */
+    int updateById(User user);
 }

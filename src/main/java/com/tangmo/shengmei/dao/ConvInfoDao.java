@@ -11,10 +11,18 @@ import com.tangmo.shengmei.entity.ConvInfo;
 public interface ConvInfoDao {
 
     /**
-     * 新增便民对象Selective
+     * 新增便民信息Selective
      *
      * @param convInfo
      * @return
      */
     int insertSelective(ConvInfo convInfo);
+
+    /**
+     * 通过主键修改便民信息
+     *
+     * @param convInfo
+     * @return
+     */
+    int updateById(ConvInfo convInfo);
 }
