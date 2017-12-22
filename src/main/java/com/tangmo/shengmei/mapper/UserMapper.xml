@@ -2,10 +2,40 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.tangmo.shengmei.dao.UserDao" >
     <resultMap id="BaseResultMap" type="com.tangmo.shengmei.entity.User" >
-
+        <id column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="mobile" property="mobile" jdbcType="VARCHAR"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+        <result column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="avatar_id" property="avatarId" jdbcType="VARCHAR"/>
+        <result column="createtime" property="createTime" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <sql id="Base_Column_List" >
 
     </sql>
+    <insert id="insertSelective" parameterType="com.tangmo.shengmei.entity.User">
+            insert into user_info
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="password != null">
+                    password,
+                </if>
+                <if test="mobile != null">
+                    mobile,
+                </if>
+                <if test="username != null">
+                    username,
+                </if>
+            </trim>
+            <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="password != null">
+                    #{password,jdbcType=VARCHAR},
+                </if>
+                <if test="mobile != null">
+                    #{mobile,jdbcType=VARCHAR},
+                </if>
+                <if test="username != null">
+                    #{username,jdbcType=VARCHAR},
+                </if>
+            </trim>
+    </insert>
 </mapper>

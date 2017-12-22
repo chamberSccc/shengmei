@@ -7,18 +7,19 @@ import java.sql.Date;
 
 /**
  * @author boge
- * @date 17/12/20
- * @description 用户PO
+ * @date 17/12/22
+ * @description
  */
 
 @Data
-public class User implements Serializable {
+public class ConvInfo implements Serializable {
+
     private static final long serialVersionUID = 1L;
+    private Integer ciId;
     private Integer userId;
-    private String password;
-    private String mobile;
-    private String username;
-    private String avatarId;
+    private String title;
+    private String subtitle;
+    private String content;
     private Date createTime;
     private Date updateTime;
 }

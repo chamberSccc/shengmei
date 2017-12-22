@@ -30,9 +30,8 @@ spring:
       driver-class-name: com.mysql.jdbc.Driver
       username: root
       password: 1
-
-#mybatis:
-#  mapper-locations: classpath:com/mclinical/mapper/*.xml
+  mybatis:
+    mapper-locations: classpath:com/tangmo/shengmei/mapper/*.xml
 
 
 

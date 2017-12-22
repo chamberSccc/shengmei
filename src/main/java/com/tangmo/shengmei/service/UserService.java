@@ -1,14 +1,21 @@
 package com.tangmo.shengmei.service;
 
-import org.springframework.stereotype.Service;
+import com.tangmo.shengmei.entity.User;
+import com.tangmo.shengmei.utility.code.Result;
 
 /**
  * @author boge
  * @date 17/12/20
- * @description 用户接口
+ * @description 用户服务
  */
 
-@Service("userService")
 public interface UserService {
 
+    /**
+     * 增加单个用户
+     *
+     * @param user
+     * @return
+     */
+    Result addUser(User user);
 }

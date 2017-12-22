@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tangmo.shengmei.dao.ConvInfoDao" >
+    <resultMap id="BaseResultMap" type="com.tangmo.shengmei.entity.ConvInfo" >
+        <id column="ci_id" property="userId" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="subtitle" property="subtitle" jdbcType="VARCHAR"/>
+        <result column="content" property="content" jdbcType="VARCHAR"/>
+        <result column="createtime" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+
+    </sql>
+    <insert id="insertSelective" parameterType="com.tangmo.shengmei.entity.ConvInfo">
+            insert into convenient_info
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="userId != null">
+                    user_id,
+                </if>
+                <if test="title != null">
+                    title,
+                </if>
+                <if test="subtitle != null">
+                    subtitle,
+                </if>
+                <if test="content != null">
+                    content,
+                </if>
+            </trim>
+            <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="userId != null">
+                    #{userId,jdbcType=VARCHAR},
+                </if>
+                <if test="title != null">
+                    #{title,jdbcType=VARCHAR},
+                </if>
+                <if test="subtitle != null">
+                    #{subtitle,jdbcType=VARCHAR},
+                </if>
+                <if test="content != null">
+                    #{content,jdbcType=VARCHAR},
+                </if>
+            </trim>
+    </insert>
+
+    <update id="updateById" parameterType="com.tangmo.shengmei.entity.ConvInfo">
+        UPDATE convenient_info
+        <set>
+            <if test="userId != null">
+                user_id = #{userId},
+            </if>
+            <if test="title != null">
+                title = #{title},
+            </if>
+            <if test="subtitle != null">
+                subtitle = #{subtitle},
+            </if>
+            <if test="content != null">
+                content = #{content},
+            </if>
+            updatetime = now()
+        </set>
+        WHERE ci_id = #{ciId,jdbcType=INTEGER}
+    </update>
+</mapper>
