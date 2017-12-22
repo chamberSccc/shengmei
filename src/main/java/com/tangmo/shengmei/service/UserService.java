@@ -12,7 +12,7 @@ import com.tangmo.shengmei.utility.code.Result;
 public interface UserService {
 
     /**
-     * 增加单个用户
+     * 增加用户信息
      *
      * @param user
      * @return
@@ -26,4 +26,12 @@ public interface UserService {
      * @return
      */
     Result changeUser(User user);
+
+    /**
+     * 获取用户信息
+     *
+     * @param userId
+     * @return
+     */
+    Result getUser(Integer userId);
 }

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tangmo.shengmei.dao.FileDao" >
+    <resultMap id="BaseResultMap" type="com.tangmo.shengmei.entity.File" >
+        <result column="path" property="path" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+
+    </sql>
+    <insert id="insertSelective" parameterType="com.tangmo.shengmei.entity.File">
+        insert into file (file_id,path) VALUES (#{fileId},#{path})
+    </insert>
+
+    <select id="selectById" resultMap="BaseResultMap">
+        SELECT path FROM file WHERE file_id = #{fileId}
+    </select>
+</mapper>

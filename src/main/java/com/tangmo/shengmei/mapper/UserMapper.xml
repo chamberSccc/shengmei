@@ -4,7 +4,6 @@
     <resultMap id="BaseResultMap" type="com.tangmo.shengmei.entity.User" >
         <id column="user_id" property="userId" jdbcType="INTEGER"/>
         <result column="mobile" property="mobile" jdbcType="VARCHAR"/>
-        <result column="password" property="password" jdbcType="VARCHAR"/>
         <result column="username" property="username" jdbcType="VARCHAR"/>
         <result column="avatar_id" property="avatarId" jdbcType="VARCHAR"/>
         <result column="createtime" property="createTime" jdbcType="TIMESTAMP"/>
@@ -52,4 +51,8 @@
         </set>
         WHERE user_id = #{userId,jdbcType=INTEGER}
     </update>
+
+    <select id="selectById" resultMap="BaseResultMap">
+        SELECT user_id,username,mobile,avatar_id FROM user_info WHERE user_id = #{userId}
+    </select>
 </mapper>

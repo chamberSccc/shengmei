@@ -8,7 +8,7 @@ import java.util.UUID;
 /**
  * @author Chamber
  * @date 2017/8/22.
- * @description 密码类相关工具
+ * @description 密码相关工具
  */
 public class EncryptUtil {
 

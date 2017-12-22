@@ -22,7 +22,7 @@ public interface UserDao {
      * @param id user表主键
      * @return
      */
-    User selectByPrimaryKey(Integer id);
+    User selectById(Integer id);
 
     /**
      * 通过主键修改用户信息
