@@ -88,13 +88,13 @@ public class UserController extends BaseController{
      * @apiGroup User
      * @apiVersion 0.0.1
      * @apiDescription 上传头像
-     * @apiParam {User} user 用户对象
+     * @apiParam {String} code 图片base64编码
      * @apiParamExample {json} 请求样例:
      *                   {
      *                      code:"sdfjsajfsa89878979hfhfakjdlkf",
      *                   }
-     * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
-     * @apiSuccess (success) {GET} data 返回数据
+     * @apiSuccess (success) {POST} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccess (success) {POST} data 返回数据
      * @apiSuccessExample {json} 返回样例:
      *                    {"code":"success"}
      */
