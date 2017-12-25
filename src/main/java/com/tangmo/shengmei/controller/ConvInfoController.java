@@ -37,7 +37,7 @@ public class ConvInfoController extends BaseController {
     }
 
     /**
-     * @api {POST} /conv 修改便民信息
+     * @api {POST} /conv/change 修改便民信息
      * @apiGroup Convenient
      * @apiVersion 0.0.1
      * @apiDescription 修改便民信息
