@@ -33,9 +33,6 @@ spring:
   mybatis:
     mapper-locations: classpath:com/tangmo/shengmei/mapper/*.xml
 
-
-
-
-
-
-
+logging:
+  level:
+    com.tangmo.shengmei.mapper: DEBUG

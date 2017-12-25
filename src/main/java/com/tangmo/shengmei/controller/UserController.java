@@ -27,8 +27,8 @@ public class UserController extends BaseController{
      *                      mobile:"18710889234",
      *                      avatarId:"dasjhu2423523234"
      *                   }
-     * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
-     * @apiSuccess (success) {GET} data 返回数据
+     * @apiSuccess (success) {POST} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccess (success) {POST} data 返回数据
      * @apiSuccessExample {json} 返回样例:
      *                    {"code":"success"}
      */
@@ -62,7 +62,7 @@ public class UserController extends BaseController{
     }
 
     /**
-     * @api {PUT} /user 修改用户信息
+     * @api {POST} /user 修改用户信息
      * @apiGroup Convenient
      * @apiVersion 0.0.1
      * @apiDescription 修改用户信息
@@ -73,12 +73,12 @@ public class UserController extends BaseController{
      *                      mobile:"18710889234",
      *                      avatarId:"dasjhu2423523234"
      *                   }
-     * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
-     * @apiSuccess (success) {GET} data 返回数据
+     * @apiSuccess (success) {POST} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccess (success) {POST} data 返回数据
      * @apiSuccessExample {json} 返回样例:
      *                    {"code":"success"}
      */
-    @PutMapping
+    @PostMapping("/add")
     public Result changeUserInfo(User user){
         return userService.changeUser(user);
     }
@@ -98,7 +98,7 @@ public class UserController extends BaseController{
      * @apiSuccessExample {json} 返回样例:
      *                    {"code":"success"}
      */
-    @PostMapping("/avatar")
+    @PostMapping("/avatar/add")
     public Result loadAvatar(String code){
         return null;
     }

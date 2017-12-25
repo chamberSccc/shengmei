@@ -26,4 +26,13 @@ public interface ConvInfoService {
      * @return
      */
     Result changeConvInfo(ConvInfo convInfo);
+
+    /**
+     * 获取分页便民信息列表
+     *
+     * @param start
+     * @param end
+     * @return
+     */
+    Result searchConvList(Integer start, Integer end);
 }

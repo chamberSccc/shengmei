@@ -34,6 +34,15 @@ public class ConvInfoServiceImpl implements ConvInfoService {
     @Override
     @Transactional
     public Result changeConvInfo(ConvInfo convInfo) {
-        return null;
+        if(convInfo.getCiId() == null){
+            return ResultUtil.fail();
+        }
+        convInfoDao.updateById(convInfo);
+        return ResultUtil.success();
+    }
+
+    @Override
+    public Result searchConvList(Integer start, Integer end) {
+        return ResultUtil.success(convInfoDao.selectConvList(start,end));
     }
 }

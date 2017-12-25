@@ -38,7 +38,7 @@
             </trim>
     </insert>
 
-    <update id="updateById" parameterType="com.tangmo.shengmei.entity.user">
+    <update id="updateById" parameterType="com.tangmo.shengmei.entity.User">
         UPDATE convenient_info
         <set>
             <if test="mobile != null">

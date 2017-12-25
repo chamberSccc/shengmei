@@ -3,10 +3,7 @@ package com.tangmo.shengmei.controller;
 import com.tangmo.shengmei.controller.base.BaseController;
 import com.tangmo.shengmei.entity.ConvInfo;
 import com.tangmo.shengmei.utility.code.Result;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author boge
@@ -29,18 +26,18 @@ public class ConvInfoController extends BaseController {
      *                      title:"标题是什么",
      *                      content:"内容是什么"
      *                   }
-     * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
-     * @apiSuccess (success) {GET} data 返回数据
+     * @apiSuccess (success) {POST} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccess (success) {POST} data 返回数据
      * @apiSuccessExample {json} 返回样例:
      *                    {"code":"success"}
      */
-    @PostMapping("")
+    @PostMapping("/add")
     public Result addConvInfo(ConvInfo convInfo){
         return convInfoService.addConvInfo(convInfo);
     }
 
     /**
-     * @api {PUT} /conv 修改便民信息
+     * @api {POST} /conv 修改便民信息
      * @apiGroup Convenient
      * @apiVersion 0.0.1
      * @apiDescription 修改便民信息
@@ -51,13 +48,43 @@ public class ConvInfoController extends BaseController {
      *                      title:"标题是什么",
      *                      content:"内容是什么"
      *                   }
-     * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
-     * @apiSuccess (success) {GET} data 返回数据
+     * @apiSuccess (success) {POST} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccess (success) {POST} data 返回数据
      * @apiSuccessExample {json} 返回样例:
      *                    {"code":"success"}
      */
-    @PutMapping("")
+    @PostMapping("/change")
     public Result changeConvInfo(ConvInfo convInfo){
         return convInfoService.changeConvInfo(convInfo);
+    }
+
+    /**
+     * @api {GET} /get/list/{start}/{end} 获取便民信息
+     * @apiGroup Staff
+     * @apiVersion 0.0.1
+     * @apiParam {int} start 分页起始索引
+     * @apiParam {int} end 分页结束索引
+     * @apiDescription 获取个人信息
+     * @apiParamExample {json} 请求样例：
+     *  /get/list/1/10
+     * @apiSuccess (200) {String} msg 信息
+     * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success",
+     *                     "data":{
+     *                     [{
+     *                        "ciId": 1,
+     *                        "title": "文章标题",
+     *                        "content": "文章内容"},
+     *                     {
+     *                        "ciId": 2,
+     *                        "title": "文章标题2",
+     *                        "content": "文章内容2"
+     *                     }]
+     *                     }
+     */
+    @GetMapping("/get/list/{start}/{end}")
+    public Result getConvInfo(@PathVariable Integer start,@PathVariable Integer end){
+        return convInfoService.searchConvList(start,end);
     }
 }

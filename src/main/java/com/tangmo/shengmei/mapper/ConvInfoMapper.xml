@@ -5,7 +5,6 @@
         <id column="ci_id" property="userId" jdbcType="INTEGER"/>
         <result column="user_id" property="userId" jdbcType="INTEGER"/>
         <result column="title" property="title" jdbcType="VARCHAR"/>
-        <result column="subtitle" property="subtitle" jdbcType="VARCHAR"/>
         <result column="content" property="content" jdbcType="VARCHAR"/>
         <result column="createtime" property="createTime" jdbcType="TIMESTAMP"/>
     </resultMap>
@@ -64,4 +63,8 @@
         </set>
         WHERE ci_id = #{ciId,jdbcType=INTEGER}
     </update>
+
+    <select id="selectConvList" resultMap="BaseResultMap">
+        SELECT ci_id,title,content FROM convenient_info limit #{start},#{end}
+    </select>
 </mapper>

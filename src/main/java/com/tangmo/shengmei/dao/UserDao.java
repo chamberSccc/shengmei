@@ -1,12 +1,14 @@
 package com.tangmo.shengmei.dao;
 
 import com.tangmo.shengmei.entity.User;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * @author boge
  * @date 17/12/20
  * @description 用户信息Dao接口
  */
+@Mapper
 public interface UserDao {
     /**
      * 增加用户Selective
