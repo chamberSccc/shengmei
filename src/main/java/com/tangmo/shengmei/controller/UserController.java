@@ -50,10 +50,10 @@ public class UserController extends BaseController{
      * @apiSuccessExample {json} 返回样例:
      *                    {"code":"success",
      *                     "data":{
-     *                     "userId": 1,
-     *                     "username": "姓名",
-     *                     "mobile": "312445345",
-     *                     "avatarId": "fsd42sd656sdasdasd",
+     *                     userId: 1,
+     *                     username: "姓名",
+     *                     mobile: "312445345",
+     *                     avatarId: "fsd42sd656sdasdasd",
      *                     }
      */
     @GetMapping("/{userId}")

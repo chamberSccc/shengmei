@@ -8,7 +8,7 @@ import java.sql.Date;
 /**
  * @author boge
  * @date 17/12/22
- * @description
+ * @description 便民信息实体类PO
  */
 
 @Data

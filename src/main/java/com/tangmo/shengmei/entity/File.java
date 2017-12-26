@@ -5,7 +5,7 @@ import lombok.Data;
 /**
  * @author boge
  * @date 17/12/22
- * @description
+ * @description 文件资源实体类
  */
 
 @Data

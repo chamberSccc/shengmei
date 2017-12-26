@@ -2,6 +2,7 @@ package com.tangmo.shengmei.controller.base;
 
 import com.tangmo.shengmei.service.ConvInfoService;
 import com.tangmo.shengmei.service.UserAddressService;
+import com.tangmo.shengmei.service.UserCarService;
 import com.tangmo.shengmei.service.UserService;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -25,6 +26,8 @@ public class BaseController {
     protected ConvInfoService convInfoService;
     @Resource
     protected UserAddressService userAddressService;
+    @Resource
+    protected UserCarService userCarService;
 
     /**
      * 得到request对象

@@ -19,7 +19,7 @@ public class UserAddressController extends BaseController{
      * @apiGroup UserAddress
      * @apiVersion 0.0.1
      * @apiDescription 增加地址信息
-     * @apiParam {UserAddress} UserAddress 全新汽配对象
+     * @apiParam {UserAddress} UserAddress 用户地址对象
      * @apiParamExample {json} 请求样例:
      *                   {
      *                      userId:"用户Id",
@@ -42,7 +42,7 @@ public class UserAddressController extends BaseController{
      * @apiGroup UserAddress
      * @apiVersion 0.0.1
      * @apiDescription 增加地址信息
-     * @apiParam {UserAddress} UserAddress 全新汽配对象
+     * @apiParam {UserAddress} UserAddress 用户地址对象
      * @apiParamExample {json} 请求样例:
      *                   {
      *                      uaId: 本条记录id
@@ -63,7 +63,7 @@ public class UserAddressController extends BaseController{
 
     /**
      * @api {GET} /get/list/{userId} 获取用户地址信息
-     * @apiGroup Staff
+     * @apiGroup UserAddress
      * @apiVersion 0.0.1
      * @apiParam {int} userId 用户Id
      * @apiDescription 获取用户地址信息
@@ -75,15 +75,15 @@ public class UserAddressController extends BaseController{
      *                    {"code":"success",
      *                     "data":{
      *                     [{
-     *                        "uaId": 1,
-     *                        "address": "地址信息1",
-     *                        "recipient": "收件人1",
-     *                        "mobile":"手机号1"},
+     *                        uaId: 1,
+     *                        address: "地址信息1",
+     *                        recipient: "收件人1",
+     *                        mobile:"手机号1"},
      *                     {
-     *                        "uaId": 2,
-     *                        "address": "地址信息2",
-     *                        "recipient": "收件人2",
-     *                        "mobile":"手机号2"
+     *                        uaId: 2,
+     *                        address: "地址信息2",
+     *                        recipient: "收件人2",
+     *                        mobile:"手机号2"
      *                     }]
      *                     }
      */
@@ -94,7 +94,7 @@ public class UserAddressController extends BaseController{
 
     /**
      * @api {GET} /del/{uaId} 删除用户地址信息
-     * @apiGroup Staff
+     * @apiGroup UserAddress
      * @apiVersion 0.0.1
      * @apiParam {int} uaId 地址表主键
      * @apiDescription 删除用户地址信息

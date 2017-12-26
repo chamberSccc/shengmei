@@ -8,7 +8,7 @@ import java.sql.Date;
 /**
  * @author boge
  * @date 17/12/26
- * @description 用户车辆实体类
+ * @description 用户车辆实体类PO
  */
 @Data
 public class UserCar implements Serializable{
@@ -17,7 +17,7 @@ public class UserCar implements Serializable{
     private Integer userId;
     private String carNum;
     private String carProvince;
-    private String carFrameNum;
+    private String frameNum;
     private Byte carType;
     private String engineNum;
     private Date createTime;

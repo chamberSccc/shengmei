@@ -6,6 +6,7 @@ import com.tangmo.shengmei.service.UserAddressService;
 import com.tangmo.shengmei.utility.code.Result;
 import com.tangmo.shengmei.utility.code.ResultUtil;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
@@ -20,6 +21,7 @@ public class UserAddressServiceImpl implements UserAddressService{
     @Resource
     private UserAddressDao userAddressDao;
     @Override
+    @Transactional
     public Result addUserAddress(UserAddress userAddress) {
         if(userAddress.getUserId() == null){
             return ResultUtil.fail();
@@ -29,6 +31,7 @@ public class UserAddressServiceImpl implements UserAddressService{
     }
 
     @Override
+    @Transactional
     public Result changeUserAddress(UserAddress userAddress) {
         if(userAddress.getUaId() == null){
             return ResultUtil.fail();
@@ -43,6 +46,7 @@ public class UserAddressServiceImpl implements UserAddressService{
     }
 
     @Override
+    @Transactional
     public Result delUserAddress(Integer uaId) {
         userAddressDao.deleteById(uaId);
         return ResultUtil.success();

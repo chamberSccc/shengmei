@@ -51,14 +51,14 @@
                 mobile = #{mobile},
             </if>
             <if test="address != null">
-                address = #{username},
+                address = #{address},
             </if>
             <if test="recipient != null">
-                recipient = #{username},
+                recipient = #{recipient},
             </if>
             updatetime = now()
         </set>
-        WHERE user_id = #{userId,jdbcType=INTEGER}
+        WHERE ua_id = #{uaId,jdbcType=INTEGER}
     </update>
 
     <select id="selectListByUserId" resultMap="BaseResultMap">

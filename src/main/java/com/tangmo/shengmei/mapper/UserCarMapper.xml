@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tangmo.shengmei.dao.UserCarDao" >
+    <resultMap id="BaseResultMap" type="com.tangmo.shengmei.entity.UserCar" >
+        <id column="uc_id" property="uaId" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="car_num" property="carNum" jdbcType="VARCHAR"/>
+        <result column="car_province" property="carProvince" jdbcType="VARCHAR"/>
+        <result column="frame_num" property="frameNum" jdbcType="VARCHAR"/>
+        <result column="engine_num" property="engineNum" jdbcType="VARCHAR"/>
+        <result column="car_type" property="carType" jdbcType="TINYINT"/>
+        <result column="createtime" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+
+    </sql>
+    <insert id="insertSelective" parameterType="com.tangmo.shengmei.entity.UserCar">
+            insert into user_car
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="userId != null">
+                    user_id,
+                </if>
+                <if test="carNum != null">
+                    car_num,
+                </if>
+                <if test="carProvince != null">
+                    car_province,
+                </if>
+                <if test="frameNum != null">
+                    frame_num,
+                </if>
+                <if test="engineNum != null">
+                    engine_num,
+                </if>
+                <if test="carType != null">
+                    car_type,
+                </if>
+            </trim>
+            <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="userId != null">
+                    #{userId,jdbcType=INTEGER},
+                </if>
+                <if test="carNum != null">
+                    #{carNum,jdbcType=VARCHAR},
+                </if>
+                <if test="carProvince != null">
+                    #{carProvince,jdbcType=VARCHAR},
+                </if>
+                <if test="frameNum != null">
+                    #{frameNum,jdbcType=VARCHAR},
+                </if>
+                <if test="engineNum != null">
+                    #{engineNum,jdbcType=VARCHAR},
+                </if>
+                <if test="carType != null">
+                    #{carType,jdbcType=TINYINT},
+                </if>
+            </trim>
+    </insert>
+
+    <update id="updateById" parameterType="com.tangmo.shengmei.entity.UserAddress">
+        UPDATE user_car
+        <set>
+            <if test="carNum != null">
+                car_num = #{carNum},
+            </if>
+            <if test="carProvince != null">
+                car_province = #{carProvince},
+            </if>
+            <if test="frameNum != null">
+                frame_num = #{frameNum},
+            </if>
+            <if test="engineNum != null">
+                engine_num = #{engineNum},
+            </if>
+            <if test="carType != null">
+                car_type = #{carType},
+            </if>
+            updatetime = now()
+        </set>
+        WHERE uc_id = #{userId,jdbcType=INTEGER}
+    </update>
+
+    <select id="selectListByUserId" resultMap="BaseResultMap">
+        SELECT mobile,recipient,address  FROM user_address WHERE user_id = #{userId}
+    </select>
+
+    <delete id="deleteById">
+        DELETE FROM user_address WHERE uc_id = #{ucId}
+    </delete>
+</mapper>

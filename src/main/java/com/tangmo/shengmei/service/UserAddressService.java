@@ -3,7 +3,6 @@ package com.tangmo.shengmei.service;
 import com.tangmo.shengmei.entity.UserAddress;
 import com.tangmo.shengmei.utility.code.Result;
 
-import java.util.List;
 
 /**
  * @author boge

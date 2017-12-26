@@ -60,7 +60,7 @@ public class ConvInfoController extends BaseController {
 
     /**
      * @api {GET} /get/list/{start}/{end} 获取便民信息
-     * @apiGroup Staff
+     * @apiGroup Convenient
      * @apiVersion 0.0.1
      * @apiParam {int} start 分页起始索引
      * @apiParam {int} end 分页结束索引
@@ -73,13 +73,13 @@ public class ConvInfoController extends BaseController {
      *                    {"code":"success",
      *                     "data":{
      *                     [{
-     *                        "ciId": 1,
-     *                        "title": "文章标题",
-     *                        "content": "文章内容"},
+     *                        ciId: 1,
+     *                        title: "文章标题",
+     *                        content: "文章内容"},
      *                     {
-     *                        "ciId": 2,
-     *                        "title": "文章标题2",
-     *                        "content": "文章内容2"
+     *                        ciId: 2,
+     *                        title: "文章标题2",
+     *                        content: "文章内容2"
      *                     }]
      *                     }
      */
