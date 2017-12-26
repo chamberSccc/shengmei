@@ -79,14 +79,14 @@
             </if>
             updatetime = now()
         </set>
-        WHERE uc_id = #{userId,jdbcType=INTEGER}
+        WHERE uc_id = #{ucId,jdbcType=INTEGER}
     </update>
 
     <select id="selectListByUserId" resultMap="BaseResultMap">
-        SELECT mobile,recipient,address  FROM user_address WHERE user_id = #{userId}
+        SELECT uc_id,user_id,car_num,frame_num,car_province,engine_num,car_type FROM user_car WHERE user_id = #{userId}
     </select>
 
     <delete id="deleteById">
-        DELETE FROM user_address WHERE uc_id = #{ucId}
+        DELETE FROM user_car WHERE uc_id = #{ucId}
     </delete>
 </mapper>

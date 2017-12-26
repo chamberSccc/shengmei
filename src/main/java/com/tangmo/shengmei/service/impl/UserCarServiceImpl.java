@@ -19,7 +19,8 @@ import javax.annotation.Resource;
 public class UserCarServiceImpl implements UserCarService {
     @Resource
     private UserCarDao userCarDao;
-    private static final int CAR_NUM_LENGEH = 6;
+    private static final int CAR_NUM_LENGTH = 6;
+    private static final int CAR_PROVINCE_LENGTH = 1;
     @Override
     @Transactional
     public Result addUserCar(UserCar userCar) {
@@ -27,7 +28,7 @@ public class UserCarServiceImpl implements UserCarService {
             return ResultUtil.fail();
         }
 
-        if(userCar.getCarNum().length() != CAR_NUM_LENGEH){
+        if(userCar.getCarNum().length() != CAR_NUM_LENGTH && userCar.getCarProvince().length() != CAR_PROVINCE_LENGTH){
             return ResultUtil.fail();
         }
         userCarDao.insertSelective(userCar);
