@@ -34,7 +34,7 @@ public class UserAddressController extends BaseController{
      */
     @PostMapping("/add")
     public Result addAddress(UserAddress userAddress){
-        return null;
+        return userAddressService.addUserAddress(userAddress);
     }
 
     /**
@@ -58,7 +58,7 @@ public class UserAddressController extends BaseController{
      */
     @PostMapping("/change")
     public Result changeAddress(UserAddress userAddress){
-        return null;
+        return userAddressService.changeUserAddress(userAddress);
     }
 
     /**

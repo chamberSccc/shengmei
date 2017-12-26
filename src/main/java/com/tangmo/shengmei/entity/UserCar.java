@@ -7,17 +7,20 @@ import java.sql.Date;
 
 /**
  * @author boge
- * @date 17/12/25
- * @description 用户地址PO
+ * @date 17/12/26
+ * @description 用户车辆实体类
  */
 @Data
-public class UserAddress implements Serializable{
+public class UserCar implements Serializable{
     private static final long serialVersionUID = 1L;
-    private Integer uaId;
-    private String address;
-    private String recipient;
-    private String mobile;
+    private Integer ucId;
     private Integer userId;
+    private String carNum;
+    private String carProvince;
+    private String carFrameNum;
+    private Byte carType;
+    private String engineNum;
     private Date createTime;
     private Date updateTime;
+
 }

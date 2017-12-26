@@ -35,4 +35,4 @@ spring:
 
 logging:
   level:
-    com.tangmo.shengmei.mapper: DEBUG
+    org.springframework.web: DEBUG
