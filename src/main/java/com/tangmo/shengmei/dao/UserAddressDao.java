@@ -27,7 +27,7 @@ public interface UserAddressDao {
      * @param userId 用户id
      * @return
      */
-    List<UserAddress> selectListById(Integer userId);
+    List<UserAddress> selectListByUserId(Integer userId);
 
     /**
      * 通过主键修改用户地址信息
@@ -36,4 +36,12 @@ public interface UserAddressDao {
      * @return
      */
     int updateById(UserAddress userAddress);
+
+    /**
+     * 通过主键删除用户地址信息
+     *
+     * @param uaId
+     * @return
+     */
+    int deleteById(Integer uaId);
 }

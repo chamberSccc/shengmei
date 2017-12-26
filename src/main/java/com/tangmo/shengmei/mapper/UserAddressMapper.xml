@@ -64,4 +64,8 @@
     <select id="selectListById" resultMap="BaseResultMap">
         SELECT mobile,recipient,address  FROM user_address WHERE user_id = #{userId}
     </select>
+
+    <delete id="deleteById">
+        DELETE FROM user_address WHERE ua_id = #{uaId}
+    </delete>
 </mapper>

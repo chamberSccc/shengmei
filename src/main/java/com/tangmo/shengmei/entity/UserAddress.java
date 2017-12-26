@@ -11,11 +11,11 @@ import java.sql.Date;
  */
 @Data
 public class UserAddress {
-    private int uaId;
+    private Integer uaId;
     private String address;
     private String recipient;
     private String mobile;
-    private int userId;
+    private Integer userId;
     private Date createTime;
     private Date updateTime;
 }
