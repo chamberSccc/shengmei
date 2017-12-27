@@ -55,7 +55,7 @@
         cd.title,cd.content,cd.price_pre,cd.price_now,cd.img_id,cd.cd_type
         FROM shop_cart sc LEFT JOIN commodity cd
         ON sc.cd_id = cd.cd_id
-        WHERE sc.user_id = #{userId}
+        WHERE sc.user_id = #{userId} limit #{start},#{end}
     </select>
 
     <delete id="deleteById">

@@ -1,9 +1,14 @@
 package com.tangmo.shengmei.service.impl;
 
+import com.tangmo.shengmei.dao.ShopCartDao;
 import com.tangmo.shengmei.entity.ShopCart;
 import com.tangmo.shengmei.service.ShopCartService;
 import com.tangmo.shengmei.utility.code.Result;
+import com.tangmo.shengmei.utility.code.ResultUtil;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.annotation.Resource;
 
 /**
  * @author boge
@@ -12,18 +17,30 @@ import org.springframework.stereotype.Service;
  */
 @Service("shopCartService")
 public class ShopCartServiceImpl implements ShopCartService{
+
+    @Resource
+    private ShopCartDao shopCartDao;
     @Override
+    @Transactional
     public Result addShopCart(ShopCart shopCart) {
-        return null;
+
+        try {
+            shopCartDao.insertSelective(shopCart);
+        } catch (Exception e) {
+            return ResultUtil.fail();
+        }
+        return ResultUtil.success();
     }
 
     @Override
     public Result searchUserCart(Integer userId, Integer start, Integer end) {
-        return null;
+        return ResultUtil.success(shopCartDao.selectListByUserId(userId,start,end));
     }
 
     @Override
+    @Transactional
     public Result delCart(Integer scId) {
-        return null;
+        shopCartDao.deleteById(scId);
+        return ResultUtil.success();
     }
 }
