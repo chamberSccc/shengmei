@@ -27,6 +27,8 @@ public class BaseController {
     protected UserCarService userCarService;
     @Resource
     protected CommodityService commodityService;
+    @Resource
+    protected ShopCartService shopCartService;
 
     /**
      * 得到request对象

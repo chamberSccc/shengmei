@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tangmo.shengmei.dao.ShopCartDao" >
+    <resultMap id="BaseResultMap" type="com.tangmo.shengmei.entity.ShopCart" >
+        <id column="sc_id" property="scId" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="cd_id" property="cdId" jdbcType="INTEGER"/>
+        <result column="price" property="price" jdbcType="DOUBLE"/>
+        <result column="pay_count" property="payCount" jdbcType="INTEGER"/>
+        <result column="createtime" property="createTime" jdbcType="TIMESTAMP"/>
+        <association property="commodity" javaType="com.tangmo.shengmei.entity.Commodity">
+            <id column="cd_id" property="cdId" jdbcType="INTEGER"/>
+            <result column="img_id" property="imgId" jdbcType="VARCHAR"/>
+            <result column="title" property="title" jdbcType="VARCHAR"/>
+            <result column="content" property="content" jdbcType="VARCHAR"/>
+            <result column="price_pre" property="pricePre" jdbcType="DOUBLE"/>
+            <result column="price_now" property="priceNow" jdbcType="DOUBLE"/>
+            <result column="type" property="type" jdbcType="TINYINT"/>
+        </association>
+    </resultMap>
+    <insert id="insertSelective" parameterType="com.tangmo.shengmei.entity.ShopCart">
+            insert into shop_cart
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="userId != null">
+                    user_id,
+                </if>
+                <if test="cdId != null">
+                    cd_id,
+                </if>
+                <if test="price != null">
+                    price,
+                </if>
+                <if test="payCount != null">
+                    pay_count,
+                </if>
+            </trim>
+            <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="userId != null">
+                    #{userId,jdbcType=VARCHAR},
+                </if>
+                <if test="cdId != null">
+                    #{cdId,jdbcType=INTEGER},
+                </if>
+                <if test="price != null">
+                    #{price,jdbcType=DOUBLE},
+                </if>
+                <if test="payCount != null">
+                    #{payCount,jdbcType=INTEGER},
+                </if>
+            </trim>
+    </insert>
+
+    <select id="selectListByUserId" resultMap="BaseResultMap">
+        SELECT sc.sc_id,sc.user_id,sc.price,sc.pay_count,
+        cd.title,cd.content,cd.price_pre,cd.price_now,cd.img_id,cd.cd_type
+        FROM shop_cart sc LEFT JOIN commodity cd
+        ON sc.cd_id = cd.cd_id
+        WHERE sc.user_id = #{userId}
+    </select>
+
+    <delete id="deleteById">
+        DELETE FROM shop_cart WHERE sc_id = #{scId}
+    </delete>
+</mapper>
