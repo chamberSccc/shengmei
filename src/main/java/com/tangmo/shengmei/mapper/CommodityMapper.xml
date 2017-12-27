@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tangmo.shengmei.dao.CommodityDao" >
+    <resultMap id="BaseResultMap" type="com.tangmo.shengmei.entity.Commodity" >
+        <id column="cd_id" property="cdId" jdbcType="INTEGER"/>
+        <result column="img_id" property="imgId" jdbcType="VARCHAR"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="content" property="content" jdbcType="VARCHAR"/>
+        <result column="price_pre" property="pricePre" jdbcType="DOUBLE"/>
+        <result column="price_now" property="priceNow" jdbcType="DOUBLE"/>
+        <result column="type" property="type" jdbcType="TINYINT"/>
+        <result column="cd_count" property="cdCount" jdbcType="INTEGER"/>
+        <result column="createtime" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+
+    </sql>
+    <insert id="insertSelective" parameterType="com.tangmo.shengmei.entity.Commodity">
+            insert into commodity
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="imgId != null">
+                    img_id,
+                </if>
+                <if test="userId != null">
+                    user_id,
+                </if>
+                <if test="title != null">
+                    title,
+                </if>
+                <if test="content != null">
+                    content,
+                </if>
+                <if test="pricePre != null">
+                    price_pre,
+                </if>
+                <if test="priceNow != null">
+                    price_now,
+                </if>
+                <if test="cdType != null">
+                    cd_type,
+                </if>
+                <if test="cdCount != null">
+                    cd_count,
+                </if>
+            </trim>
+            <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="imgId != null">
+                    #{imgId,jdbcType=VARCHAR},
+                </if>
+                <if test="userId != null">
+                    #{userId,jdbcType=INTEGER},
+                </if>
+                <if test="title != null">
+                    #{title,jdbcType=VARCHAR},
+                </if>
+                <if test="content != null">
+                    #{content,jdbcType=VARCHAR},
+                </if>
+                <if test="pricePre != null">
+                    #{pricePre,jdbcType=DOUBLE},
+                </if>
+                <if test="priceNow != null">
+                    #{priceNow,jdbcType=DOUBLE},
+                </if>
+                <if test="cdType != null">
+                    #{cdType,jdbcType=TINYINT},
+                </if>
+                <if test="cdCount != null">
+                    #{cdCount,jdbcType=INTEGER},
+                </if>
+            </trim>
+    </insert>
+
+    <update id="updateById" parameterType="com.tangmo.shengmei.entity.Commodity">
+        UPDATE commodity
+        <set>
+            <if test="title != null">
+                title = #{title},
+            </if>
+            <if test="content != null">
+                content = #{content},
+            </if>
+            <if test="pricePre != null">
+                price_pre = #{pricePre},
+            </if>
+            <if test="priceNow != null">
+                price_now = #{priceNow},
+            </if>
+            <if test="pricePre != null">
+                price_pre = #{pricePre},
+            </if>
+            <if test="cdType != null">
+                cd_type = #{cdType},
+            </if>
+            <if test="cdCount != null">
+                cd_count = #{cdCount},
+            </if>
+            updatetime = now()
+        </set>
+        WHERE cd_id = #{cdId,jdbcType=INTEGER}
+    </update>
+
+    <select id="selectListByType" resultMap="BaseResultMap">
+        SELECT img_id,title,content,cd_type,cd_count,price_pre,price_now,createtime
+          FROM commodity WHERE cd_type = #{cdType} limit #{start},#{end}
+    </select>
+
+    <select id="selectListByUserId" resultMap="BaseResultMap">
+        SELECT img_id,title,content,cd_type,cd_count,price_pre,price_now,createtime
+        FROM commodity WHERE user_id = #{userId}
+    </select>
+
+    <delete id="deleteById">
+        DELETE FROM commodity WHERE cd_id = #{cdId}
+    </delete>
+</mapper>
