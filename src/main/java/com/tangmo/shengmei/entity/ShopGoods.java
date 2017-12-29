@@ -3,6 +3,7 @@ package com.tangmo.shengmei.entity;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 /**
  * @author boge
@@ -19,5 +20,6 @@ public class ShopGoods implements Serializable {
     private String imgId;
     private Byte goodsType;
     private Double goodsPrice;
-
+    private Date createTime;
+    private Date updateTime;
 }
