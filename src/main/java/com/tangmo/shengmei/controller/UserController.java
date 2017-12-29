@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserController extends BaseController{
 
     /**
-     * @api {POST} /user 增加用户
+     * @api {POST} /add 增加用户
      * @apiGroup User
      * @apiVersion 0.0.1
      * @apiDescription 增加用户
@@ -32,19 +32,19 @@ public class UserController extends BaseController{
      * @apiSuccessExample {json} 返回样例:
      *                    {"code":"success"}
      */
-    @PostMapping("")
+    @PostMapping("/add")
     public Result addUserInfo(User user){
         return userService.addUser(user);
     }
 
     /**
-     * @api {GET} /user/{userId} 获取用户信息
-     * @apiGroup Staff
+     * @api {GET} /user/get/{userId} 获取用户信息
+     * @apiGroup User
      * @apiVersion 0.0.1
      * @apiParam {int} userId 用户表ID
      * @apiDescription 获取个人信息
      * @apiParamExample {json} 请求样例：
-     *  /user/1
+     *  /user/get/1
      * @apiSuccess (200) {String} msg 信息
      * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
      * @apiSuccessExample {json} 返回样例:
@@ -56,14 +56,14 @@ public class UserController extends BaseController{
      *                     avatarId: "fsd42sd656sdasdasd",
      *                     }
      */
-    @GetMapping("/{userId}")
+    @GetMapping("/get/{userId}")
     public Result getUserInfo(@PathVariable Integer userId){
         return null;
     }
 
     /**
-     * @api {POST} /user 修改用户信息
-     * @apiGroup Convenient
+     * @api {POST} /user/change 修改用户信息
+     * @apiGroup User
      * @apiVersion 0.0.1
      * @apiDescription 修改用户信息
      * @apiParam {User} user 用户信息对象
@@ -78,7 +78,7 @@ public class UserController extends BaseController{
      * @apiSuccessExample {json} 返回样例:
      *                    {"code":"success"}
      */
-    @PostMapping("/add")
+    @PostMapping("/change")
     public Result changeUserInfo(User user){
         return userService.changeUser(user);
     }

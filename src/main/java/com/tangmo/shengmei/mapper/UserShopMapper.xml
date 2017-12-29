@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tangmo.shengmei.dao.UserShopDao">
+    <resultMap id="BaseResultMap" type="com.tangmo.shengmei.entity.UserShop">
+        <id column="us_id" property="usId" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="mobile" property="mobile" jdbcType="VARCHAR"/>
+        <result column="us_province" property="usProvince" jdbcType="VARCHAR"/>
+        <result column="us_city" property="usCity" jdbcType="VARCHAR"/>
+        <result column="us_district" property="usDistrict" jdbcType="VARCHAR"/>
+        <result column="us_name" property="usName" jdbcType="VARCHAR"/>
+        <result column="img_id" property="imgId" jdbcType="VARCHAR"/>
+        <result column="is_auth" property="isAuth" jdbcType="TINYINT"/>
+        <result column="createtime" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+
+    </sql>
+    <insert id="insertSelective" parameterType="com.tangmo.shengmei.entity.UserShop">
+        insert into user_shop
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="mobile != null">
+                mobile,
+            </if>
+            <if test="usProvince != null">
+                us_province,
+            </if>
+            <if test="usCity != null">
+                us_city,
+            </if>
+            <if test="usDistrict != null">
+                us_district,
+            </if>
+            <if test="usName != null">
+                us_name,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="mobile != null">
+                #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="usProvince != null">
+                #{usProvince,jdbcType=VARCHAR},
+            </if>
+            <if test="usCity != null">
+                #{usCity,jdbcType=VARCHAR},
+            </if>
+            <if test="usDistrict != null">
+                #{usDistrict,jdbcType=VARCHAR},
+            </if>
+            <if test="usName != null">
+                #{usName,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateById" parameterType="com.tangmo.shengmei.entity.UserShop">
+        UPDATE user_shop
+        <set>
+            <if test="mobile != null">
+                mobile = #{mobile},
+            </if>
+            <if test="usProvince != null">
+                us_province = #{usProvince},
+            </if>
+            <if test="usCity != null">
+                us_city = #{usCity},
+            </if>
+            <if test="usDistrict != null">
+                us_district = #{usDistrict},
+            </if>
+            updatetime = now()
+        </set>
+        WHERE us_id = #{usId,jdbcType=INTEGER}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM user_shop WHERE sc_id = #{scId}
+    </delete>
+
+    <update id="updateAuth">
+        UPDATE user_shop SET is_auth = TRUE,updatetime = now() WHERE sc_id = #{scId}
+    </update>
+
+    <select id="selectByUserId" resultMap="BaseResultMap">
+        SELECT mobile,us_province,us_city,us_district,us_name,img_id,is_auth
+        FROM user_shop WHERE user_id = #{userId}
+    </select>
+
+    <update id="updateAvatar">
+        UPDATE user_shop SET img_id = #{imgId},updatetime = now() WHERE sc_id = #{scId}
+    </update>
+</mapper>

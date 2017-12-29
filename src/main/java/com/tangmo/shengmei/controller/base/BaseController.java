@@ -31,6 +31,8 @@ public class BaseController {
     protected ShopCartService shopCartService;
     @Resource
     protected MyCollectService myCollectService;
+    @Resource
+    protected UserShopService userShopService;
 
     /**
      * 得到request对象

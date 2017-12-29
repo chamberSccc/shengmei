@@ -6,6 +6,15 @@
         <result column="user_id" property="userId" jdbcType="INTEGER"/>
         <result column="cd_id" property="cdId" jdbcType="INTEGER"/>
         <result column="createtime" property="createTime" jdbcType="TIMESTAMP"/>
+        <association property="commodity" javaType="com.tangmo.shengmei.entity.Commodity">
+            <id column="cd_id" property="cdId" jdbcType="INTEGER"/>
+            <result column="img_id" property="imgId" jdbcType="VARCHAR"/>
+            <result column="title" property="title" jdbcType="VARCHAR"/>
+            <result column="content" property="content" jdbcType="VARCHAR"/>
+            <result column="price_pre" property="pricePre" jdbcType="DOUBLE"/>
+            <result column="price_now" property="priceNow" jdbcType="DOUBLE"/>
+            <result column="type" property="type" jdbcType="TINYINT"/>
+        </association>
     </resultMap>
     <insert id="insertSelective" parameterType="com.tangmo.shengmei.entity.MyCollect">
             insert into my_collect
