@@ -41,7 +41,7 @@ public class ShopCartController extends BaseController{
      * @api {GET} /get/list/{userId}/{start}/{end} 获取用户购物车信息
      * @apiGroup ShopCart
      * @apiVersion 0.0.1
-     * @apiParam {int} userId 商品类型
+     * @apiParam {int} userId 用户id
      * @apiParam {int} start 分页起始索引
      * @apiParam {int} end 分页结束索引
      * @apiDescription 获取指定类型商品
@@ -56,7 +56,7 @@ public class ShopCartController extends BaseController{
      *                        scId: 1,
      *                        userId:"用户id",
      *                        cdId:"商品id",
-     *                        price:"商品jiage",
+     *                        price:"商品价格",
      *                        cdCount:"商品数量",
      *                        createTime:"创建时间"},
      *                     {
