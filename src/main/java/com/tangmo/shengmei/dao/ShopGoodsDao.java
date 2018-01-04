@@ -29,7 +29,7 @@ public interface ShopGoodsDao {
     int updateById(ShopGoods shopGoods);
 
     /**
-     * 修改店铺商品信息
+     * 删除店铺商品信息
      *
      * @param sgId
      * @return
@@ -42,7 +42,7 @@ public interface ShopGoodsDao {
      * @param usId
      * @return
      */
-    List<ShopGoods> selectByusId(Integer usId);
+    List<ShopGoods> selectListByUsId(Integer usId);
 
 
 }

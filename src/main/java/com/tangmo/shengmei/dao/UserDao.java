@@ -2,6 +2,7 @@ package com.tangmo.shengmei.dao;
 
 import com.tangmo.shengmei.entity.User;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * @author boge
@@ -33,4 +34,13 @@ public interface UserDao {
      * @return
      */
     int updateById(User user);
+
+    /**
+     * 更新用户的申请商家状态
+     *
+     * @param userId 用户id
+     * @param applyStatus 申请状态
+     * @return
+     */
+    int updateApplyShop(@Param("userId") Integer userId, @Param("applyStatus") Byte applyStatus);
 }

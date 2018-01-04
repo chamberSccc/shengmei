@@ -19,6 +19,7 @@ public class User implements Serializable {
     private String mobile;
     private String username;
     private String avatarId;
+    private Byte shopAuth;
     private Date createTime;
     private Date updateTime;
 }

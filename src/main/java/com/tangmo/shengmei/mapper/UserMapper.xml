@@ -39,7 +39,7 @@
     </insert>
 
     <update id="updateById" parameterType="com.tangmo.shengmei.entity.User">
-        UPDATE convenient_info
+        UPDATE user_info
         <set>
             <if test="mobile != null">
                 mobile = #{mobile},
@@ -55,4 +55,8 @@
     <select id="selectById" resultMap="BaseResultMap">
         SELECT user_id,username,mobile,avatar_id FROM user_info WHERE user_id = #{userId}
     </select>
+
+    <update id="updateApplyShop">
+        UPDATE user_info SET apply_shop = #{applyStatus} WHERE user_id = #{userId}
+    </update>
 </mapper>

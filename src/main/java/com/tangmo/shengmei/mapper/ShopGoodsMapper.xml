@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tangmo.shengmei.dao.ShopGoodsDao" >
+    <resultMap id="BaseResultMap" type="com.tangmo.shengmei.entity.ShopGoods" >
+        <id column="sg_id" property="sgId" jdbcType="INTEGER"/>
+        <result column="us_id" property="usId" jdbcType="INTEGER"/>
+        <result column="goods_name" property="goodsName" jdbcType="VARCHAR"/>
+        <result column="goods_content" property="goodsContent" jdbcType="VARCHAR"/>
+        <result column="img_id" property="imgId" jdbcType="VARCHAR"/>
+        <result column="goods_type" property="goodsType" jdbcType="TINYINT"/>
+        <result column="goods_price" property="goodsPirce" jdbcType="DOUBLE"/>
+        <result column="createtime" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+
+    </sql>
+    <insert id="insertSelective" parameterType="com.tangmo.shengmei.entity.Commodity">
+            insert into shop_goods
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="imgId != null">
+                    img_id,
+                </if>
+                <if test="usId != null">
+                    us_id,
+                </if>
+                <if test="goodsName != null">
+                    goods_name,
+                </if>
+                <if test="goodsContent != null">
+                    goods_content,
+                </if>
+                <if test="goodsType != null">
+                    goods_type,
+                </if>
+                <if test="goodsPrice != null">
+                    goods_price,
+                </if>
+            </trim>
+            <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="imgId != null">
+                    #{imgId,jdbcType=VARCHAR},
+                </if>
+                <if test="usId != null">
+                    #{usId,jdbcType=INTEGER},
+                </if>
+                <if test="goodsName != null">
+                    #{goodsName,jdbcType=VARCHAR},
+                </if>
+                <if test="goodsContent != null">
+                    #{goodsContent,jdbcType=VARCHAR},
+                </if>
+                <if test="goodsType != null">
+                    #{goodsType,jdbcType=TINYINT},
+                </if>
+                <if test="goodsPrice != null">
+                    #{goodsPrice,jdbcType=DOUBLE},
+                </if>
+            </trim>
+    </insert>
+
+    <update id="updateById" parameterType="com.tangmo.shengmei.entity.Commodity">
+        UPDATE shop_goods
+        <set>
+            <if test="goodsName != null">
+                goods_name = #{goodsName},
+            </if>
+            <if test="goodsContent != null">
+                goods_content = #{goodsContent},
+            </if>
+            <if test="goodsType != null">
+                goods_type = #{goodsType},
+            </if>
+            <if test="goodsPrice != null">
+                goods_price = #{goodsPrice},
+            </if>
+            updatetime = now()
+        </set>
+        WHERE cd_id = #{cdId,jdbcType=INTEGER}
+    </update>
+
+    <select id="selectListByUsId" resultMap="BaseResultMap">
+        SELECT img_id,goods_name,goods_content,goods_type,goods_price
+        FROM shop_goods WHERE us_id = #{usId}
+    </select>
+
+    <delete id="deleteById">
+        DELETE FROM shop_goods WHERE sg_id = #{sgId}
+    </delete>
+</mapper>

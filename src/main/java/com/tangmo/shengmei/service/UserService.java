@@ -6,7 +6,7 @@ import com.tangmo.shengmei.utility.code.Result;
 /**
  * @author boge
  * @date 17/12/20
- * @description 用户服务
+ * @description 用户服务接口
  */
 
 public interface UserService {
@@ -14,7 +14,7 @@ public interface UserService {
     /**
      * 增加用户信息
      *
-     * @param user
+     * @param user 用户对象
      * @return
      */
     Result addUser(User user);
@@ -22,7 +22,7 @@ public interface UserService {
     /**
      * 修改用户信息
      *
-     * @param user
+     * @param user 用户对象
      * @return
      */
     Result changeUser(User user);
@@ -30,8 +30,16 @@ public interface UserService {
     /**
      * 获取用户信息
      *
-     * @param userId
+     * @param userId 用户id
      * @return
      */
     Result getUser(Integer userId);
+
+    /**
+     * 用户申请成为商家
+     *
+     * @param userId 用户id
+     * @return
+     */
+    Result ApplyShopAuth(Integer userId);
 }

@@ -47,4 +47,9 @@ public class UserServiceImpl implements UserService {
     public Result getUser(Integer userId) {
         return ResultUtil.success(userDao.selectById(userId));
     }
+
+    @Override
+    public Result ApplyShopAuth(Integer userId) {
+        return null;
+    }
 }
