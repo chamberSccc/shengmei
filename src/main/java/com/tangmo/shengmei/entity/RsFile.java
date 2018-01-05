@@ -9,7 +9,8 @@ import lombok.Data;
  */
 
 @Data
-public class File {
+public class RsFile {
     private String fileId;
     private String path;
+    private Integer userId;
 }

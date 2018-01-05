@@ -1,6 +1,6 @@
 package com.tangmo.shengmei.dao;
 
-import com.tangmo.shengmei.entity.File;
+import com.tangmo.shengmei.entity.RsFile;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -17,7 +17,7 @@ public interface FileDao {
      * @param file
      * @return
      */
-    File insertFile(File file);
+    int insertFile(RsFile file);
 
     /**
      * 查询文件路径信息
@@ -25,5 +25,5 @@ public interface FileDao {
      * @param fileId
      * @return
      */
-    String selectById(String fileId);
+    RsFile selectById(String fileId);
 }
