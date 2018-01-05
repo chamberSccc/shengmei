@@ -38,9 +38,18 @@ public interface UserDao {
     /**
      * 更新用户的申请商家状态
      *
-     * @param userId 用户id
+     * @param userId      用户id
      * @param applyStatus 申请状态
      * @return
      */
     int updateApplyShop(@Param("userId") Integer userId, @Param("applyStatus") Byte applyStatus);
+
+    /**
+     * 上传头像
+     *
+     * @param userId
+     * @param imgId
+     * @return
+     */
+    int updateAvatar(@Param("userId") Integer userId, @Param("imgId") String imgId);
 }

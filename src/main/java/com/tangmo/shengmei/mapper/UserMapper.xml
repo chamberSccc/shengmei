@@ -59,4 +59,8 @@
     <update id="updateApplyShop">
         UPDATE user_info SET apply_shop = #{applyStatus} WHERE user_id = #{userId}
     </update>
+
+    <update id="updateAvatar">
+        UPDATE user_info SET img_id = #{imgId} WHERE user_id = #{userId}
+    </update>
 </mapper>

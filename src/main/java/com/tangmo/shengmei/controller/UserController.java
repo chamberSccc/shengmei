@@ -91,7 +91,8 @@ public class UserController extends BaseController{
      * @apiParam {String} code 图片base64编码
      * @apiParamExample {json} 请求样例:
      *                   {
-     *                      code:"sdfjsajfsa89878979hfhfakjdlkf",
+     *                      code:"图像base64编码",
+     *                      userId:"用户id"
      *                   }
      * @apiSuccess (success) {PutMapping} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
      * @apiSuccess (success) {PutMapping} data 返回数据
@@ -99,8 +100,8 @@ public class UserController extends BaseController{
      *                    {"code":"success"}
      */
     @PutMapping("/avatar")
-    public Result loadAvatar(String code){
-        return null;
+    public Result loadAvatar(String code,Integer userId){
+        return userService.uploadAvatar(userId,code);
     }
 
 }

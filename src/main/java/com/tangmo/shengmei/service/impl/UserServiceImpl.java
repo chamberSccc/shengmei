@@ -1,7 +1,9 @@
 package com.tangmo.shengmei.service.impl;
 
 import com.tangmo.shengmei.dao.UserDao;
+import com.tangmo.shengmei.entity.RsFile;
 import com.tangmo.shengmei.entity.User;
+import com.tangmo.shengmei.service.ImgFileService;
 import com.tangmo.shengmei.service.UserService;
 import com.tangmo.shengmei.utility.code.Result;
 import com.tangmo.shengmei.utility.code.ResultUtil;
@@ -19,6 +21,8 @@ import javax.annotation.Resource;
 public class UserServiceImpl implements UserService {
     @Resource
     private UserDao userDao;
+    @Resource
+    private ImgFileService imgFileService;
 
     @Override
     @Transactional
@@ -51,5 +55,18 @@ public class UserServiceImpl implements UserService {
     @Override
     public Result ApplyShopAuth(Integer userId) {
         return null;
+    }
+
+    @Override
+    public Result uploadAvatar(Integer userId, String code) {
+        if(userId!=null || code!=null){
+            RsFile rsFile = imgFileService.addImgFile(code,userId);
+            if(rsFile == null){
+                return ResultUtil.fail();
+            }
+            //更新头像id
+            userDao.updateAvatar(userId,rsFile.getFileId());
+        }
+        return ResultUtil.success();
     }
 }

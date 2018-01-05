@@ -42,4 +42,13 @@ public interface UserService {
      * @return
      */
     Result ApplyShopAuth(Integer userId);
+
+    /**
+     * 上传头像
+     *
+     * @param userId
+     * @param code
+     * @return
+     */
+    Result uploadAvatar(Integer userId, String code);
 }

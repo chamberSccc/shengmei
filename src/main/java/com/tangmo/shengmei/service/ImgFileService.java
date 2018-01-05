@@ -1,5 +1,6 @@
 package com.tangmo.shengmei.service;
 
+import com.tangmo.shengmei.entity.RsFile;
 import org.springframework.http.ResponseEntity;
 
 /**
@@ -11,13 +12,13 @@ import org.springframework.http.ResponseEntity;
 public interface ImgFileService {
 
     /**
-     * 增加文件
+     * 增加图片文件,并存储
      *
-     * @param code 图像base64编码
+     * @param code   图像base64编码
      * @param userId 用户id
      * @return
      */
-    Boolean addImgFile(Integer userId);
+    RsFile addImgFile(String code, Integer userId);
 
     /**
      * 查找文件路径
