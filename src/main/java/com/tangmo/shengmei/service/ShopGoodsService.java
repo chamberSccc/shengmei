@@ -43,4 +43,13 @@ public interface ShopGoodsService {
      * @return
      */
     Result searchShopGoods(Integer usId);
+
+
+    /**
+     * 获取精品商品列表
+     * @param start
+     * @param end
+     * @return
+     */
+    Result searchQlList(Integer start, Integer end);
 }

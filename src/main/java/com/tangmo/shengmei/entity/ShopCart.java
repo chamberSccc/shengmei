@@ -17,5 +17,7 @@ public class ShopCart implements Serializable{
     private Integer cdId;
     private Double price;
     private Integer payCount;
+    private String scColor;
+    private String scSize;
     private Commodity commodity;
 }

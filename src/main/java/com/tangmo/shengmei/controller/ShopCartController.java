@@ -24,7 +24,9 @@ public class ShopCartController extends BaseController{
      *                      userId:"用户id",
      *                      cdId:"商品id",
      *                      price:"商品jiage",
-     *                      cdCount:"商品数量"
+     *                      cdCount:"商品数量",
+     *                      scColor:"商品颜色,
+     *                      scSize:"商品规格
      *                   }
      * @apiSuccess (success) {POST} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
      * @apiSuccess (success) {POST} data 返回数据
@@ -58,13 +60,17 @@ public class ShopCartController extends BaseController{
      *                        cdId:"商品id",
      *                        price:"商品价格",
      *                        cdCount:"商品数量",
+     *                        scColor:"商品颜色,
+     *                        scSize:"商品规格",
      *                        createTime:"创建时间"},
      *                     {
      *                        scId: 1,
      *                        userId:"用户id",
      *                        cdId:"商品id",
      *                        price:"商品价格2",
-     *                        cdCount:"商品数量2"
+     *                        cdCount:"商品数量2",
+     *                        scColor:"商品颜色,
+     *                        scSize:"商品规格",
      *                        createTime:"创建时间2"}
      *                     }]
      *                     }

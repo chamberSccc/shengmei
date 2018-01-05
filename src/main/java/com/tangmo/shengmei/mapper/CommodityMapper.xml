@@ -6,6 +6,8 @@
         <result column="img_id" property="imgId" jdbcType="VARCHAR"/>
         <result column="title" property="title" jdbcType="VARCHAR"/>
         <result column="content" property="content" jdbcType="VARCHAR"/>
+        <result column="cdColor" property="cdColor" jdbcType="VARCHAR"/>
+        <result column="cdSize" property="cdSize" jdbcType="VARCHAR"/>
         <result column="price_pre" property="pricePre" jdbcType="DOUBLE"/>
         <result column="price_now" property="priceNow" jdbcType="DOUBLE"/>
         <result column="type" property="type" jdbcType="TINYINT"/>
@@ -43,6 +45,12 @@
                 <if test="cdCount != null">
                     cd_count,
                 </if>
+                <if test="cdColor != null">
+                    cd_color,
+                </if>
+                <if test="cdSize != null">
+                    cd_size,
+                </if>
             </trim>
             <trim prefix="values (" suffix=")" suffixOverrides=",">
                 <if test="imgId != null">
@@ -68,6 +76,12 @@
                 </if>
                 <if test="cdCount != null">
                     #{cdCount,jdbcType=INTEGER},
+                </if>
+                <if test="cdColor != null">
+                    #{cdColor,jdbcType=TINYINT},
+                </if>
+                <if test="cdSize != null">
+                    #{cdSize,jdbcType=INTEGER},
                 </if>
             </trim>
     </insert>
@@ -95,6 +109,12 @@
             </if>
             <if test="cdCount != null">
                 cd_count = #{cdCount},
+            </if>
+            <if test="cdColor != null">
+                cdColor = #{cdColor},
+            </if>
+            <if test="cdSize != null">
+                cdSize = #{cdSize},
             </if>
             updatetime = now()
         </set>

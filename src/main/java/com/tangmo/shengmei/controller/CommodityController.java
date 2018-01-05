@@ -29,7 +29,9 @@ public class CommodityController extends BaseController {
      *                      pricePre:"原价",
      *                      priceNow:"现价",
      *                      cdType:"商品类型",
-     *                      cdCount:"商品数量"
+     *                      cdCount:"商品数量",
+     *                      cdColor:"商品颜色,多种颜色以逗号分隔,
+     *                      cdSize:"商品规格,多种规格以逗号分隔"
      *                   }
      * @apiSuccess (success) {POST} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
      * @apiSuccess (success) {POST} data 返回数据
@@ -90,7 +92,9 @@ public class CommodityController extends BaseController {
      *                        pricePre:"商品原价1",
      *                        priceNow:"商品现价1",
      *                        cdType:"商品类型1",
-     *                        cdCount:"商品数量1"},
+     *                        cdCount:"商品数量1",
+     *                        cdColor:"商品颜色,多种颜色以逗号分隔,
+     *                        cdSize:"商品规格,多种规格以逗号分隔"},
      *                     {
      *                        cdId: 2,
      *                        title: "商品信息标题2",
@@ -98,7 +102,9 @@ public class CommodityController extends BaseController {
      *                        pricePre:"商品原价2",
      *                        priceNow:"商品现价2",
      *                        cdType:"商品类型2",
-     *                        cdCount:"商品数量2"},
+     *                        cdCount:"商品数量2",
+     *                        cdColor:"商品颜色,多种颜色以逗号分隔,
+     *                        cdSize:"商品规格,多种规格以逗号分隔"},
      *                     }]
      *                     }
      */
@@ -127,7 +133,9 @@ public class CommodityController extends BaseController {
      *                        pricePre:"商品原价1",
      *                        priceNow:"商品现价1",
      *                        cdType:"商品类型1",
-     *                        cdCount:"商品数量1"},
+     *                        cdCount:"商品数量1",
+     *                        cdColor:"商品颜色,多种颜色以逗号分隔,
+     *                        cdSize:"商品规格,多种规格以逗号分隔"},
      *                     {
      *                        cdId: 2,
      *                        title: "商品信息标题2",
@@ -135,7 +143,9 @@ public class CommodityController extends BaseController {
      *                        pricePre:"商品原价2",
      *                        priceNow:"商品现价2",
      *                        cdType:"商品类型2",
-     *                        cdCount:"商品数量2"},
+     *                        cdCount:"商品数量2",
+     *                        cdColor:"商品颜色,多种颜色以逗号分隔,
+     *                        cdSize:"商品规格,多种规格以逗号分隔"},
      *                     }]
      *                     }
      */

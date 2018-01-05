@@ -6,6 +6,8 @@
         <result column="user_id" property="userId" jdbcType="INTEGER"/>
         <result column="cd_id" property="cdId" jdbcType="INTEGER"/>
         <result column="price" property="price" jdbcType="DOUBLE"/>
+        <result column="sc_color" property="scColor" jdbcType="VARCHAR"/>
+        <result column="sc_size" property="scSize" jdbcType="VARCHAR"/>
         <result column="pay_count" property="payCount" jdbcType="INTEGER"/>
         <result column="createtime" property="createTime" jdbcType="TIMESTAMP"/>
         <association property="commodity" javaType="com.tangmo.shengmei.entity.Commodity">
@@ -33,6 +35,12 @@
                 <if test="payCount != null">
                     pay_count,
                 </if>
+                <if test="scColor != null">
+                    sc_color,
+                </if>
+                <if test="scSize != null">
+                    sc_size,
+                </if>
             </trim>
             <trim prefix="values (" suffix=")" suffixOverrides=",">
                 <if test="userId != null">
@@ -47,11 +55,17 @@
                 <if test="payCount != null">
                     #{payCount,jdbcType=INTEGER},
                 </if>
+                <if test="scColor != null">
+                    #{scColor,jdbcType=VARCHAR},
+                </if>
+                <if test="scSize != null">
+                    #{scSize,jdbcType=VARCHAR},
+                </if>
             </trim>
     </insert>
 
     <select id="selectListByUserId" resultMap="BaseResultMap">
-        SELECT sc.sc_id,sc.user_id,sc.price,sc.pay_count,
+        SELECT sc.sc_id,sc.user_id,sc.price,sc.pay_count,sc.sc_color,sc.sc_size,
         cd.title,cd.content,cd.price_pre,cd.price_now,cd.img_id,cd.cd_type
         FROM shop_cart sc LEFT JOIN commodity cd
         ON sc.cd_id = cd.cd_id

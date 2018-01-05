@@ -14,7 +14,7 @@ import java.sql.Date;
 public class ShopGoods implements Serializable {
     private static final long serialVersionUID = 1L;
     private Integer sgId;
-    private Integer usId;
+    private Integer userId;
     private String goodsName;
     private String goodsContent;
     private String imgId;

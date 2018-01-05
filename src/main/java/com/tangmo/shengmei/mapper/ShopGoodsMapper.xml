@@ -84,6 +84,11 @@
         FROM shop_goods WHERE us_id = #{usId}
     </select>
 
+    <select id="selectQlList">
+        SELECT img_id,goods_name,goods_content,goods_type,goods_price FROM shop_goods
+        WHERE is_quality = 1 limit #{start},#{end}-#{start}
+    </select>
+
     <delete id="deleteById">
         DELETE FROM shop_goods WHERE sg_id = #{sgId}
     </delete>

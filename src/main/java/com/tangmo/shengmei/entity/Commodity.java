@@ -22,6 +22,8 @@ public class Commodity implements Serializable{
     private Integer cdCount;
     private Double pricePre;
     private Double priceNow;
+    private String cdColor;
+    private String cdSize;
     private Date createTime;
     private Date updateTime;
 }

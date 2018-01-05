@@ -4,7 +4,9 @@ import com.tangmo.shengmei.dao.ShopGoodsDao;
 import com.tangmo.shengmei.entity.ShopGoods;
 import com.tangmo.shengmei.service.ShopGoodsService;
 import com.tangmo.shengmei.utility.code.Result;
+import com.tangmo.shengmei.utility.code.ResultUtil;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
@@ -17,23 +19,41 @@ import javax.annotation.Resource;
 public class ShopGoodsServiceImpl implements ShopGoodsService {
     @Resource
     private ShopGoodsDao shopGoodsDao;
+
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Result addShopGoods(ShopGoods shopGoods) {
-        return null;
+        if (shopGoods.getUserId() == null) {
+            return ResultUtil.fail();
+        }
+        shopGoodsDao.insertSelective(shopGoods);
+        return ResultUtil.success();
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Result changeShopGoods(ShopGoods shopGoods) {
-        return null;
+        if (shopGoods.getSgId() == null) {
+            return ResultUtil.fail();
+        }
+        shopGoodsDao.updateById(shopGoods);
+        return ResultUtil.success();
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Result delShopGoods(Integer sgId) {
-        return null;
+        shopGoodsDao.deleteById(sgId);
+        return ResultUtil.success();
     }
 
     @Override
     public Result searchShopGoods(Integer usId) {
         return null;
+    }
+
+    @Override
+    public Result searchQlList(Integer start, Integer end) {
+        return ResultUtil.success(shopGoodsDao.selectQlList(start, end));
     }
 }

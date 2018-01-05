@@ -65,6 +65,7 @@
     </update>
 
     <select id="selectConvList" resultMap="BaseResultMap">
-        SELECT ci_id,title,content FROM convenient_info limit #{start},#{end}
+        SELECT ci_id,title,content FROM convenient_info ORDER BY createtime DESC
+        limit #{start},#{end}-#{start}
     </select>
 </mapper>
