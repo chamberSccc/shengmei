@@ -47,9 +47,9 @@ public interface UserDao {
     /**
      * 上传头像
      *
-     * @param userId
-     * @param imgId
+     * @param userId 用户id
+     * @param avatarId 图片存储id
      * @return
      */
-    int updateAvatar(@Param("userId") Integer userId, @Param("imgId") String imgId);
+    int updateAvatar(@Param("userId") Integer userId, @Param("avatarId") String avatarId);
 }

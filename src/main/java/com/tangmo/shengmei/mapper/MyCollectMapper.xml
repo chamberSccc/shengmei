@@ -28,7 +28,7 @@
             </trim>
             <trim prefix="values (" suffix=")" suffixOverrides=",">
                 <if test="userId != null">
-                    #{userId,jdbcType=VARCHAR},
+                    #{userId,jdbcType=INTEGER},
                 </if>
                 <if test="cdId != null">
                     #{cdId,jdbcType=INTEGER},

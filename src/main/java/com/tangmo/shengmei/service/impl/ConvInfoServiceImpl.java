@@ -1,6 +1,7 @@
 package com.tangmo.shengmei.service.impl;
 
 import com.tangmo.shengmei.dao.ConvInfoDao;
+import com.tangmo.shengmei.entity.ConvComment;
 import com.tangmo.shengmei.entity.ConvInfo;
 import com.tangmo.shengmei.service.ConvInfoService;
 import com.tangmo.shengmei.utility.code.Result;
@@ -44,5 +45,21 @@ public class ConvInfoServiceImpl implements ConvInfoService {
     @Override
     public Result searchConvList(Integer start, Integer end) {
         return ResultUtil.success(convInfoDao.selectConvList(start,end));
+    }
+
+    @Override
+    public Result searchConvDetail(Integer ciId) {
+        convInfoDao.updateViewCount(ciId);
+        return ResultUtil.success(convInfoDao.selectByCiId(ciId));
+    }
+
+    @Override
+    public Result addComment(ConvComment convComment) {
+        if(convComment.getUserId()==null || convComment.getCcId() ==null){
+            return ResultUtil.fail();
+        }
+        convInfoDao.updateCommentCount(convComment.getCiId());
+        convInfoDao.insertConvComment(convComment);
+        return ResultUtil.success();
     }
 }

@@ -61,6 +61,6 @@
     </update>
 
     <update id="updateAvatar">
-        UPDATE user_info SET img_id = #{imgId} WHERE user_id = #{userId}
+        UPDATE user_info SET avatar_id = #{avatarId} WHERE user_id = #{userId}
     </update>
 </mapper>

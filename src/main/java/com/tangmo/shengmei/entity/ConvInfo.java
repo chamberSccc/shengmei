@@ -4,6 +4,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
 
 /**
  * @author boge
@@ -22,4 +23,5 @@ public class ConvInfo implements Serializable {
     private String content;
     private Date createTime;
     private Date updateTime;
+    private List<ConvComment> commentList;
 }

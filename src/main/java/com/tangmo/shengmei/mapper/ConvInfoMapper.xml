@@ -6,8 +6,32 @@
         <result column="user_id" property="userId" jdbcType="INTEGER"/>
         <result column="title" property="title" jdbcType="VARCHAR"/>
         <result column="content" property="content" jdbcType="VARCHAR"/>
+        <result column="view_count" property="viewCount" jdbcType="INTEGER"/>
+        <result column="comment_count" property="commentCount" jdbcType="INTEGER"/>
         <result column="createtime" property="createTime" jdbcType="TIMESTAMP"/>
     </resultMap>
+
+    <resultMap id="BaseResultMapWithComment" type="com.tangmo.shengmei.entity.ConvInfo" >
+        <id column="ci_id" property="userId" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="content" property="content" jdbcType="VARCHAR"/>
+        <result column="view_count" property="viewCount" jdbcType="INTEGER"/>
+        <result column="comment_count" property="commentCount" jdbcType="INTEGER"/>
+        <result column="createtime" property="createTime" jdbcType="TIMESTAMP"/>
+        <collection property="commentList" column="ci_id" select="selectCommentByCiId"/>
+    </resultMap>
+
+    <resultMap id="CommentResultMap" type="com.tangmo.shengmei.entity.ConvComment" >
+        <id column="cc_id" property="ccId" jdbcType="INTEGER"/>
+        <result column="ci_id" property="ciId" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="avatar_id" property="avatarId" jdbcType="INTEGER"/>
+        <result column="createtime" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+
 
     <sql id="Base_Column_List" >
 
@@ -30,7 +54,7 @@
             </trim>
             <trim prefix="values (" suffix=")" suffixOverrides=",">
                 <if test="userId != null">
-                    #{userId,jdbcType=VARCHAR},
+                    #{userId,jdbcType=INTEGER},
                 </if>
                 <if test="title != null">
                     #{title,jdbcType=VARCHAR},
@@ -65,7 +89,55 @@
     </update>
 
     <select id="selectConvList" resultMap="BaseResultMap">
-        SELECT ci_id,title,content FROM convenient_info ORDER BY createtime DESC
+        SELECT ci_id,title,content,view_count,comment_count
+        FROM convenient_info ORDER BY createtime DESC
         limit #{start},#{end}-#{start}
+    </select>
+
+    <update id="updateViewCount">
+        UPDATE convenient_info SET view_count = view_count + 1
+        WHERE ci_id = #{ciId}
+    </update>
+
+    <update id="updateCommentCount">
+        UPDATE convenient_info SET comment_count = comment_count + 1
+        WHERE ci_id = #{ciId}
+    </update>
+
+    <insert id="insertConvComment" parameterType="com.tangmo.shengmei.entity.ConvComment">
+        insert into conv_comment
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="comment != null">
+                comment,
+            </if>
+            <if test="ciId != null">
+                cd_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="comment != null">
+                #{comment,jdbcType=VARCHAR},
+            </if>
+            <if test="ciId != null">
+                #{ciId,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="selectCommentByCiId" resultMap="CommentResultMap">
+        SELECT cc.user_id,ui.user_name,ui.avatar_id,cc.createtime FROM conv_comment cc
+        LEFT JOIN user_info ui ON cc.user_id = ui.user_id
+        WHERE cc.ci_id = #{ciId}
+    </select>
+
+    <select id="selectByCiId" resultMap="BaseResultMap">
+        SELECT ci_id,title,content,view_count,comment_count
+        FROM convenient_info WHERE ci_id = #{ciId}
     </select>
 </mapper>
