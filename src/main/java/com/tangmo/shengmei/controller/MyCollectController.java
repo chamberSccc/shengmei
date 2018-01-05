@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 public class MyCollectController extends BaseController {
 
     /**
-     * @api {GET} /get/list/{userId}/{start}/{end} 获取我的收藏信息
+     * @api {GET} /collect/list/{userId}/{start}/{end} 获取我的收藏信息
      * @apiGroup ShopCart
      * @apiVersion 0.0.1
      * @apiParam {int} userId 用户id
@@ -23,7 +23,7 @@ public class MyCollectController extends BaseController {
      * @apiParam {int} end 分页结束索引
      * @apiDescription 获取我的收藏信息
      * @apiParamExample {json} 请求样例：
-     *  /get/list/1/1/10
+     *  /collect/list/1/1/10
      * @apiSuccess (200) {String} msg 信息
      * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
      * @apiSuccessExample {json} 返回样例:
@@ -44,12 +44,12 @@ public class MyCollectController extends BaseController {
      *                     }]
      *                     }
      */
-    @GetMapping("/get/list/{userId}/{start}/{end}")
+    @GetMapping("/list/{userId}/{start}/{end}")
     public Result getCollectList(@PathVariable Integer start, @PathVariable Integer end, @PathVariable Integer userId){
         return myCollectService.searchMyCollect(userId,start,end);
     }
     /**
-     * @api {POST} /cart/add 增加我的收藏
+     * @api {POST} /collect/cart/add 增加我的收藏
      * @apiGroup MyCollect
      * @apiVersion 0.0.1
      * @apiDescription 增加我的收藏
@@ -64,25 +64,25 @@ public class MyCollectController extends BaseController {
      * @apiSuccessExample {json} 返回样例:
      *                    {"code":"success"}
      */
-    @PostMapping("/add")
+    @PostMapping("")
     public Result addMyCollect(MyCollect myCollect){
         return myCollectService.addMyCollect(myCollect);
     }
 
     /**
-     * @api {GET} /del/{mcId} 删除我的收藏
+     * @api {DELETE} /collect/{mcId} 删除我的收藏
      * @apiGroup MyCollect
      * @apiVersion 0.0.1
      * @apiParam {int} mcId 我的收藏主键
      * @apiDescription 删除我的收藏
      * @apiParamExample {json} 请求样例：
-     *  /del/12
+     *  /collect/collect/12
      * @apiSuccess (200) {String} msg 信息
-     * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccess (success) {DELETE} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
      * @apiSuccessExample {json} 返回样例:
      *                    {"code":"success"}
      */
-    @GetMapping("/del/{mcId}")
+    @DeleteMapping("/{mcId}")
     public Result delMyCollect(@PathVariable  Integer mcId){
         return myCollectService.delMyCollect(mcId);
     }

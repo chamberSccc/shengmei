@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserController extends BaseController{
 
     /**
-     * @api {POST} /add 增加用户
+     * @api {POST}  增加用户
      * @apiGroup User
      * @apiVersion 0.0.1
      * @apiDescription 增加用户
@@ -32,13 +32,13 @@ public class UserController extends BaseController{
      * @apiSuccessExample {json} 返回样例:
      *                    {"code":"success"}
      */
-    @PostMapping("/add")
+    @PostMapping("")
     public Result addUserInfo(User user){
         return userService.addUser(user);
     }
 
     /**
-     * @api {GET} /user/get/{userId} 获取用户信息
+     * @api {GET} /user/{userId} 获取用户信息
      * @apiGroup User
      * @apiVersion 0.0.1
      * @apiParam {int} userId 用户表ID
@@ -56,13 +56,13 @@ public class UserController extends BaseController{
      *                     avatarId: "fsd42sd656sdasdasd",
      *                     }
      */
-    @GetMapping("/get/{userId}")
+    @GetMapping("/{userId}")
     public Result getUserInfo(@PathVariable Integer userId){
         return null;
     }
 
     /**
-     * @api {POST} /user/change 修改用户信息
+     * @api {PUT} /user/change 修改用户信息
      * @apiGroup User
      * @apiVersion 0.0.1
      * @apiDescription 修改用户信息
@@ -73,12 +73,12 @@ public class UserController extends BaseController{
      *                      mobile:"18710889234",
      *                      avatarId:"dasjhu2423523234"
      *                   }
-     * @apiSuccess (success) {POST} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
-     * @apiSuccess (success) {POST} data 返回数据
+     * @apiSuccess (success) {PUT} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccess (success) {PUT} data 返回数据
      * @apiSuccessExample {json} 返回样例:
      *                    {"code":"success"}
      */
-    @PostMapping("/change")
+    @PutMapping("")
     public Result changeUserInfo(User user){
         return userService.changeUser(user);
     }
@@ -93,12 +93,12 @@ public class UserController extends BaseController{
      *                   {
      *                      code:"sdfjsajfsa89878979hfhfakjdlkf",
      *                   }
-     * @apiSuccess (success) {POST} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
-     * @apiSuccess (success) {POST} data 返回数据
+     * @apiSuccess (success) {PutMapping} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccess (success) {PutMapping} data 返回数据
      * @apiSuccessExample {json} 返回样例:
      *                    {"code":"success"}
      */
-    @PostMapping("/avatar/add")
+    @PutMapping("/avatar")
     public Result loadAvatar(String code){
         return null;
     }

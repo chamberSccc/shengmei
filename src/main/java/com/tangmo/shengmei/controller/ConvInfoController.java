@@ -31,13 +31,13 @@ public class ConvInfoController extends BaseController {
      * @apiSuccessExample {json} 返回样例:
      *                    {"code":"success"}
      */
-    @PostMapping("/add")
+    @PostMapping("")
     public Result addConvInfo(ConvInfo convInfo){
         return convInfoService.addConvInfo(convInfo);
     }
 
     /**
-     * @api {POST} /conv/change 修改便民信息
+     * @api {PUT} /conv 修改便民信息
      * @apiGroup Convenient
      * @apiVersion 0.0.1
      * @apiDescription 修改便民信息
@@ -48,25 +48,25 @@ public class ConvInfoController extends BaseController {
      *                      title:"标题是什么",
      *                      content:"内容是什么"
      *                   }
-     * @apiSuccess (success) {POST} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
-     * @apiSuccess (success) {POST} data 返回数据
+     * @apiSuccess (success) {PUT} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccess (success) {PUT} data 返回数据
      * @apiSuccessExample {json} 返回样例:
      *                    {"code":"success"}
      */
-    @PostMapping("/change")
+    @PutMapping("")
     public Result changeConvInfo(ConvInfo convInfo){
         return convInfoService.changeConvInfo(convInfo);
     }
 
     /**
-     * @api {GET} /get/list/{start}/{end} 获取便民信息
+     * @api {GET} /conv/list/{start}/{end} 获取便民信息列表
      * @apiGroup Convenient
      * @apiVersion 0.0.1
      * @apiParam {int} start 分页起始索引
      * @apiParam {int} end 分页结束索引
      * @apiDescription 获取个人信息
      * @apiParamExample {json} 请求样例：
-     *  /get/list/1/10
+     *  /conv/list/1/10
      * @apiSuccess (200) {String} msg 信息
      * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
      * @apiSuccessExample {json} 返回样例:
@@ -83,25 +83,25 @@ public class ConvInfoController extends BaseController {
      *                     }]
      *                     }
      */
-    @GetMapping("/get/list/{start}/{end}")
+    @GetMapping("/list/{start}/{end}")
     public Result getConvInfo(@PathVariable Integer start,@PathVariable Integer end){
         return convInfoService.searchConvList(start,end);
     }
 
     /**
-     * @api {GET} /del/{ciId} 删除指定便民信息
+     * @api {DELETE} /conv/{ciId} 删除指定便民信息
      * @apiGroup Convenient
      * @apiVersion 0.0.1
      * @apiParam {int} ciId 便民信息表主键
      * @apiDescription 删除指定便民信息
      * @apiParamExample {json} 请求样例：
-     *  /del/12
+     *  /conv/12
      * @apiSuccess (200) {String} msg 信息
-     * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccess (success) {DELETE} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
      * @apiSuccessExample {json} 返回样例:
      *                    {"code":"success"}
      */
-    @GetMapping("/del/{ciId}")
+    @DeleteMapping("/{ciId}")
     public Result removeAddress(@PathVariable Integer uaId){
         return null;
     }

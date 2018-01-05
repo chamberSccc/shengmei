@@ -42,7 +42,7 @@ public class CommodityController extends BaseController {
     }
 
     /**
-     * @api {POST} /commodity/change 修改商品信息
+     * @api {PUT} /commodity 修改商品信息
      * @apiGroup Commodity
      * @apiVersion 0.0.1
      * @apiDescription 增加商品信息
@@ -58,18 +58,18 @@ public class CommodityController extends BaseController {
      *                      cdType:"商品类型",
      *                      cdCount:"商品数量"
      *                   }
-     * @apiSuccess (success) {POST} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
-     * @apiSuccess (success) {POST} data 返回数据
+     * @apiSuccess (success) {PUT} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccess (success) {PUT} data 返回数据
      * @apiSuccessExample {json} 返回样例:
      *                    {"code":"success"}
      */
-    @PostMapping("/change")
+    @PutMapping("")
     public Result changeCommodity(Commodity commodity){
         return commodityService.changeCommodity(commodity);
     }
 
     /**
-     * @api {GET} /get/list/{type}/{start}/{end} 获取指定类型商品
+     * @api {GET} /commodity/list/{type}/{start}/{end} 获取指定类型商品
      * @apiGroup Commodity
      * @apiVersion 0.0.1
      * @apiParam {byte} type 商品类型
@@ -77,7 +77,7 @@ public class CommodityController extends BaseController {
      * @apiParam {int} end 分页结束索引
      * @apiDescription 获取指定类型商品
      * @apiParamExample {json} 请求样例：
-     *  /get/list/1/1/10
+     *  /commodity/list/1/1/10
      * @apiSuccess (200) {String} msg 信息
      * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
      * @apiSuccessExample {json} 返回样例:
@@ -102,19 +102,19 @@ public class CommodityController extends BaseController {
      *                     }]
      *                     }
      */
-    @GetMapping("/get/list/{type}/{start}/{end}")
+    @GetMapping("/list/{type}/{start}/{end}")
     public Result getCommodityList(@PathVariable Integer start, @PathVariable Integer end,@PathVariable Byte type){
         return commodityService.searchCdList(type,start,end);
     }
 
     /**
-     * @api {GET} /get/user/{userId} 获取指定用户的商品
+     * @api {GET} /commodity/user/{userId} 获取指定用户的商品
      * @apiGroup Commodity
      * @apiVersion 0.0.1
      * @apiParam {int} userId 商品类型
      * @apiDescription 获取指定用户的商品
      * @apiParamExample {json} 请求样例：
-     *  /get/list/1/1/10
+     *  /commodity/list/1/1/10
      * @apiSuccess (200) {String} msg 信息
      * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
      * @apiSuccessExample {json} 返回样例:
@@ -139,25 +139,25 @@ public class CommodityController extends BaseController {
      *                     }]
      *                     }
      */
-    @GetMapping("/get/user/{userId}")
+    @GetMapping("/user/{userId}")
     public Result getUserCdList(@PathVariable Integer userId){
         return commodityService.searchUserCdList(userId);
     }
 
     /**
-     * @api {GET} /del/{cdId} 删除商品信息
+     * @api {DELETE} /commodity/{cdId} 删除商品信息
      * @apiGroup Commodity
      * @apiVersion 0.0.1
      * @apiParam {int} cdId 商品表主键
      * @apiDescription 删除用户地址信息
      * @apiParamExample {json} 请求样例：
-     *  /del/12
+     *  /commodity/12
      * @apiSuccess (200) {String} msg 信息
-     * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccess (success) {DELETE} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
      * @apiSuccessExample {json} 返回样例:
      *                    {"code":"success"}
      */
-    @GetMapping("/del/{cdId}")
+    @DeleteMapping("/{cdId}")
     public Result removeCommodity(@PathVariable Integer cdId){
         return commodityService.delCommodity(cdId);
     }

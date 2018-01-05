@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/car")
 public class UserCarController extends BaseController {
     /**
-     * @api {POST} /car/add 增加车辆信息
+     * @api {POST} /car 增加车辆信息
      * @apiGroup UserCar
      * @apiVersion 0.0.1
      * @apiDescription 增加车辆信息
@@ -34,13 +34,13 @@ public class UserCarController extends BaseController {
      * @apiSuccessExample {json} 返回样例:
      *                    {"code":"success"}
      */
-    @PostMapping("/add")
+    @PostMapping("")
     public Result addCar(UserCar userCar){
         return userCarService.addUserCar(userCar);
     }
 
     /**
-     * @api {POST} /address/change 修改车辆信息
+     * @api {PUT} /car 修改车辆信息
      * @apiGroup UserCar
      * @apiVersion 0.0.1
      * @apiDescription 修改车辆信息
@@ -55,24 +55,24 @@ public class UserCarController extends BaseController {
      *                      engineNum:"发动机号",
      *                      frameNum:"车架号"
      *                   }
-     * @apiSuccess (success) {POST} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
-     * @apiSuccess (success) {POST} data 返回数据
+     * @apiSuccess (success) {PUT} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccess (success) {PUT} data 返回数据
      * @apiSuccessExample {json} 返回样例:
      *                    {"code":"success"}
      */
-    @PostMapping("/change")
+    @PutMapping("")
     public Result changeCar(UserCar userCar){
         return userCarService.changeUserCar(userCar);
     }
 
     /**
-     * @api {GET} /get/list/{userId} 获取用户车辆信息
+     * @api {GET} /car/list/{userId} 获取用户车辆信息
      * @apiGroup UserCar
      * @apiVersion 0.0.1
      * @apiParam {int} userId 用户Id
      * @apiDescription 获取用户地址信息
      * @apiParamExample {json} 请求样例：
-     *  /get/list/12
+     *  /car/list/12
      * @apiSuccess (200) {String} msg 信息
      * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
      * @apiSuccessExample {json} 返回样例:
@@ -98,25 +98,25 @@ public class UserCarController extends BaseController {
      *                     }]
      *                     }
      */
-    @GetMapping("/get/list/{userId}")
+    @GetMapping("/list/{userId}")
     public Result getCarList(@PathVariable Integer userId){
         return userCarService.searchCarList(userId);
     }
 
     /**
-     * @api {GET} /del/{ucId} 删除指定车辆信息
+     * @api {DELETE} /car/{ucId} 删除指定车辆信息
      * @apiGroup UserCar
      * @apiVersion 0.0.1
      * @apiParam {int} ucId 车辆表主键
      * @apiDescription 删除用户地址信息
      * @apiParamExample {json} 请求样例：
-     *  /del/12
+     *  /car/12
      * @apiSuccess (200) {String} msg 信息
-     * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccess (success) {DELETE} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
      * @apiSuccessExample {json} 返回样例:
      *                    {"code":"success"}
      */
-    @GetMapping("/del/{ucId}")
+    @DeleteMapping("/{ucId}")
     public Result removeCar(@PathVariable Integer ucId){
         return userCarService.delUserCar(ucId);
     }

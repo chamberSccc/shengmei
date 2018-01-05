@@ -38,7 +38,7 @@ public class ShopCartController extends BaseController{
 
 
     /**
-     * @api {GET} /get/list/{userId}/{start}/{end} 获取用户购物车信息
+     * @api {GET} /cart/list/{userId}/{start}/{end} 获取用户购物车信息
      * @apiGroup ShopCart
      * @apiVersion 0.0.1
      * @apiParam {int} userId 用户id
@@ -46,7 +46,7 @@ public class ShopCartController extends BaseController{
      * @apiParam {int} end 分页结束索引
      * @apiDescription 获取指定类型商品
      * @apiParamExample {json} 请求样例：
-     *  /get/list/1/1/10
+     *  /cart/list/1/1/10
      * @apiSuccess (200) {String} msg 信息
      * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
      * @apiSuccessExample {json} 返回样例:
@@ -69,25 +69,25 @@ public class ShopCartController extends BaseController{
      *                     }]
      *                     }
      */
-    @GetMapping("/get/list/{userId}/{start}/{end}")
+    @GetMapping("/list/{userId}/{start}/{end}")
     public Result getCommodityList(@PathVariable Integer start, @PathVariable Integer end, @PathVariable Integer userId){
         return shopCartService.searchUserCart(userId,start,end);
     }
 
     /**
-     * @api {GET} /del/{scId} 删除指定购物车信息
+     * @api {GET} /cart/{scId} 删除指定购物车信息
      * @apiGroup ShopCart
      * @apiVersion 0.0.1
      * @apiParam {int} scId 购物车表主键
      * @apiDescription 删除用户地址信息
      * @apiParamExample {json} 请求样例：
-     *  /del/12
+     *  /cart/12
      * @apiSuccess (200) {String} msg 信息
      * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
      * @apiSuccessExample {json} 返回样例:
      *                    {"code":"success"}
      */
-    @GetMapping("/del/{scId}")
+    @DeleteMapping("/{scId}")
     public Result removeCart(@PathVariable Integer scId){
         return shopCartService.delCart(scId);
     }

@@ -33,6 +33,8 @@ public class BaseController {
     protected MyCollectService myCollectService;
     @Resource
     protected UserShopService userShopService;
+    @Resource
+    protected ShopGoodsService shopGoodsService;
 
     /**
      * 得到request对象

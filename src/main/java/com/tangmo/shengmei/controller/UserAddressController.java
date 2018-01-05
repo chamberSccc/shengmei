@@ -38,7 +38,7 @@ public class UserAddressController extends BaseController{
     }
 
     /**
-     * @api {POST} /address/change 修改地址信息
+     * @api {PUT} /address 修改地址信息
      * @apiGroup UserAddress
      * @apiVersion 0.0.1
      * @apiDescription 增加地址信息
@@ -51,24 +51,24 @@ public class UserAddressController extends BaseController{
      *                      recipient:"收件人",
      *                      address:"地址信息"
      *                   }
-     * @apiSuccess (success) {POST} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
-     * @apiSuccess (success) {POST} data 返回数据
+     * @apiSuccess (success) {PUT} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccess (success) {PUT} data 返回数据
      * @apiSuccessExample {json} 返回样例:
      *                    {"code":"success"}
      */
-    @PostMapping("/change")
+    @PutMapping("")
     public Result changeAddress(UserAddress userAddress){
         return userAddressService.changeUserAddress(userAddress);
     }
 
     /**
-     * @api {GET} /get/list/{userId} 获取用户地址信息
+     * @api {GET} /address/list/{userId} 获取用户地址信息
      * @apiGroup UserAddress
      * @apiVersion 0.0.1
      * @apiParam {int} userId 用户Id
      * @apiDescription 获取用户地址信息
      * @apiParamExample {json} 请求样例：
-     *  /get/list/12
+     *  /address/list/12
      * @apiSuccess (200) {String} msg 信息
      * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
      * @apiSuccessExample {json} 返回样例:
@@ -87,25 +87,25 @@ public class UserAddressController extends BaseController{
      *                     }]
      *                     }
      */
-    @GetMapping("/get/list/{userId}")
+    @GetMapping("/list/{userId}")
     public Result getAddressList(@PathVariable Integer userId){
         return userAddressService.searchAddressList(userId);
     }
 
     /**
-     * @api {GET} /del/{uaId} 删除用户地址信息
+     * @api {DELETE} /{uaId} 删除用户地址信息
      * @apiGroup UserAddress
      * @apiVersion 0.0.1
      * @apiParam {int} uaId 地址表主键
      * @apiDescription 删除用户地址信息
      * @apiParamExample {json} 请求样例：
-     *  /del/12
+     *  /address/12
      * @apiSuccess (200) {String} msg 信息
-     * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccess (success) {DELETE} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
      * @apiSuccessExample {json} 返回样例:
      *                    {"code":"success"}
      */
-    @GetMapping("/del/{uaId}")
+    @DeleteMapping("/{uaId}")
     public Result removeAddress(@PathVariable Integer uaId){
         return userAddressService.delUserAddress(uaId);
     }
