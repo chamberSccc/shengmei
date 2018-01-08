@@ -7,7 +7,9 @@ package com.tangmo.shengmei.constant;
  */
 
 public class GoodsTypeConst {
-
+    /**
+     * 改装配件相关
+     */
     /**发动机系统*/
     public static final Byte ENGINE = 0;
     /**传动系统*/
@@ -26,4 +28,5 @@ public class GoodsTypeConst {
     public static final Byte SUSPENSION = 7;
     /**汽保工具*/
     public static final Byte TOOL = 8;
+
 }
