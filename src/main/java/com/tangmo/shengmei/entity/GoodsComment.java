@@ -3,6 +3,7 @@ package com.tangmo.shengmei.entity;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 /**
  * @author boge
@@ -20,4 +21,5 @@ public class GoodsComment implements Serializable{
     private String avatarId;
     private Byte belongType;
     private String comment;
+    private Date createtime;
 }

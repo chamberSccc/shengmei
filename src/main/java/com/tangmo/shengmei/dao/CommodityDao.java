@@ -59,18 +59,28 @@ public interface CommodityDao {
 
     /**
      * 获取商品评论列表
+     *
      * @param goodsId 商品id
-     * @param start 开始索引
-     * @param end 结束索引
+     * @param start   开始索引
+     * @param end     结束索引
      * @return
      */
-    List<GoodsComment> selectCommentByGoodsId(@Param("goodsId") Integer goodsId,@Param("start") Integer start,
-                                          @Param("end") Integer end);
+    List<GoodsComment> selectCommentByGoodsId(@Param("goodsId") Integer goodsId, @Param("start") Integer start,
+                                              @Param("end") Integer end);
 
     /**
      * 增加商品评论
+     *
      * @param goodsComment
      * @return
      */
     int insertComment(GoodsComment goodsComment);
+
+    /**
+     * 查询商品详细信息
+     *
+     * @param cdId
+     * @return
+     */
+    Commodity selectCommodityDetail(Integer cdId);
 }

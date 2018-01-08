@@ -65,11 +65,20 @@ public interface CommodityService {
     /**
      * 获取商品评论列表
      *
-     * @param goodsId 商品表主键
+     * @param goodsId    商品表主键
      * @param belongType 属于个人还是商家
-     * @param start 开始索引
-     * @param end 结束索引
+     * @param start      开始索引
+     * @param end        结束索引
      * @return
      */
     Result getComments(Integer goodsId, Byte belongType, Integer start, Integer end);
+
+    /**
+     * 得到商品详细信息
+     *
+     * @param userId
+     * @param cdId
+     * @return
+     */
+    Result getCommodityDetail(Integer userId, Integer cdId);
 }

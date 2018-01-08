@@ -3,6 +3,7 @@ package com.tangmo.shengmei.entity;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 /**
  * @author boge
@@ -19,4 +20,5 @@ public class ConvComment implements Serializable {
     private String userName;
     private String avatarId;
     private String comment;
+    private Date createtime;
 }

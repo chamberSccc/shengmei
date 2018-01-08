@@ -184,4 +184,8 @@
             </if>
         </trim>
     </insert>
+
+    <select id="selectCommodityDetail" resultMap="BaseResultMap">
+        SELECT * FROM commodity WHERE  cd_id = #{cdId}
+    </select>
 </mapper>

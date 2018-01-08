@@ -101,4 +101,9 @@ public class CommodityServiceImpl implements CommodityService {
             return ResultUtil.fail();
         }
     }
+
+    @Override
+    public Result getCommodityDetail(Integer userId,Integer cdId) {
+        return null;
+    }
 }
