@@ -12,6 +12,15 @@
         <result column="createtime" property="createTime" jdbcType="TIMESTAMP"/>
     </resultMap>
 
+    <resultMap id="CommentResultMap" type="com.tangmo.shengmei.entity.ConvComment" >
+        <id column="gc_id" property="gcId" jdbcType="INTEGER"/>
+        <result column="goods_id" property="goodsId" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="avatar_id" property="avatarId" jdbcType="VARCHAR"/>
+        <result column="createtime" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
     <sql id="Base_Column_List" >
 
     </sql>
@@ -97,6 +106,7 @@
         SELECT cc.user_id,ui.user_name,ui.avatar_id,cc.createtime FROM goods_comment gc
         LEFT JOIN user_info ui ON cc.user_id = ui.user_id
         WHERE gc.goods_id = #{goodsId} AND belong_type = 1
+        ORDER BY gc.createtime DESC
         limit #{start},#{end}-#{start}
     </select>
 </mapper>
