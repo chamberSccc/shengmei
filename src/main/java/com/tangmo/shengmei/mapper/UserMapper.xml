@@ -63,4 +63,8 @@
     <update id="updateAvatar">
         UPDATE user_info SET avatar_id = #{avatarId} WHERE user_id = #{userId}
     </update>
+
+    <update id="updateMobile">
+        UPDATE user_info SET mobile = #{mobile} WHERE mobile = #{mobile}
+    </update>
 </mapper>

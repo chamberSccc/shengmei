@@ -47,9 +47,18 @@ public interface UserDao {
     /**
      * 上传头像
      *
-     * @param userId 用户id
+     * @param userId   用户id
      * @param avatarId 图片存储id
      * @return
      */
     int updateAvatar(@Param("userId") Integer userId, @Param("avatarId") String avatarId);
+
+    /**
+     * 修改手机号
+     *
+     * @param userId 用户id
+     * @param mobile 手机号
+     * @return
+     */
+    int updateMobile(@Param("userId") Integer userId, @Param("mobile") String mobile);
 }

@@ -25,7 +25,6 @@ public class UserController extends BaseController{
      *                   {
      *                      username:"姓名",
      *                      mobile:"18710889234",
-     *                      avatarId:"dasjhu2423523234"
      *                   }
      * @apiSuccess (success) {POST} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
      * @apiSuccess (success) {POST} data 返回数据
@@ -71,7 +70,6 @@ public class UserController extends BaseController{
      *                   {
      *                      username:"姓名",
      *                      mobile:"18710889234",
-     *                      avatarId:"dasjhu2423523234"
      *                   }
      * @apiSuccess (success) {PUT} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
      * @apiSuccess (success) {PUT} data 返回数据
@@ -84,24 +82,46 @@ public class UserController extends BaseController{
     }
 
     /**
-     * @api {POST} /user/avatar 上传头像
+     * @api {PUT} /user/avatar 上传头像
      * @apiGroup User
      * @apiVersion 0.0.1
      * @apiDescription 上传头像
      * @apiParam {String} code 图片base64编码
      * @apiParamExample {json} 请求样例:
      *                   {
-     *                      code:"图像base64编码",
+     *                      avatarId:"图像base64编码",
      *                      userId:"用户id"
      *                   }
-     * @apiSuccess (success) {PutMapping} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
-     * @apiSuccess (success) {PutMapping} data 返回数据
+     * @apiSuccess (success) {PUT} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccess (success) {PUT} data 返回数据
      * @apiSuccessExample {json} 返回样例:
      *                    {"code":"success"}
      */
     @PutMapping("/avatar")
-    public Result loadAvatar(String code,Integer userId){
-        return userService.uploadAvatar(userId,code);
+    public Result loadAvatar(User user){
+        return userService.uploadAvatar(user.getUserId(),user.getAvatarId());
+    }
+
+
+    /**
+     * @api {PUT} /user/avatar 上传头像
+     * @apiGroup User
+     * @apiVersion 0.0.1
+     * @apiDescription 上传头像
+     * @apiParam {String} code 图片base64编码
+     * @apiParamExample {json} 请求样例:
+     *                   {
+     *                      userId:"用户Id"
+     *                      mobile:"新的手机号"
+     *                   }
+     * @apiSuccess (success) {PUT} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccess (success) {PUT} data 返回数据
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success"}
+     */
+    @PutMapping("/mobile")
+    public Result changeMobile(User user){
+        return userService.updateMobile(user.getUserId(),user.getMobile());
     }
 
 }

@@ -69,4 +69,9 @@ public class UserServiceImpl implements UserService {
         }
         return ResultUtil.success();
     }
+
+    @Override
+    public Result updateMobile(Integer userId, String mobile) {
+        return ResultUtil.success(userDao.updateMobile(userId,mobile));
+    }
 }

@@ -51,4 +51,13 @@ public interface UserService {
      * @return
      */
     Result uploadAvatar(Integer userId, String code);
+
+    /**
+     * 修改手机号
+     *
+     * @param userId 用户id
+     * @param mobile 手机号
+     * @return
+     */
+    Result updateMobile(Integer userId, String mobile);
 }
