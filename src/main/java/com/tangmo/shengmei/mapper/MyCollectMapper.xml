@@ -45,6 +45,6 @@
         cd.price_now,cd.img_id,cd.cd_type
         FROM my_collect mc LEFT JOIN commodity cd
         ON mc.cd_id = cd.cd_id
-        WHERE mc.user_id = #{userId} limit #{start},#{end}
+        WHERE mc.user_id = #{userId} limit #{start},#{end}-#{start}
     </select>
 </mapper>

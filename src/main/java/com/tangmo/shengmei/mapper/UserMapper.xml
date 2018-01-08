@@ -68,4 +68,8 @@
     <select id="selectByMobile" resultMap="BaseResultMap">
         SELECT user_id,username,mobile,avatar_id FROM user_info WHERE mobile = #{mobile}
     </select>
+
+    <update id="updatePwd">
+        UPDATE user_info SET password = #{newPwd} WHERE user_id = #{userId}
+    </update>
 </mapper>

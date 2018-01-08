@@ -87,4 +87,17 @@ public class UserServiceImpl implements UserService {
         }
         return ResultUtil.fail();
     }
+
+    @Override
+    public Result changePwd(User user) {
+        if(user.getUserId() == null || user.getPassword()==null || user.getNewPwd() == null){
+            return ResultUtil.fail();
+        }
+        User result = userDao.selectById(user.getUserId());
+        if(!result.getPassword().equals(user.getPassword())){
+            return ResultUtil.pwdError();
+        }
+
+        return null;
+    }
 }

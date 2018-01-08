@@ -69,4 +69,12 @@ public interface UserDao {
      * @return
      */
     User selectByMobile(String mobile);
+
+    /**
+     * 更改密码
+     *
+     * @param user
+     * @return
+     */
+    int updatePwd(User user);
 }

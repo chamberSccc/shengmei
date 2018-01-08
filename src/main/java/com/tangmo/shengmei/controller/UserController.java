@@ -104,10 +104,10 @@ public class UserController extends BaseController{
 
 
     /**
-     * @api {PUT} /user/avatar 上传头像
+     * @api {PUT} /mobile 修改手机
      * @apiGroup User
      * @apiVersion 0.0.1
-     * @apiDescription 上传头像
+     * @apiDescription 修改手机
      * @apiParam {String} code 图片base64编码
      * @apiParamExample {json} 请求样例:
      *                   {
@@ -140,6 +140,28 @@ public class UserController extends BaseController{
     @GetMapping("/mobile/{userId}")
     public Result checkMobile(@PathVariable String mobile,@PathVariable Integer userId){
         return userService.checkMobile(userId,mobile);
+    }
+
+    /**
+     * @api {PUT} /user/pwd 修改密码
+     * @apiGroup User
+     * @apiVersion 0.0.1
+     * @apiDescription 修改密码
+     * @apiParam {User} user user对象
+     * @apiParamExample {json} 请求样例:
+     *                   {
+     *                      userId:"用户Id",
+     *                      password:"旧密码",
+     *                      newPwd:"新密码"
+     *                   }
+     * @apiSuccess (success) {PUT} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccess (success) {PUT} data 返回数据
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success"}
+     */
+    @PutMapping("/pwd")
+    public Result changePwd(User user){
+        return userService.changePwd(user);
     }
 
 }

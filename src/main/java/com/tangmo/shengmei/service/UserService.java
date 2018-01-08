@@ -69,4 +69,12 @@ public interface UserService {
      * @return
      */
     Result checkMobile(Integer userId, String mobile);
+
+    /**
+     * 修改密码
+     *
+     * @param user
+     * @return
+     */
+    Result changePwd(User user);
 }
