@@ -30,6 +30,10 @@ public class UserServiceImpl implements UserService {
         if (user.getPassword() == null || user.getMobile() == null) {
             return ResultUtil.fail();
         }
+        User result = userDao.selectByMobile(user.getMobile());
+        if(result!=null){
+            return ResultUtil.registered();
+        }
         int row = userDao.insertSelective(user);
         if (row == 1) {
             return ResultUtil.success();
@@ -73,5 +77,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public Result updateMobile(Integer userId, String mobile) {
         return ResultUtil.success(userDao.updateMobile(userId,mobile));
+    }
+
+    @Override
+    public Result checkMobile(Integer userId, String mobile) {
+        User user = userDao.selectById(userId);
+        if(user.getMobile().equals(mobile)){
+            return ResultUtil.success();
+        }
+        return ResultUtil.fail();
     }
 }

@@ -61,4 +61,12 @@ public interface UserDao {
      * @return
      */
     int updateMobile(@Param("userId") Integer userId, @Param("mobile") String mobile);
+
+    /**
+     * 通过手机号查询用户信息
+     *
+     * @param mobile 手机号
+     * @return
+     */
+    User selectByMobile(String mobile);
 }

@@ -1,6 +1,5 @@
 package com.tangmo.shengmei.controller;
 
-import com.tangmo.shengmei.constant.CommodityConst;
 import com.tangmo.shengmei.constant.GoodsBelongConst;
 import com.tangmo.shengmei.controller.base.BaseController;
 import com.tangmo.shengmei.entity.Commodity;

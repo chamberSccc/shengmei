@@ -37,4 +37,6 @@ public class ResultUtil {
     public static Result fail() {
         return createResult(Result.FAIL);
     }
+
+    public static Result registered(){return createResult(Result.ERROR_MOBILE);}
 }

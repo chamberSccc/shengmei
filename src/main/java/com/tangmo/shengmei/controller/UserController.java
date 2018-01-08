@@ -124,4 +124,22 @@ public class UserController extends BaseController{
         return userService.updateMobile(user.getUserId(),user.getMobile());
     }
 
+    /**
+     * @api {GET} /mobile/check/{userId}/{mobile} 验证手机信息
+     * @apiGroup User
+     * @apiVersion 0.0.1
+     * @apiDescription 验证手机信息
+     * @apiParamExample {json} 请求样例：
+     *  /mobile/check/1/18710829356
+     * @apiSuccess (200) {String} msg 信息
+     * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success",
+     *                     "data":{}
+     */
+    @GetMapping("/mobile/{userId}")
+    public Result checkMobile(@PathVariable String mobile,@PathVariable Integer userId){
+        return userService.checkMobile(userId,mobile);
+    }
+
 }

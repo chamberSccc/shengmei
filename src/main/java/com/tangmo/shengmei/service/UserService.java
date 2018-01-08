@@ -60,4 +60,13 @@ public interface UserService {
      * @return
      */
     Result updateMobile(Integer userId, String mobile);
+
+    /**
+     * 验证手机号
+     *
+     * @param userId
+     * @param mobile
+     * @return
+     */
+    Result checkMobile(Integer userId, String mobile);
 }
