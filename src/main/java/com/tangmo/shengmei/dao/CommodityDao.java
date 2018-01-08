@@ -1,6 +1,7 @@
 package com.tangmo.shengmei.dao;
 
 import com.tangmo.shengmei.entity.Commodity;
+import com.tangmo.shengmei.entity.GoodsComment;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -55,4 +56,21 @@ public interface CommodityDao {
      * @return
      */
     List<Commodity> selectListByUserId(Integer userId);
+
+    /**
+     * 获取商品评论列表
+     * @param goodsId 商品id
+     * @param start 开始索引
+     * @param end 结束索引
+     * @return
+     */
+    List<GoodsComment> selectCommentByGoodsId(@Param("goodsId") Integer goodsId,@Param("start") Integer start,
+                                          @Param("end") Integer end);
+
+    /**
+     * 增加商品评论
+     * @param goodsComment
+     * @return
+     */
+    int insertComment(GoodsComment goodsComment);
 }

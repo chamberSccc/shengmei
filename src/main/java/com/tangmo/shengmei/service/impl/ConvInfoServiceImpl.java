@@ -54,6 +54,7 @@ public class ConvInfoServiceImpl implements ConvInfoService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Result addComment(ConvComment convComment) {
         if(convComment.getUserId()==null || convComment.getCcId() ==null){
             return ResultUtil.fail();
@@ -61,5 +62,16 @@ public class ConvInfoServiceImpl implements ConvInfoService {
         convInfoDao.updateCommentCount(convComment.getCiId());
         convInfoDao.insertConvComment(convComment);
         return ResultUtil.success();
+    }
+
+    @Override
+    public Result deleteConvInfo(Integer ciId) {
+        convInfoDao.deleteById(ciId);
+        return ResultUtil.success();
+    }
+
+    @Override
+    public Result getCommentList(Integer ciId, Integer start, Integer end) {
+        return ResultUtil.success(convInfoDao.selectCommentByCiId(ciId,start,end));
     }
 }

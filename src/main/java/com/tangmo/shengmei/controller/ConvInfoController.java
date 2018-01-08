@@ -1,6 +1,7 @@
 package com.tangmo.shengmei.controller;
 
 import com.tangmo.shengmei.controller.base.BaseController;
+import com.tangmo.shengmei.entity.ConvComment;
 import com.tangmo.shengmei.entity.ConvInfo;
 import com.tangmo.shengmei.utility.code.Result;
 import org.springframework.web.bind.annotation.*;
@@ -102,7 +103,61 @@ public class ConvInfoController extends BaseController {
      *                    {"code":"success"}
      */
     @DeleteMapping("/{ciId}")
-    public Result removeAddress(@PathVariable Integer uaId){
-        return null;
+    public Result removeAddress(@PathVariable Integer ciId){
+        return convInfoService.deleteConvInfo(ciId);
+    }
+
+    /**
+     * @api {POST} /comment 增加便民信息评论
+     * @apiGroup Convenient
+     * @apiVersion 0.0.1
+     * @apiDescription 增加便民信息评论
+     * @apiParam {ConvComment} convComment 评论对象
+     * @apiParamExample {json} 请求样例:
+     *                   {
+     *                      userId:"用户id",
+     *                      ciId:"便民信息id",
+     *                      content:"评论内容"
+     *                   }
+     * @apiSuccess (success) {POST} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccess (success) {POST} data 返回数据
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success"}
+     */
+    @PostMapping("/comment")
+    public Result addComment(ConvComment convComment){
+        return convInfoService.addComment(convComment);
+    }
+
+    /**
+     * @api {GET} /comment/list/{start}/{end} 获取便民信息评论
+     * @apiGroup Convenient
+     * @apiVersion 0.0.1
+     * @apiParam {int} start 分页起始索引
+     * @apiParam {int} end 分页结束索引
+     * @apiDescription 获取便民信息评论
+     * @apiParamExample {json} 请求样例：
+     *  /comment/list/1/1/10
+     * @apiSuccess (200) {String} msg 信息
+     * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success",
+     *                     "data":{
+     *                     [{
+     *                        ccId: 评论Id,
+     *                        userId: "用户Id",
+     *                        userName:用户名字
+     *                        avatarId: "头像Id"},
+     *                     {
+     *                        ccId: 评论Id,
+     *                        userId: "用户Id",
+     *                        userName:用户名字
+     *                        avatarId: "头像Id"
+     *                     }]
+     *                     }
+     */
+    @GetMapping("/comment/list/{ciId}/{start}/{end}")
+    public Result getCommentList(@PathVariable Integer ciId,@PathVariable Integer start,@PathVariable Integer end){
+        return convInfoService.getCommentList(ciId,start,end);
     }
 }

@@ -15,6 +15,16 @@
         <result column="createtime" property="createTime" jdbcType="TIMESTAMP"/>
     </resultMap>
 
+    <resultMap id="CommentResultMap" type="com.tangmo.shengmei.entity.ConvComment" >
+        <id column="gc_id" property="gcId" jdbcType="INTEGER"/>
+        <result column="goods_id" property="goodsId" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="avatar_id" property="avatarId" jdbcType="VARCHAR"/>
+        <result column="belong_type" property="belongType" jdbcType="TINYINT"/>
+        <result column="createtime" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
     <sql id="Base_Column_List" >
 
     </sql>
@@ -123,7 +133,7 @@
 
     <select id="selectListByType" resultMap="BaseResultMap">
         SELECT img_id,title,content,cd_type,cd_count,price_pre,price_now,createtime
-          FROM commodity WHERE cd_type = #{cdType} limit #{start},#{end}
+          FROM commodity WHERE cd_type = #{cdType} limit #{start},#{end}-#{start}
     </select>
 
     <select id="selectListByUserId" resultMap="BaseResultMap">
@@ -134,4 +144,44 @@
     <delete id="deleteById">
         DELETE FROM commodity WHERE cd_id = #{cdId}
     </delete>
+
+
+    <select id="selectCommentByGoodsId" resultMap="CommentResultMap">
+        SELECT cc.user_id,ui.user_name,ui.avatar_id,cc.createtime FROM goods_comment gc
+        LEFT JOIN user_info ui ON cc.user_id = ui.user_id
+        WHERE gc.goods_id = #{goodsId} AND belong_type = 0
+        limit #{start},#{end}-#{start}
+    </select>
+
+    <insert id="insertComment" parameterType="com.tangmo.shengmei.entity.GoodsComment">
+        insert into goods_comment
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="comment != null">
+                comment,
+            </if>
+            <if test="goodsId != null">
+                goods_id,
+            </if>
+            <if test="belongType != null">
+                belong_type,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="comment != null">
+                #{comment,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsId != null">
+                #{goodsId,jdbcType=INTEGER},
+            </if>
+            <if test="belongType != null">
+                #{belongType,jdbcType=TINYINT},
+            </if>
+        </trim>
+    </insert>
 </mapper>

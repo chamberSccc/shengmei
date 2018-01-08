@@ -27,7 +27,7 @@
         <result column="ci_id" property="ciId" jdbcType="INTEGER"/>
         <result column="user_id" property="userId" jdbcType="INTEGER"/>
         <result column="username" property="username" jdbcType="VARCHAR"/>
-        <result column="avatar_id" property="avatarId" jdbcType="INTEGER"/>
+        <result column="avatar_id" property="avatarId" jdbcType="VARCHAR"/>
         <result column="createtime" property="createTime" jdbcType="TIMESTAMP"/>
     </resultMap>
 
@@ -140,4 +140,8 @@
         SELECT ci_id,title,content,view_count,comment_count
         FROM convenient_info WHERE ci_id = #{ciId}
     </select>
+
+    <delete id="deleteById">
+        DELETE FROM convenient_info WHERE ci_id = #{ciId}
+    </delete>
 </mapper>

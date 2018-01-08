@@ -6,17 +6,18 @@ import java.io.Serializable;
 
 /**
  * @author boge
- * @date 18/1/5
- * @description 便民信息评论对象
+ * @date 18/1/9
+ * @description 商品评论表
  */
 @Data
-public class ConvComment implements Serializable {
+public class GoodsComment implements Serializable{
 
     private static final long serialVersionUID = 1L;
-    private Integer ccId;
+    private Integer gcId;
     private Integer ciId;
     private Integer userId;
     private String userName;
     private String avatarId;
+    private Byte belongType;
     private String comment;
 }

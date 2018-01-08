@@ -1,5 +1,6 @@
 package com.tangmo.shengmei.dao;
 
+import com.tangmo.shengmei.entity.GoodsComment;
 import com.tangmo.shengmei.entity.ShopGoods;
 import org.apache.ibatis.annotations.Param;
 
@@ -53,6 +54,16 @@ public interface ShopGoodsDao {
      * @return
      */
     List<ShopGoods> selectQlList(@Param("start") Integer start, @Param("end") Integer end);
+
+    /**
+     * 获取商品评论列表
+     * @param goodsId 商品id
+     * @param start 开始索引
+     * @param end 结束索引
+     * @return
+     */
+    List<GoodsComment> selectCommentByGoodsId(@Param("goodsId") Integer goodsId, @Param("start") Integer start,
+                                          @Param("end") Integer end);
 
 
 }

@@ -52,4 +52,21 @@ public interface ConvInfoService {
      * @return
      */
     Result addComment(ConvComment convComment);
+
+    /**
+     * 删除便民信息
+     *
+     * @param ciId
+     * @return
+     */
+    Result deleteConvInfo(Integer ciId);
+
+    /**
+     * 便民信息评论列表
+     * @param ciId
+     * @param start
+     * @param end
+     * @return
+     */
+    Result getCommentList(Integer ciId,Integer start,Integer end);
 }

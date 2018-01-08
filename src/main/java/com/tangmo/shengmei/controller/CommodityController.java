@@ -1,7 +1,10 @@
 package com.tangmo.shengmei.controller;
 
+import com.tangmo.shengmei.constant.CommodityConst;
+import com.tangmo.shengmei.constant.GoodsBelongConst;
 import com.tangmo.shengmei.controller.base.BaseController;
 import com.tangmo.shengmei.entity.Commodity;
+import com.tangmo.shengmei.entity.GoodsComment;
 import com.tangmo.shengmei.utility.code.Result;
 import org.springframework.web.bind.annotation.*;
 
@@ -170,5 +173,60 @@ public class CommodityController extends BaseController {
     @DeleteMapping("/{cdId}")
     public Result removeCommodity(@PathVariable Integer cdId){
         return commodityService.delCommodity(cdId);
+    }
+
+    /**
+     * @api {GET} /comment/list/{start}/{end} 获取个人商品评论
+     * @apiGroup Commodity
+     * @apiVersion 0.0.1
+     * @apiParam {int} start 分页起始索引
+     * @apiParam {int} end 分页结束索引
+     * @apiDescription 获取个人商品评论
+     * @apiParamExample {json} 请求样例：
+     *  /comment/list/1/1/10
+     * @apiSuccess (200) {String} msg 信息
+     * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success",
+     *                     "data":{
+     *                     [{
+     *                        ccId: 评论Id,
+     *                        userId: "用户Id",
+     *                        userName:用户名字
+     *                        avatarId: "头像Id"},
+     *                     {
+     *                        ccId: 评论Id,
+     *                        userId: "用户Id",
+     *                        userName:用户名字
+     *                        avatarId: "头像Id"
+     *                     }]
+     *                     }
+     */
+    @GetMapping("/comment/list/{goodsId}/{start}/{end}")
+    public Result getCommentList(@PathVariable Integer goodsId,@PathVariable Integer start,@PathVariable Integer end){
+        return commodityService.getComments(goodsId, GoodsBelongConst.PERSON_GOODS,start,end);
+    }
+
+    /**
+     * @api {POST} /comment 增加个人商品评论
+     * @apiGroup Commodity
+     * @apiVersion 0.0.1
+     * @apiDescription 增加个人商品评论
+     * @apiParam {GoodsComment} goodsComment 商品评论对象
+     * @apiParamExample {json} 请求样例:
+     *                   {
+     *                      userId:"用户id",
+     *                      ciId:"便民信息id",
+     *                      content:"评论内容"
+     *                   }
+     * @apiSuccess (success) {POST} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccess (success) {POST} data 返回数据
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success"}
+     */
+    @PostMapping("/comment")
+    public Result addComment(GoodsComment goodsComment){
+        goodsComment.setBelongType(GoodsBelongConst.PERSON_GOODS);
+        return commodityService.addComment(goodsComment);
     }
 }

@@ -1,7 +1,10 @@
 package com.tangmo.shengmei.service.impl;
 
+import com.tangmo.shengmei.constant.GoodsBelongConst;
 import com.tangmo.shengmei.dao.CommodityDao;
+import com.tangmo.shengmei.dao.ShopGoodsDao;
 import com.tangmo.shengmei.entity.Commodity;
+import com.tangmo.shengmei.entity.GoodsComment;
 import com.tangmo.shengmei.entity.RsFile;
 import com.tangmo.shengmei.service.CommodityService;
 import com.tangmo.shengmei.service.ImgFileService;
@@ -23,6 +26,8 @@ import javax.annotation.Resource;
 public class CommodityServiceImpl implements CommodityService {
     @Resource
     private CommodityDao commodityDao;
+    @Resource
+    private ShopGoodsDao shopGoodsDao;
     @Resource
     private ImgFileService imgFileService;
 
@@ -73,9 +78,27 @@ public class CommodityServiceImpl implements CommodityService {
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public Result delCommodity(Integer cdId) {
         commodityDao.deleteById(cdId);
         return ResultUtil.success();
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Result addComment(GoodsComment goodsComment) {
+        commodityDao.insertComment(goodsComment);
+        return ResultUtil.success();
+    }
+
+    @Override
+    public Result getComments(Integer goodsId, Byte belongType, Integer start, Integer end) {
+        if(belongType.equals(GoodsBelongConst.PERSON_GOODS)){
+            return ResultUtil.success(commodityDao.selectCommentByGoodsId(goodsId,start,end));
+        }else if(belongType.equals(GoodsBelongConst.SHOP_GOODS)){
+            return ResultUtil.success(shopGoodsDao.selectCommentByGoodsId(goodsId, start, end));
+        }else{
+            return ResultUtil.fail();
+        }
     }
 }
