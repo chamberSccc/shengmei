@@ -3,6 +3,7 @@
 <mapper namespace="com.tangmo.shengmei.dao.CommodityDao" >
     <resultMap id="BaseResultMap" type="com.tangmo.shengmei.entity.Commodity" >
         <id column="cd_id" property="cdId" jdbcType="INTEGER"/>
+        <result column="vr_id" property="vrId" jdbcType="INTEGER"/>
         <result column="img_id" property="imgId" jdbcType="VARCHAR"/>
         <result column="title" property="title" jdbcType="VARCHAR"/>
         <result column="content" property="content" jdbcType="VARCHAR"/>
@@ -199,4 +200,8 @@
         FROM view_record vr LEFT JOIN commodity co ON vr.goods_id = co.co_id
         WHERE vr.user_id = #{userId} limit #{start},#{end}-#{start}
     </select>
+
+    <delete id="deleteViewRecordById">
+        DELETE FROM view_record WHERE vr_id = #{vrId}
+    </delete>
 </mapper>

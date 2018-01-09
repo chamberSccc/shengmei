@@ -271,9 +271,63 @@ public class CommodityController extends BaseController {
         return commodityService.getQualityInfo(start,end);
     }
 
-
+    /**
+     * @api {GET} /commodity/quality/{start}/{end} 精品列表
+     * @apiGroup Commodity
+     * @apiVersion 0.0.1
+     * @apiParam {int} start 分页起始索引
+     * @apiParam {int} end 分页结束索引
+     * @apiDescription 精品列表
+     * @apiParamExample {json} 请求样例：
+     *  /commodity/quality/1/10
+     * @apiSuccess (200) {String} msg 信息
+     * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success",
+     *                     "data":{
+     *                     [{
+     *                        vrId: 浏览记录主键,
+     *                        title: "商品信息标题1",
+     *                        content: "商品信息内容1",
+     *                        pricePre:"商品原价1",
+     *                        priceNow:"商品现价1",
+     *                        cdType:"商品类型1",
+     *                        cdCount:"商品数量1",
+     *                        cdColor:"商品颜色,多种颜色以逗号分隔,
+     *                        cdSize:"商品规格,多种规格以逗号分隔"},
+     *                     {
+     *                        vrId: 浏览记录主键,
+     *                        title: "商品信息标题2",
+     *                        content: "商品信息内容2",
+     *                        pricePre:"商品原价2",
+     *                        priceNow:"商品现价2",
+     *                        cdType:"商品类型2",
+     *                        cdCount:"商品数量2",
+     *                        cdColor:"商品颜色,多种颜色以逗号分隔,
+     *                        cdSize:"商品规格,多种规格以逗号分隔"},
+     *                     }]
+     *                     }
+     */
     @GetMapping("/view/{userId}/{start}/{end}")
     public Result getViewRecord(@PathVariable Integer userId,@PathVariable Integer start,@PathVariable Integer end){
         return commodityService.getViewRecord(userId, start, end);
+    }
+
+    /**
+     * @api {DELETE} /view/{vrId} 删除浏览记录
+     * @apiGroup Commodity
+     * @apiVersion 0.0.1
+     * @apiParam {int} vrId 浏览记录主键
+     * @apiDescription 删除浏览记录
+     * @apiParamExample {json} 请求样例：
+     *  /view/12
+     * @apiSuccess (200) {String} msg 信息
+     * @apiSuccess (success) {DELETE} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success"}
+     */
+    @DeleteMapping("/view/{vrId}")
+    public Result delViewRecord(){
+        return null;
     }
 }

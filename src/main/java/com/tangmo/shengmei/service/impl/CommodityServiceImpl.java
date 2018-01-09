@@ -125,4 +125,10 @@ public class CommodityServiceImpl implements CommodityService {
     public Result getViewRecord(Integer userId, Integer start, Integer end) {
         return ResultUtil.success(commodityDao.selectViewRecord(userId, start, end));
     }
+
+    @Override
+    public Result delViewRecord(Integer vrId) {
+        commodityDao.deleteViewRecordById(vrId);
+        return ResultUtil.success();
+    }
 }

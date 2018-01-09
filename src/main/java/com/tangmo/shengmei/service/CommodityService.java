@@ -100,4 +100,12 @@ public interface CommodityService {
      * @return
      */
     Result getViewRecord(Integer userId, Integer start, Integer end);
+
+    /**
+     * 删除浏览记录
+     *
+     * @param vrId
+     * @return
+     */
+    Result delViewRecord(Integer vrId);
 }

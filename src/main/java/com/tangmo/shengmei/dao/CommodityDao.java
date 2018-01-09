@@ -86,19 +86,29 @@ public interface CommodityDao {
 
     /**
      * 查询精品商品
+     *
      * @param start
      * @param end
      * @return
      */
-    List<Commodity> selectQualityList(@Param("start") Integer start,@Param("end") Integer end);
+    List<Commodity> selectQualityList(@Param("start") Integer start, @Param("end") Integer end);
 
     /**
      * 查询商品浏览记录
+     *
      * @param userId
      * @param start
      * @param end
      * @return
      */
-    List<Commodity> selectViewRecord(@Param("userId") Integer userId,@Param("start") Integer start,
+    List<Commodity> selectViewRecord(@Param("userId") Integer userId, @Param("start") Integer start,
                                      @Param("end") Integer end);
+
+    /**
+     * 删除浏览记录
+     *
+     * @param vrId
+     * @return
+     */
+    int deleteViewRecordById(Integer vrId);
 }
