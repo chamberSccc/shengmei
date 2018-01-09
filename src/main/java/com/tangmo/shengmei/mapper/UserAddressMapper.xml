@@ -7,6 +7,8 @@
         <result column="recipient" property="recipient" jdbcType="VARCHAR"/>
         <result column="address" property="address" jdbcType="VARCHAR"/>
         <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="is_default" property="isDefault" jdbcType="TINYINT"/>
+        <result column="createtime" property="createTime" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <sql id="Base_Column_List" >
@@ -27,6 +29,9 @@
                 <if test="userId != null">
                     user_id,
                 </if>
+                <if test="isDefault != null">
+                    is_default,
+                </if>
             </trim>
             <trim prefix="values (" suffix=")" suffixOverrides=",">
                 <if test="recipient != null">
@@ -40,6 +45,9 @@
                 </if>
                 <if test="userId != null">
                     #{userId,jdbcType=INTEGER},
+                </if>
+                <if test="isDefault != null">
+                    #{isDefault,jdbcType=INTEGER},
                 </if>
             </trim>
     </insert>
@@ -62,10 +70,22 @@
     </update>
 
     <select id="selectListByUserId" resultMap="BaseResultMap">
-        SELECT mobile,recipient,address  FROM user_address WHERE user_id = #{userId}
+        SELECT ua_id,mobile,recipient,is_default,address,createtime  FROM user_address WHERE user_id = #{userId}
     </select>
 
     <delete id="deleteById">
         DELETE FROM user_address WHERE ua_id = #{uaId}
     </delete>
+
+    <update id="updateDefaultById">
+        UPDATE user_address SET is_default = 1 WHERE ua_id = #{uaId}
+    </update>
+
+    <select id="selectListById" resultMap="BaseResultMap">
+        SELECT ua_id,user_id FROM user_address WHERE ua_id = #{uaId}
+    </select>
+
+    <update id="updateUnDefaultByUserId">
+        UPDATE user_address SET is_default = 0 WHERE user_id = #{userId}
+    </update>
 </mapper>

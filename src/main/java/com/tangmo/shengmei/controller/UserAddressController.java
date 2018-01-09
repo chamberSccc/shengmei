@@ -3,6 +3,7 @@ package com.tangmo.shengmei.controller;
 import com.tangmo.shengmei.controller.base.BaseController;
 import com.tangmo.shengmei.entity.UserAddress;
 import com.tangmo.shengmei.utility.code.Result;
+import com.tangmo.shengmei.utility.code.ResultUtil;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserAddressController extends BaseController{
 
     /**
-     * @api {POST} /address/add 增加地址信息
+     * @api {POST} /address 增加地址信息
      * @apiGroup UserAddress
      * @apiVersion 0.0.1
      * @apiDescription 增加地址信息
@@ -25,6 +26,7 @@ public class UserAddressController extends BaseController{
      *                      userId:"用户Id",
      *                      mobile:"手机号",
      *                      recipient:"收件人",
+     *                      isDefault:"是否是默认地址",
      *                      address:"地址信息"
      *                   }
      * @apiSuccess (success) {POST} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
@@ -32,7 +34,7 @@ public class UserAddressController extends BaseController{
      * @apiSuccessExample {json} 返回样例:
      *                    {"code":"success"}
      */
-    @PostMapping("/add")
+    @PostMapping("")
     public Result addAddress(@RequestBody UserAddress userAddress){
         return userAddressService.addUserAddress(userAddress);
     }
@@ -45,8 +47,7 @@ public class UserAddressController extends BaseController{
      * @apiParam {UserAddress} UserAddress 用户地址对象
      * @apiParamExample {json} 请求样例:
      *                   {
-     *                      uaId: 本条记录id
-     *                      userId:"用户Id",
+     *                      uaId: "本条记录id",
      *                      mobile:"手机号",
      *                      recipient:"收件人",
      *                      address:"地址信息"
@@ -59,6 +60,29 @@ public class UserAddressController extends BaseController{
     @PutMapping("")
     public Result changeAddress(@RequestBody UserAddress userAddress){
         return userAddressService.changeUserAddress(userAddress);
+    }
+
+    /**
+     * @api {PUT} /address/default 修改为默认地址
+     * @apiGroup UserAddress
+     * @apiVersion 0.0.1
+     * @apiDescription 增加地址信息
+     * @apiParam {UserAddress} UserAddress 用户地址对象
+     * @apiParamExample {json} 请求样例:
+     *                   {
+     *                      uaId: "本条记录id"
+     *                   }
+     * @apiSuccess (success) {PUT} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccess (success) {PUT} data 返回数据
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success"}
+     */
+    @PutMapping("/default")
+    public Result changeDefault(@RequestBody UserAddress userAddress){
+        if(userAddress.getUaId()==null){
+            return ResultUtil.fail();
+        }
+        return userAddressService.changeDefault(userAddress.getUaId());
     }
 
     /**
@@ -78,11 +102,13 @@ public class UserAddressController extends BaseController{
      *                        uaId: 1,
      *                        address: "地址信息1",
      *                        recipient: "收件人1",
+     *                        isDefault:"是否是默认地址",
      *                        mobile:"手机号1"},
      *                     {
      *                        uaId: 2,
      *                        address: "地址信息2",
      *                        recipient: "收件人2",
+     *                        isDefault:"是否是默认地址",
      *                        mobile:"手机号2"
      *                     }]
      *                     }
@@ -93,7 +119,7 @@ public class UserAddressController extends BaseController{
     }
 
     /**
-     * @api {DELETE} /{uaId} 删除用户地址信息
+     * @api {DELETE} /address/{uaId} 删除用户地址信息
      * @apiGroup UserAddress
      * @apiVersion 0.0.1
      * @apiParam {int} uaId 地址表主键

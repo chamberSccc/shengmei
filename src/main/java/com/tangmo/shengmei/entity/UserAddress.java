@@ -18,6 +18,7 @@ public class UserAddress implements Serializable{
     private String recipient;
     private String mobile;
     private Integer userId;
+    private Byte isDefault;
     private Date createTime;
     private Date updateTime;
 }

@@ -16,6 +16,11 @@ public class MyCollect implements Serializable{
     private Integer mcId;
     private Integer cdId;
     private Integer userId;
+    private String imgId;
+    private String title;
+    private String content;
+    private Byte cdType;
+    private Double pricePre;
+    private Double priceNow;
     private Date createTime;
-    private Commodity commodity;
 }

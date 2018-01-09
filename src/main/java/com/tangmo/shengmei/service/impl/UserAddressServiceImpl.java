@@ -51,4 +51,16 @@ public class UserAddressServiceImpl implements UserAddressService{
         userAddressDao.deleteById(uaId);
         return ResultUtil.success();
     }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Result changeDefault(Integer uaId) {
+        UserAddress userAddress = userAddressDao.selectListById(uaId);
+        if(userAddress==null || userAddress.getUserId()==null){
+            return ResultUtil.fail();
+        }
+        userAddressDao.updateUnDefaultByUserId(userAddress.getUserId());
+        userAddressDao.updateDefaultById(uaId);
+        return ResultUtil.success();
+    }
 }

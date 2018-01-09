@@ -44,4 +44,28 @@ public interface UserAddressDao {
      * @return
      */
     int deleteById(Integer uaId);
+
+    /**
+     * 通过主键查询地址信息
+     *
+     * @param uaId
+     * @return
+     */
+    UserAddress selectListById(Integer uaId);
+
+    /**
+     * 通过主键更改为默认地址
+     *
+     * @param uaId
+     * @return
+     */
+    int updateDefaultById(Integer uaId);
+
+    /**
+     * 设置用户的所有地址信息为非默认
+     *
+     * @param userId
+     * @return
+     */
+    int updateUnDefaultByUserId(Integer userId);
 }

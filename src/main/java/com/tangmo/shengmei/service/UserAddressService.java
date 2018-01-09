@@ -43,4 +43,12 @@ public interface UserAddressService {
      * @return
      */
     Result delUserAddress(Integer uaId);
+
+    /**
+     * 设置为默认地址
+     *
+     * @param uaId
+     * @return
+     */
+    Result changeDefault(Integer uaId);
 }
