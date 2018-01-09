@@ -133,7 +133,7 @@
 
     <select id="selectListByType" resultMap="BaseResultMap">
         SELECT img_id,title,content,cd_type,cd_count,price_pre,price_now,createtime
-          FROM commodity WHERE cd_type = #{cdType} limit #{start},#{end}-#{start}
+          FROM commodity WHERE cd_type = #{cdType} limit #{start},#{end}
     </select>
 
     <select id="selectListByUserId" resultMap="BaseResultMap">
@@ -192,13 +192,13 @@
 
     <select id="selectQualityList" resultMap="BaseResultMap">
         SELECT img_id,title,content,cd_type,cd_count,price_pre,price_now,createtime
-        FROM commodity WHERE is_quality = 1 limit #{start},#{end}-#{start}
+        FROM commodity WHERE is_quality = 1 limit #{start},#{end}
     </select>
 
     <select id="selectViewRecord" resultMap="BaseResultMap">
         SELECT co.img_id,co.title,co.content,co.cd_type,co.cd_count,co.price_pre,co.price_now,vr.createtime
         FROM view_record vr LEFT JOIN commodity co ON vr.goods_id = co.co_id
-        WHERE vr.user_id = #{userId} limit #{start},#{end}-#{start}
+        WHERE vr.user_id = #{userId} limit #{start},#{start},#{end}
     </select>
 
     <delete id="deleteViewRecordById">

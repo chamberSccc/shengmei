@@ -93,7 +93,7 @@
     <select id="selectConvList" resultMap="BaseResultMap">
         SELECT ci_id,title,content,view_count,comment_count
         FROM convenient_info ORDER BY createtime DESC
-        limit #{start},#{end}-#{start}
+        limit #{start},#{end}
     </select>
 
     <update id="updateViewCount">
@@ -137,7 +137,7 @@
         LEFT JOIN user_info ui ON cc.user_id = ui.user_id
         WHERE cc.ci_id = #{ciId}
         ORDER BY cc.createtime DESC
-        limit #{start},#{end}-#{start}
+        limit #{start},#{end}
     </select>
 
     <select id="selectByCiId" resultMap="BaseResultMap">
@@ -153,6 +153,6 @@
         SELECT ci_id,title,content,view_count,comment_count
         FROM convenient_info WHERE user_id = #{userId}
         ORDER BY createtime DESC
-        limit #{start},#{end}-#{start}
+        limit #{start},#{end}
     </select>
 </mapper>

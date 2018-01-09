@@ -64,7 +64,7 @@ public class ConvInfoController extends BaseController {
      * @apiGroup Convenient
      * @apiVersion 0.0.1
      * @apiParam {int} start 分页起始索引
-     * @apiParam {int} end 分页结束索引
+     * @apiParam {int} end 查询列表长度
      * @apiDescription 获取个人信息
      * @apiParamExample {json} 请求样例：
      *  /conv/list/1/10
@@ -134,7 +134,7 @@ public class ConvInfoController extends BaseController {
      * @apiGroup Convenient
      * @apiVersion 0.0.1
      * @apiParam {int} start 分页起始索引
-     * @apiParam {int} end 分页结束索引
+     * @apiParam {int} end 查询列表长度
      * @apiDescription 获取便民信息评论
      * @apiParamExample {json} 请求样例：
      *  /comment/list/1/1/10
@@ -166,7 +166,7 @@ public class ConvInfoController extends BaseController {
      * @apiGroup Convenient
      * @apiVersion 0.0.1
      * @apiParam {int} start 分页起始索引
-     * @apiParam {int} end 分页结束索引
+     * @apiParam {int} end 查询列表长度
      * @apiDescription 获取用户便民信息
      * @apiParamExample {json} 请求样例：
      *  /conv/user/1/1/10

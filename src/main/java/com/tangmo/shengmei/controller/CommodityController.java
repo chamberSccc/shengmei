@@ -78,7 +78,7 @@ public class CommodityController extends BaseController {
      * @apiVersion 0.0.1
      * @apiParam {byte} type 商品类型
      * @apiParam {int} start 分页起始索引
-     * @apiParam {int} end 分页结束索引
+     * @apiParam {int} end 查询列表长度
      * @apiDescription 获取指定类型商品
      * @apiParamExample {json} 请求样例：
      *  /commodity/list/1/1/10
@@ -179,7 +179,7 @@ public class CommodityController extends BaseController {
      * @apiGroup Commodity
      * @apiVersion 0.0.1
      * @apiParam {int} start 分页起始索引
-     * @apiParam {int} end 分页结束索引
+     * @apiParam {int} end 查询列表长度
      * @apiDescription 获取个人商品评论
      * @apiParamExample {json} 请求样例：
      *  /comment/list/1/1/10
@@ -234,7 +234,7 @@ public class CommodityController extends BaseController {
      * @apiGroup Commodity
      * @apiVersion 0.0.1
      * @apiParam {int} start 分页起始索引
-     * @apiParam {int} end 分页结束索引
+     * @apiParam {int} end 查询列表长度
      * @apiDescription 精品列表
      * @apiParamExample {json} 请求样例：
      *  /commodity/quality/1/10
@@ -276,7 +276,7 @@ public class CommodityController extends BaseController {
      * @apiGroup Commodity
      * @apiVersion 0.0.1
      * @apiParam {int} start 分页起始索引
-     * @apiParam {int} end 分页结束索引
+     * @apiParam {int} end 查询列表长度
      * @apiDescription 精品列表
      * @apiParamExample {json} 请求样例：
      *  /commodity/quality/1/10

@@ -20,7 +20,7 @@ public class MyCollectController extends BaseController {
      * @apiVersion 0.0.1
      * @apiParam {int} userId 用户id
      * @apiParam {int} start 分页起始索引
-     * @apiParam {int} end 分页结束索引
+     * @apiParam {int} end 查询列表长度
      * @apiDescription 获取我的收藏信息
      * @apiParamExample {json} 请求样例：
      *  /collect/list/1/1/10
