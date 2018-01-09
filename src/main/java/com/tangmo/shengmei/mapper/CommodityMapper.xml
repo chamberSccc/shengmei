@@ -188,4 +188,9 @@
     <select id="selectCommodityDetail" resultMap="BaseResultMap">
         SELECT * FROM commodity WHERE  cd_id = #{cdId}
     </select>
+
+    <select id="selectQualityList" resultMap="BaseResultMap">
+        SELECT img_id,title,content,cd_type,cd_count,price_pre,price_now,createtime
+        FROM commodity WHERE is_quality = 1 limit #{start},#{end}-#{start}
+    </select>
 </mapper>

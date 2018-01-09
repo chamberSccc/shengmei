@@ -109,9 +109,15 @@ public class CommodityServiceImpl implements CommodityService {
     @Override
     public Result getCommodityDetail(Integer userId,Integer cdId) {
         if(userId != null){
+            //增加浏览记录
             ViewRecord viewRecord = new ViewRecord(userId,cdId,GoodsBelongConst.PERSON_GOODS);
             userDao.insertViewRecord(viewRecord);
         }
         return ResultUtil.success(commodityDao.selectCommodityDetail(cdId));
+    }
+
+    @Override
+    public Result getQualityInfo(Integer start, Integer end) {
+        return ResultUtil.success(commodityDao.selectQualityList(start, end));
     }
 }

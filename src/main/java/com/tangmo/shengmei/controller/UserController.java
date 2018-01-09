@@ -223,4 +223,26 @@ public class UserController extends BaseController{
         return userService.searchWithDrawInfo(userId);
     }
 
+    /**
+     * @api {POST} /user/feedback 提交反馈
+     * @apiGroup User
+     * @apiVersion 0.0.1
+     * @apiDescription 提交反馈
+     * @apiParamExample {json} 请求样例:
+     *                   {
+     *                      userId:"用户id",
+     *                      content:"建议内容",
+     *                      imgId:"base64编码",
+     *                      mobile:"电话"
+     *                   }
+     * @apiSuccess (success) {POST} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccess (success) {POST} data 返回数据
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success"}
+     */
+    @PostMapping("/feedback")
+    public Result addFeedBack(){
+        return null;
+    }
+
 }

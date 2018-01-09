@@ -83,4 +83,12 @@ public interface CommodityDao {
      * @return
      */
     Commodity selectCommodityDetail(Integer cdId);
+
+    /**
+     * 查询精品商品
+     * @param start
+     * @param end
+     * @return
+     */
+    List<Commodity> selectQualityList(@Param("start") Integer start,@Param("end") Integer end);
 }

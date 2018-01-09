@@ -17,13 +17,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class FileController extends BaseController{
 
     /**
-     * @api {GET} /resource/read/{rfId} 附件查看
+     * @api {GET} /file/read/{rfId} 附件查看
      * @apiGroup Resource
      * @apiVersion 0.0.1
      * @apiDescription 查看文件,需要传输文件id, 返回ResponseEntity<byte[]>
      * @apiParam {String} rfId 文件id
      * @apiParamExample {uri} 请求样例:
-     *                   /resource/read/d5540ff2db804a8daf1050a06679155f
+     *                   /file/read/d5540ff2db804a8daf1050a06679155f
      */
     @GetMapping("/read/{rfId}")
     public ResponseEntity<byte[]> readFile(@PathVariable String rfId){

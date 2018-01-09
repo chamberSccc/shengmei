@@ -1,5 +1,6 @@
 package com.tangmo.shengmei.service;
 
+import com.tangmo.shengmei.entity.FeedBack;
 import com.tangmo.shengmei.entity.User;
 import com.tangmo.shengmei.entity.WithDrawInfo;
 import com.tangmo.shengmei.utility.code.Result;
@@ -94,4 +95,12 @@ public interface UserService {
      * @return
      */
     Result searchWithDrawInfo(Integer userId);
+
+    /**
+     * 增加反馈信息
+     *
+     * @param feedBack
+     * @return
+     */
+    Result addFeedBack(FeedBack feedBack);
 }

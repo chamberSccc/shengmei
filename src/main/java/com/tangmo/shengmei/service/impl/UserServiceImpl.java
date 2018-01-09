@@ -1,6 +1,7 @@
 package com.tangmo.shengmei.service.impl;
 
 import com.tangmo.shengmei.dao.UserDao;
+import com.tangmo.shengmei.entity.FeedBack;
 import com.tangmo.shengmei.entity.RsFile;
 import com.tangmo.shengmei.entity.User;
 import com.tangmo.shengmei.entity.WithDrawInfo;
@@ -118,5 +119,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public Result searchWithDrawInfo(Integer userId) {
         return ResultUtil.success(userDao.selectWithDrawByUserId(userId));
+    }
+
+    @Override
+    public Result addFeedBack(FeedBack feedBack) {
+        if(feedBack.getUserId() == null){
+            return ResultUtil.fail();
+        }
+        return null;
     }
 }

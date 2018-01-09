@@ -107,4 +107,36 @@
         SELECT wi_id,user_id,amount,order_num,wi_way,createtime FROM withdraw_info
         WHERE user_id = #{userId} ORDER BY createtime DESC
     </select>
+
+    <insert id="insertFeedBack" parameterType="com.tangmo.shengmei.entity.FeedBack">
+        insert into feed_back
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="mobile != null">
+                mobile,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+            <if test="imgId != null">
+                img_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="mobile != null">
+                #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="imgId != null">
+                #{imgId,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
 </mapper>

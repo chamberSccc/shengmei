@@ -1,5 +1,6 @@
 package com.tangmo.shengmei.dao;
 
+import com.tangmo.shengmei.entity.FeedBack;
 import com.tangmo.shengmei.entity.User;
 import com.tangmo.shengmei.entity.ViewRecord;
 import com.tangmo.shengmei.entity.WithDrawInfo;
@@ -105,4 +106,12 @@ public interface UserDao {
      * @return
      */
     List<WithDrawInfo> selectWithDrawByUserId(Integer userId);
+
+    /**
+     * 增加反馈信息
+     *
+     * @param feedBack
+     * @return
+     */
+    int insertFeedBack(FeedBack feedBack);
 }

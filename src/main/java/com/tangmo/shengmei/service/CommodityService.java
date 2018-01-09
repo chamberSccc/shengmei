@@ -81,4 +81,13 @@ public interface CommodityService {
      * @return
      */
     Result getCommodityDetail(Integer userId, Integer cdId);
+
+    /**
+     * 得到精品商品信息
+     *
+     * @param start
+     * @param end
+     * @return
+     */
+    Result getQualityInfo(Integer start, Integer end);
 }

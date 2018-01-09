@@ -33,7 +33,7 @@ public class ImgFileServiceImpl implements ImgFileService {
     @Autowired
     private Environment env;
 
-    private static final String IMG_TYPE = "jpg";
+    private static final String IMG_TYPE = "jpeg";
     private final static String AGENT_MSIE = "MSIE";
     private final static String AGENT_TRIDENT = "Trident";
     private final static String AGENT_EDGE = "Edge";
