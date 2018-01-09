@@ -17,13 +17,13 @@ public interface FileDao {
      * @param file
      * @return
      */
-    int insertFile(RsFile file);
+    int insertSelective(RsFile file);
 
     /**
      * 查询文件路径信息
      *
-     * @param fileId
+     * @param rfId
      * @return
      */
-    RsFile selectById(String fileId);
+    RsFile selectById(String rfId);
 }

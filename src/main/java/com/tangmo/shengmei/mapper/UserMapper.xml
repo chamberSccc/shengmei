@@ -72,4 +72,9 @@
     <update id="updatePwd">
         UPDATE user_info SET password = #{newPwd} WHERE user_id = #{userId}
     </update>
+
+    <insert id="insertViewRecord" parameterType="com.tangmo.shengmei.entity.ViewRecord">
+        INSERT INTO view_record VALUES (goods_id,user_id,belong_type)
+        (#{goodsId},#{userId},#{belongType})
+    </insert>
 </mapper>

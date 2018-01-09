@@ -3,9 +3,11 @@ package com.tangmo.shengmei.service.impl;
 import com.tangmo.shengmei.constant.GoodsBelongConst;
 import com.tangmo.shengmei.dao.CommodityDao;
 import com.tangmo.shengmei.dao.ShopGoodsDao;
+import com.tangmo.shengmei.dao.UserDao;
 import com.tangmo.shengmei.entity.Commodity;
 import com.tangmo.shengmei.entity.GoodsComment;
 import com.tangmo.shengmei.entity.RsFile;
+import com.tangmo.shengmei.entity.ViewRecord;
 import com.tangmo.shengmei.service.CommodityService;
 import com.tangmo.shengmei.service.ImgFileService;
 import com.tangmo.shengmei.utility.code.Result;
@@ -29,6 +31,8 @@ public class CommodityServiceImpl implements CommodityService {
     @Resource
     private ShopGoodsDao shopGoodsDao;
     @Resource
+    private UserDao userDao;
+    @Resource
     private ImgFileService imgFileService;
 
     @Override
@@ -43,7 +47,7 @@ public class CommodityServiceImpl implements CommodityService {
             if(rsFile == null){
                 return ResultUtil.fail();
             }
-            commodity.setImgId(rsFile.getFileId());
+            commodity.setImgId(rsFile.getRfId());
         }
         commodityDao.insertSelective(commodity);
         return ResultUtil.success();
@@ -61,7 +65,7 @@ public class CommodityServiceImpl implements CommodityService {
             if(rsFile == null){
                 return ResultUtil.fail();
             }
-            commodity.setImgId(rsFile.getFileId());
+            commodity.setImgId(rsFile.getRfId());
         }
         commodityDao.updateById(commodity);
         return ResultUtil.success();
@@ -104,6 +108,10 @@ public class CommodityServiceImpl implements CommodityService {
 
     @Override
     public Result getCommodityDetail(Integer userId,Integer cdId) {
-        return null;
+        if(userId != null){
+            ViewRecord viewRecord = new ViewRecord(userId,cdId,GoodsBelongConst.PERSON_GOODS);
+            userDao.insertViewRecord(viewRecord);
+        }
+        return ResultUtil.success(commodityDao.selectCommodityDetail(cdId));
     }
 }

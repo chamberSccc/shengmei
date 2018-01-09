@@ -10,7 +10,7 @@ import lombok.Data;
 
 @Data
 public class RsFile {
-    private String fileId;
+    private String rfId;
     private String path;
     private Integer userId;
 }

@@ -9,10 +9,10 @@
 
     </sql>
     <insert id="insertSelective" parameterType="com.tangmo.shengmei.entity.RsFile">
-        insert into rs_file (file_id,path) VALUES (#{fileId},#{path})
+        insert into rs_file (rf_id,path,user_id) VALUES (#{rfId},#{path},#{userId})
     </insert>
 
     <select id="selectById" resultMap="BaseResultMap">
-        SELECT path FROM rs_file WHERE file_id = #{fileId}
+        SELECT path FROM rs_file WHERE rf_id = #{rfId}
     </select>
 </mapper>

@@ -50,4 +50,13 @@ public interface UserShopService {
      * @return
      */
     Result searchUserShop(Integer userId);
+
+    /**
+     * 得到商品详细信息
+     *
+     * @param userId
+     * @param cdId
+     * @return
+     */
+    Result getGoodsDetail(Integer userId, Integer cdId);
 }

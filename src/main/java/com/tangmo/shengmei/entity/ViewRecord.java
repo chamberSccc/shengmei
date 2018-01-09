@@ -17,6 +17,15 @@ public class ViewRecord implements Serializable {
     private Integer vr_id;
     private Integer userId;
     private Integer goods_id;
-    private Integer belong_type;
+    private Byte belong_type;
     private Date createtime;
+
+    public ViewRecord() {
+    }
+
+    public ViewRecord(Integer userId, Integer goods_id, Byte belong_type) {
+        this.userId = userId;
+        this.goods_id = goods_id;
+        this.belong_type = belong_type;
+    }
 }

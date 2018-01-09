@@ -1,6 +1,7 @@
 package com.tangmo.shengmei.dao;
 
 import com.tangmo.shengmei.entity.User;
+import com.tangmo.shengmei.entity.ViewRecord;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -77,4 +78,12 @@ public interface UserDao {
      * @return
      */
     int updatePwd(User user);
+
+    /**
+     * 增加浏览记录
+     *
+     * @param viewRecord
+     * @return
+     */
+    int insertViewRecord(ViewRecord viewRecord);
 }

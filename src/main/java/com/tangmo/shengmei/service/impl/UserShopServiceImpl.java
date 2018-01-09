@@ -57,4 +57,9 @@ public class UserShopServiceImpl implements UserShopService {
     public Result searchUserShop(Integer userId) {
         return ResultUtil.success(userShopDao.selectByUserId(userId));
     }
+
+    @Override
+    public Result getGoodsDetail(Integer userId, Integer cdId) {
+        return ResultUtil.success();
+    }
 }

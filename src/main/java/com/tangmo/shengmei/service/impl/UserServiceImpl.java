@@ -69,7 +69,7 @@ public class UserServiceImpl implements UserService {
                 return ResultUtil.fail();
             }
             //更新头像id
-            userDao.updateAvatar(userId,rsFile.getFileId());
+            userDao.updateAvatar(userId,rsFile.getRfId());
         }
         return ResultUtil.success();
     }
@@ -97,7 +97,7 @@ public class UserServiceImpl implements UserService {
         if(!result.getPassword().equals(user.getPassword())){
             return ResultUtil.pwdError();
         }
-
-        return null;
+        userDao.updatePwd(user);
+        return ResultUtil.success();
     }
 }

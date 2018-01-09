@@ -3,7 +3,6 @@ package com.tangmo.shengmei.service.impl;
 import com.tangmo.shengmei.dao.FileDao;
 import com.tangmo.shengmei.entity.RsFile;
 import com.tangmo.shengmei.service.ImgFileService;
-import com.tangmo.shengmei.utility.code.ResultUtil;
 import com.tangmo.shengmei.utility.file.ImgUtil;
 import com.tangmo.shengmei.utility.string.EncryptUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +11,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import javax.annotation.Resource;
@@ -39,11 +39,13 @@ public class ImgFileServiceImpl implements ImgFileService {
     private final static String AGENT_EDGE = "Edge";
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public RsFile addImgFile(String code,Integer userId) {
         RsFile file = getFileInfo(userId,IMG_TYPE);
-        int row = fileDao.insertFile(file);
+        int row = fileDao.insertSelective(file);
+        String basePath = env.getProperty("RF.BASE_DIR");
         if(row == 1){
-            Boolean isSave = ImgUtil.code2Disk(code,file.getPath());
+            Boolean isSave = ImgUtil.code2Disk(code,basePath+file.getPath());
             if(!isSave){
                 TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
                 return null;
@@ -67,7 +69,7 @@ public class ImgFileServiceImpl implements ImgFileService {
                 return null;
             }
             //获取文件目录
-            String basePath = env.getProperty("RF_BASE_DIR");
+            String basePath = env.getProperty("RF.BASE_DIR");
             String resourceName = rf.getPath();
             String filePath = new StringBuilder(basePath).append("/").append(resourceName).toString();
             String fileType = resourceName.substring(resourceName.indexOf(".") + 1);
@@ -140,10 +142,10 @@ public class ImgFileServiceImpl implements ImgFileService {
      */
     public RsFile getFileInfo(Integer userId, String fileType) {
         String uuid = EncryptUtil.get32Uuid();
-        StringBuilder sb = new StringBuilder(env.getProperty("RF.BASE_DIR")).append("/").append(userId).append("/")
+        StringBuilder sb = new StringBuilder("").append("/").append(userId).append("/")
                 .append(uuid).append(".").append(fileType);
         RsFile file = new RsFile();
-        file.setFileId(uuid);
+        file.setRfId(uuid);
         file.setPath(sb.toString());
         file.setUserId(userId);
         return file;
