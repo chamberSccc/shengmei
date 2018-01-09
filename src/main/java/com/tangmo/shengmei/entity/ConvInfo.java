@@ -23,6 +23,8 @@ public class ConvInfo implements Serializable {
     private String title;
     private String subtitle;
     private String content;
+    private Integer viewCount;
+    private Integer commentCount;
     private Date createTime;
     private Date updateTime;
     private List<ConvComment> commentList;

@@ -150,11 +150,9 @@
     </delete>
 
     <select id="selectByUserId" resultMap="BaseResultMap">
-        SELECT ci.ci_id,ci.title,ci.content,ci.view_count,ci.comment_count,
-        ui.username,ui.avatarId
-        FROM convenient_info ci
-        LEFT JOIN user_info ui ON ci.user_id = ui.user_id
-        ORDER BY ci.createtime DESC
+        SELECT ci_id,title,content,view_count,comment_count
+        FROM convenient_info WHERE user_id = #{userId}
+        ORDER BY createtime DESC
         limit #{start},#{end}-#{start}
     </select>
 </mapper>

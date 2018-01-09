@@ -122,7 +122,7 @@ public class CommodityController extends BaseController {
      * @apiParam {int} userId 商品类型
      * @apiDescription 获取指定用户的商品
      * @apiParamExample {json} 请求样例：
-     *  /commodity/list/1/1/10
+     *  /commodity/user/1
      * @apiSuccess (200) {String} msg 信息
      * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
      * @apiSuccessExample {json} 返回样例:
