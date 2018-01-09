@@ -1,6 +1,7 @@
 package com.tangmo.shengmei.controller;
 
 import com.tangmo.shengmei.controller.base.BaseController;
+import com.tangmo.shengmei.entity.FeedBack;
 import com.tangmo.shengmei.entity.User;
 import com.tangmo.shengmei.entity.WithDrawInfo;
 import com.tangmo.shengmei.utility.code.Result;
@@ -241,8 +242,8 @@ public class UserController extends BaseController{
      *                    {"code":"success"}
      */
     @PostMapping("/feedback")
-    public Result addFeedBack(){
-        return null;
+    public Result addFeedBack(FeedBack feedBack){
+        return userService.addFeedBack(feedBack);
     }
 
 }
