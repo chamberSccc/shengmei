@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/cart")
 public class ShopCartController extends BaseController{
     /**
-     * @api {POST} /cart/add 增加购物车信息
+     * @api {POST} /cart 增加购物车信息
      * @apiGroup ShopCart
      * @apiVersion 0.0.1
      * @apiDescription 增加购物车信息
@@ -33,8 +33,8 @@ public class ShopCartController extends BaseController{
      * @apiSuccessExample {json} 返回样例:
      *                    {"code":"success"}
      */
-    @PostMapping("/add")
-    public Result addShopCart(ShopCart shopCart){
+    @PostMapping("")
+    public Result addShopCart(@RequestBody ShopCart shopCart){
         return shopCartService.addShopCart(shopCart);
     }
 

@@ -34,7 +34,7 @@ public class UserController extends BaseController{
      *                    {"code":"success"}
      */
     @PostMapping("")
-    public Result addUserInfo(User user){
+    public Result addUserInfo(@RequestBody User user){
         return userService.addUser(user);
     }
 
@@ -85,7 +85,7 @@ public class UserController extends BaseController{
      *                    {"code":"success"}
      */
     @PutMapping("")
-    public Result changeUserInfo(User user){
+    public Result changeUserInfo(@RequestBody User user){
         return userService.changeUser(user);
     }
 
@@ -106,7 +106,7 @@ public class UserController extends BaseController{
      *                    {"code":"success"}
      */
     @PutMapping("/avatar")
-    public Result loadAvatar(User user){
+    public Result loadAvatar(@RequestBody User user){
         return userService.uploadAvatar(user.getUserId(),user.getAvatarId());
     }
 
@@ -128,7 +128,7 @@ public class UserController extends BaseController{
      *                    {"code":"success"}
      */
     @PutMapping("/mobile")
-    public Result changeMobile(User user){
+    public Result changeMobile(@RequestBody User user){
         return userService.updateMobile(user.getUserId(),user.getMobile());
     }
 
@@ -168,7 +168,7 @@ public class UserController extends BaseController{
      *                    {"code":"success"}
      */
     @PutMapping("/pwd")
-    public Result changePwd(User user){
+    public Result changePwd(@RequestBody User user){
         return userService.changePwd(user);
     }
 
@@ -190,7 +190,7 @@ public class UserController extends BaseController{
      *                    {"code":"success"}
      */
     @PostMapping("/withdraw")
-    public Result addWithDraw(WithDrawInfo withDrawInfo){
+    public Result addWithDraw(@RequestBody WithDrawInfo withDrawInfo){
         return userService.addWithDraw(withDrawInfo);
     }
 
@@ -242,8 +242,7 @@ public class UserController extends BaseController{
      *                    {"code":"success"}
      */
     @PostMapping("/feedback")
-    public Result addFeedBack(FeedBack feedBack){
+    public Result addFeedBack(@RequestBody FeedBack feedBack){
         return userService.addFeedBack(feedBack);
     }
-
 }

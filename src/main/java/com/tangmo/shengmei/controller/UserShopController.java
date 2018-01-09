@@ -35,7 +35,7 @@ public class UserShopController extends BaseController {
      *                    {"code":"success"}
      */
     @PostMapping("")
-    public Result addUserShop(UserShop userShop){
+    public Result addUserShop(@RequestBody UserShop userShop){
         return userShopService.addUserShop(userShop);
     }
 
@@ -60,7 +60,7 @@ public class UserShopController extends BaseController {
      *                    {"code":"success"}
      */
     @PutMapping("")
-    public Result changeUserShop(UserShop userShop){
+    public Result changeUserShop(@RequestBody UserShop userShop){
         return userShopService.changeUserShop(userShop);
     }
 

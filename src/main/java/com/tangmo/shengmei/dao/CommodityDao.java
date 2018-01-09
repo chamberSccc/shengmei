@@ -91,4 +91,14 @@ public interface CommodityDao {
      * @return
      */
     List<Commodity> selectQualityList(@Param("start") Integer start,@Param("end") Integer end);
+
+    /**
+     * 查询商品浏览记录
+     * @param userId
+     * @param start
+     * @param end
+     * @return
+     */
+    List<Commodity> selectViewRecord(@Param("userId") Integer userId,@Param("start") Integer start,
+                                     @Param("end") Integer end);
 }

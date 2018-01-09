@@ -37,7 +37,7 @@ public class ShopGoodsController extends BaseController{
      *                    {"code":"success"}
      */
     @PostMapping("")
-    public Result addShopGoods(ShopGoods shopGoods){
+    public Result addShopGoods(@RequestBody ShopGoods shopGoods){
         return shopGoodsService.addShopGoods(shopGoods);
     }
 
@@ -127,7 +127,7 @@ public class ShopGoodsController extends BaseController{
      *                    {"code":"success"}
      */
     @PostMapping("/comment")
-    public Result addComment(GoodsComment goodsComment){
+    public Result addComment(@RequestBody GoodsComment goodsComment){
         goodsComment.setBelongType(GoodsBelongConst.SHOP_GOODS);
         return commodityService.addComment(goodsComment);
     }

@@ -270,4 +270,10 @@ public class CommodityController extends BaseController {
     public Result getQualityList(@PathVariable Integer start, @PathVariable Integer end){
         return commodityService.getQualityInfo(start,end);
     }
+
+
+    @GetMapping("/view/{userId}/{start}/{end}")
+    public Result getViewRecord(@PathVariable Integer userId,@PathVariable Integer start,@PathVariable Integer end){
+        return commodityService.getViewRecord(userId, start, end);
+    }
 }

@@ -33,7 +33,7 @@ public class UserAddressController extends BaseController{
      *                    {"code":"success"}
      */
     @PostMapping("/add")
-    public Result addAddress(UserAddress userAddress){
+    public Result addAddress(@RequestBody UserAddress userAddress){
         return userAddressService.addUserAddress(userAddress);
     }
 
@@ -57,7 +57,7 @@ public class UserAddressController extends BaseController{
      *                    {"code":"success"}
      */
     @PutMapping("")
-    public Result changeAddress(UserAddress userAddress){
+    public Result changeAddress(@RequestBody UserAddress userAddress){
         return userAddressService.changeUserAddress(userAddress);
     }
 

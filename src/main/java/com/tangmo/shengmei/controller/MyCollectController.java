@@ -65,7 +65,7 @@ public class MyCollectController extends BaseController {
      *                    {"code":"success"}
      */
     @PostMapping("")
-    public Result addMyCollect(MyCollect myCollect){
+    public Result addMyCollect(@RequestBody MyCollect myCollect){
         return myCollectService.addMyCollect(myCollect);
     }
 

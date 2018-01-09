@@ -33,7 +33,7 @@ public class ConvInfoController extends BaseController {
      *                    {"code":"success"}
      */
     @PostMapping("")
-    public Result addConvInfo(ConvInfo convInfo){
+    public Result addConvInfo(@RequestBody ConvInfo convInfo){
         return convInfoService.addConvInfo(convInfo);
     }
 
@@ -55,7 +55,7 @@ public class ConvInfoController extends BaseController {
      *                    {"code":"success"}
      */
     @PutMapping("")
-    public Result changeConvInfo(ConvInfo convInfo){
+    public Result changeConvInfo(@RequestBody ConvInfo convInfo){
         return convInfoService.changeConvInfo(convInfo);
     }
 
@@ -125,7 +125,7 @@ public class ConvInfoController extends BaseController {
      *                    {"code":"success"}
      */
     @PostMapping("/comment")
-    public Result addComment(ConvComment convComment){
+    public Result addComment(@RequestBody ConvComment convComment){
         return convInfoService.addComment(convComment);
     }
 

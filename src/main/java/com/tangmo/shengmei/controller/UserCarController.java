@@ -35,7 +35,7 @@ public class UserCarController extends BaseController {
      *                    {"code":"success"}
      */
     @PostMapping("")
-    public Result addCar(UserCar userCar){
+    public Result addCar(@RequestBody UserCar userCar){
         return userCarService.addUserCar(userCar);
     }
 
@@ -61,7 +61,7 @@ public class UserCarController extends BaseController {
      *                    {"code":"success"}
      */
     @PutMapping("")
-    public Result changeCar(UserCar userCar){
+    public Result changeCar(@RequestBody UserCar userCar){
         return userCarService.changeUserCar(userCar);
     }
 

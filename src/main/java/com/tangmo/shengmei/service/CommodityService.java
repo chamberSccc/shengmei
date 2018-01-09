@@ -90,4 +90,14 @@ public interface CommodityService {
      * @return
      */
     Result getQualityInfo(Integer start, Integer end);
+
+    /**
+     * 得到浏览记录
+     *
+     * @param userId
+     * @param start
+     * @param end
+     * @return
+     */
+    Result getViewRecord(Integer userId, Integer start, Integer end);
 }
