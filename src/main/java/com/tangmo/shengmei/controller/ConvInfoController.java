@@ -160,4 +160,36 @@ public class ConvInfoController extends BaseController {
     public Result getCommentList(@PathVariable Integer ciId,@PathVariable Integer start,@PathVariable Integer end){
         return convInfoService.getCommentList(ciId,start,end);
     }
+
+    /**
+     * @api {GET} /conv/user/{userId}/{start}/{end} 获取便民信息列表
+     * @apiGroup Convenient
+     * @apiVersion 0.0.1
+     * @apiParam {int} start 分页起始索引
+     * @apiParam {int} end 分页结束索引
+     * @apiDescription 获取个人信息
+     * @apiParamExample {json} 请求样例：
+     *  /conv/user/1/1/10
+     * @apiSuccess (200) {String} msg 信息
+     * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success",
+     *                     "data":{
+     *                     [{
+     *                        ciId: 1,
+     *                        username:"用户名称",
+     *                        title: "文章标题",
+     *                        content: "文章内容"},
+     *                     {
+     *                        ciId: 2,
+     *                        username:"用户名称",
+     *                        title: "文章标题2",
+     *                        content: "文章内容2"
+     *                     }]
+     *                     }
+     */
+    @GetMapping("/user/{userId}/{start}/{end}")
+    public Result getUserConvInfo(@PathVariable Integer userId,@PathVariable Integer start,@PathVariable Integer end){
+        return convInfoService.getUserConvInfo(userId, start, end);
+    }
 }

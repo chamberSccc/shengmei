@@ -67,12 +67,12 @@ public interface ConvInfoDao {
     /**
      * 查询便民信息的评论
      *
-     * @param ciId 便民信息主键
+     * @param ciId  便民信息主键
      * @param start 开始索引
-     * @param end 结束索引
+     * @param end   结束索引
      * @return
      */
-    List<ConvComment> selectCommentByCiId(@Param("ciId") Integer ciId,@Param("start") Integer start,
+    List<ConvComment> selectCommentByCiId(@Param("ciId") Integer ciId, @Param("start") Integer start,
                                           @Param("end") Integer end);
 
     /**
@@ -92,10 +92,13 @@ public interface ConvInfoDao {
     int deleteById(Integer ciId);
 
     /**
-     * 增加便民信息评论
+     * 获取用户的便民信息
      *
-     * @param convComment 评论对象
+     * @param userId
+     * @param start
+     * @param end
      * @return
      */
-    int addComment(ConvComment convComment);
+    List<ConvInfo> selectByUserId(@Param("userId") Integer userId, @Param("start") Integer start,
+                                  @Param("end") Integer end);
 }

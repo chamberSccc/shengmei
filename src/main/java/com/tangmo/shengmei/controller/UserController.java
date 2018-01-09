@@ -44,7 +44,7 @@ public class UserController extends BaseController{
      * @apiParam {int} userId 用户表ID
      * @apiDescription 获取个人信息
      * @apiParamExample {json} 请求样例：
-     *  /user/get/1
+     *  /user/1
      * @apiSuccess (200) {String} msg 信息
      * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
      * @apiSuccessExample {json} 返回样例:
@@ -61,7 +61,7 @@ public class UserController extends BaseController{
      */
     @GetMapping("/{userId}")
     public Result getUserInfo(@PathVariable Integer userId){
-        return null;
+        return userService.getUser(userId);
     }
 
     /**

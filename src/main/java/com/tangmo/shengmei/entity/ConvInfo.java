@@ -18,6 +18,8 @@ public class ConvInfo implements Serializable {
     private static final long serialVersionUID = 1L;
     private Integer ciId;
     private Integer userId;
+    private Integer username;
+    private Integer avatarId;
     private String title;
     private String subtitle;
     private String content;

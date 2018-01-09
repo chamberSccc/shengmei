@@ -74,4 +74,9 @@ public class ConvInfoServiceImpl implements ConvInfoService {
     public Result getCommentList(Integer ciId, Integer start, Integer end) {
         return ResultUtil.success(convInfoDao.selectCommentByCiId(ciId,start,end));
     }
+
+    @Override
+    public Result getUserConvInfo(Integer userId, Integer start, Integer end) {
+        return ResultUtil.success(convInfoDao.selectByUserId(userId, start, end));
+    }
 }

@@ -63,10 +63,21 @@ public interface ConvInfoService {
 
     /**
      * 便民信息评论列表
+     *
      * @param ciId
      * @param start
      * @param end
      * @return
      */
-    Result getCommentList(Integer ciId,Integer start,Integer end);
+    Result getCommentList(Integer ciId, Integer start, Integer end);
+
+    /**
+     * 用户便民信息
+     *
+     * @param userId
+     * @param start
+     * @param end
+     * @return
+     */
+    Result getUserConvInfo(Integer userId, Integer start, Integer end);
 }
