@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.*;
 public class MyCollectController extends BaseController {
 
     /**
-     * @api {GET} /collect/list/{userId}/{start}/{end} 获取我的收藏信息
+     * @api {GET} /collect/list/{userId}/{start}/{end} 查看我的收藏信息
      * @apiGroup MyCollect
      * @apiVersion 0.0.1
      * @apiParam {int} userId 用户id
      * @apiParam {int} start 分页起始索引
      * @apiParam {int} end 查询列表长度
-     * @apiDescription 获取我的收藏信息
+     * @apiDescription 查看我的收藏信息
      * @apiParamExample {json} 请求样例：
      *  /collect/list/1/1/10
      * @apiSuccess (200) {String} msg 信息

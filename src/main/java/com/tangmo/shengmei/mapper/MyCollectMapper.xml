@@ -39,7 +39,7 @@
     </delete>
 
     <select id="selectListByUserId" resultMap="BaseResultMap">
-        SELECT mc.mc_id,mc.user_id,cd.title,cd.content,cd.price_pre,
+        SELECT mc.mc_id,mc.user_id,cd.cd_id,cd.title,cd.content,cd.price_pre,
         cd.price_now,cd.img_id,cd.cd_type,mc.createtime
         FROM my_collect mc LEFT JOIN commodity cd
         ON mc.cd_id = cd.cd_id WHERE mc.user_id = #{userId}
