@@ -9,6 +9,14 @@
         <result column="createtime" property="createTime" jdbcType="TIMESTAMP"/>
     </resultMap>
 
+    <resultMap id="BaseResultMap" type="com.tangmo.shengmei.entity.WithDrawInfo" >
+        <id column="wi_id" property="userId" jdbcType="INTEGER"/>
+        <result column="amount" property="amount" jdbcType="DOUBLE"/>
+        <result column="wi_way" property="wiWay" jdbcType="VARCHAR"/>
+        <result column="order_num" property="orderNum" jdbcType="VARCHAR"/>
+        <result column="createtime" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
     <sql id="Base_Column_List" >
 
     </sql>
@@ -74,7 +82,17 @@
     </update>
 
     <insert id="insertViewRecord" parameterType="com.tangmo.shengmei.entity.ViewRecord">
-        INSERT INTO view_record VALUES (goods_id,user_id,belong_type)
+        INSERT INTO view_record  (goods_id,user_id,belong_type) VALUES
         (#{goodsId},#{userId},#{belongType})
     </insert>
+
+    <insert id="insertWithDraw" parameterType="com.tangmo.shengmei.entity.WithDrawInfo">
+        INSERT INTO withdraw_info (user_id,amount,order_num,wi_way) VALUES
+        (#{userId},#{amount},#{orderNum},#{wiWay})
+    </insert>
+
+    <select id="selectWithDrawByUserId" resultMap="WithDrawResultMap">
+        SELECT wi_id,user_id,amount,order_num,wi_way,createtime FROM withdraw_info
+        WHERE user_id = #{userId} ORDER BY createtime DESC
+    </select>
 </mapper>

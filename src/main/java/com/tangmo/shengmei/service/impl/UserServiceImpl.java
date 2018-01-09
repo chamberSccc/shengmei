@@ -3,6 +3,7 @@ package com.tangmo.shengmei.service.impl;
 import com.tangmo.shengmei.dao.UserDao;
 import com.tangmo.shengmei.entity.RsFile;
 import com.tangmo.shengmei.entity.User;
+import com.tangmo.shengmei.entity.WithDrawInfo;
 import com.tangmo.shengmei.service.ImgFileService;
 import com.tangmo.shengmei.service.UserService;
 import com.tangmo.shengmei.utility.code.Result;
@@ -99,5 +100,23 @@ public class UserServiceImpl implements UserService {
         }
         userDao.updatePwd(user);
         return ResultUtil.success();
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Result addWithDraw(WithDrawInfo withDrawInfo) {
+        if(withDrawInfo.getUserId() == null || withDrawInfo.getAmount() == null){
+            return ResultUtil.fail();
+        }
+        if(withDrawInfo.getOrderNum() ==null || withDrawInfo.getWiWay() == null){
+            return ResultUtil.fail();
+        }
+        userDao.insertWithDraw(withDrawInfo);
+        return ResultUtil.success();
+    }
+
+    @Override
+    public Result searchWithDrawInfo(Integer userId) {
+        return ResultUtil.success(userDao.selectWithDrawByUserId(userId));
     }
 }

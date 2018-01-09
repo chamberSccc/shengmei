@@ -2,6 +2,7 @@ package com.tangmo.shengmei.controller;
 
 import com.tangmo.shengmei.controller.base.BaseController;
 import com.tangmo.shengmei.entity.User;
+import com.tangmo.shengmei.entity.WithDrawInfo;
 import com.tangmo.shengmei.utility.code.Result;
 import org.springframework.web.bind.annotation.*;
 
@@ -162,6 +163,58 @@ public class UserController extends BaseController{
     @PutMapping("/pwd")
     public Result changePwd(User user){
         return userService.changePwd(user);
+    }
+
+    /**
+     * @api {POST} /user/withdraw 增加提现记录
+     * @apiGroup User
+     * @apiVersion 0.0.1
+     * @apiDescription 增加提现记录
+     * @apiParamExample {json} 请求样例:
+     *                   {
+     *                      amount:"提现金额",
+     *                      userId:"用户id",
+     *                      wiWay:"提现方式",
+     *                      orderNum:"订单号"
+     *                   }
+     * @apiSuccess (success) {POST} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccess (success) {POST} data 返回数据
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success"}
+     */
+    @PostMapping("/withdraw")
+    public Result addWithDraw(WithDrawInfo withDrawInfo){
+        return userService.addWithDraw(withDrawInfo);
+    }
+
+    /**
+     * @api {GET} /user/withdraw/{userId} 获取提现记录列表
+     * @apiGroup User
+     * @apiVersion 0.0.1
+     * @apiDescription 获取提现记录列表
+     * @apiParamExample {json} 请求样例：
+     *  /user/withdraw/10
+     * @apiSuccess (200) {String} msg 信息
+     * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success",
+     *                     "data":{
+     *                     [{
+     *                        wiId: 1,
+     *                        amount: "提现金额",
+     *                        orderNum: "订单号",
+     *                        wiWay:"提现方式"},
+     *                     {
+     *                        wiId: 1,
+     *                        amount: "提现金额",
+     *                        orderNum: "订单号",
+     *                        wiWay:"提现方式"},
+     *                     }]
+     *                     }
+     */
+    @GetMapping("/withdraw/{userId}")
+    public Result getWithDrawInfo(@PathVariable Integer userId){
+        return userService.searchWithDrawInfo(userId);
     }
 
 }

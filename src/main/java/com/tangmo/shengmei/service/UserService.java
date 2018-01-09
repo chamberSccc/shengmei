@@ -1,6 +1,7 @@
 package com.tangmo.shengmei.service;
 
 import com.tangmo.shengmei.entity.User;
+import com.tangmo.shengmei.entity.WithDrawInfo;
 import com.tangmo.shengmei.utility.code.Result;
 
 /**
@@ -77,4 +78,20 @@ public interface UserService {
      * @return
      */
     Result changePwd(User user);
+
+    /**
+     * 增加提现记录
+     *
+     * @param withDrawInfo
+     * @return
+     */
+    Result addWithDraw(WithDrawInfo withDrawInfo);
+
+    /**
+     * 查询提现记录列表
+     *
+     * @param userId
+     * @return
+     */
+    Result searchWithDrawInfo(Integer userId);
 }

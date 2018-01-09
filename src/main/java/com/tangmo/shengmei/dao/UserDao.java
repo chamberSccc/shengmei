@@ -2,8 +2,11 @@ package com.tangmo.shengmei.dao;
 
 import com.tangmo.shengmei.entity.User;
 import com.tangmo.shengmei.entity.ViewRecord;
+import com.tangmo.shengmei.entity.WithDrawInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * @author boge
@@ -86,4 +89,20 @@ public interface UserDao {
      * @return
      */
     int insertViewRecord(ViewRecord viewRecord);
+
+    /**
+     * 增加提现记录
+     *
+     * @param withDrawInfo
+     * @return
+     */
+    int insertWithDraw(WithDrawInfo withDrawInfo);
+
+    /**
+     * 查询用户订单列表
+     *
+     * @param userId
+     * @return
+     */
+    List<WithDrawInfo> selectWithDrawByUserId(Integer userId);
 }
