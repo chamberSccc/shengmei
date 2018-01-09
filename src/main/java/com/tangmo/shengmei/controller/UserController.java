@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
  *
  * @author boge
  * @date 17/12/19
- * @description: Main Page Controller
+ * @description: 用户控制层
  */
 @RestController
 @RequestMapping("/user")
@@ -53,6 +53,9 @@ public class UserController extends BaseController{
      *                     userId: 1,
      *                     username: "姓名",
      *                     mobile: "312445345",
+     *                     province:"省份",
+     *                     city:"市",
+     *                     gender:"性别 0女  1男",
      *                     avatarId: "fsd42sd656sdasdasd",
      *                     }
      */
@@ -71,6 +74,9 @@ public class UserController extends BaseController{
      *                   {
      *                      username:"姓名",
      *                      mobile:"18710889234",
+     *                      province:"省份",
+     *                      city:"市",
+     *                      gender:"性别 0女  1男"
      *                   }
      * @apiSuccess (success) {PUT} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
      * @apiSuccess (success) {PUT} data 返回数据

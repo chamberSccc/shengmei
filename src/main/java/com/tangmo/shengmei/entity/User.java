@@ -19,6 +19,9 @@ public class User implements Serializable {
     private String newPwd;
     private String mobile;
     private String username;
+    private String province;
+    private String city;
+    private Byte gender;
     private String avatarId;
     private Byte shopAuth;
     private Date createTime;

@@ -23,7 +23,7 @@ public class FileController extends BaseController{
      * @apiDescription 查看文件,需要传输文件id, 返回ResponseEntity<byte[]>
      * @apiParam {String} rfId 文件id
      * @apiParamExample {uri} 请求样例:
-     *                   /resource/download/d5540ff2db804a8daf1050a06679155f/cv
+     *                   /resource/read/d5540ff2db804a8daf1050a06679155f
      */
     @GetMapping("/read/{rfId}")
     public ResponseEntity<byte[]> readFile(@PathVariable String rfId){

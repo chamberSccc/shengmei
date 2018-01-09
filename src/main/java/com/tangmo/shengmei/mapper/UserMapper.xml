@@ -5,11 +5,14 @@
         <id column="user_id" property="userId" jdbcType="INTEGER"/>
         <result column="mobile" property="mobile" jdbcType="VARCHAR"/>
         <result column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="province" property="province" jdbcType="VARCHAR"/>
+        <result column="city" property="city" jdbcType="VARCHAR"/>
+        <result column="gender" property="gender" jdbcType="VARCHAR"/>
         <result column="avatar_id" property="avatarId" jdbcType="VARCHAR"/>
         <result column="createtime" property="createTime" jdbcType="TIMESTAMP"/>
     </resultMap>
 
-    <resultMap id="BaseResultMap" type="com.tangmo.shengmei.entity.WithDrawInfo" >
+    <resultMap id="WithDrawResultMap" type="com.tangmo.shengmei.entity.WithDrawInfo" >
         <id column="wi_id" property="userId" jdbcType="INTEGER"/>
         <result column="amount" property="amount" jdbcType="DOUBLE"/>
         <result column="wi_way" property="wiWay" jdbcType="VARCHAR"/>
@@ -52,13 +55,22 @@
             <if test="username != null">
                 username = #{username},
             </if>
+            <if test="province != null">
+                province = #{province},
+            </if>
+            <if test="city != null">
+                city = #{city},
+            </if>
+            <if test="gender != null">
+                gender = #{gender},
+            </if>
             updatetime = now()
         </set>
         WHERE user_id = #{userId,jdbcType=INTEGER}
     </update>
 
     <select id="selectById" resultMap="BaseResultMap">
-        SELECT user_id,username,mobile,avatar_id FROM user_info WHERE user_id = #{userId}
+        SELECT user_id,username,mobile,avatar_id,province,city,gender FROM user_info WHERE user_id = #{userId}
     </select>
 
     <update id="updateApplyShop">
