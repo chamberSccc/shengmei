@@ -108,4 +108,12 @@ public interface CommodityService {
      * @return
      */
     Result delViewRecord(Integer vrId);
+
+    /**
+     * 删除多条浏览记录
+     *
+     * @param vrIds 浏览记录主键,逗号分隔
+     * @return
+     */
+    Result delMultiViewRecord(String vrIds);
 }

@@ -14,18 +14,22 @@ import java.sql.Date;
 public class ViewRecord implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private Integer vr_id;
+    private Integer vrId;
     private Integer userId;
-    private Integer goods_id;
-    private Byte belong_type;
-    private Date createtime;
+    private Integer goodsId;
+    private Byte belongType;
+    private Byte cdType;
+    private String imgId;
+    private String title;
+    private String content;
+    private Date createTime;
 
     public ViewRecord() {
     }
 
-    public ViewRecord(Integer userId, Integer goods_id, Byte belong_type) {
+    public ViewRecord(Integer userId, Integer goodsId, Byte belongType) {
         this.userId = userId;
-        this.goods_id = goods_id;
-        this.belong_type = belong_type;
+        this.goodsId = goodsId;
+        this.belongType = belongType;
     }
 }

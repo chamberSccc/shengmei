@@ -131,4 +131,9 @@ public class CommodityServiceImpl implements CommodityService {
         commodityDao.deleteViewRecordById(vrId);
         return ResultUtil.success();
     }
+
+    @Override
+    public Result delMultiViewRecord(String vrIds) {
+        return null;
+    }
 }

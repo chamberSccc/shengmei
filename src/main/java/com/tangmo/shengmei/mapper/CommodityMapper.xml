@@ -11,17 +11,28 @@
         <result column="cdSize" property="cdSize" jdbcType="VARCHAR"/>
         <result column="price_pre" property="pricePre" jdbcType="DOUBLE"/>
         <result column="price_now" property="priceNow" jdbcType="DOUBLE"/>
-        <result column="type" property="type" jdbcType="TINYINT"/>
+        <result column="cd_type" property="cdType" jdbcType="TINYINT"/>
         <result column="cd_count" property="cdCount" jdbcType="INTEGER"/>
         <result column="createtime" property="createTime" jdbcType="TIMESTAMP"/>
     </resultMap>
 
-    <resultMap id="CommentResultMap" type="com.tangmo.shengmei.entity.ConvComment" >
+    <resultMap id="CommentResultMap" type="com.tangmo.shengmei.entity.GoodsComment" >
         <id column="gc_id" property="gcId" jdbcType="INTEGER"/>
         <result column="goods_id" property="goodsId" jdbcType="INTEGER"/>
         <result column="user_id" property="userId" jdbcType="INTEGER"/>
         <result column="username" property="username" jdbcType="VARCHAR"/>
         <result column="avatar_id" property="avatarId" jdbcType="VARCHAR"/>
+        <result column="createtime" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <resultMap id="ViewResultMap" type="com.tangmo.shengmei.entity.ViewRecord" >
+        <id column="vr_id" property="vrId" jdbcType="INTEGER"/>
+        <result column="cd_id" property="goodsId" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="img_id" property="imgId" jdbcType="VARCHAR"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="content" property="content" jdbcType="VARCHAR"/>
+        <result column="cd_type" property="cdType" jdbcType="TINYINT"/>
         <result column="createtime" property="createTime" jdbcType="TIMESTAMP"/>
     </resultMap>
 
@@ -195,13 +206,20 @@
         FROM commodity WHERE is_quality = 1 limit #{start},#{end}
     </select>
 
-    <select id="selectViewRecord" resultMap="BaseResultMap">
-        SELECT co.img_id,co.title,co.content,co.cd_type,co.cd_count,co.price_pre,co.price_now,vr.createtime
-        FROM view_record vr LEFT JOIN commodity co ON vr.goods_id = co.co_id
-        WHERE vr.user_id = #{userId} limit #{start},#{start},#{end}
+    <select id="selectViewRecord" resultMap="ViewResultMap">
+        SELECT vr.vr_id,vr.user_id,cd.cd_id,cd.img_id,cd.title,cd.content,cd.cd_type,vr.createtime
+        FROM view_record vr LEFT JOIN commodity cd ON vr.goods_id = cd.cd_id
+        WHERE vr.user_id = #{userId} limit #{start},#{end}
     </select>
 
     <delete id="deleteViewRecordById">
         DELETE FROM view_record WHERE vr_id = #{vrId}
+    </delete>
+    <delete id="deleteMultiViewRecord" parameterType="java.util.List">
+        DELETE FROM view_record WHERE vr_id IN
+        <foreach collection="list" item="item" index="index"
+                 open="(" close=")" separator=",">
+            #{item}
+        </foreach>
     </delete>
 </mapper>

@@ -7,6 +7,8 @@ import com.tangmo.shengmei.entity.GoodsComment;
 import com.tangmo.shengmei.utility.code.Result;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * @author boge
  * @date 17/12/25
@@ -272,39 +274,32 @@ public class CommodityController extends BaseController {
     }
 
     /**
-     * @api {GET} /commodity/quality/{start}/{end} 精品列表
+     * @api {GET} /commodity/view/{userId}}/{start}/{end} 查询浏览记录
      * @apiGroup Commodity
      * @apiVersion 0.0.1
      * @apiParam {int} start 分页起始索引
      * @apiParam {int} end 查询列表长度
-     * @apiDescription 精品列表
+     * @apiDescription 查询浏览记录
      * @apiParamExample {json} 请求样例：
-     *  /commodity/quality/1/10
+     *  /commodity/view/1/1/10
      * @apiSuccess (200) {String} msg 信息
      * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
      * @apiSuccessExample {json} 返回样例:
      *                    {"code":"success",
      *                     "data":{
      *                     [{
-     *                        vrId: 浏览记录主键,
+     *                        vrId: "浏览记录主键",
+     *                        goodsId:商品信息主键,
      *                        title: "商品信息标题1",
      *                        content: "商品信息内容1",
-     *                        pricePre:"商品原价1",
-     *                        priceNow:"商品现价1",
-     *                        cdType:"商品类型1",
-     *                        cdCount:"商品数量1",
-     *                        cdColor:"商品颜色,多种颜色以逗号分隔,
-     *                        cdSize:"商品规格,多种规格以逗号分隔"},
+     *                        imgId:"图片id",
+     *                        cdType:"商品类型1"},
      *                     {
-     *                        vrId: 浏览记录主键,
+     *                        vrId: "浏览记录主键",
+     *                        goodsId:商品信息主键,
      *                        title: "商品信息标题2",
      *                        content: "商品信息内容2",
-     *                        pricePre:"商品原价2",
-     *                        priceNow:"商品现价2",
-     *                        cdType:"商品类型2",
-     *                        cdCount:"商品数量2",
-     *                        cdColor:"商品颜色,多种颜色以逗号分隔,
-     *                        cdSize:"商品规格,多种规格以逗号分隔"},
+     *                        cdType:"商品类型2"}
      *                     }]
      *                     }
      */
@@ -314,7 +309,7 @@ public class CommodityController extends BaseController {
     }
 
     /**
-     * @api {DELETE} /view/{vrId} 删除浏览记录
+     * @api {DELETE} /commodity/view/{vrId} 删除浏览记录
      * @apiGroup Commodity
      * @apiVersion 0.0.1
      * @apiParam {int} vrId 浏览记录主键
@@ -327,7 +322,28 @@ public class CommodityController extends BaseController {
      *                    {"code":"success"}
      */
     @DeleteMapping("/view/{vrId}")
-    public Result delViewRecord(){
+    public Result delViewRecord(@PathVariable Integer vrId){
+        return commodityService.delViewRecord(vrId);
+    }
+
+
+    /**
+     * @api {DELETE} /commodity/view/multi 删除多条浏览记录
+     * @apiGroup Commodity
+     * @apiVersion 0.0.1
+     * @apiDescription 删除多条浏览记录
+     * @apiParam {vrIds} vrIds 浏览记录主键,逗号分隔
+     * @apiParamExample {json} 请求样例:
+     * /commodity/view/multi
+     * @apiSuccess (success) {DELETE} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccess (success) {DELETE} data 返回数据
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success"}
+     */
+    @DeleteMapping("/view/multi")
+    public Result deleteMultiView(){
+        String vrIds = this.getRequest().getParameter("vrId");
+        int a = 1;
         return null;
     }
 }

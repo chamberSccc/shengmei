@@ -9,6 +9,7 @@
         <result column="username" property="username" jdbcType="VARCHAR"/>
         <result column="content" property="content" jdbcType="VARCHAR"/>
         <result column="view_count" property="viewCount" jdbcType="INTEGER"/>
+        <result column="is_expire" property="isExpire" jdbcType="TINYINT"/>
         <result column="comment_count" property="commentCount" jdbcType="INTEGER"/>
         <result column="createtime" property="createTime" jdbcType="TIMESTAMP"/>
     </resultMap>
@@ -16,9 +17,12 @@
     <resultMap id="BaseResultMapWithComment" type="com.tangmo.shengmei.entity.ConvInfo" >
         <id column="ci_id" property="userId" jdbcType="INTEGER"/>
         <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="avatarId" property="avatarId" jdbcType="VARCHAR"/>
         <result column="title" property="title" jdbcType="VARCHAR"/>
         <result column="content" property="content" jdbcType="VARCHAR"/>
         <result column="view_count" property="viewCount" jdbcType="INTEGER"/>
+        <result column="is_expire" property="isExpire" jdbcType="TINYINT"/>
         <result column="comment_count" property="commentCount" jdbcType="INTEGER"/>
         <result column="createtime" property="createTime" jdbcType="TIMESTAMP"/>
         <collection property="commentList" column="ci_id" select="selectCommentByCiId"/>
@@ -91,7 +95,7 @@
     </update>
 
     <select id="selectConvList" resultMap="BaseResultMap">
-        SELECT ci_id,title,content,view_count,comment_count
+        SELECT ci_id,title,content,view_count,comment_count,is_expire,createtime
         FROM convenient_info ORDER BY createtime DESC
         limit #{start},#{end}
     </select>
@@ -141,7 +145,7 @@
     </select>
 
     <select id="selectByCiId" resultMap="BaseResultMap">
-        SELECT ci_id,title,content,view_count,comment_count
+        SELECT ci_id,title,content,view_count,comment_count,createtime
         FROM convenient_info WHERE ci_id = #{ciId}
     </select>
 
@@ -150,7 +154,7 @@
     </delete>
 
     <select id="selectByUserId" resultMap="BaseResultMap">
-        SELECT ci_id,title,content,view_count,comment_count,createtime
+        SELECT ci_id,title,content,view_count,comment_count,createtime,is_expire
         FROM convenient_info WHERE user_id = #{userId}
         ORDER BY createtime DESC
         limit #{start},#{end}
