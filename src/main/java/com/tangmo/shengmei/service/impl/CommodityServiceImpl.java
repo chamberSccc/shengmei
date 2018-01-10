@@ -4,10 +4,7 @@ import com.tangmo.shengmei.constant.GoodsBelongConst;
 import com.tangmo.shengmei.dao.CommodityDao;
 import com.tangmo.shengmei.dao.ShopGoodsDao;
 import com.tangmo.shengmei.dao.UserDao;
-import com.tangmo.shengmei.entity.Commodity;
-import com.tangmo.shengmei.entity.GoodsComment;
-import com.tangmo.shengmei.entity.RsFile;
-import com.tangmo.shengmei.entity.ViewRecord;
+import com.tangmo.shengmei.entity.*;
 import com.tangmo.shengmei.service.CommodityService;
 import com.tangmo.shengmei.service.ImgFileService;
 import com.tangmo.shengmei.utility.code.Result;
@@ -127,6 +124,7 @@ public class CommodityServiceImpl implements CommodityService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Result delViewRecord(Integer vrId) {
         commodityDao.deleteViewRecordById(vrId);
         return ResultUtil.success();
@@ -135,5 +133,20 @@ public class CommodityServiceImpl implements CommodityService {
     @Override
     public Result delMultiViewRecord(String vrIds) {
         return null;
+    }
+
+    @Override
+    public Result selectByCondition(CommodityDto commodityDto) {
+        if(commodityDto.getEnd() == null){
+            return ResultUtil.fail();
+        }
+        return ResultUtil.success(commodityDao.selectCdByCondition(commodityDto));
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Result addCdStar(Integer cdId, Integer userId) {
+        commodityDao.updateCdStar(cdId);
+        return ResultUtil.success();
     }
 }

@@ -1,6 +1,7 @@
 package com.tangmo.shengmei.dao;
 
 import com.tangmo.shengmei.entity.Commodity;
+import com.tangmo.shengmei.entity.CommodityDto;
 import com.tangmo.shengmei.entity.GoodsComment;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -99,7 +100,7 @@ public interface CommodityDao {
     /**
      * 查询商品浏览记录
      *
-     * @param userId
+     * @param userId 用户Id
      * @param start
      * @param end
      * @return
@@ -110,8 +111,24 @@ public interface CommodityDao {
     /**
      * 删除浏览记录
      *
-     * @param vrId
+     * @param vrId 浏览记录主键
      * @return
      */
     int deleteViewRecordById(Integer vrId);
+
+    /**
+     * 通过条件筛选
+     *
+     * @param commodityDto 商品查询条件对象
+     * @return
+     */
+    List<Commodity> selectCdByCondition(CommodityDto commodityDto);
+
+    /**
+     * 商品好评+1
+     *
+     * @param cdId 商品主键
+     * @return
+     */
+    int updateCdStar(Integer cdId);
 }

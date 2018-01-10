@@ -3,6 +3,7 @@ package com.tangmo.shengmei.controller;
 import com.tangmo.shengmei.constant.GoodsBelongConst;
 import com.tangmo.shengmei.controller.base.BaseController;
 import com.tangmo.shengmei.entity.Commodity;
+import com.tangmo.shengmei.entity.CommodityDto;
 import com.tangmo.shengmei.entity.GoodsComment;
 import com.tangmo.shengmei.utility.code.Result;
 import org.springframework.web.bind.annotation.*;
@@ -345,17 +346,47 @@ public class CommodityController extends BaseController {
      * @api {PUT} /commodity/star 商品增加好评
      * @apiGroup Commodity
      * @apiVersion 0.0.1
-     * @apiDescription 增加个人商品评论
-     * @apiParam {GoodsComment} goodsComment 商品评论对象
+     * @apiDescription 商品增加好评
+     * @apiParam {Commodity} commodity 商品对象
      * @apiParamExample {json} 请求样例:
      *                   {
-     *                      userId:"用户id",
-     *                      ciId:"便民信息id",
-     *                      content:"评论内容"
+     *                      cdId:"商品Id",
+     *                      userId:"用户Id"
      *                   }
-     * @apiSuccess (success) {POST} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
-     * @apiSuccess (success) {POST} data 返回数据
+     * @apiSuccess (success) {PUT} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccess (success) {PUT} data 返回数据
      * @apiSuccessExample {json} 返回样例:
      *                    {"code":"success"}
      */
+    @PutMapping("/star")
+    public Result addStar(){
+        return null;
+    }
+
+    /**
+     * @api {GET} /commodity/select 通过条件筛选商品
+     * @apiGroup Commodity
+     * @apiVersion 0.0.1
+     * @apiDescription 商品增加好评
+     * @apiParam {CommodityDto} commodityDto 商品查询对象
+     * @apiParamExample {json} 请求样例:
+     *                   {
+     *                      city:"商品Id",
+     *                      district:"用户Id",
+     *                      cdClass:"商品分类",
+     *                      priceStart:"价格开始区间",
+     *                      priceEnd:"价格结束区间",
+     *                      start:"分页开始索引,必填",
+     *                      end:"分页查询长度,必填",
+     *                      star:"好评排序,0正序,1倒序"
+     *                   }
+     * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccess (success) {GET} data 返回数据
+     * @apiSuccessExample {json} 返回样例:
+     *                    {和返回商品信息字段相同}
+     */
+    @GetMapping("/select")
+    public Result getByCondition(CommodityDto commodityDto){
+        return commodityService.selectByCondition(commodityDto);
+    }
 }

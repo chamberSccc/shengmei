@@ -1,6 +1,7 @@
 package com.tangmo.shengmei.service;
 
 import com.tangmo.shengmei.entity.Commodity;
+import com.tangmo.shengmei.entity.CommodityDto;
 import com.tangmo.shengmei.entity.GoodsComment;
 import com.tangmo.shengmei.utility.code.Result;
 
@@ -118,4 +119,21 @@ public interface CommodityService {
      * @return
      */
     Result delMultiViewRecord(String vrIds);
+
+    /**
+     * 根据条件筛选商品
+     *
+     * @param commodityDto
+     * @return
+     */
+    Result selectByCondition(CommodityDto commodityDto);
+
+    /**
+     * 商品好评加1
+     *
+     * @param cdId 商品Id
+     * @param userId 用户Id
+     * @return
+     */
+    Result addCdStar(Integer cdId, Integer userId);
 }

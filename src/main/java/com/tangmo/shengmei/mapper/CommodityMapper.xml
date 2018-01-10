@@ -147,12 +147,12 @@
 
     <select id="selectListByType" resultMap="BaseResultMap">
         SELECT cd_id,img_id,title,content,cd_type,cd_count,price_pre,price_now,createtime
-          FROM commodity WHERE cd_type = #{cdType} limit #{start},#{end}
+          FROM commodity WHERE cd_type = #{cdType} AND is_expire = 0 limit #{start},#{end}
     </select>
 
     <select id="selectListByUserId" resultMap="BaseResultMap">
         SELECT cd_id,img_id,title,content,cd_type,cd_count,price_pre,price_now,createtime
-        FROM commodity WHERE user_id = #{userId} limit #{start},#{end}
+        FROM commodity WHERE user_id = #{userId} AND is_expire = 0 limit #{start},#{end}
     </select>
 
     <delete id="deleteById">
@@ -201,12 +201,12 @@
     </insert>
 
     <select id="selectCommodityDetail" resultMap="BaseResultMap">
-        SELECT * FROM commodity WHERE  cd_id = #{cdId}
+        SELECT * FROM commodity WHERE  cd_id = #{cdId} AND is_expire = 0
     </select>
 
     <select id="selectQualityList" resultMap="BaseResultMap">
         SELECT cd_id,img_id,title,content,cd_type,cd_count,price_pre,price_now,createtime
-        FROM commodity WHERE is_quality = 1 limit #{start},#{end}
+        FROM commodity WHERE is_quality = 1 AND is_expire = 0 limit #{start},#{end}
     </select>
 
     <select id="selectViewRecord" resultMap="ViewResultMap">
@@ -218,6 +218,7 @@
     <delete id="deleteViewRecordById">
         DELETE FROM view_record WHERE vr_id = #{vrId}
     </delete>
+
     <delete id="deleteMultiViewRecord" parameterType="java.util.List">
         DELETE FROM view_record WHERE vr_id IN
         <foreach collection="list" item="item" index="index"
@@ -225,4 +226,21 @@
             #{item}
         </foreach>
     </delete>
+
+    <select id="selectCdByCondition" parameterType="com.tangmo.shengmei.entity.CommodityDto">
+        SELECT cd_id,img_id,title,content,cd_type,cd_count,price_pre,price_now,createtime
+        FROM commodity WHERE is_expire = 0
+        <if test="city != null"> AND city = #{city} </if>
+        <if test="district != null"> AND district = #{district} </if>
+        <if test="cdClass != null"> AND cd_class = #{cdClass} </if>
+        <if test="priceStart != null"> AND price_now = #{priceStart} </if>
+        <if test="priceEnd != null"> AND price_now = #{priceEnd} </if>
+        <if test="star == '0'"> ORDER BY star</if>
+        <if test="star == '1'">ORDER BY star DESC </if>
+        <if test="start != null">limit #{start},#{end} </if>
+    </select>
+
+    <update id="updateCdStar">
+        UPDATE commodity SET star = star+1 WHERE cd_id = #{cdId}
+    </update>
 </mapper>

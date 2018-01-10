@@ -25,6 +25,9 @@ public class ConvInfo implements Serializable {
     private String content;
     private Integer viewCount;
     private Integer commentCount;
+    private String province;
+    private String city;
+    private String district;
     private Byte isExpire;
     private Date createTime;
     private Date updateTime;
