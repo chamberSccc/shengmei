@@ -81,7 +81,7 @@ public class CommodityController extends BaseController {
      * @apiParam {byte} type 商品类型
      * @apiParam {int} start 分页起始索引
      * @apiParam {int} end 查询列表长度
-     * @apiDescription 获取指定类型商品
+     * @apiDescription 获取指定类型商品 区分全新汽配,二手汽配...
      * @apiParamExample {json} 请求样例：
      *  /commodity/list/1/1/10
      * @apiSuccess (200) {String} msg 信息
