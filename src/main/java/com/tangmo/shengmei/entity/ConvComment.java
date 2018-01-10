@@ -20,5 +20,5 @@ public class ConvComment implements Serializable {
     private String userName;
     private String avatarId;
     private String comment;
-    private Date createtime;
+    private Date createTime;
 }

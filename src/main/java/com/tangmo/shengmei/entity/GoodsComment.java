@@ -15,11 +15,11 @@ public class GoodsComment implements Serializable{
 
     private static final long serialVersionUID = 1L;
     private Integer gcId;
-    private Integer ciId;
+    private Integer goodsId;
     private Integer userId;
     private String userName;
     private String avatarId;
     private Byte belongType;
     private String comment;
-    private Date createtime;
+    private Date createTime;
 }

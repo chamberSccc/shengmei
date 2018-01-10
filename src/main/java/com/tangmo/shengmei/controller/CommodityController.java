@@ -171,14 +171,14 @@ public class CommodityController extends BaseController {
     }
 
     /**
-     * @api {GET} /comment/list/{start}/{end} 获取个人商品评论
+     * @api {GET} /commodity/comment/list/{start}/{end} 获取个人商品评论
      * @apiGroup Commodity
      * @apiVersion 0.0.1
      * @apiParam {int} start 分页起始索引
      * @apiParam {int} end 查询列表长度
      * @apiDescription 获取个人商品评论
      * @apiParamExample {json} 请求样例：
-     *  /comment/list/1/1/10
+     *  /commodity/comment/list/1/1/10
      * @apiSuccess (200) {String} msg 信息
      * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
      * @apiSuccessExample {json} 返回样例:
@@ -203,7 +203,7 @@ public class CommodityController extends BaseController {
     }
 
     /**
-     * @api {POST} /comment 增加个人商品评论
+     * @api {POST} /commodity/comment 增加个人商品评论
      * @apiGroup Commodity
      * @apiVersion 0.0.1
      * @apiDescription 增加个人商品评论
@@ -211,7 +211,7 @@ public class CommodityController extends BaseController {
      * @apiParamExample {json} 请求样例:
      *                   {
      *                      userId:"用户id",
-     *                      ciId:"便民信息id",
+     *                      goodsId:"商品Id",
      *                      content:"评论内容"
      *                   }
      * @apiSuccess (success) {POST} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
@@ -309,7 +309,7 @@ public class CommodityController extends BaseController {
      * @apiParam {int} vrId 浏览记录主键
      * @apiDescription 删除浏览记录
      * @apiParamExample {json} 请求样例：
-     *  /view/12
+     *  commodity/view/12
      * @apiSuccess (200) {String} msg 信息
      * @apiSuccess (success) {DELETE} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
      * @apiSuccessExample {json} 返回样例:
@@ -340,4 +340,22 @@ public class CommodityController extends BaseController {
         int a = 1;
         return null;
     }
+
+    /**
+     * @api {PUT} /commodity/star 商品增加好评
+     * @apiGroup Commodity
+     * @apiVersion 0.0.1
+     * @apiDescription 增加个人商品评论
+     * @apiParam {GoodsComment} goodsComment 商品评论对象
+     * @apiParamExample {json} 请求样例:
+     *                   {
+     *                      userId:"用户id",
+     *                      ciId:"便民信息id",
+     *                      content:"评论内容"
+     *                   }
+     * @apiSuccess (success) {POST} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccess (success) {POST} data 返回数据
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success"}
+     */
 }
