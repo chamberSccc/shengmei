@@ -77,8 +77,8 @@ public class CommodityServiceImpl implements CommodityService {
     }
 
     @Override
-    public Result searchUserCdList(Integer userId) {
-        return ResultUtil.success(commodityDao.selectListByUserId(userId));
+    public Result searchUserCdList(Integer userId, Integer start, Integer end) {
+        return ResultUtil.success(commodityDao.selectListByUserId(userId,start,end));
     }
 
     @Override

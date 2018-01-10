@@ -42,9 +42,11 @@ public interface CommodityService {
      * 查询指定用户的商品信息
      *
      * @param userId
+     * @param start
+     * @param end
      * @return
      */
-    Result searchUserCdList(Integer userId);
+    Result searchUserCdList(Integer userId, Integer start, Integer end);
 
     /**
      * 删除指定商品信息

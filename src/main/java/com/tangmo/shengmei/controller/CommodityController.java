@@ -92,23 +92,19 @@ public class CommodityController extends BaseController {
      *                     [{
      *                        cdId: 1,
      *                        title: "商品信息标题1",
+     *                        imgId:"商品图片",
      *                        content: "商品信息内容1",
      *                        pricePre:"商品原价1",
      *                        priceNow:"商品现价1",
-     *                        cdType:"商品类型1",
-     *                        cdCount:"商品数量1",
-     *                        cdColor:"商品颜色,多种颜色以逗号分隔,
-     *                        cdSize:"商品规格,多种规格以逗号分隔"},
+     *                        cdType:"商品类型1"},
      *                     {
      *                        cdId: 2,
      *                        title: "商品信息标题2",
+     *                        imgId:"商品图片",
      *                        content: "商品信息内容2",
      *                        pricePre:"商品原价2",
      *                        priceNow:"商品现价2",
-     *                        cdType:"商品类型2",
-     *                        cdCount:"商品数量2",
-     *                        cdColor:"商品颜色,多种颜色以逗号分隔,
-     *                        cdSize:"商品规格,多种规格以逗号分隔"},
+     *                        cdType:"商品类型2"},
      *                     }]
      *                     }
      */
@@ -118,13 +114,15 @@ public class CommodityController extends BaseController {
     }
 
     /**
-     * @api {GET} /commodity/user/{userId} 获取指定用户的商品
+     * @api {GET} /commodity/user/{userId}/{start}/{end} 获取指定用户的商品
      * @apiGroup Commodity
      * @apiVersion 0.0.1
+     * @apiParam {int} start 分页起始索引
+     * @apiParam {int} end 查询列表长度
      * @apiParam {int} userId 商品类型
      * @apiDescription 获取指定用户的商品
      * @apiParamExample {json} 请求样例：
-     *  /commodity/user/1
+     *  /commodity/user/1/1/10
      * @apiSuccess (200) {String} msg 信息
      * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
      * @apiSuccessExample {json} 返回样例:
@@ -133,29 +131,25 @@ public class CommodityController extends BaseController {
      *                     [{
      *                        cdId: 1,
      *                        title: "商品信息标题1",
+     *                        imgId:"商品图片",
      *                        content: "商品信息内容1",
      *                        pricePre:"商品原价1",
      *                        priceNow:"商品现价1",
-     *                        cdType:"商品类型1",
-     *                        cdCount:"商品数量1",
-     *                        cdColor:"商品颜色,多种颜色以逗号分隔,
-     *                        cdSize:"商品规格,多种规格以逗号分隔"},
+     *                        cdType:"商品类型1"},
      *                     {
      *                        cdId: 2,
      *                        title: "商品信息标题2",
+     *                        imgId:"商品图片",
      *                        content: "商品信息内容2",
      *                        pricePre:"商品原价2",
      *                        priceNow:"商品现价2",
-     *                        cdType:"商品类型2",
-     *                        cdCount:"商品数量2",
-     *                        cdColor:"商品颜色,多种颜色以逗号分隔,
-     *                        cdSize:"商品规格,多种规格以逗号分隔"},
+     *                        cdType:"商品类型2"},
      *                     }]
      *                     }
      */
-    @GetMapping("/user/{userId}")
-    public Result getUserCdList(@PathVariable Integer userId){
-        return commodityService.searchUserCdList(userId);
+    @GetMapping("/user/{userId}/{start}/{end}")
+    public Result getUserCdList(@PathVariable Integer userId,@PathVariable Integer start,@PathVariable Integer end){
+        return commodityService.searchUserCdList(userId,start,end);
     }
 
     /**

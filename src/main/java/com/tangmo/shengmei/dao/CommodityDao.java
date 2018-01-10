@@ -53,9 +53,12 @@ public interface CommodityDao {
      * 根据用户id查询商品信息
      *
      * @param userId
+     * @param start
+     * @param end
      * @return
      */
-    List<Commodity> selectListByUserId(Integer userId);
+    List<Commodity> selectListByUserId(@Param("userId") Integer userId, @Param("start") Integer start,
+                                       @Param("end") Integer end);
 
     /**
      * 获取商品评论列表

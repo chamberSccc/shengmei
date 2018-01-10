@@ -11,7 +11,10 @@
         <result column="cdSize" property="cdSize" jdbcType="VARCHAR"/>
         <result column="price_pre" property="pricePre" jdbcType="DOUBLE"/>
         <result column="price_now" property="priceNow" jdbcType="DOUBLE"/>
-        <result column="cd_type" property="cdType" jdbcType="TINYINT"/>
+        <result column="province" property="province" jdbcType="VARCHAR"/>
+        <result column="city" property="city" jdbcType="VARCHAR"/>
+        <result column="district" property="district" jdbcType="VARCHAR"/>
+        <result column="star" property="star" jdbcType="INTEGER"/>
         <result column="cd_count" property="cdCount" jdbcType="INTEGER"/>
         <result column="createtime" property="createTime" jdbcType="TIMESTAMP"/>
     </resultMap>
@@ -143,13 +146,13 @@
     </update>
 
     <select id="selectListByType" resultMap="BaseResultMap">
-        SELECT img_id,title,content,cd_type,cd_count,price_pre,price_now,createtime
+        SELECT cd_id,img_id,title,content,cd_type,cd_count,price_pre,price_now,createtime
           FROM commodity WHERE cd_type = #{cdType} limit #{start},#{end}
     </select>
 
     <select id="selectListByUserId" resultMap="BaseResultMap">
-        SELECT img_id,title,content,cd_type,cd_count,price_pre,price_now,createtime
-        FROM commodity WHERE user_id = #{userId}
+        SELECT cd_id,img_id,title,content,cd_type,cd_count,price_pre,price_now,createtime
+        FROM commodity WHERE user_id = #{userId} limit #{start},#{end}
     </select>
 
     <delete id="deleteById">
@@ -158,11 +161,11 @@
 
 
     <select id="selectCommentByGoodsId" resultMap="CommentResultMap">
-        SELECT cc.user_id,ui.user_name,ui.avatar_id,cc.createtime FROM goods_comment gc
-        LEFT JOIN user_info ui ON cc.user_id = ui.user_id
+        SELECT gc.gc_id,gc.user_id,ui.user_name,ui.avatar_id,cc.createtime FROM goods_comment gc
+        LEFT JOIN user_info ui ON gc.user_id = ui.user_id
         WHERE gc.goods_id = #{goodsId} AND belong_type = 0
         ORDER BY gc.createtime DESC
-        limit #{start},#{end}-#{start}
+        limit #{start},#{end}
     </select>
 
     <insert id="insertComment" parameterType="com.tangmo.shengmei.entity.GoodsComment">
@@ -202,7 +205,7 @@
     </select>
 
     <select id="selectQualityList" resultMap="BaseResultMap">
-        SELECT img_id,title,content,cd_type,cd_count,price_pre,price_now,createtime
+        SELECT cd_id,img_id,title,content,cd_type,cd_count,price_pre,price_now,createtime
         FROM commodity WHERE is_quality = 1 limit #{start},#{end}
     </select>
 

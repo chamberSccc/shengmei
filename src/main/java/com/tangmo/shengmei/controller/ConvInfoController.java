@@ -180,6 +180,7 @@ public class ConvInfoController extends BaseController {
      *                        userId:用户Id
      *                        viewCount:"浏览数",
      *                        commentCount:"评论数量",
+     *                        isExpire:"是否失效",
      *                        title: "文章标题",
      *                        content: "文章内容"
      *                        },
@@ -188,6 +189,7 @@ public class ConvInfoController extends BaseController {
      *                        userId:用户Id
      *                        viewCount:"浏览数",
      *                        commentCount:"评论数量",
+     *                        isExpire:"是否失效",
      *                        title: "文章标题2",
      *                        content: "文章内容2"
      *                     }]
