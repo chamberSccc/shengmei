@@ -131,4 +131,12 @@ public interface CommodityDao {
      * @return
      */
     int updateCdStar(Integer cdId);
+
+    /**
+     * 删除多条浏览记录
+     *
+     * @param vrIds 浏览记录主键数组
+     * @return
+     */
+    int deleteMultiViewRecord(Integer[] vrIds);
 }

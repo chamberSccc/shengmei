@@ -23,6 +23,7 @@ public class User implements Serializable {
     private String city;
     private Byte gender;
     private String avatarId;
+    private Double balance;
     private Byte shopAuth;
     private Date createTime;
     private Date updateTime;

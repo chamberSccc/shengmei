@@ -84,7 +84,7 @@ public class CommodityController extends BaseController {
      * @apiParam {int} end 查询列表长度
      * @apiDescription 获取指定类型商品 区分全新汽配,二手汽配...
      * @apiParamExample {json} 请求样例：
-     *  /commodity/list/1/1/10
+     *  /commodity/list/1/0/10
      * @apiSuccess (200) {String} msg 信息
      * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
      * @apiSuccessExample {json} 返回样例:
@@ -172,14 +172,15 @@ public class CommodityController extends BaseController {
     }
 
     /**
-     * @api {GET} /commodity/comment/list/{start}/{end} 获取个人商品评论
+     * @api {GET} /commodity/comment/list/{cdId}/{start}/{end} 获取个人商品评论
      * @apiGroup Commodity
      * @apiVersion 0.0.1
      * @apiParam {int} start 分页起始索引
      * @apiParam {int} end 查询列表长度
+     * @apiParam {int} cdId 商品Id
      * @apiDescription 获取个人商品评论
      * @apiParamExample {json} 请求样例：
-     *  /commodity/comment/list/1/1/10
+     *  /commodity/comment/list/1/0/10
      * @apiSuccess (200) {String} msg 信息
      * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
      * @apiSuccessExample {json} 返回样例:
@@ -189,18 +190,20 @@ public class CommodityController extends BaseController {
      *                        ccId: 评论Id,
      *                        userId: "用户Id",
      *                        userName:用户名字
-     *                        avatarId: "头像Id"},
+     *                        avatarId: "头像Id",
+     *                        comment:"评论内容"},
      *                     {
      *                        ccId: 评论Id,
      *                        userId: "用户Id",
      *                        userName:用户名字
-     *                        avatarId: "头像Id"
+     *                        avatarId: "头像Id",
+     *                        comment:"评论内容"
      *                     }]
      *                     }
      */
-    @GetMapping("/comment/list/{goodsId}/{start}/{end}")
-    public Result getCommentList(@PathVariable Integer goodsId,@PathVariable Integer start,@PathVariable Integer end){
-        return commodityService.getComments(goodsId, GoodsBelongConst.PERSON_GOODS,start,end);
+    @GetMapping("/comment/list/{cdId}/{start}/{end}")
+    public Result getCommentList(@PathVariable Integer cdId,@PathVariable Integer start,@PathVariable Integer end){
+        return commodityService.getComments(cdId, GoodsBelongConst.PERSON_GOODS,start,end);
     }
 
     /**
@@ -213,7 +216,7 @@ public class CommodityController extends BaseController {
      *                   {
      *                      userId:"用户id",
      *                      goodsId:"商品Id",
-     *                      content:"评论内容"
+     *                      comment:"评论内容"
      *                   }
      * @apiSuccess (success) {POST} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
      * @apiSuccess (success) {POST} data 返回数据
@@ -221,7 +224,7 @@ public class CommodityController extends BaseController {
      *                    {"code":"success"}
      */
     @PostMapping("/comment")
-    public Result addComment(GoodsComment goodsComment){
+    public Result addComment(@RequestBody GoodsComment goodsComment){
         goodsComment.setBelongType(GoodsBelongConst.PERSON_GOODS);
         return commodityService.addComment(goodsComment);
     }
@@ -243,27 +246,16 @@ public class CommodityController extends BaseController {
      *                     [{
      *                        cdId: 1,
      *                        title: "商品信息标题1",
+     *                        imgId:"商品图片",
      *                        content: "商品信息内容1",
      *                        pricePre:"商品原价1",
      *                        priceNow:"商品现价1",
-     *                        cdType:"商品类型1",
-     *                        cdCount:"商品数量1",
-     *                        cdColor:"商品颜色,多种颜色以逗号分隔,
-     *                        cdSize:"商品规格,多种规格以逗号分隔"},
-     *                     {
-     *                        cdId: 2,
-     *                        title: "商品信息标题2",
-     *                        content: "商品信息内容2",
-     *                        pricePre:"商品原价2",
-     *                        priceNow:"商品现价2",
-     *                        cdType:"商品类型2",
-     *                        cdCount:"商品数量2",
-     *                        cdColor:"商品颜色,多种颜色以逗号分隔,
-     *                        cdSize:"商品规格,多种规格以逗号分隔"},
-     *                     }]
+     *                        cdType:"商品类型1"
+     *                      },
+     *                     {...}]
      *                     }
      */
-    @GetMapping("/list/quality/{start}/{end}")
+    @GetMapping("/quality/{start}/{end}")
     public Result getQualityList(@PathVariable Integer start, @PathVariable Integer end){
         return commodityService.getQualityInfo(start,end);
     }
@@ -327,19 +319,17 @@ public class CommodityController extends BaseController {
      * @apiGroup Commodity
      * @apiVersion 0.0.1
      * @apiDescription 删除多条浏览记录
-     * @apiParam {vrIds} vrIds 浏览记录主键,逗号分隔
+     * @apiParam {vrId} vrId 浏览记录主键
      * @apiParamExample {json} 请求样例:
-     * /commodity/view/multi
+     * /commodity/view/multi?&vrId=1&vrId=2
      * @apiSuccess (success) {DELETE} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
      * @apiSuccess (success) {DELETE} data 返回数据
      * @apiSuccessExample {json} 返回样例:
      *                    {"code":"success"}
      */
     @DeleteMapping("/view/multi")
-    public Result deleteMultiView(){
-        String vrIds = this.getRequest().getParameter("vrId");
-        int a = 1;
-        return null;
+    public Result deleteMultiView(@RequestParam Integer[] vrId){
+        return commodityService.delMultiViewRecord(vrId);
     }
 
     /**
@@ -359,8 +349,8 @@ public class CommodityController extends BaseController {
      *                    {"code":"success"}
      */
     @PutMapping("/star")
-    public Result addStar(){
-        return null;
+    public Result addStar(Commodity commodity){
+        return commodityService.addCdStar(commodity.getCdId(),commodity.getUserId());
     }
 
     /**

@@ -18,8 +18,8 @@ public class ConvInfo implements Serializable {
     private static final long serialVersionUID = 1L;
     private Integer ciId;
     private Integer userId;
-    private Integer username;
-    private Integer avatarId;
+    private String username;
+    private String avatarId;
     private String title;
     private String subtitle;
     private String content;
@@ -29,6 +29,7 @@ public class ConvInfo implements Serializable {
     private String city;
     private String district;
     private Byte isExpire;
+    private Date validDate;
     private Date createTime;
     private Date updateTime;
     private List<ConvComment> commentList;

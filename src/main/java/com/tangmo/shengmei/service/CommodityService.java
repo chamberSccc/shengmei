@@ -115,10 +115,10 @@ public interface CommodityService {
     /**
      * 删除多条浏览记录
      *
-     * @param vrIds 浏览记录主键,逗号分隔
+     * @param vrIds 浏览记录主键数组
      * @return
      */
-    Result delMultiViewRecord(String vrIds);
+    Result delMultiViewRecord(Integer[] vrIds);
 
     /**
      * 根据条件筛选商品

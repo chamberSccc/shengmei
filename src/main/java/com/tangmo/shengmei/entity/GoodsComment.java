@@ -17,7 +17,7 @@ public class GoodsComment implements Serializable{
     private Integer gcId;
     private Integer goodsId;
     private Integer userId;
-    private String userName;
+    private String username;
     private String avatarId;
     private Byte belongType;
     private String comment;

@@ -95,4 +95,21 @@ public class MyCollectController extends BaseController {
         return myCollectService.delMyCollect(mcId);
     }
 
+    /**
+     * @api {DELETE} /collect/multi 删除多条我的收藏
+     * @apiGroup MyCollect
+     * @apiVersion 0.0.1
+     * @apiDescription 删除多条我的收藏
+     * @apiParam {int} mcId 浏览记录主键
+     * @apiParamExample {json} 请求样例:
+     * /collect/multi?&mcId=1&mcId=2
+     * @apiSuccess (success) {DELETE} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccess (success) {DELETE} data 返回数据
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success"}
+     */
+    @DeleteMapping("/multi")
+    public Result deleteMultiView(@RequestParam Integer[] mcId){
+        return commodityService.delMultiViewRecord(mcId);
+    }
 }

@@ -23,7 +23,7 @@ public class ConvInfoController extends BaseController {
      * @apiParam {ConvInfo} convInfo 便民信息对象
      * @apiParamExample {json} 请求样例:
      *                   {
-     *                      userId:"112312",
+     *                      userId:"用户Id",
      *                      title:"标题是什么",
      *                      content:"内容是什么"
      *                   }
@@ -76,12 +76,15 @@ public class ConvInfoController extends BaseController {
      *                     [{
      *                        ciId: 1,
      *                        title: "文章标题",
-     *                        content: "文章内容"},
-     *                     {
-     *                        ciId: 2,
-     *                        title: "文章标题2",
-     *                        content: "文章内容2"
-     *                     }]
+     *                        content: "文章内容",
+     *                        userId:"用户id",
+     *                        userName:"用户姓名",
+     *                        viewCount:"浏览数",
+     *                        commentCount:"评论数",
+     *                        province:"省",
+     *                        city:"市",
+     *                        district:"区"},{...}
+     *                     ]
      *                     }
      */
     @GetMapping("/list/{start}/{end}")
@@ -108,7 +111,7 @@ public class ConvInfoController extends BaseController {
     }
 
     /**
-     * @api {POST} /comment 增加便民信息评论
+     * @api {POST} /conv/comment 增加便民信息评论
      * @apiGroup Convenient
      * @apiVersion 0.0.1
      * @apiDescription 增加便民信息评论
@@ -117,7 +120,7 @@ public class ConvInfoController extends BaseController {
      *                   {
      *                      userId:"用户id",
      *                      ciId:"便民信息id",
-     *                      content:"评论内容"
+     *                      comment:"评论内容"
      *                   }
      * @apiSuccess (success) {POST} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
      * @apiSuccess (success) {POST} data 返回数据
@@ -130,14 +133,14 @@ public class ConvInfoController extends BaseController {
     }
 
     /**
-     * @api {GET} /comment/list/{start}/{end} 获取便民信息评论
+     * @api {GET} /conv/comment/list/{ciId}/{start}/{end} 获取便民信息评论
      * @apiGroup Convenient
      * @apiVersion 0.0.1
      * @apiParam {int} start 分页起始索引
      * @apiParam {int} end 查询列表长度
      * @apiDescription 获取便民信息评论
      * @apiParamExample {json} 请求样例：
-     *  /comment/list/1/1/10
+     *  /conv/comment/list/1/1/10
      * @apiSuccess (200) {String} msg 信息
      * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
      * @apiSuccessExample {json} 返回样例:
@@ -198,5 +201,36 @@ public class ConvInfoController extends BaseController {
     @GetMapping("/user/{userId}/{start}/{end}")
     public Result getUserConvInfo(@PathVariable Integer userId,@PathVariable Integer start,@PathVariable Integer end){
         return convInfoService.getUserConvInfo(userId, start, end);
+    }
+
+    /**
+     * @api {GET} /conv/{ciId} 便民信息详情
+     * @apiGroup Convenient
+     * @apiVersion 0.0.1
+     * @apiDescription 便民信息详情
+     * @apiParamExample {json} 请求样例：
+     *  /conv/1
+     * @apiSuccess (200) {String} msg 信息
+     * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success",
+     *                     "data":{
+     *                     [{
+     *                        ciId: 1,
+     *                        title: "文章标题",
+     *                        content: "文章内容",
+     *                        userId:"用户id",
+     *                        userName:"用户姓名",
+     *                        viewCount:"浏览数",
+     *                        commentCount:"评论数",
+     *                        province:"省",
+     *                        city:"市",
+     *                        district:"区"},{...}
+     *                     ]
+     *                     }
+     */
+    @GetMapping("/{ciId}")
+    public Result getConvDetail(@PathVariable Integer ciId){
+        return convInfoService.searchConvDetail(ciId);
     }
 }

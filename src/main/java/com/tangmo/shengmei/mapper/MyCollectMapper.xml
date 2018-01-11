@@ -45,4 +45,12 @@
         ON mc.cd_id = cd.cd_id WHERE mc.user_id = #{userId}
         ORDER BY mc.createtime DESC limit #{start},#{end}
     </select>
+
+    <delete id="deleteMultiMyCollect" parameterType="Integer[]">
+        DELETE FROM my_collect WHERE mc_id IN
+        <foreach collection="array" item="item" index="index"
+                 open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </delete>
 </mapper>

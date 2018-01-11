@@ -56,7 +56,7 @@ public class ConvInfoServiceImpl implements ConvInfoService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Result addComment(ConvComment convComment) {
-        if(convComment.getUserId()==null || convComment.getCcId() ==null){
+        if(convComment.getUserId()==null || convComment.getCiId() ==null){
             return ResultUtil.fail();
         }
         convInfoDao.updateCommentCount(convComment.getCiId());

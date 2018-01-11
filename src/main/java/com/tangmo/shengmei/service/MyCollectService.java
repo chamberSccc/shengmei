@@ -36,4 +36,12 @@ public interface MyCollectService {
      * @return
      */
     Result searchMyCollect(Integer userId, Integer start, Integer end);
+
+    /**
+     * 删除多条我的收藏
+     *
+     * @param mcIds 我的收藏主键数组
+     * @return
+     */
+    Result delMultiMyCollect(Integer[] mcIds);
 }

@@ -131,8 +131,10 @@ public class CommodityServiceImpl implements CommodityService {
     }
 
     @Override
-    public Result delMultiViewRecord(String vrIds) {
-        return null;
+    @Transactional(rollbackFor = Exception.class)
+    public Result delMultiViewRecord(Integer[] vrIds) {
+        commodityDao.deleteMultiViewRecord(vrIds);
+        return ResultUtil.success();
     }
 
     @Override

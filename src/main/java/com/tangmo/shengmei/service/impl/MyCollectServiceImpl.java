@@ -43,4 +43,11 @@ public class MyCollectServiceImpl implements MyCollectService {
         return ResultUtil.success(myCollectDao.selectListByUserId(userId, start, end));
     }
 
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Result delMultiMyCollect(Integer[] mcIds) {
+        myCollectDao.deleteMultiMyCollect(mcIds);
+        return ResultUtil.success();
+    }
+
 }

@@ -25,6 +25,7 @@
         <result column="user_id" property="userId" jdbcType="INTEGER"/>
         <result column="username" property="username" jdbcType="VARCHAR"/>
         <result column="avatar_id" property="avatarId" jdbcType="VARCHAR"/>
+        <result column="comment" property="comment" jdbcType="VARCHAR"/>
         <result column="createtime" property="createTime" jdbcType="TIMESTAMP"/>
     </resultMap>
 
@@ -146,13 +147,15 @@
     </update>
 
     <select id="selectListByType" resultMap="BaseResultMap">
-        SELECT cd_id,img_id,title,content,cd_type,cd_count,price_pre,price_now,createtime
-          FROM commodity WHERE cd_type = #{cdType} AND is_expire = 0 limit #{start},#{end}
+        SELECT cd_id,user_id,img_id,title,content,cd_type,price_pre,
+        price_now,createtime,province,city,district
+          FROM commodity WHERE cd_type = #{cdType} AND is_sell = 0 limit #{start},#{end}
     </select>
 
     <select id="selectListByUserId" resultMap="BaseResultMap">
-        SELECT cd_id,img_id,title,content,cd_type,cd_count,price_pre,price_now,createtime
-        FROM commodity WHERE user_id = #{userId} AND is_expire = 0 limit #{start},#{end}
+        SELECT cd_id,user_id,img_id,title,content,cd_type,
+        price_pre,price_now,createtime,province,city,district
+        FROM commodity WHERE user_id = #{userId} AND is_sell = 0 limit #{start},#{end}
     </select>
 
     <delete id="deleteById">
@@ -161,7 +164,7 @@
 
 
     <select id="selectCommentByGoodsId" resultMap="CommentResultMap">
-        SELECT gc.gc_id,gc.user_id,ui.user_name,ui.avatar_id,cc.createtime FROM goods_comment gc
+        SELECT gc.gc_id,gc.user_id,ui.username,ui.avatar_id,gc.createtime,gc.comment FROM goods_comment gc
         LEFT JOIN user_info ui ON gc.user_id = ui.user_id
         WHERE gc.goods_id = #{goodsId} AND belong_type = 0
         ORDER BY gc.createtime DESC
@@ -201,12 +204,13 @@
     </insert>
 
     <select id="selectCommodityDetail" resultMap="BaseResultMap">
-        SELECT * FROM commodity WHERE  cd_id = #{cdId} AND is_expire = 0
+        SELECT * FROM commodity WHERE  cd_id = #{cdId} AND is_sell = 0
     </select>
 
     <select id="selectQualityList" resultMap="BaseResultMap">
-        SELECT cd_id,img_id,title,content,cd_type,cd_count,price_pre,price_now,createtime
-        FROM commodity WHERE is_quality = 1 AND is_expire = 0 limit #{start},#{end}
+        SELECT cd_id,img_id,title,content,cd_type,cd_count,price_pre,
+        price_now,createtime,province,city,district,user_id
+        FROM commodity WHERE is_quality = 1 AND is_sell = 0 limit #{start},#{end}
     </select>
 
     <select id="selectViewRecord" resultMap="ViewResultMap">
@@ -219,17 +223,17 @@
         DELETE FROM view_record WHERE vr_id = #{vrId}
     </delete>
 
-    <delete id="deleteMultiViewRecord" parameterType="java.util.List">
+    <delete id="deleteMultiViewRecord" parameterType="Integer[]">
         DELETE FROM view_record WHERE vr_id IN
-        <foreach collection="list" item="item" index="index"
+        <foreach collection="array" item="item" index="index"
                  open="(" close=")" separator=",">
             #{item}
         </foreach>
     </delete>
 
-    <select id="selectCdByCondition" parameterType="com.tangmo.shengmei.entity.CommodityDto">
-        SELECT cd_id,img_id,title,content,cd_type,cd_count,price_pre,price_now,createtime
-        FROM commodity WHERE is_expire = 0
+    <select id="selectCdByCondition" parameterType="com.tangmo.shengmei.entity.CommodityDto" resultMap="BaseResultMap">
+        SELECT cd_id,img_id,title,content,cd_type,cd_count,price_pre,price_now,createtime,province,city,district
+        FROM commodity WHERE is_sell = 0
         <if test="city != null"> AND city = #{city} </if>
         <if test="district != null"> AND district = #{district} </if>
         <if test="cdClass != null"> AND cd_class = #{cdClass} </if>
@@ -243,4 +247,36 @@
     <update id="updateCdStar">
         UPDATE commodity SET star = star+1 WHERE cd_id = #{cdId}
     </update>
+
+    <insert id="insertComment" parameterType="com.tangmo.shengmei.entity.GoodsComment">
+        insert into buy_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="amount != null">
+                amount,
+            </if>
+            <if test="goodsId != null">
+                goods_id,
+            </if>
+            <if test="brCount != null">
+                br_ount,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="amount != null">
+                #{amount,jdbcType=DOUBLE},
+            </if>
+            <if test="goodsId != null">
+                #{goodsId,jdbcType=INTEGER},
+            </if>
+            <if test="brCount != null">
+                #{brCount,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
 </mapper>
