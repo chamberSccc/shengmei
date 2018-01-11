@@ -343,7 +343,7 @@ public class UserController extends BaseController{
      */
     @DeleteMapping("/sell/multi")
     public Result delMultiSellRecord(@RequestParam Integer[] srId){
-        return userService.delMultiBuyRecord(srId);
+        return userService.delMultiSellRecord(srId);
     }
 
     //购买

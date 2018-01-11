@@ -13,7 +13,7 @@ import java.sql.Date;
 @Data
 public class SellRecord implements Serializable {
     private static final long serialVersionUID = 1L;
-    private Integer brId;
+    private Integer srId;
     private Integer userId;
     private Integer amount;
     private Byte isShow;

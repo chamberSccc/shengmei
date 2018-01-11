@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.tangmo.shengmei.dao.GoodsRecordDao" >
     <resultMap id="BuyReCordResultMap" type="com.tangmo.shengmei.entity.BuyRecord" >
-        <id column="br_id" property="cdId" jdbcType="INTEGER"/>
+        <id column="br_id" property="brId" jdbcType="INTEGER"/>
         <result column="goods_id" property="goodsId" jdbcType="INTEGER"/>
         <result column="user_id" property="userId" jdbcType="INTEGER"/>
         <result column="img_id" property="imgId" jdbcType="VARCHAR"/>
@@ -23,10 +23,10 @@
         <result column="img_id" property="imgId" jdbcType="VARCHAR"/>
         <result column="title" property="title" jdbcType="VARCHAR"/>
         <result column="content" property="content" jdbcType="VARCHAR"/>
-        <result column="brColor" property="brColor" jdbcType="VARCHAR"/>
-        <result column="brSize" property="brSize" jdbcType="VARCHAR"/>
+        <result column="srColor" property="srColor" jdbcType="VARCHAR"/>
+        <result column="srSize" property="srSize" jdbcType="VARCHAR"/>
         <result column="price" property="price" jdbcType="DOUBLE"/>
-        <result column="br_count" property="brCount" jdbcType="INTEGER"/>
+        <result column="sr_count" property="srCount" jdbcType="INTEGER"/>
         <result column="amount" property="amount" jdbcType="DOUBLE"/>
         <result column="createtime" property="createTime" jdbcType="TIMESTAMP"/>
     </resultMap>
@@ -140,15 +140,15 @@
         br.br_size ,br.br_color,br.createtime,cd.img_id,cd.content,cd.title
         FROM buy_record br LEFT JOIN commodity cd ON br.goods_id = cd.cd_id
         WHERE br.user_id = #{userId} AND is_show = TRUE ORDER BY br.createtime
-        limit {start},{end}
+        limit #{start},#{end}
     </select>
 
     <select id="selectUserSellRecord" resultMap="SellReCordResultMap">
-        SELECT  sr.sr_id ,sr.user_id ,sr.goods_id ,sr.amount ,sr.br_count ,sr.price ,
+        SELECT  sr.sr_id ,sr.user_id ,sr.goods_id ,sr.amount ,sr.sr_count ,sr.price ,
         sr.sr_size ,sr.sr_color,sr.createtime,cd.img_id,cd.content,cd.title
         FROM sell_record sr LEFT JOIN commodity cd ON sr.goods_id = cd.cd_id
         WHERE sr.user_id = #{userId} AND is_show = TRUE ORDER BY sr.createtime
-        limit {start},{end}
+        limit #{start},#{end}
     </select>
 
     <update id="deleteMultiBuyRecord" parameterType="Integer[]">
@@ -160,10 +160,12 @@
     </update>
 
     <update id="deleteMultiSellRecord" parameterType="Integer[]">
-        UPDATE sell_record SET is_show = 0  WHERE br_id IN
+        UPDATE sell_record SET is_show = 0  WHERE sr_id IN
         <foreach collection="array" item="item" index="index"
                  open="(" close=")" separator=",">
             #{item}
         </foreach>
     </update>
+
+    <select
 </mapper>
