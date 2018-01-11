@@ -103,4 +103,40 @@ public interface UserService {
      * @return
      */
     Result addFeedBack(FeedBack feedBack);
+
+    /**
+     * 获取用户购买记录
+     *
+     * @param userId
+     * @param start
+     * @param end
+     * @return
+     */
+    Result searchBuyRecord(Integer userId, Integer start, Integer end);
+
+    /**
+     * 获取用户卖出记录
+     *
+     * @param userId
+     * @param start
+     * @param end
+     * @return
+     */
+    Result searchSellRecord(Integer userId, Integer start, Integer end);
+
+    /**
+     * 删除多条购买记录
+     *
+     * @param brIds 购买记录主键数组
+     * @return
+     */
+    Result delMultiBuyRecord(Integer[] brIds);
+
+    /**
+     * 删除多条卖出记录
+     *
+     * @param srIds 卖出记录主键数组
+     * @return
+     */
+    Result delMultiSellRecord(Integer[] srIds);
 }

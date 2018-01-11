@@ -8,10 +8,10 @@ import java.sql.Date;
 /**
  * @author boge
  * @date 18/1/11
- * @description 购买记录实体
+ * @description 卖出记录实体
  */
 @Data
-public class BuyRecord implements Serializable {
+public class SellRecord implements Serializable {
     private static final long serialVersionUID = 1L;
     private Integer brId;
     private Integer userId;
@@ -27,8 +27,7 @@ public class BuyRecord implements Serializable {
     private String title;
     private String content;
     private Double price;
-    private Integer brCount;
-    private String brColor;
-    private String brSize;
-
+    private Integer srCount;
+    private String srColor;
+    private String srSize;
 }

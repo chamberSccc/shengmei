@@ -1,5 +1,6 @@
 package com.tangmo.shengmei.dao;
 
+import com.tangmo.shengmei.entity.BuyRecord;
 import com.tangmo.shengmei.entity.Commodity;
 import com.tangmo.shengmei.entity.CommodityDto;
 import com.tangmo.shengmei.entity.GoodsComment;

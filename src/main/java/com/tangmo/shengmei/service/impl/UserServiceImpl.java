@@ -1,5 +1,6 @@
 package com.tangmo.shengmei.service.impl;
 
+import com.tangmo.shengmei.dao.GoodsRecordDao;
 import com.tangmo.shengmei.dao.UserDao;
 import com.tangmo.shengmei.entity.FeedBack;
 import com.tangmo.shengmei.entity.RsFile;
@@ -25,6 +26,8 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
     @Resource
     private ImgFileService imgFileService;
+    @Resource
+    private GoodsRecordDao goodsRecordDao;
 
     @Override
     @Transactional
@@ -127,5 +130,27 @@ public class UserServiceImpl implements UserService {
             return ResultUtil.fail();
         }
         return null;
+    }
+
+    @Override
+    public Result searchBuyRecord(Integer userId, Integer start, Integer end) {
+        return ResultUtil.success(goodsRecordDao.selectUserBuyRecord(userId, start, end));
+    }
+
+    @Override
+    public Result searchSellRecord(Integer userId, Integer start, Integer end) {
+        return ResultUtil.success(goodsRecordDao.selectUserSellRecord(userId, start, end));
+    }
+
+    @Override
+    public Result delMultiBuyRecord(Integer[] brIds) {
+        goodsRecordDao.deleteMultiBuyRecord(brIds);
+        return ResultUtil.success();
+    }
+
+    @Override
+    public Result delMultiSellRecord(Integer[] srIds) {
+        goodsRecordDao.deleteMultiSellRecord(srIds);
+        return ResultUtil.success();
     }
 }

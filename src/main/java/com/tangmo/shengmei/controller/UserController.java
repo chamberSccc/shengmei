@@ -245,4 +245,111 @@ public class UserController extends BaseController{
     public Result addFeedBack(@RequestBody FeedBack feedBack){
         return userService.addFeedBack(feedBack);
     }
+
+    /**
+     * @api {GET} /user/buy/{userId}}/{start}/{end} 购买记录
+     * @apiGroup User
+     * @apiVersion 0.0.1
+     * @apiParam {int} start 分页起始索引
+     * @apiParam {int} end 查询列表长度
+     * @apiParam {int} userId 用户Id
+     * @apiDescription 购买记录
+     * @apiParamExample {json} 请求样例：
+     *  /user/buy/1/1/10
+     * @apiSuccess (200) {String} msg 信息
+     * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success",
+     *                     "data":{
+     *                     [{
+     *                        brId: 1,
+     *                        title: "商品信息标题1",
+     *                        imgId:"商品图片",
+     *                        content: "商品信息内容1",
+     *                        amount:"价格",
+     *                        brCount:"购买数量",
+     *                        createTime:"购买时间"
+     *                      },
+     *                     {...}]
+     *                     }
+     */
+    @GetMapping("/buy/{userId}/{start}/{end}")
+    public Result getBuyRecord(@PathVariable Integer userId,@PathVariable Integer start,@PathVariable Integer end){
+        return userService.searchBuyRecord(userId, start, end);
+    }
+
+    /**
+     * @api {GET} /user/sell/{userId}}/{start}/{end} 卖出记录
+     * @apiGroup User
+     * @apiVersion 0.0.1
+     * @apiParam {int} start 分页起始索引
+     * @apiParam {int} end 查询列表长度
+     * @apiParam {int} userId 用户Id
+     * @apiDescription 卖出记录
+     * @apiParamExample {json} 请求样例：
+     *  /user/sell/1/1/10
+     * @apiSuccess (200) {String} msg 信息
+     * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success",
+     *                     "data":{
+     *                     [{
+     *                        srId: 1,
+     *                        title: "商品信息标题1",
+     *                        imgId:"商品图片",
+     *                        content: "商品信息内容1",
+     *                        amount:"价格",
+     *                        brCount:"购买数量",
+     *                        createTime:"购买时间"
+     *                      },
+     *                     {...}]
+     *                     }
+     */
+    @GetMapping("/sell/{userId}/{start}/{end}")
+    public Result getSellRecord(@PathVariable Integer userId,@PathVariable Integer start,@PathVariable Integer end){
+        return userService.searchSellRecord(userId, start, end);
+    }
+
+    /**
+     * @api {DELETE} /user/buy/multi 删除多条购买记录
+     * @apiGroup User
+     * @apiVersion 0.0.1
+     * @apiDescription 删除多条购买记录
+     * @apiParam {int} brId 浏览记录主键
+     * @apiParamExample {json} 请求样例:
+     * /user/buy/multi?brId=1&brId=2
+     * @apiSuccess (success) {DELETE} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccess (success) {DELETE} data 返回数据
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success"}
+     */
+    @DeleteMapping("/buy/multi")
+    public Result delMultiBuyRecord(@RequestParam Integer[] brId){
+        return userService.delMultiBuyRecord(brId);
+    }
+
+    /**
+     * @api {DELETE} /user/sell/multi 删除多条卖出记录
+     * @apiGroup User
+     * @apiVersion 0.0.1
+     * @apiDescription 删除多条购买记录
+     * @apiParam {int} srId 浏览记录主键
+     * @apiParamExample {json} 请求样例:
+     * /user/sell/multi?srId=1&srId=2
+     * @apiSuccess (success) {DELETE} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccess (success) {DELETE} data 返回数据
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success"}
+     */
+    @DeleteMapping("/sell/multi")
+    public Result delMultiSellRecord(@RequestParam Integer[] srId){
+        return userService.delMultiBuyRecord(srId);
+    }
+
+    //购买
+    @PostMapping("/buy")
+    public Result addBuyRecord(){
+        return null;
+    }
+
 }

@@ -247,36 +247,4 @@
     <update id="updateCdStar">
         UPDATE commodity SET star = star+1 WHERE cd_id = #{cdId}
     </update>
-
-    <insert id="insertComment" parameterType="com.tangmo.shengmei.entity.GoodsComment">
-        insert into buy_record
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="userId != null">
-                user_id,
-            </if>
-            <if test="amount != null">
-                amount,
-            </if>
-            <if test="goodsId != null">
-                goods_id,
-            </if>
-            <if test="brCount != null">
-                br_ount,
-            </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="userId != null">
-                #{userId,jdbcType=INTEGER},
-            </if>
-            <if test="amount != null">
-                #{amount,jdbcType=DOUBLE},
-            </if>
-            <if test="goodsId != null">
-                #{goodsId,jdbcType=INTEGER},
-            </if>
-            <if test="brCount != null">
-                #{brCount,jdbcType=INTEGER},
-            </if>
-        </trim>
-    </insert>
 </mapper>

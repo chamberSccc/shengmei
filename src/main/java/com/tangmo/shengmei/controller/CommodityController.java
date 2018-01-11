@@ -321,7 +321,7 @@ public class CommodityController extends BaseController {
      * @apiDescription 删除多条浏览记录
      * @apiParam {vrId} vrId 浏览记录主键
      * @apiParamExample {json} 请求样例:
-     * /commodity/view/multi?&vrId=1&vrId=2
+     * /commodity/view/multi?vrId=1&vrId=2
      * @apiSuccess (success) {DELETE} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
      * @apiSuccess (success) {DELETE} data 返回数据
      * @apiSuccessExample {json} 返回样例:
