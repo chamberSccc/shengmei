@@ -35,6 +35,12 @@
                 <if test="username != null">
                     username,
                 </if>
+                <if test="province != null">
+                    province,
+                </if>
+                <if test="city != null">
+                    city,
+                </if>
             </trim>
             <trim prefix="values (" suffix=")" suffixOverrides=",">
                 <if test="password != null">
@@ -45,6 +51,12 @@
                 </if>
                 <if test="username != null">
                     #{username,jdbcType=VARCHAR},
+                </if>
+                <if test="province != null">
+                    #{province,jdbcType=VARCHAR},
+                </if>
+                <if test="city != null">
+                    #{city,jdbcType=VARCHAR},
                 </if>
             </trim>
     </insert>

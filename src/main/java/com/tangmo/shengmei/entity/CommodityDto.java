@@ -10,9 +10,8 @@ import java.io.Serializable;
  * @description 商品查询对象
  */
 @Data
-public class CommodityDto implements Serializable{
+public class CommodityDto{
 
-    private static final long serialVersionUID = 1L;
     private Byte cdClass;
     private Boolean star;
     private Double priceStart;

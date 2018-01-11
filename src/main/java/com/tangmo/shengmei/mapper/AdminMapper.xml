@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tangmo.shengmei.dao.AdminDao">
+
+    <select id="selectUserReport" resultType="java.util.Map">
+        select ui.user_id,ui.mobile,ui.balance,br.expend,sr.income,wi.withdraw from user_info ui
+        left join
+        (select user_id,count(amount) as expend from buy_record group by user_id,createtime) as br
+        on ui.user_id = br.user_id
+        left join
+        (select user_id,count(amount) as income from sell_record group by user_id,createtime) as sr
+        on ui.user_id = sr.user_id
+        left join
+        (select user_id,count(amount) as withdraw from withdraw_info group by user_id,createtime) as wi
+        on ui.user_id = wi.user_id WHERE 1=1
+        <if test="city != null"> AND ui.city = #{city} </if>
+        <if test="province != null"> AND province = #{province} </if>
+        <if test="startDate != null">
+            AND (br.createtime &gt;#{startDate} OR sr.createtime &gt;#{startDate}
+            OR wi.createtime &gt;#{startDate} )
+        </if>
+        <if test="endDate != null">
+            AND (br.createtime &lt;#{endDate} OR sr.createtime &lt;#{endDate}
+            OR wi.createtime &lt;#{endDate} )
+        </if>
+        ORDER BY ui.user_id
+        <if test="start != null">limit #{start},#{end} </if>
+    </select>
+
+</mapper>
