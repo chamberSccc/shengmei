@@ -25,6 +25,7 @@ public class User implements Serializable {
     private String avatarId;
     private Double balance;
     private Byte shopAuth;
+    private String token;
     private Date createTime;
     private Date updateTime;
 }

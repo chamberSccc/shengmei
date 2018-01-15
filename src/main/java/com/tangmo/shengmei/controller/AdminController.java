@@ -25,7 +25,7 @@ public class AdminController extends BaseController{
 
     /**
      * @api {GET} /admin/report 用户报表
-     * @apiGroup Commodity
+     * @apiGroup Admin
      * @apiVersion 0.0.1
      * @apiDescription 精品列表
      * @apiParamExample {json} 请求样例:
@@ -60,7 +60,7 @@ public class AdminController extends BaseController{
 
     /**
      * @api {GET} admin/conv/{type}/{start}/{end} 获取失效/未失效便民信息
-     * @apiGroup Convenient
+     * @apiGroup Admin
      * @apiVersion 0.0.1
      * @apiParam {int} type 是否失效
      * @apiParam {int} start 分页起始索引
@@ -90,5 +90,44 @@ public class AdminController extends BaseController{
     @GetMapping("/conv/{type}/{start}/{end}")
     public Result getConvInfo(@PathVariable Byte type,@PathVariable Integer start, @PathVariable Integer end){
         return convInfoService.searchConvList(start,end);
+    }
+
+    /**
+     * @api {GET} /admin/commodity/{type}/{start}/{end} 获取指定类型商品
+     * @apiGroup Commodity
+     * @apiVersion 0.0.1
+     * @apiParam {byte} type 商品类型
+     * @apiParam {int} start 分页起始索引
+     * @apiParam {int} end 查询列表长度
+     * @apiDescription 获取指定类型商品 区分全新汽配,二手汽配...
+     * @apiParamExample {json} 请求样例：
+     *  /admin/commodity/1/0/10
+     * @apiSuccess (200) {String} msg 信息
+     * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success",
+     *                     "data":{
+     *                     [{
+     *                        cdId: 1,
+     *                        title: "商品信息标题1",
+     *                        imgId:"商品图片",
+     *                        content: "商品信息内容1",
+     *                        pricePre:"商品原价1",
+     *                        priceNow:"商品现价1",
+     *                        cdType:"商品类型1"},
+     *                     {
+     *                        cdId: 2,
+     *                        title: "商品信息标题2",
+     *                        imgId:"商品图片",
+     *                        content: "商品信息内容2",
+     *                        pricePre:"商品原价2",
+     *                        priceNow:"商品现价2",
+     *                        cdType:"商品类型2"},
+     *                     }]
+     *                     }
+     */
+    @GetMapping("/commodity/{type}/{start}/{end}")
+    public Result getCommodityList(@PathVariable Integer start, @PathVariable Integer end,@PathVariable Byte type){
+        return commodityService.searchCdList(type,start,end);
     }
 }

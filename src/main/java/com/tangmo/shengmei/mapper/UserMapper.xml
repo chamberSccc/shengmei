@@ -23,7 +23,7 @@
     <sql id="Base_Column_List" >
 
     </sql>
-    <insert id="insertSelective" parameterType="com.tangmo.shengmei.entity.User">
+    <insert id="insertSelective" parameterType="com.tangmo.shengmei.entity.User" useGeneratedKeys="true" keyProperty="userId">
             insert into user_info
             <trim prefix="(" suffix=")" suffixOverrides=",">
                 <if test="password != null">
@@ -41,6 +41,9 @@
                 <if test="city != null">
                     city,
                 </if>
+                <if test="token != null">
+                    token,
+                </if>
             </trim>
             <trim prefix="values (" suffix=")" suffixOverrides=",">
                 <if test="password != null">
@@ -57,6 +60,9 @@
                 </if>
                 <if test="city != null">
                     #{city,jdbcType=VARCHAR},
+                </if>
+                <if test="token != null">
+                    #{token,jdbcType=VARCHAR},
                 </if>
             </trim>
     </insert>

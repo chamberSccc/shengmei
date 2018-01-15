@@ -10,10 +10,12 @@ import com.tangmo.shengmei.service.ImgFileService;
 import com.tangmo.shengmei.service.UserService;
 import com.tangmo.shengmei.utility.code.Result;
 import com.tangmo.shengmei.utility.code.ResultUtil;
+import com.tangmo.shengmei.utility.string.EncryptUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.Date;
 
 /**
  * @author boge
@@ -39,9 +41,15 @@ public class UserServiceImpl implements UserService {
         if(result!=null){
             return ResultUtil.registered();
         }
+        //设置token
+        String token = EncryptUtil.get32Uuid();
+        user.setToken(token);
         int row = userDao.insertSelective(user);
         if (row == 1) {
-            return ResultUtil.success();
+            User userResult = new User();
+            userResult.setUserId(user.getUserId());
+            userResult.setToken(user.getToken());
+            return ResultUtil.success(userResult);
         }
         return ResultUtil.fail();
     }
