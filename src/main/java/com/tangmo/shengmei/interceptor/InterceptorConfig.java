@@ -17,7 +17,7 @@ public class InterceptorConfig extends WebMvcConfigurerAdapter {
         registry.addInterceptor(new TokenInterceptor())
                 .addPathPatterns("/**")
                 .excludePathPatterns("/commodity/list/**")
-                .excludePathPatterns("/commodity/comment/list/**}")
+                .excludePathPatterns("/commodity/comment/list/**")
                 .excludePathPatterns("/commodity/quality/**")
                 .excludePathPatterns("/conv/list/**")
                 .excludePathPatterns("/conv/comment/list/**")

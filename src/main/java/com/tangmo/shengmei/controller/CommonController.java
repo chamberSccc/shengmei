@@ -58,7 +58,7 @@ public class CommonController {
      *                     ...]
      *                     }
      */
-    @GetMapping("/car/type")
+    @GetMapping("/goods/class/{type}")
     public Result getCarClass(){
         return null;
     }

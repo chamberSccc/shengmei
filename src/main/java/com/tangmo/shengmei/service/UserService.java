@@ -147,4 +147,6 @@ public interface UserService {
      * @return
      */
     Result login(User user);
+
+    String selectToken(Integer userId);
 }

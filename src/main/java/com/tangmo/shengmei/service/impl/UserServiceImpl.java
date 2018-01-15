@@ -175,4 +175,9 @@ public class UserServiceImpl implements UserService {
             return ResultUtil.pwdError();
         }
     }
+
+    @Override
+    public String selectToken(Integer userId) {
+        return userDao.selectTokenByUserId(userId);
+    }
 }
