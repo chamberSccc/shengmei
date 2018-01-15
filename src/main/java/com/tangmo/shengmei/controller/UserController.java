@@ -39,6 +39,27 @@ public class UserController extends BaseController{
     }
 
     /**
+     * @api {POST}  d用户登录
+     * @apiGroup User
+     * @apiVersion 0.0.1
+     * @apiDescription 用户登录
+     * @apiParam {User} user 用户对象
+     * @apiParamExample {json} 请求样例:
+     *                   {
+     *                      password:"MD5加密后的密码",
+     *                      mobile:"18710889234",
+     *                   }
+     * @apiSuccess (success) {POST} code success:请求成功； fail:请求失败；pwd_error：密码错误;
+     * @apiSuccess (success) {POST} data 返回数据
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success"}
+     */
+    @PostMapping("/login")
+    public Result userLogin(@RequestBody User user){
+        return userService.login(user);
+    }
+
+    /**
      * @api {GET} /user/{userId} 获取用户信息
      * @apiGroup User
      * @apiVersion 0.0.1

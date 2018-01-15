@@ -187,4 +187,13 @@
         ORDER BY ci.createtime DESC
         limit #{start},#{end}
     </select>
+
+    <select id="selectByIsExpire" resultMap="BaseResultMap">
+        SELECT ci.ci_id,ci.user_id,ci.title,ci.content,ci.view_count,ci.comment_count,
+        ci.createtime,if(expire_date &gt;now(),0,1) as is_expire,ci.province,ci.city,ci.district,ui.username,ui.avatar_id
+        FROM convenient_info ci LEFT JOIN user_info ui ON ci.user_id = ui.user_id
+        WHERE is_expire = #{type}
+        ORDER BY ci.createtime DESC
+        limit #{start},#{end}
+    </select>
 </mapper>

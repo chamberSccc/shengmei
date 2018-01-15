@@ -161,4 +161,18 @@ public class UserServiceImpl implements UserService {
         goodsRecordDao.deleteMultiSellRecord(srIds);
         return ResultUtil.success();
     }
+
+    @Override
+    public Result login(User user) {
+        if(user.getPassword()==null || user.getMobile()==null){
+            return ResultUtil.fail();
+        }
+        User checkUser = userDao.selectByMobile(user.getMobile());
+        if(checkUser.getPassword().equals(user.getPassword())){
+            checkUser.setPassword(null);
+            return ResultUtil.success(checkUser);
+        }else{
+            return ResultUtil.pwdError();
+        }
+    }
 }

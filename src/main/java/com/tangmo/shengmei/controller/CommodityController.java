@@ -357,12 +357,12 @@ public class CommodityController extends BaseController {
      * @api {GET} /commodity/select 通过条件筛选商品
      * @apiGroup Commodity
      * @apiVersion 0.0.1
-     * @apiDescription 商品增加好评
+     * @apiDescription 通过条件筛选商品
      * @apiParam {CommodityDto} commodityDto 商品查询对象
      * @apiParamExample {json} 请求样例:
      *                   {
-     *                      city:"商品Id",
-     *                      district:"用户Id",
+     *                      city:"城市",
+     *                      district:"区域",
      *                      cdClass:"商品分类",
      *                      priceStart:"价格开始区间",
      *                      priceEnd:"价格结束区间",

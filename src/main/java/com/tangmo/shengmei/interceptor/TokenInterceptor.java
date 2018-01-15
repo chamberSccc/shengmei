@@ -1,7 +1,9 @@
 package com.tangmo.shengmei.interceptor;
 
+import com.tangmo.shengmei.dao.UserDao;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,10 +14,21 @@ import javax.servlet.http.HttpServletResponse;
  */
 
 public class TokenInterceptor extends HandlerInterceptorAdapter {
+    @Resource
+    private UserDao userDao;
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception{
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String ip = request.getRemoteAddr();
+        String token = request.getHeader("token");
+        Integer userId = Integer.valueOf(request.getHeader("userId"));
+        if(token==null || userId == null){
+            return false;
+        }
+        String checkToken = userDao.selectTokenByUserId(userId);
+        if(!checkToken.equals(token)){
+            return false;
+        }
         return true;
     }
 }

@@ -15,6 +15,12 @@ public class InterceptorConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new TokenInterceptor())
-                .addPathPatterns("/**");
+                .addPathPatterns("/**")
+                .excludePathPatterns("/commodity/list/**")
+                .excludePathPatterns("/commodity/comment/list/**}")
+                .excludePathPatterns("/commodity/quality/**")
+                .excludePathPatterns("/conv/list/**")
+                .excludePathPatterns("/conv/comment/list/**")
+                .excludePathPatterns("/commodity/select");
     }
 }

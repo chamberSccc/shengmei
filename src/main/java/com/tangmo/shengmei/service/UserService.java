@@ -139,4 +139,12 @@ public interface UserService {
      * @return
      */
     Result delMultiSellRecord(Integer[] srIds);
+
+    /**
+     * 登录
+     *
+     * @param user
+     * @return
+     */
+    Result login(User user);
 }

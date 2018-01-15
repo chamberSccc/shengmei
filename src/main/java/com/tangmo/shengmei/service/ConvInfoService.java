@@ -80,4 +80,14 @@ public interface ConvInfoService {
      * @return
      */
     Result getUserConvInfo(Integer userId, Integer start, Integer end);
+
+    /**
+     * 获取失效/未失效便民列表
+     *
+     * @param type
+     * @param start
+     * @param end
+     * @return
+     */
+    Result getConvInfoByExpire(Integer type, Integer start, Integer end);
 }

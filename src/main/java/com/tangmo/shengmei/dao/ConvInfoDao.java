@@ -101,4 +101,15 @@ public interface ConvInfoDao {
      */
     List<ConvInfo> selectByUserId(@Param("userId") Integer userId, @Param("start") Integer start,
                                   @Param("end") Integer end);
+
+    /**
+     * 获取失效,未失效便民列表
+     *
+     * @param type 是否失效
+     * @param start
+     * @param end
+     * @return
+     */
+    List<ConvInfo> selectByIsExpire(@Param("type") Integer type, @Param("start") Integer start,
+                                    @Param("end") Integer end);
 }

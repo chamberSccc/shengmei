@@ -94,7 +94,7 @@ public class AdminController extends BaseController{
 
     /**
      * @api {GET} /admin/commodity/{type}/{start}/{end} 获取指定类型商品
-     * @apiGroup Commodity
+     * @apiGroup Admin
      * @apiVersion 0.0.1
      * @apiParam {byte} type 商品类型
      * @apiParam {int} start 分页起始索引

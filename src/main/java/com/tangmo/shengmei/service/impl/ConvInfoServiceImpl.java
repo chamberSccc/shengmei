@@ -79,4 +79,9 @@ public class ConvInfoServiceImpl implements ConvInfoService {
     public Result getUserConvInfo(Integer userId, Integer start, Integer end) {
         return ResultUtil.success(convInfoDao.selectByUserId(userId, start, end));
     }
+
+    @Override
+    public Result getConvInfoByExpire(Integer type, Integer start, Integer end) {
+        return ResultUtil.success(convInfoDao.selectByIsExpire(type, start, end));
+    }
 }

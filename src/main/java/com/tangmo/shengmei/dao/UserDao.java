@@ -114,4 +114,12 @@ public interface UserDao {
      * @return
      */
     int insertFeedBack(FeedBack feedBack);
+
+    /**
+     * 查找用户token
+     *
+     * @param userId
+     * @return
+     */
+    String selectTokenByUserId(Integer userId);
 }

@@ -93,19 +93,19 @@ public class ConvInfoController extends BaseController {
     }
 
     /**
-     * @api {DELETE} /conv/{ciId} 删除指定便民信息
+     * @api {DELETE} /conv/del/{ciId} 删除指定便民信息
      * @apiGroup Convenient
      * @apiVersion 0.0.1
      * @apiParam {int} ciId 便民信息表主键
      * @apiDescription 删除指定便民信息
      * @apiParamExample {json} 请求样例：
-     *  /conv/12
+     *  /conv/del/12
      * @apiSuccess (200) {String} msg 信息
      * @apiSuccess (success) {DELETE} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
      * @apiSuccessExample {json} 返回样例:
      *                    {"code":"success"}
      */
-    @DeleteMapping("/{ciId}")
+    @DeleteMapping("/del/{ciId}")
     public Result removeAddress(@PathVariable Integer ciId){
         return convInfoService.deleteConvInfo(ciId);
     }
