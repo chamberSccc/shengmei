@@ -23,10 +23,11 @@ public class TokenInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String ip = request.getRemoteAddr();
         String token = request.getHeader("token");
-        Integer userId = Integer.valueOf(request.getHeader("userId"));
-        if(token==null || userId == null){
+        String user = request.getHeader("userId");
+        if(token==null || user == null){
             return false;
         }
+        Integer userId = Integer.valueOf(user);
         if(userService == null){
             BeanFactory factory = WebApplicationContextUtils.getRequiredWebApplicationContext(request.getServletContext());
             userService = (UserService) factory.getBean("userService");
