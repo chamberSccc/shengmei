@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserController extends BaseController{
 
     /**
-     * @api {POST}  增加用户
+     * @api {POST} /user/register 增加用户
      * @apiGroup User
      * @apiVersion 0.0.1
      * @apiDescription 增加用户
@@ -27,19 +27,22 @@ public class UserController extends BaseController{
      *                   {
      *                      username:"姓名",
      *                      mobile:"18710889234",
+     *                      password:"MD5加密后的密码",
+     *                      province:"省",
+     *                      city:"市"
      *                   }
      * @apiSuccess (success) {POST} code success:请求成功； fail:请求失败；offline：掉线；registered：手机号已被注册;
      * @apiSuccess (success) {POST} data 返回数据
      * @apiSuccessExample {json} 返回样例:
      *                    {"code":"success"}
      */
-    @PostMapping("")
+    @PostMapping("/register")
     public Result addUserInfo(@RequestBody User user){
         return userService.addUser(user);
     }
 
     /**
-     * @api {POST}  用户登录
+     * @api {POST} /user/login 用户登录
      * @apiGroup User
      * @apiVersion 0.0.1
      * @apiDescription 用户登录

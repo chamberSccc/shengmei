@@ -148,5 +148,10 @@ public interface UserService {
      */
     Result login(User user);
 
+    /**
+     * 查询用户token
+     * @param userId
+     * @return
+     */
     String selectToken(Integer userId);
 }
