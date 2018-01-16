@@ -41,6 +41,10 @@
         SELECT ifnull(max(value),0) FROM goods_type_item WHERE gt_id = #{gtId}
     </select>
 
+    <insert id="insertAccessCount">
+        INSERT INTO access_count (ip) VALUES (#{ip})
+    </insert>
+
 
 
 </mapper>

@@ -42,7 +42,7 @@ public class CommonController extends BaseController{
     }
 
     /**
-     * @api {GET} /common/goods/class/{type}} 获取商品分类列表
+     * @api {GET} /common/goods/class/{type} 获取商品分类列表
      * @apiGroup Common
      * @apiVersion 0.0.1
      * @apiDescription 获取商品分类列表

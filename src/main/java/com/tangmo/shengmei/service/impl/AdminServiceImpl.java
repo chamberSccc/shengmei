@@ -82,4 +82,9 @@ public class AdminServiceImpl implements AdminService {
     public Result searchGoodsType() {
         return ResultUtil.success(commonDao.selectGoodsType());
     }
+
+    @Override
+    public void addAccessCount(String ip) {
+
+    }
 }

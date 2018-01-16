@@ -61,5 +61,13 @@ public interface CommonDao {
      */
     int selectMaxItemValue(Byte gtId);
 
+    /**
+     * 增加日活量
+     *
+     * @param ip
+     * @return
+     */
+    int insertAccessCount(String ip);
+
 
 }

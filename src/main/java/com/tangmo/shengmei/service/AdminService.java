@@ -66,4 +66,11 @@ public interface AdminService {
      * @return
      */
     Result searchGoodsType();
+
+    /**
+     * 增加日活量
+     *
+     * @param ip
+     */
+    void addAccessCount(String ip);
 }
