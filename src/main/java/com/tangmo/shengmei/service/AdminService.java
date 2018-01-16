@@ -51,4 +51,19 @@ public interface AdminService {
      * @return
      */
     Result delGoodsTypeItem(Integer id);
+
+    /**
+     * 查询商品分类(通过类型查询)
+     *
+     * @param gtId
+     * @return
+     */
+    Result searchGoodsTypeItem(Byte gtId);
+
+    /**
+     * 查询商品类型
+     *
+     * @return
+     */
+    Result searchGoodsType();
 }

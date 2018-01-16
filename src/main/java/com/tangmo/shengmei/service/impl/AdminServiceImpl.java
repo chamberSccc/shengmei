@@ -1,6 +1,7 @@
 package com.tangmo.shengmei.service.impl;
 
 import com.tangmo.shengmei.dao.AdminDao;
+import com.tangmo.shengmei.dao.CommonDao;
 import com.tangmo.shengmei.entity.AdminInfo;
 import com.tangmo.shengmei.entity.GoodsTypeItem;
 import com.tangmo.shengmei.service.AdminService;
@@ -20,6 +21,8 @@ import javax.annotation.Resource;
 public class AdminServiceImpl implements AdminService {
     @Resource
     private AdminDao adminDao;
+    @Resource
+    private CommonDao commonDao;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -44,20 +47,38 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Result addGoodsTypeItem(GoodsTypeItem goodsTypeItem) {
-        if(goodsTypeItem.getGtId()==null || goodsTypeItem.getValue()==null){
+        if(goodsTypeItem.getGtId()==null || goodsTypeItem.getValue()==null || goodsTypeItem.getName()==null){
             return ResultUtil.fail();
         }
-        return null;
+        Integer maxItemValue = commonDao.selectMaxItemValue(goodsTypeItem.getGtId());
+        goodsTypeItem.setValue((byte) (maxItemValue+1));
+        return ResultUtil.success();
     }
 
     @Override
     public Result changeGoodsTypeItem(GoodsTypeItem goodsTypeItem) {
+        if(goodsTypeItem.getId() == null || goodsTypeItem.getName() == null){
+            return ResultUtil.fail();
+        }
+        commonDao.updateGoodsTypeItem(goodsTypeItem);
         return null;
     }
 
     @Override
     public Result delGoodsTypeItem(Integer id) {
-        return null;
+        commonDao.deleteGoodsTypeItem(id);
+        return ResultUtil.success();
+    }
+
+    @Override
+    public Result searchGoodsTypeItem(Byte gtId) {
+        return ResultUtil.success(commonDao.selectItemByType(gtId));
+    }
+
+    @Override
+    public Result searchGoodsType() {
+        return ResultUtil.success(commonDao.selectGoodsType());
     }
 }

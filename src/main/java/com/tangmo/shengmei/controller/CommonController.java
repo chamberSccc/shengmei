@@ -1,7 +1,9 @@
 package com.tangmo.shengmei.controller;
 
+import com.tangmo.shengmei.controller.base.BaseController;
 import com.tangmo.shengmei.utility.code.Result;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/common")
-public class CommonController {
+public class CommonController extends BaseController{
 
     //获取商品类型列表
     /**
@@ -36,7 +38,7 @@ public class CommonController {
      */
     @GetMapping("/goods/type")
     public Result getGoodsType(){
-        return null;
+        return adminService.searchGoodsType();
     }
 
     /**
@@ -59,7 +61,7 @@ public class CommonController {
      *                     }
      */
     @GetMapping("/car/class/{type}")
-    public Result getCarClass(){
-        return null;
+    public Result getCarClass(@PathVariable Byte type){
+        return adminService.searchGoodsTypeItem(type);
     }
 }

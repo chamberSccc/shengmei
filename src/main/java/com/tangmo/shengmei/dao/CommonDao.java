@@ -59,7 +59,7 @@ public interface CommonDao {
      * @param gtId
      * @return
      */
-    int selectMaxItemValue(Integer gtId);
+    int selectMaxItemValue(Byte gtId);
 
 
 }
