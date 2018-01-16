@@ -169,9 +169,27 @@ public class UserController extends BaseController{
      *                    {"code":"success",
      *                     "data":{}
      */
-    @GetMapping("/mobile/{userId}")
+    @GetMapping("/mobile/check/{userId}/{mobile}")
     public Result checkMobile(@PathVariable String mobile,@PathVariable Integer userId){
         return userService.checkMobile(userId,mobile);
+    }
+
+    /**
+     * @api {GET} /mobile/auth/{mobile} 获取手机验证码
+     * @apiGroup User
+     * @apiVersion 0.0.1
+     * @apiDescription 获取手机验证码
+     * @apiParamExample {json} 请求样例：
+     *  /mobile/auth/18710829356
+     * @apiSuccess (200) {String} msg 信息
+     * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success",
+     *                     "data":{}
+     */
+    @GetMapping("/mobile/auth/{mobile}")
+    public Result getAuthCode(@PathVariable String mobile){
+        return userService.checkMobile(null,null);
     }
 
     /**
