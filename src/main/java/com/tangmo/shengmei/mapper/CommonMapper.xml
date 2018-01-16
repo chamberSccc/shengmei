@@ -25,7 +25,7 @@
 
     <insert id="insertGoodsTypeItem" parameterType="com.tangmo.shengmei.entity.GoodsTypeItem">
         INSERT INTO goods_type_item (name,value,gt_id)
-        VALUES (#{name},#{value},#{gtId]})
+        VALUES (#{name},#{value},#{gtId})
     </insert>
 
     <update id="updateGoodsTypeItem">

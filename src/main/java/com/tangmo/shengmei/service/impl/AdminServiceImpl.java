@@ -49,11 +49,12 @@ public class AdminServiceImpl implements AdminService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Result addGoodsTypeItem(GoodsTypeItem goodsTypeItem) {
-        if(goodsTypeItem.getGtId()==null || goodsTypeItem.getValue()==null || goodsTypeItem.getName()==null){
+        if(goodsTypeItem.getGtId()==null || goodsTypeItem.getName()==null){
             return ResultUtil.fail();
         }
         Integer maxItemValue = commonDao.selectMaxItemValue(goodsTypeItem.getGtId());
         goodsTypeItem.setValue((byte) (maxItemValue+1));
+        commonDao.insertGoodsTypeItem(goodsTypeItem);
         return ResultUtil.success();
     }
 
@@ -63,7 +64,7 @@ public class AdminServiceImpl implements AdminService {
             return ResultUtil.fail();
         }
         commonDao.updateGoodsTypeItem(goodsTypeItem);
-        return null;
+        return ResultUtil.success();
     }
 
     @Override

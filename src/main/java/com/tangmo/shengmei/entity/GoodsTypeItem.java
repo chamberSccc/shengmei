@@ -12,6 +12,6 @@ public class GoodsTypeItem {
 
     private Integer id;
     private Byte gtId;
-    private Integer name;
+    private String name;
     private Byte value;
 }

@@ -181,7 +181,7 @@ public class AdminController extends BaseController{
      * @apiParamExample {json} 请求样例:
      *                   {
      *                      gtId:"商品类型Id",
-     *                      name:"名称"
+     *                      name:"名称",
      *                   }
      * @apiSuccess (success) {POST} code success:请求成功； fail:请求失败；pwd_error：密码错误;
      * @apiSuccess (success) {POST} data 返回数据
@@ -190,14 +190,14 @@ public class AdminController extends BaseController{
      */
     @PostMapping("/goods/type/item")
     public Result addGoodsTypeItem(@RequestBody GoodsTypeItem goodsTypeItem){
-        return null;
+        return adminService.addGoodsTypeItem(goodsTypeItem);
     }
 
     /**
-     * @api {PUT} /admin/goods/type/item 增加商品分类
+     * @api {PUT} /admin/goods/type/item 修改商品分类
      * @apiGroup Admin
      * @apiVersion 0.0.1
-     * @apiDescription 增加商品分类
+     * @apiDescription 修改商品分类
      * @apiParam {GoodsTypeItem} goodsTypeItem
      * @apiParamExample {json} 请求样例:
      *                   {
@@ -211,7 +211,7 @@ public class AdminController extends BaseController{
      */
     @PutMapping("/goods/type/item")
     public Result changeGoodsTypeItem(@RequestBody GoodsTypeItem goodsTypeItem){
-        return null;
+        return adminService.changeGoodsTypeItem(goodsTypeItem);
     }
 
     /**
@@ -229,6 +229,6 @@ public class AdminController extends BaseController{
      */
     @DeleteMapping("/goods/type/item/{id}")
     public Result delGoodsTypeItem(@PathVariable Integer id){
-        return null;
+        return adminService.delGoodsTypeItem(id);
     }
 }
