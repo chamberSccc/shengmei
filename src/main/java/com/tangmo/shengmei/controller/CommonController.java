@@ -34,18 +34,18 @@ public class CommonController {
      *                     ...]
      *                     }
      */
-    @GetMapping("/car/type")
-    public Result getCarType(){
+    @GetMapping("/goods/type")
+    public Result getGoodsType(){
         return null;
     }
 
     /**
-     * @api {GET} /common/goods/class/{type}} 获取商品分类列表
+     * @api {GET} /common/car/class/{type}} 获取商品分类列表
      * @apiGroup Common
      * @apiVersion 0.0.1
      * @apiDescription 获取商品分类列表
      * @apiParamExample {json} 请求样例：
-     *  /common/goods/class/1
+     *  /common/car/class/1
      * @apiSuccess (200) {String} msg 信息
      * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
      * @apiSuccessExample {json} 返回样例:
@@ -58,7 +58,7 @@ public class CommonController {
      *                     ...]
      *                     }
      */
-    @GetMapping("/goods/class/{type}")
+    @GetMapping("/car/class/{type}")
     public Result getCarClass(){
         return null;
     }
