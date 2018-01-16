@@ -131,7 +131,7 @@ public class AdminController extends BaseController{
     }
 
     /**
-     * @api {POST}  增加管理员用户
+     * @api {POST}  /admin 增加管理员用户
      * @apiGroup Admin
      * @apiVersion 0.0.1
      * @apiDescription 增加管理员用户
@@ -152,7 +152,7 @@ public class AdminController extends BaseController{
     }
 
     /**
-     * @api {POST}  管理员登录
+     * @api {POST} /admin/login 管理员登录
      * @apiGroup Admin
      * @apiVersion 0.0.1
      * @apiDescription 管理员登录
@@ -173,7 +173,7 @@ public class AdminController extends BaseController{
     }
 
     /**
-     * @api {POST}  增加商品分类
+     * @api {POST} /admin/goods/type/item 增加商品分类
      * @apiGroup Admin
      * @apiVersion 0.0.1
      * @apiDescription 增加商品分类
@@ -194,7 +194,7 @@ public class AdminController extends BaseController{
     }
 
     /**
-     * @api {PUT}  增加商品分类
+     * @api {PUT} /admin/goods/type/item 增加商品分类
      * @apiGroup Admin
      * @apiVersion 0.0.1
      * @apiDescription 增加商品分类
@@ -216,7 +216,7 @@ public class AdminController extends BaseController{
 
     /**
      * @api {DELETE} /admin/goods/type/item/{id} 删除商品分类
-     * @apiGroup Commodity
+     * @apiGroup Admin
      * @apiVersion 0.0.1
      * @apiParam {int} id 商品分类值主键
      * @apiDescription 删除商品分类
