@@ -85,6 +85,6 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public void addAccessCount(String ip) {
-
+        commonDao.insertAccessCount(ip);
     }
 }
