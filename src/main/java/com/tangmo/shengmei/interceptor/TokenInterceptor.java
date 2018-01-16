@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * @author boge
  * @date 18/1/15
- * @description 检验请求合法性
+ * @description 检验请求合法性.
  */
 
 public class TokenInterceptor extends HandlerInterceptorAdapter {
