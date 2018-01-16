@@ -1,7 +1,7 @@
 package com.tangmo.shengmei.dao;
 
 
-
+import com.tangmo.shengmei.entity.AdminInfo;
 import com.tangmo.shengmei.entity.ReportDto;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -17,5 +17,29 @@ import java.util.Objects;
 @Mapper
 public interface AdminDao {
 
-    List<Map<String,Objects>> selectUserReport(ReportDto reportDto);
+    /**
+     * y用户消费报表
+     *
+     * @param reportDto
+     * @return
+     */
+    List<Map<String, Objects>> selectUserReport(ReportDto reportDto);
+
+    /**
+     * 增加管理员
+     *
+     * @param adminInfo
+     * @return
+     */
+    int insertAdmin(AdminInfo adminInfo);
+
+    /**
+     * 通过账户查询管理员信息
+     *
+     * @param account
+     * @return
+     */
+    AdminInfo selectByAccount(String account);
+
+
 }

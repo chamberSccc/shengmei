@@ -2,6 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.tangmo.shengmei.dao.AdminDao">
 
+    <resultMap id="TypeResultMap" type="com.tangmo.shengmei.entity.GoodsType" >
+        <id column="admin_id" property="adminId" jdbcType="INTEGER"/>
+        <result column="account" property="account" jdbcType="VARCHAR"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+    </resultMap>
+
     <select id="selectUserReport" resultType="java.util.Map">
         select ui.user_id,ui.mobile,ui.balance,br.expend,sr.income,wi.withdraw from user_info ui
         left join
@@ -25,6 +31,14 @@
         </if>
         ORDER BY ui.user_id
         <if test="start != null">limit #{start},#{end} </if>
+    </select>
+
+    <insert id="insertAdmin" parameterType="com.tangmo.shengmei.entity.AdminInfo">
+        insert into admin_info (account,password) VALUES (#{account},#{password})
+    </insert>
+
+    <select id="selectByAccount" resultMap="AdminResultMap">
+        SELECT password FROM admin_info WHERE account = #{account}
     </select>
 
 </mapper>

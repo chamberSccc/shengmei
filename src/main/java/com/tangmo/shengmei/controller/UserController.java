@@ -39,7 +39,7 @@ public class UserController extends BaseController{
     }
 
     /**
-     * @api {POST}  d用户登录
+     * @api {POST}  用户登录
      * @apiGroup User
      * @apiVersion 0.0.1
      * @apiDescription 用户登录

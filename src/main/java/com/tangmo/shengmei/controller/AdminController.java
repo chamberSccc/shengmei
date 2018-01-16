@@ -2,13 +2,11 @@ package com.tangmo.shengmei.controller;
 
 import com.tangmo.shengmei.controller.base.BaseController;
 import com.tangmo.shengmei.dao.AdminDao;
+import com.tangmo.shengmei.entity.AdminInfo;
 import com.tangmo.shengmei.entity.ReportDto;
 import com.tangmo.shengmei.utility.code.Result;
 import com.tangmo.shengmei.utility.code.ResultUtil;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -129,5 +127,47 @@ public class AdminController extends BaseController{
     @GetMapping("/commodity/{type}/{start}/{end}")
     public Result getCommodityList(@PathVariable Integer start, @PathVariable Integer end,@PathVariable Byte type){
         return commodityService.searchCdList(type,start,end);
+    }
+
+    /**
+     * @api {POST}  增加管理员用户
+     * @apiGroup Admin
+     * @apiVersion 0.0.1
+     * @apiDescription 增加管理员用户
+     * @apiParam {AdminInfo} adminInfo 管理员用户对象
+     * @apiParamExample {json} 请求样例:
+     *                   {
+     *                      account:"账户名",
+     *                      password:"密码"
+     *                   }
+     * @apiSuccess (success) {POST} code success:请求成功； fail:请求失败；offline：掉线；registered：手机号已被注册;
+     * @apiSuccess (success) {POST} data 返回数据
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success"}
+     */
+    @PostMapping("")
+    public Result addAdmin(@RequestBody AdminInfo adminInfo){
+        return adminService.addAdmin(adminInfo);
+    }
+
+    /**
+     * @api {POST}  管理员登录
+     * @apiGroup Admin
+     * @apiVersion 0.0.1
+     * @apiDescription 管理员登录
+     * @apiParam {AdminInfo} adminInfo 管理员用户对象
+     * @apiParamExample {json} 请求样例:
+     *                   {
+     *                      password:"MD5加密后的密码",
+     *                      account:"18710889234",
+     *                   }
+     * @apiSuccess (success) {POST} code success:请求成功； fail:请求失败；pwd_error：密码错误;
+     * @apiSuccess (success) {POST} data 返回数据
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success"}
+     */
+    @PostMapping("/login")
+    public Result adminLogin(@RequestBody AdminInfo adminInfo){
+        return adminService.adminLogin(adminInfo);
     }
 }
