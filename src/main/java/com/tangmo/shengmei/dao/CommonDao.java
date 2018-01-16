@@ -56,9 +56,10 @@ public interface CommonDao {
     /**
      * 获取商品分类item最大value
      *
+     * @param gtId
      * @return
      */
-    int selectMaxItemValue();
+    int selectMaxItemValue(Integer gtId);
 
 
 }

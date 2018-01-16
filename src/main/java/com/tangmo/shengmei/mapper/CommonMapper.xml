@@ -19,6 +19,28 @@
         select id,name,value FROM goods_type
     </select>
 
+    <select id="selectItemByType" resultMap="TypeItemResultMap">
+        SELECT id,gt_id,name,value FROM goods_type_item WHERE gt_id = #{type}
+    </select>
+
+    <insert id="insertGoodsTypeItem" parameterType="com.tangmo.shengmei.entity.GoodsTypeItem">
+        INSERT INTO goods_type_item (name,value,gt_id)
+        VALUES (#{name},#{value},#{gtId]})
+    </insert>
+
+    <update id="updateGoodsTypeItem">
+        UPDATE goods_type_item SET name = #{name}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteGoodsTypeItem">
+        DELETE FROM goods_type_item WHERE id = #{id}
+    </delete>
+
+    <select id="selectMaxItemValue" resultType="java.lang.Integer">
+        SELECT ifnull(max(value),0) FROM goods_type_item WHERE gt_id = #{gtId}
+    </select>
+
 
 
 </mapper>
