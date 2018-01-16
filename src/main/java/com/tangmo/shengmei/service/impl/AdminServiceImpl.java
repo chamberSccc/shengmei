@@ -5,6 +5,7 @@ import com.tangmo.shengmei.entity.AdminInfo;
 import com.tangmo.shengmei.service.AdminService;
 import com.tangmo.shengmei.utility.code.Result;
 import com.tangmo.shengmei.utility.code.ResultUtil;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
@@ -14,7 +15,7 @@ import javax.annotation.Resource;
  * @date 18/1/11
  * @description 管理员服务实现类
  */
-
+@Service("adminService")
 public class AdminServiceImpl implements AdminService {
     @Resource
     private AdminDao adminDao;
