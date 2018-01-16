@@ -3,6 +3,7 @@ package com.tangmo.shengmei.controller;
 import com.tangmo.shengmei.controller.base.BaseController;
 import com.tangmo.shengmei.dao.AdminDao;
 import com.tangmo.shengmei.entity.AdminInfo;
+import com.tangmo.shengmei.entity.GoodsTypeItem;
 import com.tangmo.shengmei.entity.ReportDto;
 import com.tangmo.shengmei.utility.code.Result;
 import com.tangmo.shengmei.utility.code.ResultUtil;
@@ -169,5 +170,65 @@ public class AdminController extends BaseController{
     @PostMapping("/login")
     public Result adminLogin(@RequestBody AdminInfo adminInfo){
         return adminService.adminLogin(adminInfo);
+    }
+
+    /**
+     * @api {POST}  增加商品分类
+     * @apiGroup Admin
+     * @apiVersion 0.0.1
+     * @apiDescription 增加商品分类
+     * @apiParam {GoodsTypeItem} goodsTypeItem
+     * @apiParamExample {json} 请求样例:
+     *                   {
+     *                      gtId:"商品类型Id",
+     *                      name:"名称"
+     *                   }
+     * @apiSuccess (success) {POST} code success:请求成功； fail:请求失败；pwd_error：密码错误;
+     * @apiSuccess (success) {POST} data 返回数据
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success"}
+     */
+    @PostMapping("/goods/type/item")
+    public Result addGoodsTypeItem(@RequestBody GoodsTypeItem goodsTypeItem){
+        return null;
+    }
+
+    /**
+     * @api {PUT}  增加商品分类
+     * @apiGroup Admin
+     * @apiVersion 0.0.1
+     * @apiDescription 增加商品分类
+     * @apiParam {GoodsTypeItem} goodsTypeItem
+     * @apiParamExample {json} 请求样例:
+     *                   {
+     *                      id:"本条记录主键",
+     *                      name:"名称"
+     *                   }
+     * @apiSuccess (success) {PUT} code success:请求成功； fail:请求失败；pwd_error：密码错误;
+     * @apiSuccess (success) {PUT} data 返回数据
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success"}
+     */
+    @PutMapping("/goods/type/item")
+    public Result changeGoodsTypeItem(@RequestBody GoodsTypeItem goodsTypeItem){
+        return null;
+    }
+
+    /**
+     * @api {DELETE} /admin/goods/type/item/{id} 删除商品分类
+     * @apiGroup Commodity
+     * @apiVersion 0.0.1
+     * @apiParam {int} id 商品分类值主键
+     * @apiDescription 删除商品分类
+     * @apiParamExample {json} 请求样例：
+     *  /admin/goods/type/item/1
+     * @apiSuccess (200) {String} msg 信息
+     * @apiSuccess (success) {DELETE} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success"}
+     */
+    @DeleteMapping("/goods/type/item/{id}")
+    public Result delGoodsTypeItem(@PathVariable Integer id){
+        return null;
     }
 }

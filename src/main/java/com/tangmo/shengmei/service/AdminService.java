@@ -1,6 +1,7 @@
 package com.tangmo.shengmei.service;
 
 import com.tangmo.shengmei.entity.AdminInfo;
+import com.tangmo.shengmei.entity.GoodsTypeItem;
 import com.tangmo.shengmei.utility.code.Result;
 
 /**
@@ -26,4 +27,28 @@ public interface AdminService {
      * @return
      */
     Result adminLogin(AdminInfo adminInfo);
+
+    /**
+     * 增加商品分类
+     *
+     * @param goodsTypeItem
+     * @return
+     */
+    Result addGoodsTypeItem(GoodsTypeItem goodsTypeItem);
+
+    /**
+     * 修改商品分类
+     *
+     * @param goodsTypeItem
+     * @return
+     */
+    Result changeGoodsTypeItem(GoodsTypeItem goodsTypeItem);
+
+    /**
+     * 删除商品分类
+     *
+     * @param id
+     * @return
+     */
+    Result delGoodsTypeItem(Integer id);
 }

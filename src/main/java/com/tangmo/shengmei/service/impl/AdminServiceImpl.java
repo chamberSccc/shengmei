@@ -2,6 +2,7 @@ package com.tangmo.shengmei.service.impl;
 
 import com.tangmo.shengmei.dao.AdminDao;
 import com.tangmo.shengmei.entity.AdminInfo;
+import com.tangmo.shengmei.entity.GoodsTypeItem;
 import com.tangmo.shengmei.service.AdminService;
 import com.tangmo.shengmei.utility.code.Result;
 import com.tangmo.shengmei.utility.code.ResultUtil;
@@ -40,5 +41,23 @@ public class AdminServiceImpl implements AdminService {
             return ResultUtil.pwdError();
         }
         return ResultUtil.success();
+    }
+
+    @Override
+    public Result addGoodsTypeItem(GoodsTypeItem goodsTypeItem) {
+        if(goodsTypeItem.getGtId()==null || goodsTypeItem.getValue()==null){
+            return ResultUtil.fail();
+        }
+        return null;
+    }
+
+    @Override
+    public Result changeGoodsTypeItem(GoodsTypeItem goodsTypeItem) {
+        return null;
+    }
+
+    @Override
+    public Result delGoodsTypeItem(Integer id) {
+        return null;
     }
 }
