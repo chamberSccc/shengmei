@@ -151,4 +151,14 @@ public class CommodityServiceImpl implements CommodityService {
         commodityDao.updateCdStar(cdId);
         return ResultUtil.success();
     }
+
+    @Override
+    public Result searchTypeQualityList(Byte type, Integer start, Integer end) {
+        return ResultUtil.success(commodityDao.selectQualityListByType(type, start, end));
+    }
+
+    @Override
+    public Result searchTypeStarList(Byte type, Integer start, Integer end) {
+        return ResultUtil.success(commodityDao.selectStarListByType(type, start, end));
+    }
 }

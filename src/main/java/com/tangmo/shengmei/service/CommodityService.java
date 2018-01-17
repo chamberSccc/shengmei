@@ -131,9 +131,29 @@ public interface CommodityService {
     /**
      * 商品好评加1
      *
-     * @param cdId 商品Id
+     * @param cdId   商品Id
      * @param userId 用户Id
      * @return
      */
     Result addCdStar(Integer cdId, Integer userId);
+
+    /**
+     * 获取指定类型的精品列表
+     *
+     * @param type
+     * @param start
+     * @param end
+     * @return
+     */
+    Result searchTypeQualityList(Byte type, Integer start, Integer end);
+
+    /**
+     * 获取指定类型的热门排行榜
+     *
+     * @param type
+     * @param start
+     * @param end
+     * @return
+     */
+    Result searchTypeStarList(Byte type, Integer start, Integer end);
 }

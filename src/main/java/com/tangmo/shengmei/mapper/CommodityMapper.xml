@@ -265,4 +265,18 @@
     <update id="updateCdStar">
         UPDATE commodity SET star = star+1 WHERE cd_id = #{cdId}
     </update>
+
+    <select id="selectQualityListByType" resultMap="BaseResultMap">
+        SELECT cd_id,img_id,title,content,cd_type,cd_count,price_pre,
+        price_now,createtime,province,city,district,user_id
+        FROM commodity WHERE is_quality = 1 AND is_sell = 0
+        AND cd_type = #{cdType} ORDER BY updatetime DESC  limit #{start},#{end}
+    </select>
+
+    <select id="selectStarListByType" resultMap="BaseResultMap">
+        SELECT cd_id,img_id,title,content,cd_type,cd_count,price_pre,
+        price_now,createtime,province,city,district,user_id
+        FROM commodity WHERE is_sell = 0
+        AND cd_type = #{cdType} ORDER BY star DESC limit #{start},#{end}
+    </select>
 </mapper>

@@ -394,4 +394,67 @@ public class CommodityController extends BaseController {
     public Result getByCondition(CommodityDto commodityDto){
         return commodityService.selectByCondition(commodityDto);
     }
+
+
+    /**
+     * @api {GET} /commodity/quality/{type}/{start}/{end} 指定类型的精品列表
+     * @apiGroup Commodity
+     * @apiVersion 0.0.1
+     * @apiParam {int} start 分页起始索引
+     * @apiParam {int} end 查询列表长度
+     * @apiDescription 指定类型的精品列表
+     * @apiParamExample {json} 请求样例：
+     *  /commodity/quality/1/1/10
+     * @apiSuccess (200) {String} msg 信息
+     * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success",
+     *                     "data":{
+     *                     [{
+     *                        cdId: 1,
+     *                        title: "商品信息标题1",
+     *                        imgId:"商品图片",
+     *                        content: "商品信息内容1",
+     *                        pricePre:"商品原价1",
+     *                        priceNow:"商品现价1",
+     *                        cdType:"商品类型1"
+     *                      },
+     *                     {...}]
+     *                     }
+     */
+    @GetMapping("/quality/{type}/{start}/{end}")
+    public Result getTypeQualityList(@PathVariable Byte type,@PathVariable Integer start, @PathVariable Integer end){
+        return commodityService.searchTypeQualityList(type,start,end);
+    }
+
+    /**
+     * @api {GET} /commodity/star/{type}/{start}/{end} 指定类型的热门列表
+     * @apiGroup Commodity
+     * @apiVersion 0.0.1
+     * @apiParam {int} start 分页起始索引
+     * @apiParam {int} end 查询列表长度
+     * @apiDescription 指定类型的热门列表
+     * @apiParamExample {json} 请求样例：
+     *  /commodity/star/1/1/10
+     * @apiSuccess (200) {String} msg 信息
+     * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success",
+     *                     "data":{
+     *                     [{
+     *                        cdId: 1,
+     *                        title: "商品信息标题1",
+     *                        imgId:"商品图片",
+     *                        content: "商品信息内容1",
+     *                        pricePre:"商品原价1",
+     *                        priceNow:"商品现价1",
+     *                        cdType:"商品类型1"
+     *                      },
+     *                     {...}]
+     *                     }
+     */
+    @GetMapping("/star/{type}/{start}/{end}")
+    public Result getTypeStarList(@PathVariable Byte type,@PathVariable Integer start, @PathVariable Integer end){
+        return commodityService.searchTypeStarList(type,start,end);
+    }
 }

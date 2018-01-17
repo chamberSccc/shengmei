@@ -140,4 +140,24 @@ public interface CommodityDao {
      * @return
      */
     int deleteMultiViewRecord(Integer[] vrIds);
+
+    /**
+     * 获取指定类型的精品列表
+     *
+     * @param cdType
+     * @param start
+     * @param end
+     * @return
+     */
+    List<Commodity> selectQualityListByType(@Param("cdType") Byte cdType, @Param("start") Integer start, @Param("end") Integer end);
+
+    /**
+     * 获取指定类型的热门排行榜
+     *
+     * @param cdType
+     * @param start
+     * @param end
+     * @return
+     */
+    List<Commodity> selectStarListByType(@Param("cdType") Byte cdType, @Param("start") Integer start, @Param("end") Integer end);
 }
