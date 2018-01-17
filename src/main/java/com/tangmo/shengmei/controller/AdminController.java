@@ -231,4 +231,37 @@ public class AdminController extends BaseController{
     public Result delGoodsTypeItem(@PathVariable Integer id){
         return adminService.delGoodsTypeItem(id);
     }
+
+    /**
+     * @api {GET} /admin/car/illegal/{start}/{end} 获取违章信息列表
+     * @apiGroup Admin
+     * @apiVersion 0.0.1
+     * @apiParam {int} start 分页起始索引
+     * @apiParam {int} end 查询列表长度
+     * @apiDescription 获取违章信息列表
+     * @apiParamExample {json} 请求样例：
+     *  /admin/car/illegal/0/10
+     * @apiSuccess (200) {String} msg 信息
+     * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success",
+     *                     "data":{
+     *                     [{
+     *                        id: 主键,
+     *                        carId: "车辆Id",
+     *                        carNum:"车牌号",
+     *                        carProvince:"车辆省份",
+     *                        userId:"用户id",
+     *                        username: "用户姓名",
+     *                        totalPrice:"罚款总数",
+     *                        totalScore:"总分数",
+     *                        number:"违章编号",
+     *                        handleFee:"代缴费用",
+     *                        canHandle:"是否可以代缴"}]
+     *                     }
+     */
+    @GetMapping("/illegal/{start}/{end}")
+    public Result getIllegalInfo(@PathVariable Integer start,@PathVariable Integer end){
+        return illegalService.getIllegalList(start, end);
+    }
 }

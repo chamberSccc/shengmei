@@ -2,6 +2,9 @@ package com.tangmo.shengmei.dao;
 
 import com.tangmo.shengmei.entity.IllegalInfo;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * @author boge
@@ -22,11 +25,10 @@ public interface IllegalDao {
     /**
      * 根据用户信息和车辆信息查询违章信息
      *
-     * @param userId 用户Id
-     * @param carId 车辆Id
+     * @param carId
      * @return
      */
-    IllegalInfo selectByUserAndCar(Integer userId, Integer carId);
+    int selectByCarId(Integer carId);
 
     /**
      * 更新违章信息
@@ -35,4 +37,13 @@ public interface IllegalDao {
      * @return
      */
     int updateSelective(IllegalInfo illegalInfo);
+
+    /**
+     * 查询违章列表
+     *
+     * @param start
+     * @param end
+     * @return
+     */
+    List<IllegalInfo> selectListInfo(@Param("start") Integer start, @Param("end") Integer end);
 }

@@ -23,4 +23,12 @@ public interface IllegalService {
      * @return
      */
     Result changeIllegalInfo(IllegalInfo illegalInfo);
+
+    /**
+     * 获取违章信息列表
+     * @param start
+     * @param end
+     * @return
+     */
+    Result getIllegalList(Integer start,Integer end);
 }

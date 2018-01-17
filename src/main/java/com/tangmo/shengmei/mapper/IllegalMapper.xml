@@ -6,6 +6,21 @@
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="user_id" property="userId" jdbcType="INTEGER"/>
         <result column="car_id" property="carId" jdbcType="INTEGER"/>
+        <result column="car_num" property="carNum" jdbcType="VARCHAR"/>
+        <result column="car_province" property="carProvince" jdbcType="VARCHAR"/>
+        <result column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="total_price" property="totalPrice" jdbcType="INTEGER"/>
+        <result column="total_score" property="totalScore" jdbcType="INTEGER"/>
+        <result column="number" property="number" jdbcType="VARCHAR"/>
+        <result column="handle_fee" property="handleFee" jdbcType="INTEGER"/>
+        <result column="can_handle" property="canHandle" jdbcType="INTEGER"/>
+        <result column="createtime" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <resultMap id="ValidResultMap" type="com.tangmo.shengmei.entity.IllegalInfo" >
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="car_id" property="carId" jdbcType="INTEGER"/>
     </resultMap>
 
     <insert id="insertSelective" parameterType="com.tangmo.shengmei.entity.IllegalInfo">
@@ -13,8 +28,8 @@
          VALUES (#{userId},#{carId},#{totalPrice},#{totalScore},#{number},#{canHandle},#{handleFee})
     </insert>
 
-    <select id="selectByUserAndCar" resultMap="AdminResultMap">
-        SELECT id,user_id,car_id FROM illegal_info WHERE user_id = #{userId} and car_id = #{carId}
+    <select id="selectByUserAndCar" resultMap="ValidResultMap">
+        SELECT id,user_id,car_id FROM illegal_info WHERE car_id = #{carId}
     </select>
 
     <update id="updateSelective" parameterType="com.tangmo.shengmei.entity.IllegalInfo">
@@ -24,10 +39,18 @@
                 total_price = #{totalPrice},
             </if>
             <if test="totalScore != null">
-                content = #{totalScore},
+                total_score = #{totalScore},
             </if>
         </set>
         WHERE id = #{id,jdbcType=INTEGER}
     </update>
+
+    <select id="selectListInfo" resultMap="BaseResultMap">
+        SELECT ii.id,ii.user_id,ii.car_id,ii.total_price,ii.total_score,
+        ii.handle_fee,ii.number,ii.createtime,ui.username,uc.car_num,uc.car_province
+        FROM illegal_info ii LEFT JOIN user_info ui  ON ii.user_id = ui.user_id
+        LEFT JOIN user_car uc ON ii.car_id = uc.uc_id
+        limit #{start},#{end}
+    </select>
 
 </mapper>

@@ -39,6 +39,8 @@ public class BaseController {
     protected ImgFileService imgFileService;
     @Resource
     protected AdminService adminService;
+    @Resource
+    protected IllegalService illegalService;
 
     /**
      * 得到request对象

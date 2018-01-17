@@ -76,6 +76,15 @@
                 <if test="cdSize != null">
                     cd_size,
                 </if>
+                <if test="province != null">
+                    province,
+                </if>
+                <if test="city != null">
+                    city,
+                </if>
+                <if test="district != null">
+                    district,
+                </if>
             </trim>
             <trim prefix="values (" suffix=")" suffixOverrides=",">
                 <if test="imgId != null">
@@ -107,6 +116,15 @@
                 </if>
                 <if test="cdSize != null">
                     #{cdSize,jdbcType=INTEGER},
+                </if>
+                <if test="province != null">
+                    #{province,jdbcType=VARCHAR},
+                </if>
+                <if test="city != null">
+                    #{city,jdbcType=TINYINT},
+                </if>
+                <if test="district != null">
+                    #{district,jdbcType=VARCHAR},
                 </if>
             </trim>
     </insert>
