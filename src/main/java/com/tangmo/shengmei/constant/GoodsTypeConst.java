@@ -2,31 +2,27 @@ package com.tangmo.shengmei.constant;
 
 /**
  * @author boge
- * @date 17/12/25
- * @description 订单类型/商品类型相关常量
+ * @date 18/1/9
+ * @description 商品分类
  */
 
 public class GoodsTypeConst {
-    /**
-     * 改装配件相关
-     */
-    /**发动机系统*/
-    public static final Byte ENGINE = 0;
-    /**传动系统*/
-    public static final Byte TRANS = 1;
-    /**汽车电子*/
-    public static final Byte ELEC = 2;
-    /**制动系统*/
-    public static final Byte BRAKE = 3;
-    /**汽车安全*/
-    public static final Byte SAFETY = 4;
-    /**转向系统*/
-    public static final Byte STEER = 5;
-    /**车身附件*/
-    public static final Byte ACCESSORY = 6;
-    /**悬挂系统*/
-    public static final Byte SUSPENSION = 7;
-    /**汽保工具*/
-    public static final Byte TOOL = 8;
+
+    /**全新汽配*/
+    public static final Byte NEW_KIT = 0;
+    /**二手汽配*/
+    public static final Byte SECOND_KIT = 1;
+    /**改装汽配*/
+    public static final Byte REFIT_KIT = 2;
+    /**汽车美容*/
+    public static final Byte CAR_WASH = 3;
+    /**驾照查分*/
+    public static final Byte LICENSE_SCORE = 4;
+    /**故障快处*/
+    public static final Byte MAIFUNCTION_DEAL = 5;
+    /**道路救援*/
+    public static final Byte ROAD_SERVICE = 6;
+    /**买卖闲置*/
+    public static final Byte SECOND_HAND = 7;
 
 }

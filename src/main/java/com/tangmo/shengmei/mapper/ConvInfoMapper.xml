@@ -66,7 +66,7 @@
                 <if test="city != null">
                     city,
                 </if>
-                <if test="content != null">
+                <if test="district != null">
                     district,
                 </if>
             </trim>
