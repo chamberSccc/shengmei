@@ -8,12 +8,26 @@
         <result column="car_id" property="carId" jdbcType="INTEGER"/>
     </resultMap>
 
-    <insert id="insertSelective" parameterType="com.tangmo.shengmei.entity.AdminInfo">
-        insert into admin_info (account,password) VALUES (#{account},#{password})
+    <insert id="insertSelective" parameterType="com.tangmo.shengmei.entity.IllegalInfo">
+        insert into illegal_info (user_id,car_id,total_price,total_score,number,can_handle,handle_fee)
+         VALUES (#{userId},#{carId},#{totalPrice},#{totalScore},#{number},#{canHandle},#{handleFee})
     </insert>
 
     <select id="selectByUserAndCar" resultMap="AdminResultMap">
         SELECT id,user_id,car_id FROM illegal_info WHERE user_id = #{userId} and car_id = #{carId}
     </select>
+
+    <update id="updateSelective" parameterType="com.tangmo.shengmei.entity.IllegalInfo">
+        UPDATE illegal_info
+        <set>
+            <if test="totalPrice != null">
+                total_price = #{totalPrice},
+            </if>
+            <if test="totalScore != null">
+                content = #{totalScore},
+            </if>
+        </set>
+        WHERE id = #{id,jdbcType=INTEGER}
+    </update>
 
 </mapper>

@@ -22,11 +22,11 @@ public interface IllegalDao {
     /**
      * 根据用户信息和车辆信息查询违章信息
      *
-     * @param userId
-     * @param carId
+     * @param userId 用户Id
+     * @param carId 车辆Id
      * @return
      */
-    int selectByUserAndCar(Integer userId, Integer carId);
+    IllegalInfo selectByUserAndCar(Integer userId, Integer carId);
 
     /**
      * 更新违章信息
