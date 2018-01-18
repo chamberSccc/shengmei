@@ -120,4 +120,9 @@ public class UserCarController extends BaseController {
     public Result removeCar(@PathVariable Integer ucId){
         return userCarService.delUserCar(ucId);
     }
+
+    @GetMapping("/license/score")
+    public Result searchLicenseScore(){
+        return null;
+    }
 }

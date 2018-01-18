@@ -7,6 +7,9 @@
         <result column="img_id" property="imgId" jdbcType="VARCHAR"/>
         <result column="title" property="title" jdbcType="VARCHAR"/>
         <result column="content" property="content" jdbcType="VARCHAR"/>
+        <result column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="avatar_id" property="avatarId" jdbcType="VARCHAR"/>
+        <result column="condition" property="condition" jdbcType="VARCHAR"/>
         <result column="cdColor" property="cdColor" jdbcType="VARCHAR"/>
         <result column="cdSize" property="cdSize" jdbcType="VARCHAR"/>
         <result column="price_pre" property="pricePre" jdbcType="DOUBLE"/>
@@ -222,7 +225,11 @@
     </insert>
 
     <select id="selectCommodityDetail" resultMap="BaseResultMap">
-        SELECT * FROM commodity WHERE  cd_id = #{cdId} AND is_sell = 0
+        SELECT cd.cd_id,cd.img_id,cd.title,cd.content,cd.cd_type,cd.cd_count,cd.price_pre,
+        cd.price_now,cd.createtime,cd.province,cd.city,cd.district,cd.user_id,cd.condition,
+        ui.username,ui.avatar_id
+        FROM commodity cd LEFT JOIN user_info ui ON cd.user_id = ui.user_id
+        WHERE  cd.cd_id = #{cdId} AND is_sell = 0
     </select>
 
     <select id="selectQualityList" resultMap="BaseResultMap">

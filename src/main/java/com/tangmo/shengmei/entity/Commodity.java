@@ -15,6 +15,8 @@ public class Commodity implements Serializable{
     private static final long serialVersionUID = 1L;
     private Integer cdId;
     private Integer userId;
+    private String username;
+    private String avatarId;
     private String imgId;
     private String title;
     private String content;
@@ -31,6 +33,7 @@ public class Commodity implements Serializable{
     private String district;
     private Byte cdClass;
     private Integer star;
+    private String condition;
     private Date createTime;
     private Date updateTime;
 }

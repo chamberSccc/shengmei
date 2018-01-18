@@ -69,6 +69,9 @@
                 <if test="district != null">
                     district,
                 </if>
+                <if test="validDate   != null">
+                    validDate,
+                </if>
             </trim>
             <trim prefix="values (" suffix=")" suffixOverrides=",">
                 <if test="userId != null">
@@ -91,6 +94,9 @@
                 </if>
                 <if test="district != null">
                     #{district,jdbcType=VARCHAR},
+                </if>
+                <if test="validDate   != null">
+                    #{vaild_date,jdbcType=TIMESTAMP},
                 </if>
             </trim>
     </insert>

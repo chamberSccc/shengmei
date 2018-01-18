@@ -27,7 +27,6 @@ public class CommodityController extends BaseController {
      * @apiParam {Commodity} commodity 商品信息对象
      * @apiParamExample {json} 请求样例:
      *                   {
-     *                      cdId:"商品信息主键",
      *                      title:"标题是什么",
      *                      content:"内容是什么",
      *                      imgId:"图片base64编码",
@@ -37,6 +36,7 @@ public class CommodityController extends BaseController {
      *                      pricePre:"原价",
      *                      priceNow:"现价",
      *                      cdType:"商品类型",
+     *                      condition:"新旧程度",
      *                      cdCount:"商品数量",
      *                      cdColor:"商品颜色,多种颜色以逗号分隔,
      *                      cdSize:"商品规格,多种规格以逗号分隔"
@@ -103,7 +103,7 @@ public class CommodityController extends BaseController {
      *                        content: "商品信息内容1",
      *                        pricePre:"商品原价1",
      *                        priceNow:"商品现价1",
-     *                        cdType:"商品类型1"},
+     *                        cdType:"商品类型1",},
      *                     {
      *                        cdId: 2,
      *                        title: "商品信息标题2",
@@ -166,6 +166,41 @@ public class CommodityController extends BaseController {
     @GetMapping("/user/{userId}/{start}/{end}")
     public Result getUserCdList(@PathVariable Integer userId,@PathVariable Integer start,@PathVariable Integer end){
         return commodityService.searchUserCdList(userId,start,end);
+    }
+
+    /**
+     * @api {GET} /commodity/detail/{userId}/{cdId} 获取商品详情
+     * @apiGroup Commodity
+     * @apiVersion 0.0.1
+     * @apiParam {int} cdId 商品主键
+     * @apiParam {int} userId 商品类型
+     * @apiDescription 获取商品详情
+     * @apiParamExample {json} 请求样例：
+     *  /commodity/detail/1/1
+     * @apiSuccess (200) {String} msg 信息
+     * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success",
+     *                     "data":{
+     *                      title:"标题是什么",
+     *                      content:"内容是什么",
+     *                      imgId:"图片base64编码",
+     *                      province:"省",
+     *                      city:"市",
+     *                      district:"区",
+     *                      pricePre:"原价",
+     *                      priceNow:"现价",
+     *                      cdType:"商品类型",
+     *                      condition:"新旧程度",
+     *                      cdCount:"商品数量",
+     *                      cdColor:"商品颜色,多种颜色以逗号分隔,
+     *                      cdSize:"商品规格,多种规格以逗号分隔"
+     *                   }
+     *                   }
+     */
+    @GetMapping("/detail/{userId}/{cdId}")
+    public Result getCdDetail(@PathVariable Integer userId,@PathVariable Integer cdId){
+        return commodityService.getCommodityDetail(userId,cdId);
     }
 
     /**

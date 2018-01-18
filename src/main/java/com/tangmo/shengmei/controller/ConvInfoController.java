@@ -25,7 +25,8 @@ public class ConvInfoController extends BaseController {
      *                   {
      *                      userId:"用户Id",
      *                      title:"标题是什么",
-     *                      content:"内容是什么"
+     *                      content:"内容是什么",
+     *                      validDate:"结束日期"
      *                   }
      * @apiSuccess (success) {POST} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
      * @apiSuccess (success) {POST} data 返回数据
@@ -83,7 +84,8 @@ public class ConvInfoController extends BaseController {
      *                        commentCount:"评论数",
      *                        province:"省",
      *                        city:"市",
-     *                        district:"区"},{...}
+     *                        district:"区",
+     *                        isExpire:"是否有效"},{...}
      *                     ]
      *                     }
      */

@@ -31,9 +31,10 @@ public class UserController extends BaseController{
      *                      mobile:"18710889234",
      *                      password:"MD5加密后的密码",
      *                      province:"省",
-     *                      city:"市"
+     *                      city:"市",
+     *                      authCode:"验证码"
      *                   }
-     * @apiSuccess (success) {POST} code success:请求成功； fail:请求失败；offline：掉线；registered：手机号已被注册;
+     * @apiSuccess (success) {POST} code success:请求成功； fail:请求失败；code_error：验证码错误；registered：手机号已被注册;
      * @apiSuccess (success) {POST} data 返回数据
      * @apiSuccessExample {json} 返回样例:
      *                    {"code":"success"}
@@ -42,10 +43,10 @@ public class UserController extends BaseController{
     public Result addUserInfo(@RequestBody User user){
         String code = (String) getSession().getAttribute(user.getMobile());
         if(code == null){
-            return ResultUtil.fail();
+            return ResultUtil.codeError();
         }
         if(!code.equals(user.getAuthCode())){
-            return ResultUtil.fail();
+            return ResultUtil.codeError();
         }
         return userService.addUser(user);
     }
@@ -154,6 +155,7 @@ public class UserController extends BaseController{
      *                   {
      *                      userId:"用户Id"
      *                      mobile:"新的手机号"
+     *                      authCode:"验证码"
      *                   }
      * @apiSuccess (success) {PUT} code success:请求成功； fail:请求失败；code_error：验证码错误；param_error：请求参数错误;
      * @apiSuccess (success) {PUT} data 返回数据
@@ -162,7 +164,13 @@ public class UserController extends BaseController{
      */
     @PutMapping("/mobile")
     public Result changeMobile(@RequestBody User user){
-        String code = (String) getSession().getAttribute(user.getMobile());
+        //先从数据库查询旧数据
+        Result result = userService.getUser(user.getUserId());
+        User checkUser = (User) result.getData();
+        if(checkUser.getMobile() == null){
+            return ResultUtil.fail();
+        }
+        String code = (String) getSession().getAttribute(checkUser.getMobile());
         if(code == null){
             return ResultUtil.codeError();
         }
@@ -214,7 +222,7 @@ public class UserController extends BaseController{
     public Result getAuthCode(@PathVariable String mobile){
         String code = SendMsg.getRandomCode();
         this.getSession().setAttribute(mobile,code);
-        return ResultUtil.success(code);
+        return ResultUtil.success();
     }
 
     /**
