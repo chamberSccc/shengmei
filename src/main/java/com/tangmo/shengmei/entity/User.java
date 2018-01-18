@@ -26,6 +26,7 @@ public class User implements Serializable {
     private Double balance;
     private Byte shopAuth;
     private String token;
+    private String authCode;
     private Date createTime;
     private Date updateTime;
 }

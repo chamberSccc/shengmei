@@ -7,6 +7,8 @@ import com.tangmo.shengmei.entity.GoodsTypeItem;
 import com.tangmo.shengmei.entity.ReportDto;
 import com.tangmo.shengmei.utility.code.Result;
 import com.tangmo.shengmei.utility.code.ResultUtil;
+import com.tangmo.shengmei.utility.string.SearchIllegal;
+import com.tangmo.shengmei.utility.string.SendMsg;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -263,5 +265,16 @@ public class AdminController extends BaseController{
     @GetMapping("/illegal/{start}/{end}")
     public Result getIllegalInfo(@PathVariable Integer start,@PathVariable Integer end){
         return illegalService.getIllegalList(start, end);
+    }
+
+    @GetMapping("/test")
+    public Result test(){
+        try {
+            SearchIllegal.searchScore();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }

@@ -5,6 +5,8 @@ import com.tangmo.shengmei.entity.FeedBack;
 import com.tangmo.shengmei.entity.User;
 import com.tangmo.shengmei.entity.WithDrawInfo;
 import com.tangmo.shengmei.utility.code.Result;
+import com.tangmo.shengmei.utility.code.ResultUtil;
+import com.tangmo.shengmei.utility.string.SendMsg;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -38,6 +40,13 @@ public class UserController extends BaseController{
      */
     @PostMapping("/register")
     public Result addUserInfo(@RequestBody User user){
+        String code = (String) getSession().getAttribute(user.getMobile());
+        if(code == null){
+            return ResultUtil.fail();
+        }
+        if(!code.equals(user.getAuthCode())){
+            return ResultUtil.fail();
+        }
         return userService.addUser(user);
     }
 
@@ -146,31 +155,45 @@ public class UserController extends BaseController{
      *                      userId:"用户Id"
      *                      mobile:"新的手机号"
      *                   }
-     * @apiSuccess (success) {PUT} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccess (success) {PUT} code success:请求成功； fail:请求失败；code_error：验证码错误；param_error：请求参数错误;
      * @apiSuccess (success) {PUT} data 返回数据
      * @apiSuccessExample {json} 返回样例:
      *                    {"code":"success"}
      */
     @PutMapping("/mobile")
     public Result changeMobile(@RequestBody User user){
+        String code = (String) getSession().getAttribute(user.getMobile());
+        if(code == null){
+            return ResultUtil.codeError();
+        }
+        if(!code.equals(user.getAuthCode())){
+            return ResultUtil.codeError();
+        }
         return userService.updateMobile(user.getUserId(),user.getMobile());
     }
 
     /**
-     * @api {GET} /mobile/check/{userId}/{mobile} 验证手机信息
+     * @api {GET} /mobile/check/{userId}/{mobile}/{authCode}} 验证手机信息
      * @apiGroup User
      * @apiVersion 0.0.1
      * @apiDescription 验证手机信息
      * @apiParamExample {json} 请求样例：
-     *  /mobile/check/1/18710829356
+     *  /mobile/check/1/18710829356/3267
      * @apiSuccess (200) {String} msg 信息
-     * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；code_error：验证码错误；param_error：请求参数错误;
      * @apiSuccessExample {json} 返回样例:
      *                    {"code":"success",
      *                     "data":{}
      */
-    @GetMapping("/mobile/check/{userId}/{mobile}")
-    public Result checkMobile(@PathVariable String mobile,@PathVariable Integer userId){
+    @GetMapping("/mobile/check/{userId}/{mobile}/{authCode}")
+    public Result checkMobile(@PathVariable String mobile,@PathVariable Integer userId,@PathVariable String authCode){
+        String code = (String) getSession().getAttribute(mobile);
+        if(code == null){
+            return ResultUtil.codeError();
+        }
+        if(!code.equals(authCode)){
+            return ResultUtil.codeError();
+        }
         return userService.checkMobile(userId,mobile);
     }
 
@@ -189,7 +212,9 @@ public class UserController extends BaseController{
      */
     @GetMapping("/mobile/auth/{mobile}")
     public Result getAuthCode(@PathVariable String mobile){
-        return userService.checkMobile(null,null);
+        String code = SendMsg.getRandomCode();
+        this.getSession().setAttribute(mobile,code);
+        return ResultUtil.success(code);
     }
 
     /**
@@ -201,16 +226,24 @@ public class UserController extends BaseController{
      * @apiParamExample {json} 请求样例:
      *                   {
      *                      userId:"用户Id",
+     *                      authCode:"短信验证码",
      *                      password:"旧密码",
      *                      newPwd:"新密码"
      *                   }
-     * @apiSuccess (success) {PUT} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccess (success) {PUT} code success:请求成功； fail:请求失败；code_error：验证码错误；param_error：请求参数错误;
      * @apiSuccess (success) {PUT} data 返回数据
      * @apiSuccessExample {json} 返回样例:
      *                    {"code":"success"}
      */
     @PutMapping("/pwd")
     public Result changePwd(@RequestBody User user){
+        String code = (String) getSession().getAttribute(user.getMobile());
+        if(code == null){
+            return ResultUtil.codeError();
+        }
+        if(!code.equals(user.getAuthCode())){
+            return ResultUtil.codeError();
+        }
         return userService.changePwd(user);
     }
 

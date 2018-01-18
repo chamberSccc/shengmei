@@ -41,4 +41,6 @@ public class ResultUtil {
     public static Result registered(){return createResult(Result.ERROR_MOBILE);}
 
     public static Result pwdError(){return createResult(Result.PWD_ERROR);}
+
+    public static Result codeError(){return createResult(Result.CODE_ERROR);}
 }

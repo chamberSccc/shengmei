@@ -18,6 +18,7 @@ public class Result<T> implements Serializable {
     public static final String PARAM_ERROR = "error";
     public static final String ERROR_MOBILE = "registered";
     public static final String PWD_ERROR="pwd_error";
+    public static final String CODE_ERROR="code_error";
 
     private String code;
     private T data;
