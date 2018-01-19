@@ -28,7 +28,7 @@ public interface IllegalDao {
      * @param carId
      * @return
      */
-    int selectByCarId(Integer carId);
+    IllegalInfo selectByCarId(Integer carId);
 
     /**
      * 更新违章信息

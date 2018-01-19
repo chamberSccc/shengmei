@@ -8,6 +8,7 @@ import com.tangmo.shengmei.service.IllegalService;
 import com.tangmo.shengmei.utility.code.Result;
 import com.tangmo.shengmei.utility.code.ResultUtil;
 import com.tangmo.shengmei.utility.string.SearchIllegal;
+import com.tangmo.shengmei.utility.string.SearchLicense;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -59,7 +60,20 @@ public class IllegalServiceImpl implements IllegalService {
         if(illegalInfo == null){
             return ResultUtil.fail();
         }
-        illegalDao.insertSelective(illegalInfo);
+        //数据库保存用户最新的违章信息
+        illegalInfo.setCarId(carId);
+        illegalInfo.setUserId(userCar.getUserId());
+        IllegalInfo illegalInfo1 = illegalDao.selectByCarId(carId);
+        if(illegalInfo1 == null){
+            illegalDao.insertSelective(illegalInfo);
+        }else{
+            illegalDao.updateSelective(illegalInfo);
+        }
         return ResultUtil.success(illegalInfo);
+    }
+
+    @Override
+    public Result getCurrentLicenseScore(String fileId, String licenseId) {
+        return ResultUtil.success(SearchLicense.searchLicenseScore(fileId, licenseId));
     }
 }

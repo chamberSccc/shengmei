@@ -267,14 +267,14 @@ public class AdminController extends BaseController{
         return illegalService.getIllegalList(start, end);
     }
 
-    @GetMapping("/test")
-    public Result test(){
-        try {
-            SearchIllegal.searchScore();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return null;
-    }
+//    @GetMapping("/test")
+//    public Result test(){
+//        try {
+//            SearchIllegal.searchScore();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//        return null;
+//    }
 }

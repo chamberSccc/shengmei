@@ -2,71 +2,85 @@ package com.tangmo.shengmei.utility.string;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.tangmo.shengmei.constant.CarOrgCode;
+import com.tangmo.shengmei.entity.IllegalDetail;
+import com.tangmo.shengmei.entity.IllegalInfo;
+import com.tangmo.shengmei.entity.UserCar;
 import com.tangmo.shengmei.utility.http.HttpUtil;
+import lombok.extern.slf4j.Slf4j;
 
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author boge
  * @date 18/1/18
- * @description
+ * @description 查询违章信息
  */
-
+@Slf4j
 public class SearchIllegal {
 
     public static final String APP_KEY = "da8c4213b24d8dd2";// 你的appkey
     public static final String URL = "http://api.jisuapi.com/illegal/query";
-    public static final String carorg = "shannxi";// 交管局代号
-    public static final String lsprefix = "陕A";// 车牌前缀 utf8
-    public static final String lsnum = "L6L71";// 车牌
     public static final String lstype = "02";// 车辆类型
-    public static final String engineno = "262036";// 发动机号
-    public static final String frameno = "LFV3A23C4E3162272";// 车架号
-    public static void searchScore() throws Exception {
+    public static IllegalInfo searchScore(UserCar userCar) throws Exception {
+        String lsnum = userCar.getCarNum();
+        String lsprefix = userCar.getCarProvince();
+        String engineno = userCar.getEngineNum();
+        String frameno = userCar.getFrameNum();
+        String carorg = CarOrgCode.getCodeByName(lsprefix.substring(0,1));
         String result = null;
         String url = URL + "?appkey=" + APP_KEY + "&carorg=" + carorg + "&lsprefix="
                 + URLEncoder.encode(lsprefix, "utf-8") + "&lsnum=" + lsnum + "&lstype=" + lstype + "&frameno="
                 + frameno+"&engineno="+engineno;
+        IllegalInfo illegalInfo = new IllegalInfo();
 
         try {
+            //第三方接口查询
             result = HttpUtil.sendGet(url);
             JSONObject json = JSONObject.parseObject(result);
             if (json.getIntValue("status") != 0) {
-                System.out.println(json.getString("msg"));
+                log.error(json.getString("msg"));
+                return null;
             } else {
+                //查询成功,得到违章结果
                 JSONObject resultarr = json.getJSONObject("result");
                 if (resultarr != null) {
-                    String lsprefix = resultarr.getString("lsprefix");
-                    String lsnum = resultarr.getString("lsnum");
-                    String carorg = resultarr.getString("carorg");
-                    String usercarid = resultarr.getString("usercarid");
-                    System.out.println(lsprefix + " " + lsnum + " " + carorg + " " + usercarid);
+                    String totalprice = resultarr.getString("totalprice");
+                    String totalscore = resultarr.getString("totalscore");
+                    illegalInfo.setTotalPrice(Integer.parseInt(totalprice));
+                    illegalInfo.setTotalScore(Integer.parseInt(totalscore));
                     if (resultarr.get("list") != null) {
                         JSONArray list = resultarr.getJSONArray("list");
+                        List<IllegalDetail> detailList = new ArrayList<>();
+                        //遍历违章细节
                         for (int j = 0; j < list.size(); j++) {
                             JSONObject list_obj = (JSONObject) list.get(j);
                             if (list_obj != null) {
-                                String time = list_obj.getString("time");
-                                String address = list_obj.getString("address");
-                                String content = list_obj.getString("content");
-                                String legalnum = list_obj.getString("legalnum");
-                                String price = list_obj.getString("price");
-                                String id = list_obj.getString("id");
-                                String score = list_obj.getString("score");
-                                System.out.println(time + " " + address + " " + content + " " + legalnum + " " + price
-                                        + " " + id + " " + score);
+                                IllegalDetail illegalDetail = new IllegalDetail();
+                                illegalDetail.setTime(list_obj.getString("time"));
+                                illegalDetail.setAddress(list_obj.getString("address"));
+                                illegalDetail.setContent(list_obj.getString("content"));
+                                illegalDetail.setPrice(list_obj.getString("price"));
+                                illegalDetail.setScore(list_obj.getString("score"));
+                                illegalDetail.setCanHandle(list_obj.getString("canhandle"));
+                                illegalDetail.setHandleFee(list_obj.getString("handlefee"));
+                                detailList.add(illegalDetail);
                             }
                         }
+                        //违章详细列表放回返回对象中
+                        illegalInfo.setCarProvince(userCar.getCarProvince());
+                        illegalInfo.setCarNum(userCar.getCarNum());
+                        illegalInfo.setIllegalDetails(detailList);
                     }
                 } else {
-                    System.out.println("恭喜您，没有违章！");
+                    return null;
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return illegalInfo;
     }
-
-
-
 }

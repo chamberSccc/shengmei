@@ -86,8 +86,8 @@
         SELECT uc_id,user_id,car_num,frame_num,car_province,engine_num,car_type FROM user_car WHERE user_id = #{userId}
     </select>
 
-    <select id="selectListByUserId" resultMap="BaseResultMap">
-        SELECT uc_id,user_id,car_num,frame_num,engine_num,car_type FROM user_car WHERE uc_id = #{ucId}
+    <select id="selectById" resultMap="BaseResultMap">
+        SELECT uc_id,user_id,car_num,car_province,frame_num,engine_num,car_type FROM user_car WHERE uc_id = #{ucId}
     </select>
 
     <delete id="deleteById">

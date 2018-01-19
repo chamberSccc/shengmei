@@ -40,4 +40,13 @@ public interface IllegalService {
      * @return
      */
     Result getCurrentIllegal(Integer carId);
+
+    /**
+     * 驾照查分
+     *
+     * @param fileId
+     * @param licenseId
+     * @return
+     */
+    Result getCurrentLicenseScore(String fileId, String licenseId);
 }

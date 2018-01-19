@@ -222,7 +222,7 @@ public class UserController extends BaseController{
     public Result getAuthCode(@PathVariable String mobile){
         String code = SendMsg.getRandomCode();
         this.getSession().setAttribute(mobile,code);
-        return ResultUtil.success();
+        return ResultUtil.success(code);
     }
 
     /**
