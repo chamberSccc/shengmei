@@ -40,6 +40,9 @@ public class AdminServiceImpl implements AdminService {
             return ResultUtil.fail();
         }
         AdminInfo checkAdmin = adminDao.selectByAccount(adminInfo.getAccount());
+        if(checkAdmin == null){
+            return ResultUtil.pwdError();
+        }
         if(!checkAdmin.getPassword().equals(adminInfo.getPassword())){
             return ResultUtil.pwdError();
         }

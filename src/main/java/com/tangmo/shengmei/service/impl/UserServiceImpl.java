@@ -168,6 +168,9 @@ public class UserServiceImpl implements UserService {
             return ResultUtil.fail();
         }
         User checkUser = userDao.selectByMobile(user.getMobile());
+        if(checkUser == null){
+            return ResultUtil.pwdError();
+        }
         if(checkUser.getPassword().equals(user.getPassword())){
             checkUser.setPassword(null);
             return ResultUtil.success(checkUser);

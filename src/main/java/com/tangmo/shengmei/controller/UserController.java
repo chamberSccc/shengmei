@@ -181,12 +181,12 @@ public class UserController extends BaseController{
     }
 
     /**
-     * @api {GET} /mobile/check/{userId}/{mobile}/{authCode}} 验证手机信息
+     * @api {GET} /user/mobile/check/{userId}/{mobile}/{authCode}} 验证手机信息
      * @apiGroup User
      * @apiVersion 0.0.1
      * @apiDescription 验证手机信息
      * @apiParamExample {json} 请求样例：
-     *  /mobile/check/1/18710829356/3267
+     *  /user/mobile/check/1/18710829356/3267
      * @apiSuccess (200) {String} msg 信息
      * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；code_error：验证码错误；param_error：请求参数错误;
      * @apiSuccessExample {json} 返回样例:
@@ -206,7 +206,7 @@ public class UserController extends BaseController{
     }
 
     /**
-     * @api {GET} /mobile/auth/{mobile} 获取手机验证码
+     * @api {GET} /user/mobile/auth/{mobile} 获取手机验证码
      * @apiGroup User
      * @apiVersion 0.0.1
      * @apiDescription 获取手机验证码
@@ -218,7 +218,7 @@ public class UserController extends BaseController{
      *                    {"code":"success",
      *                     "data":{}
      */
-    @GetMapping("/mobile/auth/{mobile}")
+    @GetMapping("/user/mobile/auth/{mobile}")
     public Result getAuthCode(@PathVariable String mobile){
         String code = SendMsg.getRandomCode();
         this.getSession().setAttribute(mobile,code);
