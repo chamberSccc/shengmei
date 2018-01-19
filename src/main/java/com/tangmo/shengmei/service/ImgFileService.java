@@ -29,5 +29,12 @@ public interface ImgFileService {
     String getImgFilePath(String fileId);
 
 
+    /**
+     * 下载文件
+     *
+     * @param rfId
+     * @param userAgent
+     * @return
+     */
     ResponseEntity<byte[]> downloadFile(String rfId, String userAgent);
 }
