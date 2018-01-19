@@ -121,8 +121,40 @@ public class UserCarController extends BaseController {
         return userCarService.delUserCar(ucId);
     }
 
-    @GetMapping("/license/score")
-    public Result searchLicenseScore(){
-        return null;
+
+    /**
+     * @api {GET} /license/score/{carId} 获取违章信息
+     * @apiGroup UserCar
+     * @apiVersion 0.0.1
+     * @apiParam {int} carId 车辆Id
+     * @apiDescription 获取违章信息
+     * @apiParamExample {json} 请求样例：
+     *  /license/score/12
+     * @apiSuccess (200) {String} msg 信息
+     * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success",
+     *                     "data":{
+     *                        userId: 1,
+     *                        carId:"车辆ID",
+     *                        username:"姓名",
+     *                        carProvince:"车辆省份  陕,山...",
+     *                        carType:"车类型 0:小车,1:大车",
+     *                        carNum:"车牌号"
+     *                        [{
+     *                            canHandle:"是否可以代缴",
+     *                            address:"违章地址",
+     *                            handleFee:"代缴费用",
+     *                            content:"违章内容",
+     *                            score:"扣分",
+     *                            price:"金额",
+     *                            time:"违章时间"
+     *                        }
+     *                        ]
+     *                     }
+     */
+    @GetMapping("/license/score/{carId}")
+    public Result searchLicenseScore(@PathVariable Integer carId){
+        return illegalService.getCurrentIllegal(carId);
     }
 }

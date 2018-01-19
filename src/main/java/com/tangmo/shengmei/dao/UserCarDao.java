@@ -44,4 +44,12 @@ public interface UserCarDao {
      * @return
      */
     int deleteById(Integer ucId);
+
+    /**
+     * 根据主键返回车辆信息
+     *
+     * @param ucId 用户车辆表主键
+     * @return
+     */
+    UserCar selectById(Integer ucId);
 }

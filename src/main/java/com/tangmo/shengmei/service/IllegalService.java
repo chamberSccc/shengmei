@@ -26,9 +26,18 @@ public interface IllegalService {
 
     /**
      * 获取违章信息列表
+     *
      * @param start
      * @param end
      * @return
      */
-    Result getIllegalList(Integer start,Integer end);
+    Result getIllegalList(Integer start, Integer end);
+
+    /**
+     * 获取实时违章信息
+     *
+     * @param carId
+     * @return
+     */
+    Result getCurrentIllegal(Integer carId);
 }
