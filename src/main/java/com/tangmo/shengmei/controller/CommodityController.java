@@ -27,15 +27,16 @@ public class CommodityController extends BaseController {
      * @apiParam {Commodity} commodity 商品信息对象
      * @apiParamExample {json} 请求样例:
      *                   {
+     *                      userId:"1",
      *                      title:"标题是什么",
      *                      content:"内容是什么",
      *                      imgId:"图片base64编码",
      *                      province:"省",
-     *                        city:"市",
-     *                        district:"区",
+     *                      city:"市",
+     *                      district:"区",
      *                      pricePre:"原价",
      *                      priceNow:"现价",
-     *                      cdType:"商品类型",
+     *                      cdType:"商品类型,0,1,2",
      *                      condition:"新旧程度",
      *                      cdCount:"商品数量",
      *                      cdColor:"商品颜色,多种颜色以逗号分隔,
@@ -47,7 +48,7 @@ public class CommodityController extends BaseController {
      *                    {"code":"success"}
      */
     @PostMapping("/add")
-    public Result addCommodity(Commodity commodity){
+    public Result addCommodity(@RequestBody Commodity commodity){
         return commodityService.addCommodity(commodity);
     }
 
@@ -74,7 +75,7 @@ public class CommodityController extends BaseController {
      *                    {"code":"success"}
      */
     @PutMapping("")
-    public Result changeCommodity(Commodity commodity){
+    public Result changeCommodity(@RequestBody Commodity commodity){
         return commodityService.changeCommodity(commodity);
     }
 

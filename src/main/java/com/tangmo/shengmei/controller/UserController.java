@@ -9,6 +9,8 @@ import com.tangmo.shengmei.utility.code.ResultUtil;
 import com.tangmo.shengmei.utility.string.SendMsg;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
+
 /**
  *
  * @author boge
@@ -41,6 +43,8 @@ public class UserController extends BaseController{
      */
     @PostMapping("/register")
     public Result addUserInfo(@RequestBody User user){
+        HttpSession session = getSession();
+
         String code = (String) getSession().getAttribute(user.getMobile());
         if(code == null){
             return ResultUtil.codeError();
@@ -211,16 +215,17 @@ public class UserController extends BaseController{
      * @apiVersion 0.0.1
      * @apiDescription 获取手机验证码
      * @apiParamExample {json} 请求样例：
-     *  /mobile/auth/18710829356
+     *  /user/mobile/auth/18710829356
      * @apiSuccess (200) {String} msg 信息
      * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
      * @apiSuccessExample {json} 返回样例:
      *                    {"code":"success",
      *                     "data":{}
      */
-    @GetMapping("/user/mobile/auth/{mobile}")
+    @GetMapping("/mobile/auth/{mobile}")
     public Result getAuthCode(@PathVariable String mobile){
-        String code = SendMsg.getRandomCode();
+        HttpSession session = getSession();
+         String code = SendMsg.getRandomCode();
         this.getSession().setAttribute(mobile,code);
         return ResultUtil.success(code);
     }
