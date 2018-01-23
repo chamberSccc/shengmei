@@ -183,4 +183,9 @@ public class UserServiceImpl implements UserService {
     public String selectToken(Integer userId) {
         return userDao.selectTokenByUserId(userId);
     }
+
+    @Override
+    public String getAuthCode(String mobile) {
+        return null;
+    }
 }

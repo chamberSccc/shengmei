@@ -8,24 +8,22 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author boge
- * @date 18/1/18
- * @description
+ * @author Chamber
+ * @date 2018/1/17.
  */
-
 public class HttpUtil {
 
     /**
-     * 发送get请求
-     * @param url
-     * @return
+     * 向指定URL发送GET方法的请求
+     *
+     * @param url 发送请求的URL
+     * @return URL 所代表远程资源的响应结果
      */
     public static String sendGet(String url) {
         String result = "";
         BufferedReader in = null;
         try {
-            String urlNameString = url;
-            URL realUrl = new URL(urlNameString);
+            URL realUrl = new URL(url);
             // 打开和URL之间的连接
             URLConnection connection = realUrl.openConnection();
             // 设置通用的请求属性
@@ -37,10 +35,6 @@ public class HttpUtil {
             connection.connect();
             // 获取所有响应头字段
             Map<String, List<String>> map = connection.getHeaderFields();
-            // 遍历所有的响应头字段
-//            for (String key : map.keySet()) {
-//                System.out.println(key + "--->" + map.get(key));
-//            }
             // 定义 BufferedReader输入流来读取URL的响应
             in = new BufferedReader(new InputStreamReader(
                     connection.getInputStream()));
@@ -49,7 +43,7 @@ public class HttpUtil {
                 result += line;
             }
         } catch (Exception e) {
-//            System.out.println("发送GET请求出现异常！" + e);
+            System.out.println("发送GET请求出现异常！" + e);
             e.printStackTrace();
         }
         // 使用finally块来关闭输入流

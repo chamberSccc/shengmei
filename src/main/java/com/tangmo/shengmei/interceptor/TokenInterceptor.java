@@ -1,6 +1,5 @@
 package com.tangmo.shengmei.interceptor;
 
-import com.tangmo.shengmei.dao.CommonDao;
 import com.tangmo.shengmei.service.AdminService;
 import com.tangmo.shengmei.service.UserService;
 import org.springframework.beans.factory.BeanFactory;

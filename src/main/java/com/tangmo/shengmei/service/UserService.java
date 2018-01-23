@@ -150,8 +150,17 @@ public interface UserService {
 
     /**
      * 查询用户token
+     *
      * @param userId
      * @return
      */
     String selectToken(Integer userId);
+
+    /**
+     * 获取手机验证码
+     *
+     * @param mobile
+     * @return
+     */
+    String getAuthCode(String mobile);
 }
