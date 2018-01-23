@@ -7,8 +7,6 @@ import com.tangmo.shengmei.entity.GoodsTypeItem;
 import com.tangmo.shengmei.entity.ReportDto;
 import com.tangmo.shengmei.utility.code.Result;
 import com.tangmo.shengmei.utility.code.ResultUtil;
-import com.tangmo.shengmei.utility.string.SearchIllegal;
-import com.tangmo.shengmei.utility.string.SendMsg;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;

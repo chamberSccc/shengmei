@@ -1,4 +1,4 @@
-package com.tangmo.shengmei.utility.string;
+package com.tangmo.shengmei.utility.number;
 
 /**
  * @author Chamber

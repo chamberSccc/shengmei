@@ -6,7 +6,8 @@ import com.tangmo.shengmei.entity.User;
 import com.tangmo.shengmei.entity.WithDrawInfo;
 import com.tangmo.shengmei.utility.code.Result;
 import com.tangmo.shengmei.utility.code.ResultUtil;
-import com.tangmo.shengmei.utility.string.SendMsg;
+import com.tangmo.shengmei.utility.http.SendMsg;
+import com.tangmo.shengmei.utility.number.RandomString;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
@@ -225,7 +226,7 @@ public class UserController extends BaseController{
     @GetMapping("/mobile/auth/{mobile}")
     public Result getAuthCode(@PathVariable String mobile){
         HttpSession session = getSession();
-         String code = SendMsg.getRandomCode();
+         String code = RandomString.sixRandomNumber();
         this.getSession().setAttribute(mobile,code);
         return ResultUtil.success(code);
     }

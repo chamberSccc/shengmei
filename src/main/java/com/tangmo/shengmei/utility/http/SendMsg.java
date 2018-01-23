@@ -3,6 +3,7 @@ package com.tangmo.shengmei.utility.http;
 
 import com.alibaba.fastjson.JSONObject;
 import com.tangmo.shengmei.utility.http.HttpUtil;
+import com.tangmo.shengmei.utility.number.RandomString;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -27,7 +28,7 @@ public class SendMsg {
 
     public static void sendMsg(String mobile) throws Exception {
         String result = null;
-        content = content.replace("@",getRandomCode());
+        content = content.replace("@", RandomString.sixRandomNumber());
         String url = REMOTE_URL + "?mobile=" + mobile + "&content=" + URLEncoder.encode(content, "utf-8") + "&appkey="
                 + APPKEY;
 
@@ -45,15 +46,5 @@ public class SendMsg {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    /**
-     * 生成六位随机数
-     *
-     * @return
-     */
-    public static String getRandomCode() {
-        int number = (int) ((Math.random() * 9 + 1) * 100000);
-        return String.valueOf(number);
     }
 }
