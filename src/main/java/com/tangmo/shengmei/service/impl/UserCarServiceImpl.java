@@ -19,8 +19,8 @@ import javax.annotation.Resource;
 public class UserCarServiceImpl implements UserCarService {
     @Resource
     private UserCarDao userCarDao;
-    private static final int CAR_NUM_LENGTH = 6;
-    private static final int CAR_PROVINCE_LENGTH = 1;
+    private static final int CAR_NUM_LENGTH = 5;
+    private static final int CAR_PROVINCE_LENGTH = 2;
     @Override
     @Transactional
     public Result addUserCar(UserCar userCar) {
@@ -32,7 +32,7 @@ public class UserCarServiceImpl implements UserCarService {
             return ResultUtil.fail();
         }
         userCarDao.insertSelective(userCar);
-        return ResultUtil.success();
+        return ResultUtil.success(userCar);
     }
 
     @Override

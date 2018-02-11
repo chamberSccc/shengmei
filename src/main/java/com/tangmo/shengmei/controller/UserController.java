@@ -9,6 +9,7 @@ import com.tangmo.shengmei.utility.code.ResultUtil;
 import com.tangmo.shengmei.utility.http.SendMsg;
 import com.tangmo.shengmei.utility.number.RandomString;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 
@@ -129,29 +130,29 @@ public class UserController extends BaseController{
     }
 
     /**
-     * @api {PUT} /user/avatar 上传头像
+     * @api {POST} /user/avatar 上传头像
      * @apiGroup User
      * @apiVersion 0.0.1
      * @apiDescription 上传头像
      * @apiParam {String} code 图片base64编码
      * @apiParamExample {json} 请求样例:
      *                   {
-     *                      avatarId:"图像base64编码",
+     *                      file:"图片文件",
      *                      userId:"用户id"
      *                   }
-     * @apiSuccess (success) {PUT} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
-     * @apiSuccess (success) {PUT} data 返回数据
+     * @apiSuccess (success) {POST} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccess (success) {POST} data 返回数据
      * @apiSuccessExample {json} 返回样例:
      *                    {"code":"success"}
      */
-    @PutMapping("/avatar")
-    public Result loadAvatar(@RequestBody User user){
-        return userService.uploadAvatar(user.getUserId(),user.getAvatarId());
+    @PostMapping("/avatar")
+    public Result loadAvatar(User user, MultipartFile file){
+        return userService.uploadAvatar(user.getUserId(),file);
     }
 
 
     /**
-     * @api {PUT} /mobile 修改手机
+     * @api {PUT} /user/mobile 修改手机
      * @apiGroup User
      * @apiVersion 0.0.1
      * @apiDescription 修改手机
@@ -225,7 +226,6 @@ public class UserController extends BaseController{
      */
     @GetMapping("/mobile/auth/{mobile}")
     public Result getAuthCode(@PathVariable String mobile){
-        HttpSession session = getSession();
          String code = RandomString.sixRandomNumber();
         this.getSession().setAttribute(mobile,code);
         return ResultUtil.success(code);
@@ -240,7 +240,6 @@ public class UserController extends BaseController{
      * @apiParamExample {json} 请求样例:
      *                   {
      *                      userId:"用户Id",
-     *                      authCode:"短信验证码",
      *                      password:"旧密码",
      *                      newPwd:"新密码"
      *                   }
@@ -251,16 +250,44 @@ public class UserController extends BaseController{
      */
     @PutMapping("/pwd")
     public Result changePwd(@RequestBody User user){
-        String code = (String) getSession().getAttribute(user.getMobile());
+        return userService.changePwd(user);
+    }
+
+    /**
+     * @api {PUT} /user/pwd/reset 重置密码
+     * @apiGroup User
+     * @apiVersion 0.0.1
+     * @apiDescription 重置密码
+     * @apiParam {User} user user对象
+     * @apiParamExample {json} 请求样例:
+     *                   {
+     *                      authCode:"短信验证码",
+     *                      newPwd:"新密码",
+     *                      mobile:18710829325
+     *                   }
+     * @apiSuccess (success) {PUT} code success:请求成功； fail:请求失败；code_error：验证码错误；param_error：请求参数错误;
+     * @apiSuccess (success) {PUT} data 返回数据
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success"}
+     */
+    @PutMapping("/pwd/reset")
+    public Result resetPwd(@RequestBody User user){
+        User  result = userService.searchUserByMobile(user.getMobile());
+        if(result  == null){
+            return ResultUtil.fail();
+        }
+        if(!result.getMobile().equals(user.getMobile())){
+            return ResultUtil.fail();
+        }
+        String code = (String) getSession().getAttribute(result.getMobile());
         if(code == null){
             return ResultUtil.codeError();
         }
         if(!code.equals(user.getAuthCode())){
             return ResultUtil.codeError();
         }
-        return userService.changePwd(user);
+        return userService.resetPwd(user);
     }
-
     /**
      * @api {POST} /user/withdraw 增加提现记录
      * @apiGroup User
@@ -436,9 +463,9 @@ public class UserController extends BaseController{
     }
 
     //购买
-    @PostMapping("/buy")
+    @RequestMapping("/balance/{userId}")
     public Result addBuyRecord(){
-        return null;
+        return ResultUtil.success();
     }
 
 }

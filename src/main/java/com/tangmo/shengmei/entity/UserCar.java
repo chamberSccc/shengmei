@@ -20,6 +20,7 @@ public class UserCar implements Serializable{
     private String frameNum;
     private Byte carType;
     private String engineNum;
+    private Byte isSave;
     private Date createTime;
     private Date updateTime;
 

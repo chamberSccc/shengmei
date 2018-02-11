@@ -14,6 +14,8 @@ import java.sql.Date;
 public class UserAddress implements Serializable{
     private static final long serialVersionUID = 1L;
     private Integer uaId;
+    private String city;
+    private String district;
     private String address;
     private String recipient;
     private String mobile;

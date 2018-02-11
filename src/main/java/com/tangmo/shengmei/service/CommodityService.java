@@ -4,6 +4,7 @@ import com.tangmo.shengmei.entity.Commodity;
 import com.tangmo.shengmei.entity.CommodityDto;
 import com.tangmo.shengmei.entity.GoodsComment;
 import com.tangmo.shengmei.utility.code.Result;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @author boge
@@ -19,7 +20,7 @@ public interface CommodityService {
      * @param commodity 商品实体
      * @return
      */
-    Result addCommodity(Commodity commodity);
+    Result addCommodity(Commodity commodity, MultipartFile file);
 
     /**
      * 修改商品信息
@@ -27,7 +28,7 @@ public interface CommodityService {
      * @param commodity
      * @return
      */
-    Result changeCommodity(Commodity commodity);
+    Result changeCommodity(Commodity commodity,MultipartFile file);
 
     /**
      * 获取商品列表

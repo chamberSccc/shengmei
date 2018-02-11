@@ -49,8 +49,7 @@ public class IllegalServiceImpl implements IllegalService {
     }
 
     @Override
-    public Result getCurrentIllegal(Integer carId) {
-        UserCar userCar = userCarDao.selectById(carId);
+    public Result getCurrentIllegal(UserCar userCar) {
         IllegalInfo illegalInfo = null;
         try {
             illegalInfo = SearchIllegal.searchScore(userCar);
@@ -60,10 +59,13 @@ public class IllegalServiceImpl implements IllegalService {
         if(illegalInfo == null){
             return ResultUtil.fail();
         }
+        if(userCar.getIsSave() == 1){
+            userCarDao.insertSelective(userCar);
+            illegalInfo.setCarId(userCar.getUcId());
+        }
         //数据库保存用户最新的违章信息
-        illegalInfo.setCarId(carId);
         illegalInfo.setUserId(userCar.getUserId());
-        IllegalInfo illegalInfo1 = illegalDao.selectByCarId(carId);
+        IllegalInfo illegalInfo1 = illegalDao.selectByCarId(userCar.getUcId());
         if(illegalInfo1 == null){
             illegalDao.insertSelective(illegalInfo);
         }else{

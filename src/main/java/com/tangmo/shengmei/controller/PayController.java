@@ -16,33 +16,36 @@ import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
-@RequestMapping("/web/page/pay")
+@RestController
+@RequestMapping("/pay")
 public class PayController {
 
-	String Key = "75ZSTeTkO7B74gR6kstjfPcRkAEtWDuz";
-	String appid = "wx4c0142ccd58771ce"; //应用ID 必填：true
-	String mch_id = "1495229072";//商户号    必填：true
-	String spbill_create_ip="47.52.197.54"; //终端IP 必填：true
+	String Key = "C0FB5394A44C380BE3297B69A23A7D3D";
+	String appid = "wx7329bea10eb17a5e"; //应用ID 必填：true
+	String mch_id = "1495087612";//商户号    必填：true
+	String spbill_create_ip="111.230.242.116"; //终端IP 必填：true
 	String device_info="WEB";//设备号  必填：false
 	String body = "test";//商品描述 必填：true
 	String trade_type="APP";//交易类型  必填：true
-	String notify_url="http://1ax9443072.iok.la/financial/saveUserList.do";//通知地址 必填：true
+
 	//	int total_fee=888;    //总金额  单位（分） 必填：true
 	private WeChatPayResultBean weChatPayResultBean;
 
-	@RequestMapping(value="pay.do")
-	public Result pay(Integer total_fee){
-		
+	@GetMapping("/wechat")
+	public Result pay(@RequestParam Integer total_fee, @RequestParam Integer userid){
+		String userId = userid.toString();
+		String notify_url ="http://www.weixin.qq.com/wxpay/pay.php";
 		PayCallBackBean payCallBackBean = new PayCallBackBean();
 		//生成随机字符串
 		String nonce_str = PayUtil.getRandomString(6);
 		//订单号
 		String out_trade_no = DateUtil.DateToString(new Date(),"yyyyMMddHHmmssSSS");
+		//订单编号
 		payCallBackBean.setOrdercode(out_trade_no);
 		payCallBackBean.setPayway("微信支付");
+
 
 		SortedMap<Object,Object> parameters = new TreeMap<Object, Object>();
 		parameters.put("appid", appid);
@@ -51,6 +54,7 @@ public class PayController {
 		parameters.put("trade_type",trade_type);
 		parameters.put("notify_url", notify_url);
 		parameters.put("total_fee",total_fee);
+		parameters.put("body",body);
 		parameters.put("spbill_create_ip", spbill_create_ip);
 		parameters.put("out_trade_no", out_trade_no);
 

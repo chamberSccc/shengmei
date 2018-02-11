@@ -13,6 +13,7 @@ import com.tangmo.shengmei.utility.code.ResultUtil;
 import com.tangmo.shengmei.utility.string.EncryptUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -75,15 +76,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Result uploadAvatar(Integer userId, String code) {
-        if(userId!=null || code!=null){
-            RsFile rsFile = imgFileService.addImgFile(code,userId);
-            if(rsFile == null){
+    public Result uploadAvatar(Integer userId, MultipartFile file) {
+        String uuid = null;
+        if(file!=null){
+            uuid = imgFileService.uploadFile(file,userId);
+            if(uuid == null){
                 return ResultUtil.fail();
             }
-            //更新头像id
-            userDao.updateAvatar(userId,rsFile.getRfId());
         }
+        userDao.updateAvatar(userId,uuid);
         return ResultUtil.success();
     }
 
@@ -106,9 +107,18 @@ public class UserServiceImpl implements UserService {
         if(user.getUserId() == null || user.getPassword()==null || user.getNewPwd() == null){
             return ResultUtil.fail();
         }
-        User result = userDao.selectById(user.getUserId());
+        User result = userDao.selectLoginById(user.getUserId());
         if(!result.getPassword().equals(user.getPassword())){
             return ResultUtil.pwdError();
+        }
+        userDao.updatePwd(user);
+        return ResultUtil.success();
+    }
+
+    @Override
+    public Result resetPwd(User user) {
+        if(user.getNewPwd() == null){
+            return ResultUtil.fail();
         }
         userDao.updatePwd(user);
         return ResultUtil.success();
@@ -187,5 +197,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public String getAuthCode(String mobile) {
         return null;
+    }
+
+    @Override
+    public User searchUserByMobile(String mobile) {
+        return userDao.selectByMobile(mobile);
     }
 }

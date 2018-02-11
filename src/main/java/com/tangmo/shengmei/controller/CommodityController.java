@@ -7,6 +7,7 @@ import com.tangmo.shengmei.entity.CommodityDto;
 import com.tangmo.shengmei.entity.GoodsComment;
 import com.tangmo.shengmei.utility.code.Result;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -30,7 +31,6 @@ public class CommodityController extends BaseController {
      *                      userId:"1",
      *                      title:"标题是什么",
      *                      content:"内容是什么",
-     *                      imgId:"图片base64编码",
      *                      province:"省",
      *                      city:"市",
      *                      district:"区",
@@ -40,7 +40,8 @@ public class CommodityController extends BaseController {
      *                      condition:"新旧程度",
      *                      cdCount:"商品数量",
      *                      cdColor:"商品颜色,多种颜色以逗号分隔,
-     *                      cdSize:"商品规格,多种规格以逗号分隔"
+     *                      cdSize:"商品规格,多种规格以逗号分隔",
+     *                      file:商品图片
      *                   }
      * @apiSuccess (success) {POST} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
      * @apiSuccess (success) {POST} data 返回数据
@@ -48,8 +49,8 @@ public class CommodityController extends BaseController {
      *                    {"code":"success"}
      */
     @PostMapping("/add")
-    public Result addCommodity(@RequestBody Commodity commodity){
-        return commodityService.addCommodity(commodity);
+    public Result addCommodity(Commodity commodity, MultipartFile file){
+        return commodityService.addCommodity(commodity,file);
     }
 
     /**
@@ -63,11 +64,11 @@ public class CommodityController extends BaseController {
      *                      cdId:"商品信息主键",
      *                      title:"标题是什么",
      *                      content:"内容是什么",
-     *                      imgId:"图片base64编码",
      *                      pricePre:"原价",
      *                      priceNow:"现价",
      *                      cdType:"商品类型",
-     *                      cdCount:"商品数量"
+     *                      cdCount:"商品数量",
+     *                      file:商品图片
      *                   }
      * @apiSuccess (success) {PUT} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
      * @apiSuccess (success) {PUT} data 返回数据
@@ -75,8 +76,8 @@ public class CommodityController extends BaseController {
      *                    {"code":"success"}
      */
     @PutMapping("")
-    public Result changeCommodity(@RequestBody Commodity commodity){
-        return commodityService.changeCommodity(commodity);
+    public Result changeCommodity(Commodity commodity,MultipartFile file){
+        return commodityService.changeCommodity(commodity,file);
     }
 
     /**

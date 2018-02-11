@@ -1,6 +1,7 @@
 package com.tangmo.shengmei.service;
 
 import com.tangmo.shengmei.entity.IllegalInfo;
+import com.tangmo.shengmei.entity.UserCar;
 import com.tangmo.shengmei.utility.code.Result;
 
 /**
@@ -36,10 +37,10 @@ public interface IllegalService {
     /**
      * 获取实时违章信息
      *
-     * @param carId
+     * @param userCar
      * @return
      */
-    Result getCurrentIllegal(Integer carId);
+    Result getCurrentIllegal(UserCar userCar);
 
     /**
      * 驾照查分

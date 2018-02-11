@@ -27,7 +27,9 @@ public class UserAddressController extends BaseController{
      *                      mobile:"手机号",
      *                      recipient:"收件人",
      *                      isDefault:"是否是默认地址",
-     *                      address:"地址信息"
+     *                      address:"地址信息",
+     *                      city:"市",
+     *                      district:"区"
      *                   }
      * @apiSuccess (success) {POST} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
      * @apiSuccess (success) {POST} data 返回数据
@@ -50,7 +52,9 @@ public class UserAddressController extends BaseController{
      *                      uaId: "本条记录id",
      *                      mobile:"手机号",
      *                      recipient:"收件人",
-     *                      address:"地址信息"
+     *                      address:"地址信息",
+     *                      city:"市",
+     *                      district:"区"
      *                   }
      * @apiSuccess (success) {PUT} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
      * @apiSuccess (success) {PUT} data 返回数据
@@ -101,12 +105,16 @@ public class UserAddressController extends BaseController{
      *                     [{
      *                        uaId: 1,
      *                        address: "地址信息1",
+     *                        city:"市",
+     *                        district:"区"
      *                        recipient: "收件人1",
      *                        isDefault:"是否是默认地址",
      *                        mobile:"手机号1"},
      *                     {
      *                        uaId: 2,
      *                        address: "地址信息2",
+     *                        city:"市",
+     *                        district:"区"
      *                        recipient: "收件人2",
      *                        isDefault:"是否是默认地址",
      *                        mobile:"手机号2"

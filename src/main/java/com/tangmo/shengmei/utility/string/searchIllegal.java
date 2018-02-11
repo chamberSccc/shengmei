@@ -25,8 +25,8 @@ public class SearchIllegal {
     public static final String URL = "http://api.jisuapi.com/illegal/query";
     public static final String lstype = "02";// 车辆类型
     public static IllegalInfo searchScore(UserCar userCar) throws Exception {
-        String lsnum = userCar.getCarNum();
-        String lsprefix = userCar.getCarProvince();
+        String lsnum = userCar.getCarProvince().substring(1,2)+userCar.getCarNum();
+        String lsprefix = userCar.getCarProvince().substring(0,1);
         String engineno = userCar.getEngineNum();
         String frameno = userCar.getFrameNum();
         String carorg = CarOrgCode.getCodeByName(lsprefix.substring(0,1));

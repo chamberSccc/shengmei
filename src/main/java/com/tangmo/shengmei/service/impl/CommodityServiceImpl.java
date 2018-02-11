@@ -13,6 +13,7 @@ import com.tangmo.shengmei.utility.file.ImgUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 
@@ -34,17 +35,17 @@ public class CommodityServiceImpl implements CommodityService {
 
     @Override
     @Transactional
-    public Result addCommodity(Commodity commodity) {
+    public Result addCommodity(Commodity commodity, MultipartFile file) {
         if (commodity.getPriceNow() == null || commodity.getCdType() == null || commodity.getUserId() == null) {
             return ResultUtil.fail();
         }
-        //先处理图片
-        if(commodity.getImgId() != null){
-            RsFile rsFile = imgFileService.addImgFile(commodity.getImgId(),commodity.getUserId());
-            if(rsFile == null){
+
+        if(file!=null){
+            String uuid = imgFileService.uploadFile(file,commodity.getUserId());
+            if(uuid == null){
                 return ResultUtil.fail();
             }
-            commodity.setImgId(rsFile.getRfId());
+            commodity.setImgId(uuid);
         }
         commodityDao.insertSelective(commodity);
         return ResultUtil.success();
@@ -52,17 +53,16 @@ public class CommodityServiceImpl implements CommodityService {
 
     @Override
     @Transactional
-    public Result changeCommodity(Commodity commodity) {
+    public Result changeCommodity(Commodity commodity,MultipartFile file) {
         if (commodity.getCdId() == null) {
             return ResultUtil.fail();
         }
-        if(commodity.getImgId()!=null || commodity.getUserId()!=null){
-            //先处理图片
-            RsFile rsFile = imgFileService.addImgFile(commodity.getImgId(),commodity.getUserId());
-            if(rsFile == null){
+        if(file!=null){
+            String uuid = imgFileService.uploadFile(file,commodity.getUserId());
+            if(uuid == null){
                 return ResultUtil.fail();
             }
-            commodity.setImgId(rsFile.getRfId());
+            commodity.setImgId(uuid);
         }
         commodityDao.updateById(commodity);
         return ResultUtil.success();

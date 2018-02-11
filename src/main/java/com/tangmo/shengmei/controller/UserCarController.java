@@ -123,15 +123,23 @@ public class UserCarController extends BaseController {
 
 
     /**
-     * @api {GET} /illegal/info/{carId} 获取违章信息
+     * @api {POST} /car/illegal/info 获取违章信息
      * @apiGroup UserCar
      * @apiVersion 0.0.1
      * @apiParam {int} carId 车辆Id
      * @apiDescription 获取违章信息
      * @apiParamExample {json} 请求样例：
-     *  /illegal/info/12
+     *                    {
+     *                      userId:"用户Id",
+     *                      carNum:"车牌号: 13768",
+     *                      carProvince:"车辆省份  陕A,山A...",
+     *                      carType:"车类型 0:小车,1:大车",
+     *                      engineNum:"发动机号",
+     *                      frameNum:"车架号",
+     *                      isSave:"0不保存,1保存"
+     *                   }
      * @apiSuccess (200) {String} msg 信息
-     * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccess (success) {POST} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
      * @apiSuccessExample {json} 返回样例:
      *                    {"code":"success",
      *                     "data":{
@@ -153,20 +161,20 @@ public class UserCarController extends BaseController {
      *                        ]
      *                     }
      */
-    @GetMapping("/illegal/info/{carId}")
-    public Result searchIllegalInfo(@PathVariable Integer carId){
-        return illegalService.getCurrentIllegal(carId);
+    @PostMapping("/illegal/info")
+    public Result searchIllegalInfo(@RequestBody UserCar userCar){
+        return illegalService.getCurrentIllegal(userCar);
     }
 
     /**
-     * @api {GET} /license/score/{fileId}/{licenseId} 驾照查分
+     * @api {GET} /car/license/score/{fileId}/{licenseId} 驾照查分
      * @apiGroup UserCar
      * @apiVersion 0.0.1
      * @apiParam {String} fileId 档案编号
      * @apiParam {String} licenseId 驾驶证号
      * @apiDescription 驾照查分
      * @apiParamExample {json} 请求样例：
-     *  /license/score/12/12
+     *  /car/license/score/12/12
      * @apiSuccess (200) {String} msg 信息
      * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
      * @apiSuccessExample {json} 返回样例:

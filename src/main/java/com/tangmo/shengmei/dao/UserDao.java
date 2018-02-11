@@ -122,4 +122,11 @@ public interface UserDao {
      * @return
      */
     String selectTokenByUserId(Integer userId);
+
+    /**
+     * 查询登录信息
+     * @param userId
+     * @return
+     */
+    User selectLoginById(Integer userId);
 }

@@ -4,6 +4,7 @@ import com.tangmo.shengmei.entity.FeedBack;
 import com.tangmo.shengmei.entity.User;
 import com.tangmo.shengmei.entity.WithDrawInfo;
 import com.tangmo.shengmei.utility.code.Result;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @author boge
@@ -49,10 +50,10 @@ public interface UserService {
      * 上传头像
      *
      * @param userId
-     * @param code
+     * @param file
      * @return
      */
-    Result uploadAvatar(Integer userId, String code);
+    Result uploadAvatar(Integer userId,MultipartFile file);
 
     /**
      * 修改手机号
@@ -79,6 +80,14 @@ public interface UserService {
      * @return
      */
     Result changePwd(User user);
+
+    /**
+     * 重置密码
+     *
+     * @param user
+     * @return
+     */
+    Result resetPwd(User user);
 
     /**
      * 增加提现记录
@@ -163,4 +172,12 @@ public interface UserService {
      * @return
      */
     String getAuthCode(String mobile);
+
+    /**
+     * 通过手机号查询
+     *
+     * @param mobile
+     * @return
+     */
+    User searchUserByMobile(String mobile);
 }

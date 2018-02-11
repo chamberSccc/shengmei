@@ -13,12 +13,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import org.apache.commons.io.FileUtils;
 
 /**
  * @author boge
@@ -78,6 +80,62 @@ public class ImgFileServiceImpl implements ImgFileService {
             e.printStackTrace();
         }
         return responseEntity;
+    }
+
+    @Override
+    public String uploadFile(MultipartFile file, Integer userId) {
+        String[] strings = uploadFileReturnType(file, userId);
+        return strings[0];
+    }
+
+    @Transactional (rollbackFor = Exception.class)
+    public String[] uploadFileReturnType(MultipartFile file, Integer userId) {
+        String[] rfInfo = new String[2];
+        //验证文件格式
+        String fileOriginalName = file.getOriginalFilename();
+        int index = fileOriginalName.lastIndexOf(".") + 1;
+        String fileType = fileOriginalName.substring(index);
+        rfInfo[1] = fileType;
+        String dir = env.getProperty("RF.BASE_DIR");
+        String uuid = EncryptUtil.get32Uuid();
+        StringBuilder sb = new StringBuilder("").append("/").append(userId).append("/")
+                .append(uuid).append(".").append(fileType);
+        String fileName = sb.toString();
+        boolean bool = uploadFileEntity(file, dir, fileName);
+        if (!bool) {
+            return null;
+        }
+        RsFile rf = new RsFile();
+        rf.setRfId(uuid);
+        rf.setPath(fileName);
+        rf.setUserId(userId);
+        int row = fileDao.insertSelective(rf);
+        if (row > 0) {
+            rfInfo[0] = uuid;
+            return rfInfo;
+        }
+        return null;
+    }
+
+    /**
+     * 上传文件的方法
+     * <p>
+     * 1.使用MultipartFile 获取文件;
+     * 2.将上传上来的文件存储与临时目录
+     *
+     * @param file MultipartFile 要上传的文件
+     * @return fileName  文件名
+     * @throws boolean 成功:true; 失败:false
+     */
+    private boolean uploadFileEntity(MultipartFile file, String dir, String fileName) {
+        try {
+            File newFile = new File(dir, fileName);
+            //该方法内部会自动把用到的IO流关掉
+            FileUtils.copyInputStreamToFile(file.getInputStream(), newFile);
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
     }
 
     /**

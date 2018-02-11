@@ -15,7 +15,7 @@
     <sql id="Base_Column_List" >
 
     </sql>
-    <insert id="insertSelective" parameterType="com.tangmo.shengmei.entity.UserCar">
+    <insert id="insertSelective" parameterType="com.tangmo.shengmei.entity.UserCar" useGeneratedKeys="true" keyProperty="ucId">
             insert into user_car
             <trim prefix="(" suffix=")" suffixOverrides=",">
                 <if test="userId != null">

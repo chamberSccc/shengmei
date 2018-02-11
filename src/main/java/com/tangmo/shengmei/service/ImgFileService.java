@@ -2,6 +2,7 @@ package com.tangmo.shengmei.service;
 
 import com.tangmo.shengmei.entity.RsFile;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @author boge
@@ -37,4 +38,12 @@ public interface ImgFileService {
      * @return
      */
     ResponseEntity<byte[]> downloadFile(String rfId, String userAgent);
+
+    /**
+     * 上传文件
+     * @param file
+     * @param userId
+     * @return
+     */
+    String uploadFile(MultipartFile file, Integer userId);
 }

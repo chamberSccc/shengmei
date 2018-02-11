@@ -25,7 +25,7 @@
          VALUES (#{userId},#{carId},#{totalPrice},#{totalScore})
     </insert>
 
-    <select id="selectByUserAndCar" resultMap="ValidResultMap">
+    <select id="selectByCarId" resultMap="ValidResultMap">
         SELECT id,user_id,car_id FROM illegal_info WHERE car_id = #{carId}
     </select>
 
@@ -49,5 +49,6 @@
         LEFT JOIN user_car uc ON ii.car_id = uc.uc_id
         limit #{start},#{end}
     </select>
+
 
 </mapper>
