@@ -39,7 +39,7 @@ public class CarOrgCode {
     private static final String JIANGSU = "苏";
     private static final String JIANGSU_CODE = "jiangsu";
     private static final String JIANGXI = "赣";
-    private static final String JIANGXI_CODE = "江西";
+    private static final String JIANGXI_CODE = "jiangxi";
 
     private static final String LIAONING = "辽";
     private static final String LIAONING_CODE = "liaoning";

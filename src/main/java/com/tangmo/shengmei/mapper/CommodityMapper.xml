@@ -37,6 +37,7 @@
         <result column="cd_id" property="goodsId" jdbcType="INTEGER"/>
         <result column="user_id" property="userId" jdbcType="INTEGER"/>
         <result column="img_id" property="imgId" jdbcType="VARCHAR"/>
+        <result column="price_now" property="priceNow" jdbcType="DOUBLE"/>
         <result column="title" property="title" jdbcType="VARCHAR"/>
         <result column="content" property="content" jdbcType="VARCHAR"/>
         <result column="cd_type" property="cdType" jdbcType="TINYINT"/>
@@ -239,7 +240,7 @@
     </select>
 
     <select id="selectViewRecord" resultMap="ViewResultMap">
-        SELECT vr.vr_id,vr.user_id,cd.cd_id,cd.img_id,cd.title,cd.content,cd.cd_type,vr.createtime
+        SELECT vr.vr_id,vr.user_id,cd.cd_id,cd.img_id,cd.title,cd.content,cd.cd_type,cd.price_now,vr.createtime
         FROM view_record vr LEFT JOIN commodity cd ON vr.goods_id = cd.cd_id
         WHERE vr.user_id = #{userId} limit #{start},#{end}
     </select>

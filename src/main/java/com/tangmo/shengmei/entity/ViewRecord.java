@@ -21,6 +21,7 @@ public class ViewRecord implements Serializable {
     private Byte cdType;
     private String imgId;
     private String title;
+    private Double priceNow;
     private String content;
     private Date createTime;
 
