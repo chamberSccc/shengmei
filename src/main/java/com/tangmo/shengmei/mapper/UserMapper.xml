@@ -116,6 +116,10 @@
         UPDATE user_info SET password = #{newPwd} WHERE user_id = #{userId}
     </update>
 
+    <update id="updatePwdByMobile">
+        UPDATE user_info SET password = #{newPwd} WHERE mobile = #{mobile}
+    </update>
+
     <insert id="insertViewRecord" parameterType="com.tangmo.shengmei.entity.ViewRecord">
         INSERT INTO view_record  (goods_id,user_id,belong_type) VALUES
         (#{goodsId},#{userId},#{belongType})

@@ -85,7 +85,7 @@ public class UserServiceImpl implements UserService {
             }
         }
         userDao.updateAvatar(userId,uuid);
-        return ResultUtil.success();
+        return ResultUtil.success(uuid);
     }
 
     @Override
@@ -120,7 +120,7 @@ public class UserServiceImpl implements UserService {
         if(user.getNewPwd() == null){
             return ResultUtil.fail();
         }
-        userDao.updatePwd(user);
+        userDao.updatePwdByMobile(user);
         return ResultUtil.success();
     }
 

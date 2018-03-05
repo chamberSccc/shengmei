@@ -83,6 +83,8 @@ public interface UserDao {
      */
     int updatePwd(User user);
 
+    int updatePwdByMobile(User user);
+
     /**
      * 增加浏览记录
      *

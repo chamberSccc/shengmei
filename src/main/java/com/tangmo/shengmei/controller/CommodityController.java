@@ -105,6 +105,7 @@ public class CommodityController extends BaseController {
      *                        content: "商品信息内容1",
      *                        pricePre:"商品原价1",
      *                        priceNow:"商品现价1",
+     *                        condition:"新旧程度",
      *                        cdType:"商品类型1",},
      *                     {
      *                        cdId: 2,
@@ -115,6 +116,7 @@ public class CommodityController extends BaseController {
      *                        district:"区",
      *                        content: "商品信息内容2",
      *                        pricePre:"商品原价2",
+     *                        condition:"新旧程度",
      *                        priceNow:"商品现价2",
      *                        cdType:"商品类型2"},
      *                     }]
@@ -150,6 +152,7 @@ public class CommodityController extends BaseController {
      *                        content: "商品信息内容1",
      *                        pricePre:"商品原价1",
      *                        priceNow:"商品现价1",
+     *                        condition:"新旧程度",
      *                        cdType:"商品类型1"},
      *                     {
      *                        cdId: 2,
@@ -161,6 +164,7 @@ public class CommodityController extends BaseController {
      *                        content: "商品信息内容2",
      *                        pricePre:"商品原价2",
      *                        priceNow:"商品现价2",
+     *                        condition:"新旧程度",
      *                        cdType:"商品类型2"},
      *                     }]
      *                     }
@@ -332,12 +336,14 @@ public class CommodityController extends BaseController {
      *                        title: "商品信息标题1",
      *                        content: "商品信息内容1",
      *                        imgId:"图片id",
+     *                        priceNow:"价格",
      *                        cdType:"商品类型1"},
      *                     {
      *                        vrId: "浏览记录主键",
      *                        goodsId:商品信息主键,
      *                        title: "商品信息标题2",
      *                        content: "商品信息内容2",
+     *                        priceNow:"价格",
      *                        cdType:"商品类型2"}
      *                     }]
      *                     }

@@ -170,13 +170,7 @@ public class UserController extends BaseController{
      */
     @PutMapping("/mobile")
     public Result changeMobile(@RequestBody User user){
-        //先从数据库查询旧数据
-        Result result = userService.getUser(user.getUserId());
-        User checkUser = (User) result.getData();
-        if(checkUser.getMobile() == null){
-            return ResultUtil.fail();
-        }
-        String code = (String) getSession().getAttribute(checkUser.getMobile());
+        String code = (String) getSession().getAttribute(user.getMobile());
         if(code == null){
             return ResultUtil.codeError();
         }
