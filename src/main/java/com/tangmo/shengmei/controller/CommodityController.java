@@ -9,7 +9,6 @@ import com.tangmo.shengmei.utility.code.Result;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.List;
 
 /**
  * @author boge
@@ -38,7 +37,7 @@ public class CommodityController extends BaseController {
      *                      priceNow:"现价",
      *                      cdType:"商品类型,0,1,2",
      *                      condition:"新旧程度",
-     *                      cdCount:"商品数量",
+     *                      cdCount:"商品数量",c
      *                      cdColor:"商品颜色,多种颜色以逗号分隔,
      *                      cdSize:"商品规格,多种规格以逗号分隔",
      *                      file:商品图片

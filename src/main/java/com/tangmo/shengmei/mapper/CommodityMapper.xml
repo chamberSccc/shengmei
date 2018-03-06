@@ -19,6 +19,7 @@
         <result column="district" property="district" jdbcType="VARCHAR"/>
         <result column="star" property="star" jdbcType="INTEGER"/>
         <result column="cd_count" property="cdCount" jdbcType="INTEGER"/>
+        <result column="cd_type" property="cdType" jdbcType="TINYINT"/>
         <result column="createtime" property="createTime" jdbcType="TIMESTAMP"/>
     </resultMap>
 
@@ -170,7 +171,7 @@
 
     <select id="selectListByType" resultMap="BaseResultMap">
         SELECT cd_id,user_id,img_id,title,content,cd_type,price_pre,
-        price_now,createtime,province,city,district,condition
+        price_now,createtime,province,city,district,commodity.condition
           FROM commodity WHERE cd_type = #{cdType} AND is_sell = 0 limit #{start},#{end}
     </select>
 
@@ -235,7 +236,7 @@
 
     <select id="selectQualityList" resultMap="BaseResultMap">
         SELECT cd_id,img_id,title,content,cd_type,cd_count,price_pre,
-        price_now,createtime,province,city,district,user_id,condition
+        price_now,createtime,province,city,district,user_id,commodity.condition
         FROM commodity WHERE is_quality = 1 AND is_sell = 0 limit #{start},#{end}
     </select>
 
@@ -258,7 +259,7 @@
     </delete>
 
     <select id="selectCdByCondition" parameterType="com.tangmo.shengmei.entity.CommodityDto" resultMap="BaseResultMap">
-        SELECT cd_id,img_id,title,content,cd_type,cd_count,price_pre,price_now,createtime,province,city,district,condition
+        SELECT cd_id,img_id,title,content,cd_type,cd_count,price_pre,price_now,createtime,province,city,district,commodity.condition
         FROM commodity WHERE is_sell = 0
         <if test="city != null"> AND city = #{city} </if>
         <if test="district != null"> AND district = #{district} </if>
@@ -276,14 +277,14 @@
 
     <select id="selectQualityListByType" resultMap="BaseResultMap">
         SELECT cd_id,img_id,title,content,cd_type,cd_count,price_pre,
-        price_now,createtime,province,city,district,user_id,condition
+        price_now,createtime,province,city,district,user_id,commodity.condition
         FROM commodity WHERE is_quality = 1 AND is_sell = 0
         AND cd_type = #{cdType} ORDER BY updatetime DESC  limit #{start},#{end}
     </select>
 
     <select id="selectStarListByType" resultMap="BaseResultMap">
         SELECT cd_id,img_id,title,content,cd_type,cd_count,price_pre,
-        price_now,createtime,province,city,district,user_id,condition
+        price_now,createtime,province,city,district,user_id,commodity.condition
         FROM commodity WHERE is_sell = 0
         AND cd_type = #{cdType} ORDER BY star DESC limit #{start},#{end}
     </select>
