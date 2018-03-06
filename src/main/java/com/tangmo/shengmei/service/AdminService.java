@@ -58,7 +58,7 @@ public interface AdminService {
      * @param gtId
      * @return
      */
-    Result searchGoodsTypeItem(Byte gtId);
+    Result searchGoodsTypeItem(Integer gtId);
 
     /**
      * 查询商品类型

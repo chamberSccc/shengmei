@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/common")
 public class CommonController extends BaseController{
 
-    //获取商品类型列表
     /**
      * @api {GET} /common/goods/type 获取商品类型列表
      * @apiGroup Common
@@ -32,7 +31,7 @@ public class CommonController extends BaseController{
      *                     [{
      *                        id: "类型主键",
      *                        name:名称,
-     *                        value: "对应值"},
+     *                        value: "对应数字值"},
      *                     ...]
      *                     }
      */
@@ -56,12 +55,13 @@ public class CommonController extends BaseController{
      *                     [{
      *                        id: "分类主键",
      *                        name:"名称",
-     *                        gtId: "对应商品类型主键"},
+     *                        gtId: "对应商品类型主键",
+     *                        value:"对应数字值"},
      *                     ...]
      *                     }
      */
     @GetMapping("/goods/class/{type}")
-    public Result getCarClass(@PathVariable Byte type){
+    public Result getCarClass(@PathVariable Integer type){
         return adminService.searchGoodsTypeItem(type);
     }
 }

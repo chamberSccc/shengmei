@@ -77,7 +77,7 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public Result searchGoodsTypeItem(Byte gtId) {
+    public Result searchGoodsTypeItem(Integer gtId) {
         return ResultUtil.success(commonDao.selectItemByType(gtId));
     }
 

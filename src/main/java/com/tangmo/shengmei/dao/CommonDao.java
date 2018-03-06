@@ -27,7 +27,7 @@ public interface CommonDao {
      * @param type
      * @return
      */
-    List<GoodsTypeItem> selectItemByType(Byte type);
+    List<GoodsTypeItem> selectItemByType(Integer type);
 
     /**
      * 增加商品分类
