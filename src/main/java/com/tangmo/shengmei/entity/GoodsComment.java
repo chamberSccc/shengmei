@@ -21,5 +21,13 @@ public class GoodsComment implements Serializable{
     private String avatarId;
     private Byte belongType;
     private String comment;
+
+    /**
+     * 评价指标相关
+     */
+    private Byte goodsWrapper;
+    private Byte expressSpeed;
+    private Byte deliverAtti;
+    private Byte isAnonymous;
     private Date createTime;
 }

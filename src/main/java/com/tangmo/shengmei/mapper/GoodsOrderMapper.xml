@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tangmo.shengmei.dao.IllegalDao">
+    <resultMap id="BaseResultMap" type="com.tangmo.shengmei.entity.GoodsOrder" >
+        <id column="go_id" property="goId" jdbcType="INTEGER"/>
+        <result column="cd_id" property="cdId" jdbcType="INTEGER"/>
+        <result column="ua_id" property="uaId" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="go_count" property="goCount" jdbcType="INTEGER"/>
+        <result column="order_state" property="orderState" jdbcType="TINYINT"/>
+        <result column="order_number" property="orderNumber" jdbcType="VARCHAR"/>
+        <result column="trans_number" property="transNumber" jdbcType="VARCHAR"/>
+        <result column="express_fee" property="expressFee" jdbcType="DOUBLE"/>
+        <result column="discount_fee" property="discountFee" jdbcType="DOUBLE"/>
+        <result column="pay_fee" property="payFee" jdbcType="DOUBLE"/>
+        <result column="pay_time" property="payTime" jdbcType="TIMESTAMP"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <insert id="insertGo" parameterType="com.tangmo.shengmei.entity.GoodsOrder">
+        insert into goods_order (go_id,cd_id,ua_id,user_id,go_count,order_state,
+        order_number,express_fee,discount_fee,pay_fee)
+         VALUES (#{goId},#{cdId},#{uaId},#{userId},#{goCount},#{orderState},
+         #{orderNumber},#{expressFee},#{discountFee},#{payFee})
+    </insert>
+</mapper>
