@@ -56,8 +56,9 @@ public class IllegalServiceImpl implements IllegalService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if(illegalInfo == null){
-            return ResultUtil.fail();
+        //如果有错误msg
+        if(illegalInfo.getMsg()!= null){
+            return ResultUtil.success(illegalInfo);
         }
         if(userCar.getIsSave() == 1){
             userCarDao.insertSelective(userCar);

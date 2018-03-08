@@ -42,7 +42,9 @@ public class SearchIllegal {
             JSONObject json = JSONObject.parseObject(result);
             if (json.getIntValue("status") != 0) {
                 log.error(json.getString("msg"));
-                return null;
+                IllegalInfo error = new IllegalInfo();
+                error.setMsg(json.getString("msg"));
+                return error;
             } else {
                 //查询成功,得到违章结果
                 JSONObject resultarr = json.getJSONObject("result");

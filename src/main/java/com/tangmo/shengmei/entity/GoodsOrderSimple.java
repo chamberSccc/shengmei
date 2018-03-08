@@ -5,38 +5,27 @@ import lombok.Data;
 import java.sql.Date;
 
 /**
- * @author boge
- * @date 18/3/8
- * @description
+ * @author Chamber
+ * @date 2018/3/8.
  */
 @Data
-public class GoodsOrder {
+public class GoodsOrderSimple {
+
     private Integer goId;
     private Integer cdId;
     private Integer uaId;
     private Integer userId;
-    private Integer goCount;
     private Byte orderState;
     private String orderNumber;
-    private String transNumber;
-
-
-    /**物流*/
+    private Integer goCount;
+    private String cdSize;
+    private String cdColor;
     private Double expressFee;
     private Double discountFee;
     private Double payFee;
-
-
-    private Date payTime;
-    private Date createTime;
-    private Date updateTime;
-
     /**商品信息*/
     private String imgId;
     private String title;
     private String content;
-    private String cdSize;
-    private String cdColor;
 
-    private UserAddress address;
 }

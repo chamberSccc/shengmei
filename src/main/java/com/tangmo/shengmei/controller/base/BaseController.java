@@ -41,6 +41,8 @@ public class BaseController {
     protected AdminService adminService;
     @Resource
     protected IllegalService illegalService;
+    @Resource
+    protected GoodsOrderService goodsOrderService;
     /**
      * 得到request对象
      */

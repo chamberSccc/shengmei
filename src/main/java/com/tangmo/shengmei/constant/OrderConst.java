@@ -14,8 +14,14 @@ public class OrderConst {
      * 交易完成
      */
     public static final Byte DEAL_DONE = 1;
+
+    /**
+     * 待发货
+     */
+    public static final Byte WAIT_DELIVER = 2;
     /**
      * 评价完成
      */
-    public static final Byte OCOMMENT_DONE = 2;
+    public static final Byte COMMENT_DONE = 3;
+
 }

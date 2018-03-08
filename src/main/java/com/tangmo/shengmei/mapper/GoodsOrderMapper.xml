@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.tangmo.shengmei.dao.IllegalDao">
-    <resultMap id="BaseResultMap" type="com.tangmo.shengmei.entity.GoodsOrder" >
+<mapper namespace="com.tangmo.shengmei.dao.GoodsOrderDao">
+    <resultMap id="BaseResultMap" type="com.tangmo.shengmei.entity.GoodsOrderSimple" >
+        <id column="go_id" property="goId" jdbcType="INTEGER"/>
+        <result column="cd_id" property="cdId" jdbcType="INTEGER"/>
+        <result column="ua_id" property="uaId" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="order_state" property="orderState" jdbcType="TINYINT"/>
+        <result column="order_number" property="orderNumber" jdbcType="VARCHAR"/>
+        <result column="pay_fee" property="payFee" jdbcType="DOUBLE"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="content" property="content" jdbcType="VARCHAR"/>
+        <result column="img_id" property="imgId" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <resultMap id="DetailResultMap" type="com.tangmo.shengmei.entity.GoodsOrder" >
         <id column="go_id" property="goId" jdbcType="INTEGER"/>
         <result column="cd_id" property="cdId" jdbcType="INTEGER"/>
         <result column="ua_id" property="uaId" jdbcType="INTEGER"/>
@@ -14,14 +27,64 @@
         <result column="discount_fee" property="discountFee" jdbcType="DOUBLE"/>
         <result column="pay_fee" property="payFee" jdbcType="DOUBLE"/>
         <result column="pay_time" property="payTime" jdbcType="TIMESTAMP"/>
-        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
-        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="createtime" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="content" property="content" jdbcType="VARCHAR"/>
+        <result column="img_id" property="imgId" jdbcType="VARCHAR"/>
+        <result column="cd_size" property="cdSize" jdbcType="VARCHAR"/>
+        <result column="cd_color" property="cdColor" jdbcType="VARCHAR"/>
+        <association property="address" column="ua_Id" select="selectAddressByUaId"/>
+    </resultMap>
+
+    <resultMap id="AddressResultMap" type="com.tangmo.shengmei.entity.UserAddress" >
+        <result column="ua_id" property="uaId" jdbcType="INTEGER"/>
+        <result column="mobile" property="mobile" jdbcType="VARCHAR"/>
+        <result column="recipient" property="recipient" jdbcType="VARCHAR"/>
+        <result column="address" property="address" jdbcType="VARCHAR"/>
+        <result column="city" property="city" jdbcType="VARCHAR"/>
+        <result column="district" property="district" jdbcType="VARCHAR"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="is_default" property="isDefault" jdbcType="TINYINT"/>
     </resultMap>
 
     <insert id="insertGo" parameterType="com.tangmo.shengmei.entity.GoodsOrder">
         insert into goods_order (go_id,cd_id,ua_id,user_id,go_count,order_state,
-        order_number,express_fee,discount_fee,pay_fee)
+        order_number,express_fee,discount_fee,pay_fee,cd_size,cd_color)
          VALUES (#{goId},#{cdId},#{uaId},#{userId},#{goCount},#{orderState},
-         #{orderNumber},#{expressFee},#{discountFee},#{payFee})
+         #{orderNumber},#{expressFee},#{discountFee},#{payFee},#{cdSize},#{cdColor})
     </insert>
+
+    <select id="selectOrderByState" resultMap="BaseResultMap">
+        SELECT gor.go_id,gor.cd_id,cd.title,cd.content,gor.pay_fee,
+        cd.img_id,gor.order_state FROM goods_order gor
+        INNER JOIN commodity cd ON gor.cd_id = cd.cd_id
+        WHERE gor.user_id = #{userId}
+        <if test="state == '0'.toString()"> AND gor.order_state = #{state}</if>
+        <if test="state == '1'.toString()"> AND gor.order_state &gt;= #{state}</if>
+        ORDER BY gor.go_id DESC
+        limit #{start},#{end}
+    </select>
+
+    <select id="selectAllOrder" resultMap="BaseResultMap">
+        SELECT gor.go_id,gor.cd_id,cd.title,cd.content,gor.pay_fee,
+        cd.img_id,gor.order_state FROM goods_order gor
+        INNER JOIN commodity cd ON gor.cd_id = cd.cd_id
+        WHERE gor.user_id = #{userId}
+        ORDER BY gor.go_id DESC
+        limit #{start},#{end}
+    </select>
+
+    <select id="selectById" resultMap="DetailResultMap">
+        SELECT gor.go_id,gor.cd_id,cd.title,cd.content,gor.pay_fee,cd.img_id,gor.cd_size,gor.user_id,
+        gor.order_state,gor.ua_id,gor.pay_fee,gor.trans_number,gor.express_fee,gor.cd_color,gor.go_count,
+        gor.discount_fee,gor.pay_fee,gor.pay_time,gor.createtime,gor.order_number FROM goods_order gor
+        INNER JOIN commodity cd ON gor.cd_id = cd.cd_id
+        WHERE gor.user_id = #{userId}
+        limit #{start},#{end}
+    </select>
+
+    <select id="selectAddressByUaId" resultMap="AddressResultMap">
+        SELECT ua_id,mobile,recipient,is_default,address,city,district
+        FROM user_address WHERE ua_id = #{uaId}
+    </select>
 </mapper>

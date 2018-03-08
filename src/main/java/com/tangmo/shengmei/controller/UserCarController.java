@@ -1,7 +1,6 @@
 package com.tangmo.shengmei.controller;
 
 import com.tangmo.shengmei.controller.base.BaseController;
-import com.tangmo.shengmei.entity.UserAddress;
 import com.tangmo.shengmei.entity.UserCar;
 import com.tangmo.shengmei.utility.code.Result;
 import org.springframework.web.bind.annotation.*;
@@ -148,8 +147,8 @@ public class UserCarController extends BaseController {
      *                        username:"姓名",
      *                        carProvince:"车辆省份  陕A,山A...",
      *                        carType:"车类型 0:小车,1:大车",
-     *                        carNum:"12345"
-     *                        [{
+     *                        carNum:"12345",
+     *                        list:[{
      *                            canHandle:"是否可以代缴",
      *                            address:"违章地址",
      *                            handleFee:"代缴费用",
