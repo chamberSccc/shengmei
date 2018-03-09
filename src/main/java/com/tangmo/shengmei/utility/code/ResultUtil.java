@@ -43,4 +43,6 @@ public class ResultUtil {
     public static Result pwdError(){return createResult(Result.PWD_ERROR);}
 
     public static Result codeError(){return createResult(Result.CODE_ERROR);}
+
+    public static Result paramError(){return createResult(Result.PARAM_ERROR);}
 }

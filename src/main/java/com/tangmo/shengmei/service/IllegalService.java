@@ -43,6 +43,14 @@ public interface IllegalService {
     Result getCurrentIllegal(UserCar userCar);
 
     /**
+     * 获取已存车辆违章信息
+     *
+     * @param carId
+     * @return
+     */
+    Result getCurrentIllegal(Integer carId);
+
+    /**
      * 驾照查分
      *
      * @param fileId

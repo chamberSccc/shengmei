@@ -125,7 +125,6 @@ public class UserCarController extends BaseController {
      * @api {POST} /car/illegal/info 获取违章信息
      * @apiGroup UserCar
      * @apiVersion 0.0.1
-     * @apiParam {int} carId 车辆Id
      * @apiDescription 获取违章信息
      * @apiParamExample {json} 请求样例：
      *                    {
@@ -163,6 +162,42 @@ public class UserCarController extends BaseController {
     @PostMapping("/illegal/info")
     public Result searchIllegalInfo(@RequestBody UserCar userCar){
         return illegalService.getCurrentIllegal(userCar);
+    }
+
+    /**
+     * @api {GET} /car/illegal/info/{carId} 获取已存车辆违章信息
+     * @apiGroup UserCar
+     * @apiVersion 0.0.1
+     * @apiParam {int} carId 车辆Id
+     * @apiDescription 获取已存车辆违章信息
+     * @apiParamExample {json} 请求样例：
+     *              /car/illegal/info/1
+     * @apiSuccess (200) {String} msg 信息
+     * @apiSuccess (success) {POST} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success",
+     *                     "data":{
+     *                        userId: 1,
+     *                        carId:"车辆ID",
+     *                        username:"姓名",
+     *                        carProvince:"车辆省份  陕A,山A...",
+     *                        carType:"车类型 0:小车,1:大车",
+     *                        carNum:"12345",
+     *                        list:[{
+     *                            canHandle:"是否可以代缴",
+     *                            address:"违章地址",
+     *                            handleFee:"代缴费用",
+     *                            content:"违章内容",
+     *                            score:"扣分",
+     *                            price:"金额",
+     *                            time:"违章时间"
+     *                        }
+     *                        ]
+     *                     }
+     */
+    @PostMapping("/illegal/info/{carId}")
+    public Result searchIllegalInfo(@PathVariable Integer carId){
+        return illegalService.getCurrentIllegal(carId);
     }
 
     /**

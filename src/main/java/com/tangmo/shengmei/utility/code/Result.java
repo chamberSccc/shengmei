@@ -15,7 +15,7 @@ public class Result<T> implements Serializable {
 
     public static final String FAIL = "fail";
     public static final String SUCCESS = "success";
-    public static final String PARAM_ERROR = "error";
+    public static final String PARAM_ERROR = "param_error";
     public static final String ERROR_MOBILE = "registered";
     public static final String PWD_ERROR="pwd_error";
     public static final String CODE_ERROR="code_error";

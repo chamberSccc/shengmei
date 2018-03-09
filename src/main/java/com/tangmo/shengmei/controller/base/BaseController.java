@@ -43,6 +43,8 @@ public class BaseController {
     protected IllegalService illegalService;
     @Resource
     protected GoodsOrderService goodsOrderService;
+    @Resource
+    protected CommonService commonService;
     /**
      * 得到request对象
      */

@@ -15,6 +15,12 @@
         <result column="gt_id" property="gtId" jdbcType="TINYINT"/>
     </resultMap>
 
+    <resultMap id="PvResultMap" type="com.tangmo.shengmei.entity.ParamValue" >
+        <id column="pv_id" property="pvId" jdbcType="INTEGER"/>
+        <result column="param_type" property="paramType" jdbcType="TINYINT"/>
+        <result column="param_value" property="paramValue" jdbcType="VARCHAR"/>
+    </resultMap>
+
     <select id="selectGoodsType" resultMap="TypeResultMap">
         select id,name,value FROM goods_type
     </select>
@@ -45,6 +51,22 @@
         INSERT INTO access_count (ip) VALUES (#{ip})
     </insert>
 
+    <insert id="insertParamValue" parameterType="com.tangmo.shengmei.entity.ParamValue">
+        INSERT INTO param_value (param_type,param_value)
+        VALUES (#{paramType},#{paramValue})
+    </insert>
 
+    <update id="updateParamValue" parameterType="com.tangmo.shengmei.entity.ParamValue">
+        UPDATE param_value SET param_value = #{paramValue}
+        WHERE pv_id = #{pvId,jdbcType=INTEGER}
+    </update>
+
+    <select id="selectPvByType" resultMap="PvResultMap">
+        SELECT pv_id,param_type,param_value FROM param_value WHERE param_type = #{type}
+    </select>
+
+    <delete id="deletePvById">
+        DELETE FROM param_value WHERE pv_id = #{pvId}
+    </delete>
 
 </mapper>

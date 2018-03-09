@@ -76,6 +76,12 @@ public class IllegalServiceImpl implements IllegalService {
     }
 
     @Override
+    public Result getCurrentIllegal(Integer carId) {
+        UserCar userCar = userCarDao.selectById(carId);
+        return ResultUtil.success(getCurrentIllegal(userCar));
+    }
+
+    @Override
     public Result getCurrentLicenseScore(String fileId, String licenseId) {
         return ResultUtil.success(SearchLicense.searchLicenseScore(fileId, licenseId));
     }

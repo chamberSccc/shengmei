@@ -2,7 +2,9 @@ package com.tangmo.shengmei.dao;
 
 import com.tangmo.shengmei.entity.GoodsType;
 import com.tangmo.shengmei.entity.GoodsTypeItem;
+import com.tangmo.shengmei.entity.ParamValue;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -68,6 +70,38 @@ public interface CommonDao {
      * @return
      */
     int insertAccessCount(String ip);
+
+    /**
+     * 增加参数值
+     *
+     * @param paramValue
+     * @return
+     */
+    int insertParamValue(ParamValue paramValue);
+
+    /**
+     * 修改参数值
+     *
+     * @param paramValue
+     * @return
+     */
+    int updateParamValue(ParamValue paramValue);
+
+    /**
+     * 通过类型查询参数值
+     *
+     * @param type
+     * @return
+     */
+    List<ParamValue> selectPvByType(Byte type);
+
+    /**
+     * 通过主键删除参数值
+     *
+     * @param pvId
+     * @return
+     */
+    int deletePvById(Integer pvId);
 
 
 }
