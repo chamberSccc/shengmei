@@ -17,4 +17,9 @@ public class ParamConst {
      */
     public static final Byte GOODS_COLOR = 1;
     public static final String GOODS_COLOR_CODE = "商品颜色";
+
+    /**
+     * 商品新旧程度
+     */
+    public static final Byte GOODS_CONDITION = 2;
 }

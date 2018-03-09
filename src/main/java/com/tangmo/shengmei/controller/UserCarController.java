@@ -195,7 +195,7 @@ public class UserCarController extends BaseController {
      *                        ]
      *                     }
      */
-    @PostMapping("/illegal/info/{carId}")
+    @GetMapping("/illegal/info/{carId}")
     public Result searchIllegalInfo(@PathVariable Integer carId){
         return illegalService.getCurrentIllegal(carId);
     }

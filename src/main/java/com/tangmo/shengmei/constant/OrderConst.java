@@ -19,9 +19,25 @@ public class OrderConst {
      * 待发货
      */
     public static final Byte WAIT_DELIVER = 2;
+
+    /**
+     * 已发货
+     */
+    public static final Byte DONE_DELIVER = 3;
+
+    /**
+     * 已收货
+     */
+    public static final Byte RECEIVE__DELIVER = 4;
+
     /**
      * 评价完成
      */
-    public static final Byte COMMENT_DONE = 3;
+    public static final Byte COMMENT_DONE = 5;
+
+    /**
+     * 交易关闭
+     */
+    public static final Byte DEAL_COLSE = 4;
 
 }

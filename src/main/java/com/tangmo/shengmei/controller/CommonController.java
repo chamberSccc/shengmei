@@ -109,6 +109,27 @@ public class CommonController extends BaseController{
     }
 
     /**
+     * @api {POST} /common/goods/condition 增加商品新旧程度
+     * @apiGroup Common
+     * @apiVersion 0.0.1
+     * @apiDescription 增加商品规格
+     * @apiParam {ParamValue} paramValue 参数对象
+     * @apiParamExample {json} 请求样例:
+     *                   {
+     *                      paramValue:"参数值"
+     *                   }
+     * @apiSuccess (success) {POST} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccess (success) {POST} data 返回数据
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success"}
+     */
+    @PostMapping("/goods/condition")
+    public Result addGoodCondition(@RequestBody ParamValue paramValue){
+        paramValue.setParamType(ParamConst.GOODS_CONDITION);
+        return commonService.addParamValue(paramValue);
+    }
+
+    /**
      * @api {GET} /common/goods/color 获取商品颜色列表
      * @apiGroup Common
      * @apiVersion 0.0.1
@@ -131,6 +152,31 @@ public class CommonController extends BaseController{
     @GetMapping("/goods/color")
     public Result getGoodsColor(){
         return commonService.searchParamByType(ParamConst.GOODS_COLOR);
+    }
+
+    /**
+     * @api {GET} /common/goods/condition 获取商品新旧程度列表
+     * @apiGroup Common
+     * @apiVersion 0.0.1
+     * @apiDescription 获取商品颜色列表
+     * @apiParamExample {json} 请求样例：
+     *  /common/goods/condition
+     * @apiSuccess (200) {String} msg 信息
+     * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success",
+     *                     "data":{
+     *                     [{
+     *                        pvId: "主键",
+     *                        paramType:"类型",
+     *                        paramValue: "参数值"
+     *                        },
+     *                     ...]
+     *                     }
+     */
+    @GetMapping("/goods/condition")
+    public Result getGoodsCondition(){
+        return commonService.searchParamByType(ParamConst.GOODS_CONDITION);
     }
 
     /**
