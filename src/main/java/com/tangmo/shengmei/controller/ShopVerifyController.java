@@ -23,7 +23,7 @@ public class ShopVerifyController extends BaseController{
      * @apiGroup ShopVerify
      * @apiVersion 0.0.1
      * @apiDescription 增加商家审核信息
-     * @apiParam {UserAddress} UserAddress 用户地址对象
+     * @apiParam {ShopVerify} shopVerify 商家审核对象
      * @apiParamExample {json} 请求样例:
      *                   {
      *                      userId:"用户Id",

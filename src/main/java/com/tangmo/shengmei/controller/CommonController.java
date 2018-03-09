@@ -180,12 +180,12 @@ public class CommonController extends BaseController{
     }
 
     /**
-     * @api {GET} /common/goods/color 获取商品规格列表
+     * @api {GET} /common/goods/size 获取商品规格列表
      * @apiGroup Common
      * @apiVersion 0.0.1
      * @apiDescription 获取商品规格列表
      * @apiParamExample {json} 请求样例：
-     *  /common/goods/color
+     *  /common/goods/size
      * @apiSuccess (200) {String} msg 信息
      * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
      * @apiSuccessExample {json} 返回样例:

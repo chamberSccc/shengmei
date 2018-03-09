@@ -60,7 +60,7 @@ public class GoodsOrderController extends BaseController{
      *                     "data":{
      *                     [{
      *                        goId: "订单Id",
-     *                        cdId: "文章标题",
+     *                        cdId: "商品id",
      *                        orderState: "订单状态",
      *                        imgId:"商品图片",
      *                        title:"商品标题",
@@ -91,7 +91,7 @@ public class GoodsOrderController extends BaseController{
      *                     "data":{
      *                     [{
      *                        goId: "订单Id",
-     *                        cdId: "文章标题",
+     *                        cdId: "商品id",
      *                        orderState: "订单状态",
      *                        imgId:"商品图片",
      *                        title:"商品标题",
@@ -122,7 +122,7 @@ public class GoodsOrderController extends BaseController{
      *                     "data":{
      *                     [{
      *                        goId: "订单Id",
-     *                        cdId: "文章标题",
+     *                        cdId: "商品id",
      *                        orderState: "订单状态",
      *                        imgId:"商品图片",
      *                        title:"商品标题",
