@@ -68,4 +68,12 @@ public interface UserAddressDao {
      * @return
      */
     int updateUnDefaultByUserId(Integer userId);
+
+    /**
+     * 查询默认地址信息
+     *
+     * @param userId
+     * @return
+     */
+    int selectDefaultAddress(Integer userId);
 }

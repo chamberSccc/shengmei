@@ -143,4 +143,31 @@ public class UserAddressController extends BaseController{
     public Result removeAddress(@PathVariable Integer uaId){
         return userAddressService.delUserAddress(uaId);
     }
+
+    /**
+     * @api {GET} /address/default/{userId} 获取用户默认地址
+     * @apiGroup UserAddress
+     * @apiVersion 0.0.1
+     * @apiParam {int} userId 用户Id
+     * @apiDescription 获取用户默认地址
+     * @apiParamExample {json} 请求样例：
+     *  /address/default/12
+     * @apiSuccess (200) {String} msg 信息
+     * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success",
+     *                     "data":{
+     *                        uaId: 1,
+     *                        address: "地址信息1",
+     *                        city:"市",
+     *                        district:"区"
+     *                        recipient: "收件人1",
+     *                        isDefault:"是否是默认地址",
+     *                        mobile:"手机号1"
+     *                     }
+     */
+    @GetMapping("/default/{userId}")
+    public Result getDefaultAddress(@PathVariable Integer userId){
+        return null;
+    }
 }

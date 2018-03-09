@@ -63,4 +63,9 @@ public class UserAddressServiceImpl implements UserAddressService{
         userAddressDao.updateDefaultById(uaId);
         return ResultUtil.success();
     }
+
+    @Override
+    public Result searchDefault(Integer userId) {
+        return null;
+    }
 }

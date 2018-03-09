@@ -51,4 +51,12 @@ public interface UserAddressService {
      * @return
      */
     Result changeDefault(Integer uaId);
+
+    /**
+     * 查询用户默认地址
+     *
+     * @param userId
+     * @return
+     */
+    Result searchDefault(Integer userId);
 }
