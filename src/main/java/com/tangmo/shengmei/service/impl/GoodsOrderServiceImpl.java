@@ -1,7 +1,9 @@
 package com.tangmo.shengmei.service.impl;
 
 import com.tangmo.shengmei.constant.OrderConst;
+import com.tangmo.shengmei.dao.CommodityDao;
 import com.tangmo.shengmei.dao.GoodsOrderDao;
+import com.tangmo.shengmei.entity.Commodity;
 import com.tangmo.shengmei.entity.GoodsOrder;
 import com.tangmo.shengmei.entity.GoodsOrderSimple;
 import com.tangmo.shengmei.entity.vo.ExpressVO;
@@ -24,14 +26,24 @@ import javax.annotation.Resource;
 public class GoodsOrderServiceImpl implements GoodsOrderService {
     @Resource
     private GoodsOrderDao goodsOrderDao;
+    @Resource
+    private CommodityDao commodityDao;
     @Override
     public Result addOrder(GoodsOrderSimple goodsOrderSimple) {
         if(goodsOrderSimple.getCdId() == null || goodsOrderSimple.getUserId()==null || goodsOrderSimple.getUaId() == null){
-            return ResultUtil.fail();
+            return ResultUtil.error("请确认用户信息,商品信息,地址信息是否正确");
         }
         String orderNo = OrderRelated.getOrderNo(goodsOrderSimple.getUserId());
         goodsOrderSimple.setOrderNumber(orderNo);
         goodsOrderSimple.setOrderState(OrderConst.ORDER_NEW);
+        Commodity commodity = commodityDao.selectCommodityDetail(goodsOrderSimple.getCdId());
+        if(commodity == null){
+            return ResultUtil.error("请确认商品信息是否正确");
+        }
+        if(commodity.getPriceNow() == null){
+            return ResultUtil.error("该商品商家暂未标注价格");
+        }
+        goodsOrderSimple.setPayFee(goodsOrderSimple.getGoCount() * commodity.getPriceNow());
         return ResultUtil.success(goodsOrderDao.insertGo(goodsOrderSimple));
     }
 

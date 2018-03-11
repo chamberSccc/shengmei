@@ -33,7 +33,6 @@ public class GoodsOrderController extends BaseController{
      *                      goCount:"商品数量",
      *                      expressFee:"物流费用",
      *                      discountFee:"优惠费用",
-     *                      payFee:"实际支付费用",
      *                      cdSize:"商品规格",
      *                      cdColor:"商品颜色"
      *                   }
