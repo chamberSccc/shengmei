@@ -9,10 +9,8 @@ import com.tangmo.shengmei.service.CommodityService;
 import com.tangmo.shengmei.service.ImgFileService;
 import com.tangmo.shengmei.utility.code.Result;
 import com.tangmo.shengmei.utility.code.ResultUtil;
-import com.tangmo.shengmei.utility.file.ImgUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
@@ -35,20 +33,23 @@ public class CommodityServiceImpl implements CommodityService {
 
     @Override
     @Transactional
-    public Result addCommodity(Commodity commodity, MultipartFile file) {
-        if (commodity.getPriceNow() == null || commodity.getCdType() == null || commodity.getUserId() == null) {
-            return ResultUtil.fail();
+    public Result addCommodity(Commodity commodity) {
+        if (commodity.getPriceNow() == null || commodity.getCdType() == null) {
+            return ResultUtil.error("请确认价格,商品类型是否填写");
         }
-
-        if(file!=null){
-            String uuid = imgFileService.uploadFile(file,commodity.getUserId());
-            if(uuid == null){
-                return ResultUtil.fail();
-            }
-            commodity.setImgId(uuid);
+        if (commodity.getUserId() == null) {
+            return ResultUtil.error("暂无该用户信息");
+        }
+        if(commodity.getImgId() == null){
+            return ResultUtil.error("请确认是否已上传图片");
         }
         commodityDao.insertSelective(commodity);
         return ResultUtil.success();
+    }
+
+    @Override
+    public Result addCdImg(Integer userId,MultipartFile file) {
+        return imgFileService.uploadImg(userId, file);
     }
 
     @Override
@@ -88,6 +89,9 @@ public class CommodityServiceImpl implements CommodityService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Result addComment(GoodsComment goodsComment) {
+        if(goodsComment.getIsAnonymous() == 1){
+            goodsComment.setUserId(null);
+        }
         commodityDao.insertComment(goodsComment);
         return ResultUtil.success();
     }

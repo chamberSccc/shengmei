@@ -1,6 +1,7 @@
 package com.tangmo.shengmei.service;
 
 import com.tangmo.shengmei.entity.RsFile;
+import com.tangmo.shengmei.utility.code.Result;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -41,9 +42,19 @@ public interface ImgFileService {
 
     /**
      * 上传文件
+     *
      * @param file
      * @param userId
      * @return
      */
     String uploadFile(MultipartFile file, Integer userId);
+
+    /**
+     * 上传图片
+     *
+     * @param userId
+     * @param file
+     * @return
+     */
+    Result uploadImg(Integer userId, MultipartFile file);
 }

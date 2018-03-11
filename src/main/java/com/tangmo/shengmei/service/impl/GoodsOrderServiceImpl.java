@@ -2,8 +2,12 @@ package com.tangmo.shengmei.service.impl;
 
 import com.tangmo.shengmei.constant.OrderConst;
 import com.tangmo.shengmei.dao.GoodsOrderDao;
+import com.tangmo.shengmei.entity.GoodsOrder;
 import com.tangmo.shengmei.entity.GoodsOrderSimple;
+import com.tangmo.shengmei.entity.vo.ExpressVO;
 import com.tangmo.shengmei.service.GoodsOrderService;
+import com.tangmo.shengmei.utility.JisuData.SearchExpress;
+import com.tangmo.shengmei.utility.code.OrderCode;
 import com.tangmo.shengmei.utility.code.Result;
 import com.tangmo.shengmei.utility.code.ResultUtil;
 import com.tangmo.shengmei.utility.string.OrderRelated;
@@ -27,7 +31,7 @@ public class GoodsOrderServiceImpl implements GoodsOrderService {
         }
         String orderNo = OrderRelated.getOrderNo(goodsOrderSimple.getUserId());
         goodsOrderSimple.setOrderNumber(orderNo);
-        goodsOrderSimple.setOrderState(OrderConst.NEW_ORDER);
+        goodsOrderSimple.setOrderState(OrderConst.ORDER_NEW);
         return ResultUtil.success(goodsOrderDao.insertGo(goodsOrderSimple));
     }
 
@@ -49,5 +53,37 @@ public class GoodsOrderServiceImpl implements GoodsOrderService {
     @Override
     public Result payOrder(Integer goId) {
         return null;
+    }
+
+    @Override
+    public Result delOrder(Integer goId) {
+        goodsOrderDao.deleteById(goId);
+        return ResultUtil.success();
+    }
+
+    @Override
+    public Result changeOrderState(Integer goId, Byte state) {
+        goodsOrderDao.updateOrderState(goId, state);
+        return ResultUtil.success();
+    }
+
+    @Override
+    public Result searchExpress(Integer goId) {
+        GoodsOrder goodsOrder = goodsOrderDao.selectById(goId);
+        if(goodsOrder == null){
+            return ResultUtil.error(OrderCode.NO_ORDER);
+        }
+        if (goodsOrder.getOrderState() < 2){
+            return ResultUtil.error(OrderCode.NO_PAY);
+        }
+        if(goodsOrder.getExpressNo() == null){
+            return ResultUtil.error(OrderCode.NOT_DELIVER);
+        }
+        ExpressVO expressVO = SearchExpress.Get(goodsOrder.getExpressNo());
+        if(expressVO.getMsg() != null){
+            return ResultUtil.error(expressVO.getMsg());
+        }
+        expressVO.setMsg("");
+        return ResultUtil.success(expressVO);
     }
 }

@@ -130,24 +130,22 @@ public class UserController extends BaseController{
     }
 
     /**
-     * @api {POST} /user/avatar 上传头像
+     * @api {POST} /user/avatar/{userId} 上传头像
      * @apiGroup User
      * @apiVersion 0.0.1
      * @apiDescription 上传头像
-     * @apiParam {String} code 图片base64编码
      * @apiParamExample {json} 请求样例:
      *                   {
      *                      file:"图片文件",
-     *                      userId:"用户id"
      *                   }
      * @apiSuccess (success) {POST} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
      * @apiSuccess (success) {POST} data 返回数据
      * @apiSuccessExample {json} 返回样例:
      *                    {"code":"success"}
      */
-    @PostMapping("/avatar")
-    public Result loadAvatar(User user, MultipartFile file){
-        return userService.uploadAvatar(user.getUserId(),file);
+    @PostMapping("/avata/{userId}")
+    public Result loadAvatar(@PathVariable Integer userId, MultipartFile file){
+        return userService.uploadAvatar(userId,file);
     }
 
 

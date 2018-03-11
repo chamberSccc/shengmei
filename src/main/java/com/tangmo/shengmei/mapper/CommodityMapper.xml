@@ -209,6 +209,12 @@
             <if test="belongType != null">
                 belong_type,
             </if>
+            <if test="star != null">
+                star,
+            </if>
+            <if test="isAnonymous != null">
+                is_anonymous,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="userId != null">
@@ -222,6 +228,12 @@
             </if>
             <if test="belongType != null">
                 #{belongType,jdbcType=TINYINT},
+            </if>
+            <if test="star != null">
+                #{star,jdbcType=TINYINT},
+            </if>
+            <if test="isAnonymous != null">
+                #{isAnonymous,jdbcType=TINYINT},
             </if>
         </trim>
     </insert>

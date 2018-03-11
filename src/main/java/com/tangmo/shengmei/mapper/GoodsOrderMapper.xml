@@ -20,6 +20,7 @@
         <result column="ua_id" property="uaId" jdbcType="INTEGER"/>
         <result column="user_id" property="userId" jdbcType="INTEGER"/>
         <result column="go_count" property="goCount" jdbcType="INTEGER"/>
+        <result column="merchant_id" property="merchantId" jdbcType="INTEGER"/>
         <result column="order_state" property="orderState" jdbcType="TINYINT"/>
         <result column="order_number" property="orderNumber" jdbcType="VARCHAR"/>
         <result column="trans_number" property="transNumber" jdbcType="VARCHAR"/>
@@ -33,6 +34,8 @@
         <result column="img_id" property="imgId" jdbcType="VARCHAR"/>
         <result column="cd_size" property="cdSize" jdbcType="VARCHAR"/>
         <result column="cd_color" property="cdColor" jdbcType="VARCHAR"/>
+        <result column="price_now" property="goodsPrice" jdbcType="DOUBLE"/>
+        <result column="express_no" property="expressNo" jdbcType="VARCHAR"/>
         <association property="address" column="ua_Id" select="selectAddressByUaId"/>
     </resultMap>
 
@@ -75,16 +78,24 @@
     </select>
 
     <select id="selectById" resultMap="DetailResultMap">
-        SELECT gor.go_id,gor.cd_id,cd.title,cd.content,gor.pay_fee,cd.img_id,gor.cd_size,gor.user_id,
-        gor.order_state,gor.ua_id,gor.pay_fee,gor.trans_number,gor.express_fee,gor.cd_color,gor.go_count,
-        gor.discount_fee,gor.pay_fee,gor.pay_time,gor.createtime,gor.order_number FROM goods_order gor
+        SELECT gor.go_id,gor.cd_id,cd.title,cd.content,gor.pay_fee,cd.img_id,gor.cd_size,gor.user_id,gor.express_no,
+        gor.order_state,gor.ua_id,gor.pay_fee,gor.trans_number,gor.express_fee,gor.cd_color,gor.go_count,cd.user_id  merchant_id,
+        gor.discount_fee,gor.pay_fee,gor.pay_time,gor.createtime,gor.order_number,cd.price_now FROM goods_order gor
         INNER JOIN commodity cd ON gor.cd_id = cd.cd_id
-        WHERE gor.user_id = #{userId}
-        limit #{start},#{end}
+        WHERE gor.go_id = #{goId}
     </select>
 
     <select id="selectAddressByUaId" resultMap="AddressResultMap">
         SELECT ua_id,mobile,recipient,is_default,address,city,district
         FROM user_address WHERE ua_id = #{uaId}
     </select>
+
+    <update id="updateOrderState">
+        UPDATE goods_order SET order_state = #{state} WHERE go_id = #{goId}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM goods_order WHERE go_id = #{goId}
+    </delete>
+
 </mapper>

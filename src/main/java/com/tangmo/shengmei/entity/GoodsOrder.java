@@ -15,16 +15,19 @@ public class GoodsOrder {
     private Integer cdId;
     private Integer uaId;
     private Integer userId;
+    private Integer merchantId;
     private Integer goCount;
     private Byte orderState;
     private String orderNumber;
     private String transNumber;
+    private Double goodsPrice;
 
 
     /**物流*/
     private Double expressFee;
     private Double discountFee;
     private Double payFee;
+    private String expressNo;
 
 
     private Date payTime;

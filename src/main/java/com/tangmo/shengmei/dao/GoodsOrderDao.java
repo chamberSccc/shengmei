@@ -60,4 +60,29 @@ public interface GoodsOrderDao {
      * @return
      */
     GoodsOrder selectById(Integer goId);
+
+    /**
+     * 修改订单状态
+     *
+     * @param goId
+     * @param state
+     * @return
+     */
+    int updateOrderState(@Param("goId") Integer goId, @Param("state") Byte state);
+
+    /**
+     * 删除订单
+     *
+     * @param goId
+     * @return
+     */
+    int deleteById(Integer goId);
+
+    /**
+     * 查询订单编号
+     *
+     * @param goId
+     * @return
+     */
+    String selectExpress(Integer goId);
 }

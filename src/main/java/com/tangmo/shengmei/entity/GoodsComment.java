@@ -25,9 +25,35 @@ public class GoodsComment implements Serializable{
     /**
      * 评价指标相关
      */
-    private Byte goodsWrapper;
-    private Byte expressSpeed;
-    private Byte deliverAtti;
     private Byte isAnonymous;
+    private Byte star;
     private Date createTime;
+
+    public void setStar(Byte star) {
+        if(star == null){
+            star = 0;
+        }
+        this.star = star;
+    }
+
+    public void setIsAnonymous(Byte isAnonymous) {
+        if(isAnonymous == null){
+            isAnonymous = 0;
+        }
+        this.isAnonymous = isAnonymous;
+    }
+
+    public Byte getStar() {
+        if(star == null){
+            return 0;
+        }
+        return star;
+    }
+
+    public Byte getIsAnonymous() {
+        if(isAnonymous == null){
+            return 0;
+        }
+        return isAnonymous;
+    }
 }

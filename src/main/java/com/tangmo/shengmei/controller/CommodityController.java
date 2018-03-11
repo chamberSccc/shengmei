@@ -40,7 +40,7 @@ public class CommodityController extends BaseController {
      *                      cdCount:"商品数量",c
      *                      cdColor:"商品颜色,多种颜色以逗号分隔,
      *                      cdSize:"商品规格,多种规格以逗号分隔",
-     *                      file:商品图片
+     *                      imgId:商品图片Id
      *                   }
      * @apiSuccess (success) {POST} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
      * @apiSuccess (success) {POST} data 返回数据
@@ -48,8 +48,27 @@ public class CommodityController extends BaseController {
      *                    {"code":"success"}
      */
     @PostMapping("/add")
-    public Result addCommodity(Commodity commodity, MultipartFile file){
-        return commodityService.addCommodity(commodity,file);
+    public Result addCommodity(@RequestBody Commodity commodity){
+        return commodityService.addCommodity(commodity);
+    }
+
+    /**
+     * @api {POST} /commodity/img/{userId} 上传商品图片
+     * @apiGroup Commodity
+     * @apiVersion 0.0.1
+     * @apiDescription 上传商品图片
+     * @apiParamExample {json} 请求样例:
+     *                   {
+     *                      file:"图片文件"
+     *                   }
+     * @apiSuccess (success) {POST} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccess (success) {POST} data 返回数据
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success"}
+     */
+    @PostMapping("/img/{userId}")
+    public Result addCdImg(@PathVariable Integer userId,MultipartFile file){
+        return commodityService.addCdImg(userId, file);
     }
 
     /**
@@ -262,16 +281,18 @@ public class CommodityController extends BaseController {
     }
 
     /**
-     * @api {POST} /commodity/comment 增加个人商品评论
+     * @api {POST} /commodity/comment 增加商品评论
      * @apiGroup Commodity
      * @apiVersion 0.0.1
-     * @apiDescription 增加个人商品评论
+     * @apiDescription 增加商品评论
      * @apiParam {GoodsComment} goodsComment 商品评论对象
      * @apiParamExample {json} 请求样例:
      *                   {
      *                      userId:"用户id",
      *                      goodsId:"商品Id",
-     *                      comment:"评论内容"
+     *                      comment:"评论内容",
+     *                      star:"商品评价",
+     *                      isAnonymous:"是否匿名"
      *                   }
      * @apiSuccess (success) {POST} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
      * @apiSuccess (success) {POST} data 返回数据

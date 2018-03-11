@@ -22,6 +22,14 @@ public class ResultUtil {
         return result;
     }
 
+    public static Result creatErrorResult(String errorInfo){
+        ErrorResult errorResult = new ErrorResult();
+        errorResult.setCode(Result.FAIL);
+        errorResult.setErrorInfo(errorInfo);
+        return errorResult;
+    }
+
+
     public static Result createResult(String code) {
         return createResult(code, null);
     }
@@ -37,6 +45,8 @@ public class ResultUtil {
     public static Result fail() {
         return createResult(Result.FAIL);
     }
+
+    public static Result error(String errorInfo){return creatErrorResult(errorInfo);}
 
     public static Result registered(){return createResult(Result.ERROR_MOBILE);}
 

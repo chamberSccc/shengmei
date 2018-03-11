@@ -4,6 +4,7 @@ import com.tangmo.shengmei.controller.base.BaseController;
 import com.tangmo.shengmei.entity.ShopVerify;
 import com.tangmo.shengmei.utility.code.Result;
 import com.tangmo.shengmei.utility.code.ResultUtil;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -54,4 +55,5 @@ public class ShopVerifyController extends BaseController{
         }
         return shopVerifyService.addShopVerify(shopVerify, idFront, idRear, logo, license);
     }
+
 }

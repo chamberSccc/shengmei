@@ -20,7 +20,15 @@ public interface CommodityService {
      * @param commodity 商品实体
      * @return
      */
-    Result addCommodity(Commodity commodity, MultipartFile file);
+    Result addCommodity(Commodity commodity);
+
+    /**
+     * 上传商品图片
+     * @param userId
+     * @param file
+     * @return
+     */
+    Result addCdImg(Integer userId,MultipartFile file);
 
     /**
      * 修改商品信息
@@ -28,7 +36,7 @@ public interface CommodityService {
      * @param commodity
      * @return
      */
-    Result changeCommodity(Commodity commodity,MultipartFile file);
+    Result changeCommodity(Commodity commodity, MultipartFile file);
 
     /**
      * 获取商品列表

@@ -28,7 +28,7 @@ public interface GoodsOrderService {
      * @param end
      * @return
      */
-    Result searchOrderByState(Byte state, Integer userId,Integer start,Integer end);
+    Result searchOrderByState(Byte state, Integer userId, Integer start, Integer end);
 
     /**
      * 查询所有用户订单
@@ -38,7 +38,7 @@ public interface GoodsOrderService {
      * @param end
      * @return
      */
-    Result searchAllOrder(Integer userId,Integer start,Integer end);
+    Result searchAllOrder(Integer userId, Integer start, Integer end);
 
     /**
      * 查询订单详情
@@ -55,4 +55,28 @@ public interface GoodsOrderService {
      * @return
      */
     Result payOrder(Integer goId);
+
+    /**
+     * 删除订单
+     *
+     * @param goId
+     * @return
+     */
+    Result delOrder(Integer goId);
+
+    /**
+     * 修改订单状态
+     *
+     * @param goId
+     * @return
+     */
+    Result changeOrderState(Integer goId, Byte state);
+
+    /**
+     * 查询物流状态
+     *
+     * @param goId
+     * @return
+     */
+    Result searchExpress(Integer goId);
 }

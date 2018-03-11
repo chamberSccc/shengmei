@@ -77,15 +77,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Result uploadAvatar(Integer userId, MultipartFile file) {
-        String uuid = null;
-        if(file!=null){
-            uuid = imgFileService.uploadFile(file,userId);
-            if(uuid == null){
-                return ResultUtil.fail();
-            }
-        }
-        userDao.updateAvatar(userId,uuid);
-        return ResultUtil.success(uuid);
+        return imgFileService.uploadImg(userId, file);
     }
 
     @Override

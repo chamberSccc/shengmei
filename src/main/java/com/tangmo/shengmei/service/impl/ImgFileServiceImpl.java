@@ -1,8 +1,11 @@
 package com.tangmo.shengmei.service.impl;
 
+import com.tangmo.shengmei.constant.FileCode;
 import com.tangmo.shengmei.dao.FileDao;
 import com.tangmo.shengmei.entity.RsFile;
 import com.tangmo.shengmei.service.ImgFileService;
+import com.tangmo.shengmei.utility.code.Result;
+import com.tangmo.shengmei.utility.code.ResultUtil;
 import com.tangmo.shengmei.utility.file.ImgUtil;
 import com.tangmo.shengmei.utility.string.EncryptUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,6 +89,22 @@ public class ImgFileServiceImpl implements ImgFileService {
     public String uploadFile(MultipartFile file, Integer userId) {
         String[] strings = uploadFileReturnType(file, userId);
         return strings[0];
+    }
+
+    @Override
+    public Result uploadImg(Integer userId, MultipartFile file) {
+        if(userId == null){
+            return ResultUtil.error(FileCode.USER_NULL);
+        }
+        if(file!=null){
+            String uuid = uploadFile(file,userId);
+            if(uuid == null){
+                return ResultUtil.error(FileCode.UPLOAD_FAIL);
+            }
+            return ResultUtil.success(uuid);
+        }else{
+            return ResultUtil.error(FileCode.NO_FILE);
+        }
     }
 
     @Transactional (rollbackFor = Exception.class)

@@ -7,37 +7,42 @@ package com.tangmo.shengmei.constant;
 public class OrderConst {
 
     /**
+     * 订单取消
+     */
+    public static final Byte ORDER_CANCEL = -1;
+
+    /**
      * 等待支付
      */
-    public static final Byte NEW_ORDER = 0;
+    public static final Byte ORDER_NEW = 0;
     /**
      * 交易完成
      */
     public static final Byte DEAL_DONE = 1;
 
     /**
-     * 待发货
-     */
-    public static final Byte WAIT_DELIVER = 2;
-
-    /**
      * 已发货
      */
-    public static final Byte DONE_DELIVER = 3;
+    public static final Byte DELIVER = 2;
 
     /**
      * 已收货
      */
-    public static final Byte RECEIVE__DELIVER = 4;
+    public static final Byte DELIVER_RECEIVE = 3;
 
     /**
-     * 评价完成
+     * 申请退货
      */
-    public static final Byte COMMENT_DONE = 5;
+    public static final Byte GOODS_RETURN = 4;
+
+    /**
+     * 退货完成
+     */
+    public static final Byte GOODS_RETURN_DONE = 5;
 
     /**
      * 交易关闭
      */
-    public static final Byte DEAL_COLSE = 4;
+    public static final Byte DEAL_COLSE = 6;
 
 }

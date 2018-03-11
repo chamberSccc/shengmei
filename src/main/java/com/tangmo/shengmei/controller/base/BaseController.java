@@ -47,6 +47,10 @@ public class BaseController {
     protected CommonService commonService;
     @Resource
     protected ShopVerifyService shopVerifyService;
+    @Resource
+    protected DeliverRemindService deliverRemindService;
+    @Resource
+    protected GoodsReturnService goodsReturnService;
     /**
      * 得到request对象
      */
