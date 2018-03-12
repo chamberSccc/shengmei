@@ -391,6 +391,24 @@ public class CommodityController extends BaseController {
         return commodityService.delViewRecord(vrId);
     }
 
+    /**
+     * @api {DELETE} /commodity/view/empty/{userId} 清空浏览记录
+     * @apiGroup Commodity
+     * @apiVersion 0.0.1
+     * @apiParam {int} userId 用户Id
+     * @apiDescription 清空浏览记录
+     * @apiParamExample {json} 请求样例：
+     *  commodity/view//empty/12
+     * @apiSuccess (200) {String} msg 信息
+     * @apiSuccess (success) {DELETE} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success"}
+     */
+    @DeleteMapping("/view/empty/{userId}")
+    public Result emptyViewRecord(@PathVariable Integer userId){
+        return commodityService.emptyViewRecord(userId);
+    }
+
 
     /**
      * @api {DELETE} /commodity/view/multi 删除多条浏览记录

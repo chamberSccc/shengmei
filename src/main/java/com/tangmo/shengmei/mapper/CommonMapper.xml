@@ -56,6 +56,11 @@
         VALUES (#{paramType},#{paramValue})
     </insert>
 
+    <insert id="insertFeedBack" parameterType="com.tangmo.shengmei.entity.ParamValue">
+        INSERT INTO feed_back (user_id,content,mobile,img_id)
+        VALUES (#{userId},#{content},#{mobile},#{imgId})
+    </insert>
+
     <update id="updateParamValue" parameterType="com.tangmo.shengmei.entity.ParamValue">
         UPDATE param_value SET param_value = #{paramValue}
         WHERE pv_id = #{pvId,jdbcType=INTEGER}

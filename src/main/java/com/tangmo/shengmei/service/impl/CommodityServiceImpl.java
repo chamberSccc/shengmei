@@ -165,4 +165,10 @@ public class CommodityServiceImpl implements CommodityService {
     public Result searchTypeStarList(Byte type, Integer start, Integer end) {
         return ResultUtil.success(commodityDao.selectStarListByType(type, start, end));
     }
+
+    @Override
+    public Result emptyViewRecord(Integer userId) {
+        commodityDao.deleteVrByUserId(userId);
+        return ResultUtil.success();
+    }
 }

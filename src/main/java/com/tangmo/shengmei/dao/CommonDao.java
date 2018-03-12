@@ -1,5 +1,6 @@
 package com.tangmo.shengmei.dao;
 
+import com.tangmo.shengmei.entity.FeedBack;
 import com.tangmo.shengmei.entity.GoodsType;
 import com.tangmo.shengmei.entity.GoodsTypeItem;
 import com.tangmo.shengmei.entity.ParamValue;
@@ -102,6 +103,14 @@ public interface CommonDao {
      * @return
      */
     int deletePvById(Integer pvId);
+
+    /**
+     * 增加用户反馈
+     *
+     * @param feedBack
+     * @return
+     */
+    int insertFeedBack(FeedBack feedBack);
 
 
 }

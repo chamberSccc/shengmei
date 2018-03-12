@@ -177,7 +177,7 @@
 
     <select id="selectListByUserId" resultMap="BaseResultMap">
         SELECT cd_id,user_id,img_id,title,content,cd_type,
-        price_pre,price_now,createtime,province,city,district,condition
+        price_pre,price_now,createtime,province,city,district,commodity.condition
         FROM commodity WHERE user_id = #{userId} AND is_sell = 0 limit #{start},#{end}
     </select>
 
@@ -260,6 +260,10 @@
 
     <delete id="deleteViewRecordById">
         DELETE FROM view_record WHERE vr_id = #{vrId}
+    </delete>
+
+    <delete id="deleteVrByUserId">
+        DELETE FROM view_record WHERE user_id = #{userId}
     </delete>
 
     <delete id="deleteMultiViewRecord" parameterType="Integer[]">

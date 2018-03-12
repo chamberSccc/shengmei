@@ -1,11 +1,12 @@
 package com.tangmo.shengmei.service.impl;
 
+import com.tangmo.shengmei.dao.CommonDao;
 import com.tangmo.shengmei.dao.GoodsRecordDao;
 import com.tangmo.shengmei.dao.UserDao;
 import com.tangmo.shengmei.entity.FeedBack;
-import com.tangmo.shengmei.entity.RsFile;
 import com.tangmo.shengmei.entity.User;
 import com.tangmo.shengmei.entity.WithDrawInfo;
+import com.tangmo.shengmei.entity.vo.UserVO;
 import com.tangmo.shengmei.service.ImgFileService;
 import com.tangmo.shengmei.service.UserService;
 import com.tangmo.shengmei.utility.code.Result;
@@ -16,7 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
-import java.util.Date;
 
 /**
  * @author boge
@@ -31,6 +31,8 @@ public class UserServiceImpl implements UserService {
     private ImgFileService imgFileService;
     @Resource
     private GoodsRecordDao goodsRecordDao;
+    @Resource
+    private CommonDao commonDao;
 
     @Override
     @Transactional
@@ -77,7 +79,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Result uploadAvatar(Integer userId, MultipartFile file) {
-        return imgFileService.uploadImg(userId, file);
+        Result result = imgFileService.uploadImg(userId, file);
+        String uuId = result.getData().toString();
+        userDao.updateAvatar(userId,uuId);
+        return result;
     }
 
     @Override
@@ -87,7 +92,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Result checkMobile(Integer userId, String mobile) {
-        User user = userDao.selectById(userId);
+        UserVO user = userDao.selectById(userId);
         if(user.getMobile().equals(mobile)){
             return ResultUtil.success();
         }
@@ -137,9 +142,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public Result addFeedBack(FeedBack feedBack) {
         if(feedBack.getUserId() == null){
-            return ResultUtil.fail();
+            return ResultUtil.error("用户信息为空");
         }
-        return null;
+        commonDao.insertFeedBack(feedBack);
+        return ResultUtil.success();
     }
 
     @Override

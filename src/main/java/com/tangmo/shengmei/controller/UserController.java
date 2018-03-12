@@ -143,7 +143,7 @@ public class UserController extends BaseController{
      * @apiSuccessExample {json} 返回样例:
      *                    {"code":"success"}
      */
-    @PostMapping("/avata/{userId}")
+    @PostMapping("/avatar/{userId}")
     public Result loadAvatar(@PathVariable Integer userId, MultipartFile file){
         return userService.uploadAvatar(userId,file);
     }
@@ -341,7 +341,6 @@ public class UserController extends BaseController{
      *                   {
      *                      userId:"用户id",
      *                      content:"建议内容",
-     *                      imgId:"base64编码",
      *                      mobile:"电话"
      *                   }
      * @apiSuccess (success) {POST} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;

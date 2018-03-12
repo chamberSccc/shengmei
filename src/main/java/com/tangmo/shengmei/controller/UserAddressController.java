@@ -168,6 +168,6 @@ public class UserAddressController extends BaseController{
      */
     @GetMapping("/default/{userId}")
     public Result getDefaultAddress(@PathVariable Integer userId){
-        return null;
+        return userAddressService.searchDefault(userId);
     }
 }

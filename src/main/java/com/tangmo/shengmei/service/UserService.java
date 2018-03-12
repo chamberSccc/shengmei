@@ -53,7 +53,7 @@ public interface UserService {
      * @param file
      * @return
      */
-    Result uploadAvatar(Integer userId,MultipartFile file);
+    Result uploadAvatar(Integer userId, MultipartFile file);
 
     /**
      * 修改手机号

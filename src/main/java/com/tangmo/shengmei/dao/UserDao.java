@@ -4,6 +4,7 @@ import com.tangmo.shengmei.entity.FeedBack;
 import com.tangmo.shengmei.entity.User;
 import com.tangmo.shengmei.entity.ViewRecord;
 import com.tangmo.shengmei.entity.WithDrawInfo;
+import com.tangmo.shengmei.entity.vo.UserVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -30,7 +31,7 @@ public interface UserDao {
      * @param id user表主键
      * @return
      */
-    User selectById(Integer id);
+    UserVO selectById(Integer id);
 
     /**
      * 通过主键修改用户信息
@@ -41,13 +42,13 @@ public interface UserDao {
     int updateById(User user);
 
     /**
-     * 更新用户的申请商家状态
+     * 更新用户的商家状态
      *
      * @param userId      用户id
-     * @param applyStatus 申请状态
+     * @param status 状态
      * @return
      */
-    int updateApplyShop(@Param("userId") Integer userId, @Param("applyStatus") Byte applyStatus);
+    int updateShopStatus(@Param("userId") Integer userId, @Param("status") Byte status);
 
     /**
      * 上传头像

@@ -16,14 +16,9 @@ public interface ShopVerifyService {
      * 增加商家审核信息
      *
      * @param shopVerify
-     * @param idFront    身份证正面照片
-     * @param idRear     身份证背面照片
-     * @param logo       logo照片
-     * @param license    营业执照照片
      * @return
      */
-    Result addShopVerify(ShopVerify shopVerify, MultipartFile idFront, MultipartFile idRear,
-                         MultipartFile logo, MultipartFile license);
+    Result addShopVerify(ShopVerify shopVerify);
 
     /**
      * 用户查找商家审核信息

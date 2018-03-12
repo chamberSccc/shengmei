@@ -160,4 +160,12 @@ public interface CommodityDao {
      * @return
      */
     List<Commodity> selectStarListByType(@Param("cdType") Byte cdType, @Param("start") Integer start, @Param("end") Integer end);
+
+    /**
+     * 通过用户信息删除浏览记录
+     *
+     * @param userId
+     * @return
+     */
+    int deleteVrByUserId(Integer userId);
 }

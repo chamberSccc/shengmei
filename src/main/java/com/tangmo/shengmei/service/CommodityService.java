@@ -24,11 +24,12 @@ public interface CommodityService {
 
     /**
      * 上传商品图片
+     *
      * @param userId
      * @param file
      * @return
      */
-    Result addCdImg(Integer userId,MultipartFile file);
+    Result addCdImg(Integer userId, MultipartFile file);
 
     /**
      * 修改商品信息
@@ -165,4 +166,12 @@ public interface CommodityService {
      * @return
      */
     Result searchTypeStarList(Byte type, Integer start, Integer end);
+
+    /**
+     * 清空浏览记录
+     *
+     * @param userId
+     * @return
+     */
+    Result emptyViewRecord(Integer userId);
 }

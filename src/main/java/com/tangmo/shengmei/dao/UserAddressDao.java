@@ -75,5 +75,5 @@ public interface UserAddressDao {
      * @param userId
      * @return
      */
-    int selectDefaultAddress(Integer userId);
+    UserAddress selectDefaultAddress(Integer userId);
 }

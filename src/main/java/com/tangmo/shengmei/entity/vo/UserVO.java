@@ -1,4 +1,4 @@
-package com.tangmo.shengmei.entity;
+package com.tangmo.shengmei.entity.vo;
 
 import lombok.Data;
 
@@ -7,26 +7,18 @@ import java.sql.Date;
 
 /**
  * @author boge
- * @date 17/12/20
- * @description 用户实体类PO
+ * @date 18/3/12
+ * @description
  */
-
 @Data
-public class User implements Serializable {
+public class UserVO implements Serializable{
     private static final long serialVersionUID = 1L;
     private Integer userId;
-    private String password;
-    private String newPwd;
     private String mobile;
     private String username;
     private String province;
     private String city;
     private Byte gender;
     private String avatarId;
-    private Double balance;
     private Byte isMerchant;
-    private String token;
-    private String authCode;
-    private Date createTime;
-    private Date updateTime;
 }

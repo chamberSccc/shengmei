@@ -20,8 +20,6 @@ import javax.annotation.Resource;
 @Service("shopVerifyService")
 public class ShopVerifyServiceImpl implements ShopVerifyService {
     @Resource
-    private ImgFileService imgFileService;
-    @Resource
     private ShopVerifyDao shopVerifyDao;
 
     private static final Byte NOT_VERIFY = 0;
@@ -29,41 +27,18 @@ public class ShopVerifyServiceImpl implements ShopVerifyService {
 
     @Override
     @Transactional
-    public Result addShopVerify(ShopVerify shopVerify, MultipartFile idFront, MultipartFile idRear,
-                                MultipartFile logo, MultipartFile license) {
+    public Result addShopVerify(ShopVerify shopVerify) {
         if(shopVerify.getUserId() == null || shopVerify.getIdNumber() == null || shopVerify.getShopAddress() == null){
-            return ResultUtil.paramError();
+            return ResultUtil.error("信息不完整");
         }
         if(shopVerify.getShopIntro() == null || shopVerify.getShopName() == null){
-            return ResultUtil.paramError();
+            return ResultUtil.error("信息不完整");
         }
         //先判断是否有审核信息
         ShopVerify result = shopVerifyDao.selectByUserId(shopVerify.getUserId());
         if(result != null){
-            return ResultUtil.existInfo();
+            return ResultUtil.error("已存在审核信息");
         }
-        //身份证正反面照片处理
-        String frontUuid = imgFileService.uploadFile(idFront,shopVerify.getUserId());
-        if(frontUuid == null){
-            return ResultUtil.fail();
-        }
-        shopVerify.setIdFrontImg(frontUuid);
-        String rearUuid = imgFileService.uploadFile(idRear,shopVerify.getUserId());
-        if(rearUuid == null){
-            return ResultUtil.fail();
-        }
-        shopVerify.setIdRearImg(rearUuid);
-        //logo和营业执照照片处理
-        String logoUuid = imgFileService.uploadFile(logo,shopVerify.getUserId());
-        if(logoUuid == null){
-            return ResultUtil.fail();
-        }
-        shopVerify.setLogoImg(logoUuid);
-        String licenseUuid = imgFileService.uploadFile(license,shopVerify.getUserId());
-        if(licenseUuid == null){
-            return ResultUtil.fail();
-        }
-        shopVerify.setLicenseImg(licenseUuid);
         shopVerify.setShopState(NOT_VERIFY);
         shopVerifyDao.insertShopVerify(shopVerify);
         return ResultUtil.success();

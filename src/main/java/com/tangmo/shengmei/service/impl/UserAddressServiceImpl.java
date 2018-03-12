@@ -34,7 +34,7 @@ public class UserAddressServiceImpl implements UserAddressService{
     @Transactional
     public Result changeUserAddress(UserAddress userAddress) {
         if(userAddress.getUaId() == null){
-            return ResultUtil.fail();
+            return ResultUtil.error("地址id不能为空");
         }
         userAddressDao.updateById(userAddress);
         return ResultUtil.success();
@@ -66,6 +66,6 @@ public class UserAddressServiceImpl implements UserAddressService{
 
     @Override
     public Result searchDefault(Integer userId) {
-        return null;
+        return ResultUtil.success(userAddressDao.selectDefaultAddress(userId));
     }
 }
