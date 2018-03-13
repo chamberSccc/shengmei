@@ -40,7 +40,9 @@ public class CommodityController extends BaseController {
      *                      cdCount:"商品数量",c
      *                      cdColor:"商品颜色,多种颜色以逗号分隔,
      *                      cdSize:"商品规格,多种规格以逗号分隔",
-     *                      imgId:商品图片Id
+     *                      imgId:商品图片Id,
+     *                      discountFee:打折费用,
+     *                      expressFee:物流费用
      *                   }
      * @apiSuccess (success) {POST} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
      * @apiSuccess (success) {POST} data 返回数据
@@ -86,7 +88,9 @@ public class CommodityController extends BaseController {
      *                      priceNow:"现价",
      *                      cdType:"商品类型",
      *                      cdCount:"商品数量",
-     *                      file:商品图片
+     *                      file:商品图片,
+     *                      discountFee:"打折费用",
+     *                      expressFee:"物流费用"
      *                   }
      * @apiSuccess (success) {PUT} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
      * @apiSuccess (success) {PUT} data 返回数据
@@ -241,7 +245,7 @@ public class CommodityController extends BaseController {
      *                    {"code":"success"}
      */
     @DeleteMapping("/{cdId}")
-    public Result removeCommodity(@PathVariable Integer cdId){
+    public Result delCommodity(@PathVariable Integer cdId){
         return commodityService.delCommodity(cdId);
     }
 
@@ -537,5 +541,72 @@ public class CommodityController extends BaseController {
     @GetMapping("/star/{type}/{start}/{end}")
     public Result getTypeStarList(@PathVariable Byte type,@PathVariable Integer start, @PathVariable Integer end){
         return commodityService.searchTypeStarList(type,start,end);
+    }
+
+    /**
+     * @api {PUT} /remove/{cdId} 商品下架
+     * @apiGroup Commodity
+     * @apiVersion 0.0.1
+     * @apiDescription 商品下架
+     * @apiParamExample {json} 请求样例:
+     *             /commodity/remove/1
+     * @apiSuccess (success) {PUT} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccess (success) {PUT} data 返回数据
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success"}
+     */
+    @PutMapping("/remove/{cdId}")
+    public Result removeCommodity(@PathVariable Integer cdId){
+        return commodityService.changeCdState(cdId, (byte) 0);
+    }
+
+    /**
+     * @api {PUT} /sell/{cdId} 商品上架
+     * @apiGroup Commodity
+     * @apiVersion 0.0.1
+     * @apiDescription 商品上架
+     * @apiParamExample {json} 请求样例:
+     *             /commodity/sell/1
+     * @apiSuccess (success) {PUT} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccess (success) {PUT} data 返回数据
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success"}
+     */
+    @PutMapping("/sell/{cdId}")
+    public Result sellCommodity(@PathVariable Integer cdId){
+        return commodityService.changeCdState(cdId,(byte)1);
+    }
+
+    /**
+     * @api {GET} /commodity/record/{userId}/{state}/{start}/{end} 查询上架/下架商品销售记录
+     * @apiGroup Commodity
+     * @apiVersion 0.0.1
+     * @apiParam {int} start 分页起始索引
+     * @apiParam {int} end 查询列表长度
+     * @apiParam {int} userId 用户Id
+     * @apiParam {int} state 0:下架  1:上架
+     * @apiDescription 查询上架/下架商品销售记录
+     * @apiParamExample {json} 请求样例：
+     *  /commodity/record/1/1/1/10
+     * @apiSuccess (200) {String} msg 信息
+     * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success",
+     *                     "data":{
+     *                     [{
+     *                        cdId: 1,
+     *                        title: "商品信息标题1",
+     *                        imgId:"商品图片",
+     *                        sellCount:"卖出数量",
+     *                        priceNow:"商品现价1",
+     *                        cdCount:"剩余数量"
+     *                      },
+     *                     {...}]
+     *                     }
+     */
+    @GetMapping("/record/{userId}/{state}/{start}/{end}")
+    public Result getSellRecourd(@PathVariable Integer userId,@PathVariable Byte state,
+                                 @PathVariable Integer start,@PathVariable Integer end){
+        return commodityService.searchSellRecord(userId, state, start, end);
     }
 }

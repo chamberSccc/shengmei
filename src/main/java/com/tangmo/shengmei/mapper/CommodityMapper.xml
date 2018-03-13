@@ -45,6 +45,15 @@
         <result column="createtime" property="createTime" jdbcType="TIMESTAMP"/>
     </resultMap>
 
+    <resultMap id="CdManageResultMap" type="com.tangmo.shengmei.entity.vo.CdManageVO" >
+        <id column="cd_id" property="cdId" jdbcType="INTEGER"/>
+        <result column="img_id" property="imgId" jdbcType="VARCHAR"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="price_now" property="priceNow" jdbcType="DOUBLE"/>
+        <result column="sell_count" property="sellCount" jdbcType="INTEGER"/>
+        <result column="cd_count" property="cdCount" jdbcType="INTEGER"/>
+    </resultMap>
+
     <sql id="Base_Column_List" >
 
     </sql>
@@ -69,6 +78,12 @@
                 <if test="priceNow != null">
                     price_now,
                 </if>
+                <if test="discountFee != null">
+                    discount_fee,
+                </if>
+                <if test="expressFee != null">
+                    express_fee,
+                </if>
                 <if test="cdType != null">
                     cd_type,
                 </if>
@@ -90,6 +105,9 @@
                 <if test="district != null">
                     district,
                 </if>
+                <if test="condition != null">
+                    commodity.condition,
+                </if>
             </trim>
             <trim prefix="values (" suffix=")" suffixOverrides=",">
                 <if test="imgId != null">
@@ -109,6 +127,12 @@
                 </if>
                 <if test="priceNow != null">
                     #{priceNow,jdbcType=DOUBLE},
+                </if>
+                <if test="discountFee != null">
+                    #{discountFee,jdbcType=DOUBLE},
+                </if>
+                <if test="expressFee != null">
+                    #{expressFee,jdbcType=DOUBLE},
                 </if>
                 <if test="cdType != null">
                     #{cdType,jdbcType=TINYINT},
@@ -131,6 +155,9 @@
                 <if test="district != null">
                     #{district,jdbcType=VARCHAR},
                 </if>
+                <if test="condition != null">
+                    #{condition,jdbcType=VARCHAR},
+                </if>
             </trim>
     </insert>
 
@@ -149,9 +176,6 @@
             <if test="priceNow != null">
                 price_now = #{priceNow},
             </if>
-            <if test="pricePre != null">
-                price_pre = #{pricePre},
-            </if>
             <if test="cdType != null">
                 cd_type = #{cdType},
             </if>
@@ -159,10 +183,16 @@
                 cd_count = #{cdCount},
             </if>
             <if test="cdColor != null">
-                cdColor = #{cdColor},
+                cd_color = #{cdColor},
             </if>
             <if test="cdSize != null">
-                cdSize = #{cdSize},
+                cd_size = #{cdSize},
+            </if>
+            <if test="discountFee != null">
+                discount_fee = #{discountFee},
+            </if>
+            <if test="expressFee != null">
+                express_fee = #{expressFee},
             </if>
             updatetime = now()
         </set>
@@ -172,13 +202,13 @@
     <select id="selectListByType" resultMap="BaseResultMap">
         SELECT cd_id,user_id,img_id,title,content,cd_type,price_pre,
         price_now,createtime,province,city,district,commodity.condition
-          FROM commodity WHERE cd_type = #{cdType} AND is_sell = 0 limit #{start},#{end}
+          FROM commodity WHERE cd_type = #{cdType} AND is_sell = 0 AND cd_state = 1 limit #{start},#{end}
     </select>
 
     <select id="selectListByUserId" resultMap="BaseResultMap">
         SELECT cd_id,user_id,img_id,title,content,cd_type,
         price_pre,price_now,createtime,province,city,district,commodity.condition
-        FROM commodity WHERE user_id = #{userId} AND is_sell = 0 limit #{start},#{end}
+        FROM commodity WHERE user_id = #{userId} AND is_sell = 0 AND cd_state = 1 limit #{start},#{end}
     </select>
 
     <delete id="deleteById">
@@ -249,7 +279,7 @@
     <select id="selectQualityList" resultMap="BaseResultMap">
         SELECT cd_id,img_id,title,content,cd_type,cd_count,price_pre,
         price_now,createtime,province,city,district,user_id,commodity.condition
-        FROM commodity WHERE is_quality = 1 AND is_sell = 0 limit #{start},#{end}
+        FROM commodity WHERE is_quality = 1  AND is_sell = 0 AND cd_state = 1 limit #{start},#{end}
     </select>
 
     <select id="selectViewRecord" resultMap="ViewResultMap">
@@ -276,7 +306,7 @@
 
     <select id="selectCdByCondition" parameterType="com.tangmo.shengmei.entity.CommodityDto" resultMap="BaseResultMap">
         SELECT cd_id,img_id,title,content,cd_type,cd_count,price_pre,price_now,createtime,province,city,district,commodity.condition
-        FROM commodity WHERE is_sell = 0
+        FROM commodity WHERE is_sell = 0 AND cd_state = 1
         <if test="city != null"> AND city = #{city} </if>
         <if test="district != null"> AND district = #{district} </if>
         <if test="cdClass != null"> AND cd_class = #{cdClass} </if>
@@ -294,14 +324,28 @@
     <select id="selectQualityListByType" resultMap="BaseResultMap">
         SELECT cd_id,img_id,title,content,cd_type,cd_count,price_pre,
         price_now,createtime,province,city,district,user_id,commodity.condition
-        FROM commodity WHERE is_quality = 1 AND is_sell = 0
+        FROM commodity WHERE is_quality = 1 AND is_sell = 0 AND cd_state = 1
         AND cd_type = #{cdType} ORDER BY updatetime DESC  limit #{start},#{end}
     </select>
 
     <select id="selectStarListByType" resultMap="BaseResultMap">
         SELECT cd_id,img_id,title,content,cd_type,cd_count,price_pre,
         price_now,createtime,province,city,district,user_id,commodity.condition
-        FROM commodity WHERE is_sell = 0
+        FROM commodity WHERE is_sell = 0 AND cd_state = 1
         AND cd_type = #{cdType} ORDER BY star DESC limit #{start},#{end}
+    </select>
+
+    <update id="updateCdState">
+        UPDATE commodity SET cd_state = #{state} WHERE cd_id = #{cdId}
+    </update>
+
+    <select id="selectSellRecord" resultMap="CdManageResultMap">
+        SELECT cd.cd_id,cd.price_now,cd.title,cd.img_id,
+        cd.cd_count,ifnull(sell.sell_count,0) sell_count FROM commodity cd
+        LEFT JOIN
+        (SELECT goods_id,COUNT(goods_id) sell_count FROM sell_record WHERE user_id = #{userId} GROUP BY goods_id) sell
+        ON cd.cd_id = sell.goods_id
+        WHERE cd.cd_state = #{state}
+        limit #{start},#{end}
     </select>
 </mapper>

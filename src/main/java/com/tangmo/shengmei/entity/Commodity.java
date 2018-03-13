@@ -34,6 +34,8 @@ public class Commodity implements Serializable{
     private Byte cdClass;
     private Integer star;
     private String condition;
+    private Double discountFee;
+    private Double expressFee;
     private Date createTime;
     private Date updateTime;
 }

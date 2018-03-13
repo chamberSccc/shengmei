@@ -174,4 +174,23 @@ public interface CommodityService {
      * @return
      */
     Result emptyViewRecord(Integer userId);
+
+    /**
+     * 更改商品上下架状态
+     *
+     * @param cdId
+     * @param state
+     * @return
+     */
+    Result changeCdState(Integer cdId, Byte state);
+
+    /**
+     * 查询上架/下架商品销售记录
+     * @param userId
+     * @param state
+     * @param start
+     * @param end
+     * @return
+     */
+    Result searchSellRecord(Integer userId, Byte state,Integer start, Integer end);
 }

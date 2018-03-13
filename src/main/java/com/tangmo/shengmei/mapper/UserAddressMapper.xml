@@ -84,6 +84,9 @@
             <if test="district != null">
                 district = #{recipient},
             </if>
+            <if test="isDefault != null">
+                is_default = #{isDefault},
+            </if>
             updatetime = now()
         </set>
         WHERE ua_id = #{uaId,jdbcType=INTEGER}

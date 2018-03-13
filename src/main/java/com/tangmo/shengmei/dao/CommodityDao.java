@@ -4,6 +4,7 @@ import com.tangmo.shengmei.entity.BuyRecord;
 import com.tangmo.shengmei.entity.Commodity;
 import com.tangmo.shengmei.entity.CommodityDto;
 import com.tangmo.shengmei.entity.GoodsComment;
+import com.tangmo.shengmei.entity.vo.CdManageVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -168,4 +169,25 @@ public interface CommodityDao {
      * @return
      */
     int deleteVrByUserId(Integer userId);
+
+    /**
+     * 修改商品上下架状态
+     *
+     * @param cdId
+     * @param state
+     * @return
+     */
+    int updateCdState(@Param("cdId") Integer cdId, @Param("state") Byte state);
+
+    /**
+     * 上架/下架商品销售记录和库存
+     *
+     * @param userId
+     * @param state
+     * @param start
+     * @param end
+     * @return
+     */
+    List<CdManageVO> selectSellRecord(@Param("userId") Integer userId, @Param("state") Byte state,
+                                      @Param("start") Integer start, @Param("end") Integer end);
 }

@@ -24,5 +24,7 @@ public class GoodsTypeConst {
     public static final Byte ROAD_SERVICE = 6;
     /**买卖闲置*/
     public static final Byte SECOND_HAND = 7;
+    /**需求通讯*/
+    public static final Byte REQUIREMENT = 8;
 
 }

@@ -171,4 +171,15 @@ public class CommodityServiceImpl implements CommodityService {
         commodityDao.deleteVrByUserId(userId);
         return ResultUtil.success();
     }
+
+    @Override
+    public Result changeCdState(Integer cdId, Byte state) {
+        commodityDao.updateCdState(cdId,state);
+        return ResultUtil.success();
+    }
+
+    @Override
+    public Result searchSellRecord(Integer userId, Byte state, Integer start, Integer end) {
+        return ResultUtil.success(commodityDao.selectSellRecord(userId,state, start, end));
+    }
 }

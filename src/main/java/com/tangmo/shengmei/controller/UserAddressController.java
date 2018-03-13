@@ -55,6 +55,7 @@ public class UserAddressController extends BaseController{
      *                      address:"地址信息",
      *                      city:"市",
      *                      district:"区"
+     *                      isDefault:"0 ,1 是否为默认地址"
      *                   }
      * @apiSuccess (success) {PUT} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
      * @apiSuccess (success) {PUT} data 返回数据

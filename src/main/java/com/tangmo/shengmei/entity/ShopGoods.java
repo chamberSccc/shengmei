@@ -15,11 +15,14 @@ public class ShopGoods implements Serializable {
     private static final long serialVersionUID = 1L;
     private Integer sgId;
     private Integer userId;
-    private String goodsName;
-    private String goodsContent;
+    private String shopName;
+    private String shopContent;
     private String imgId;
-    private Byte goodsType;
-    private Double goodsPrice;
+    private Byte serviceType;
+    private Double price;
+    private String discountNote;
+    private String mobile;
+    private String address;
     private Date createTime;
     private Date updateTime;
 }

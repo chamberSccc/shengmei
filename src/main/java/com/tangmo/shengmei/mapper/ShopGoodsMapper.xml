@@ -12,80 +12,98 @@
         <result column="createtime" property="createTime" jdbcType="TIMESTAMP"/>
     </resultMap>
 
-    <resultMap id="CommentResultMap" type="com.tangmo.shengmei.entity.ConvComment" >
-        <id column="gc_id" property="gcId" jdbcType="INTEGER"/>
-        <result column="goods_id" property="goodsId" jdbcType="INTEGER"/>
-        <result column="user_id" property="userId" jdbcType="INTEGER"/>
-        <result column="username" property="username" jdbcType="VARCHAR"/>
-        <result column="avatar_id" property="avatarId" jdbcType="VARCHAR"/>
-        <result column="createtime" property="createTime" jdbcType="TIMESTAMP"/>
-    </resultMap>
-
     <sql id="Base_Column_List" >
 
     </sql>
-    <insert id="insertSelective" parameterType="com.tangmo.shengmei.entity.Commodity">
+    <insert id="insertSelective" parameterType="com.tangmo.shengmei.entity.ShopGoods">
             insert into shop_goods
             <trim prefix="(" suffix=")" suffixOverrides=",">
                 <if test="imgId != null">
                     img_id,
                 </if>
-                <if test="usId != null">
-                    us_id,
+                <if test="userId != null">
+                    user_id,
                 </if>
-                <if test="goodsName != null">
-                    goods_name,
+                <if test="shopName != null">
+                    shop_name,
                 </if>
-                <if test="goodsContent != null">
-                    goods_content,
+                <if test="shopContent != null">
+                    shop_content,
                 </if>
-                <if test="goodsType != null">
-                    goods_type,
+                <if test="serviceType != null">
+                    service_type,
                 </if>
-                <if test="goodsPrice != null">
-                    goods_price,
+                <if test="price != null">
+                    price,
+                </if>
+                <if test="mobile != null">
+                    mobile,
+                </if>
+                <if test="address != null">
+                    address,
+                </if>
+                <if test="discountNote != null">
+                    discount_note,
                 </if>
             </trim>
             <trim prefix="values (" suffix=")" suffixOverrides=",">
                 <if test="imgId != null">
                     #{imgId,jdbcType=VARCHAR},
                 </if>
-                <if test="usId != null">
-                    #{usId,jdbcType=INTEGER},
+                <if test="userId != null">
+                    #{userId,jdbcType=INTEGER},
                 </if>
-                <if test="goodsName != null">
-                    #{goodsName,jdbcType=VARCHAR},
+                <if test="shopName != null">
+                    #{shopName,jdbcType=VARCHAR},
                 </if>
-                <if test="goodsContent != null">
-                    #{goodsContent,jdbcType=VARCHAR},
+                <if test="shopContent != null">
+                    #{shopContent,jdbcType=VARCHAR},
                 </if>
-                <if test="goodsType != null">
-                    #{goodsType,jdbcType=TINYINT},
+                <if test="serviceType != null">
+                    #{serviceType,jdbcType=TINYINT},
                 </if>
-                <if test="goodsPrice != null">
-                    #{goodsPrice,jdbcType=DOUBLE},
+                <if test="price != null">
+                    #{price,jdbcType=DOUBLE},
+                </if>
+                <if test="mobile != null">
+                    #{mobile,jdbcType=VARCHAR},
+                </if>
+                <if test="address != null">
+                    #{address,jdbcType=VARCHAR},
+                </if>
+                <if test="discountNote != null">
+                    #{discountNote,jdbcType=VARCHAR},
                 </if>
             </trim>
     </insert>
 
-    <update id="updateById" parameterType="com.tangmo.shengmei.entity.Commodity">
+    <update id="updateById" parameterType="com.tangmo.shengmei.entity.ShopGoods">
         UPDATE shop_goods
         <set>
-            <if test="goodsName != null">
-                goods_name = #{goodsName},
+            <if test="shopName != null">
+                shop_name = #{shopName},
             </if>
-            <if test="goodsContent != null">
-                goods_content = #{goodsContent},
+            <if test="shopContent != null">
+                shop_content = #{shopContent},
             </if>
-            <if test="goodsType != null">
-                goods_type = #{goodsType},
+            <if test="serviceType != null">
+                service_type = #{serviceType},
             </if>
-            <if test="goodsPrice != null">
-                goods_price = #{goodsPrice},
+            <if test="price != null">
+                price = #{price},
+            </if>
+            <if test="mobile != null">
+                mobile = #{mobile},
+            </if>
+            <if test="address != null">
+                address = #{price},
+            </if>
+            <if test="discountNote != null">
+                discount_note = #{discountNote},
             </if>
             updatetime = now()
         </set>
-        WHERE cd_id = #{cdId,jdbcType=INTEGER}
+        WHERE sg_id = #{sgId,jdbcType=INTEGER}
     </update>
 
     <select id="selectListByUsId" resultMap="BaseResultMap">
@@ -101,12 +119,4 @@
     <delete id="deleteById">
         DELETE FROM shop_goods WHERE sg_id = #{sgId}
     </delete>
-
-    <select id="selectCommentByGoodsId" resultMap="CommentResultMap">
-        SELECT cc.user_id,ui.user_name,ui.avatar_id,cc.createtime FROM goods_comment gc
-        LEFT JOIN user_info ui ON cc.user_id = ui.user_id
-        WHERE gc.goods_id = #{goodsId} AND belong_type = 1
-        ORDER BY gc.createtime DESC
-        limit #{start},#{end}
-    </select>
 </mapper>

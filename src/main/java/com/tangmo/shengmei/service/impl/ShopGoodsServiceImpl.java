@@ -24,7 +24,10 @@ public class ShopGoodsServiceImpl implements ShopGoodsService {
     @Transactional(rollbackFor = Exception.class)
     public Result addShopGoods(ShopGoods shopGoods) {
         if (shopGoods.getUserId() == null) {
-            return ResultUtil.fail();
+            return ResultUtil.error("用户信息不存在");
+        }
+        if(shopGoods.getServiceType() == null){
+            return ResultUtil.error("无商品类型");
         }
         shopGoodsDao.insertSelective(shopGoods);
         return ResultUtil.success();
@@ -34,7 +37,7 @@ public class ShopGoodsServiceImpl implements ShopGoodsService {
     @Transactional(rollbackFor = Exception.class)
     public Result changeShopGoods(ShopGoods shopGoods) {
         if (shopGoods.getSgId() == null) {
-            return ResultUtil.fail();
+            return ResultUtil.error("主键为空");
         }
         shopGoodsDao.updateById(shopGoods);
         return ResultUtil.success();

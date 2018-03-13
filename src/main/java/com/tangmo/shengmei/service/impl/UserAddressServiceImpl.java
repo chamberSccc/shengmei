@@ -36,6 +36,12 @@ public class UserAddressServiceImpl implements UserAddressService{
         if(userAddress.getUaId() == null){
             return ResultUtil.error("地址id不能为空");
         }
+        //如果要设置为默认地址,则先设置其他地址为默认地址
+        if(userAddress.getIsDefault()!= null){
+            if(userAddress.getIsDefault().equals(1)){
+                userAddressDao.updateUnDefaultByUserId(userAddress.getUserId());
+            }
+        }
         userAddressDao.updateById(userAddress);
         return ResultUtil.success();
     }
