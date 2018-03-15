@@ -10,14 +10,12 @@
         <result column="sc_size" property="scSize" jdbcType="VARCHAR"/>
         <result column="pay_count" property="payCount" jdbcType="INTEGER"/>
         <result column="createtime" property="createTime" jdbcType="TIMESTAMP"/>
-        <association property="commodity" javaType="com.tangmo.shengmei.entity.Commodity">
+        <association property="commodity" javaType="com.tangmo.shengmei.entity.vo.ShopCartCdVO">
             <id column="cd_id" property="cdId" jdbcType="INTEGER"/>
             <result column="img_id" property="imgId" jdbcType="VARCHAR"/>
             <result column="title" property="title" jdbcType="VARCHAR"/>
-            <result column="content" property="content" jdbcType="VARCHAR"/>
-            <result column="price_pre" property="pricePre" jdbcType="DOUBLE"/>
             <result column="price_now" property="priceNow" jdbcType="DOUBLE"/>
-            <result column="type" property="type" jdbcType="TINYINT"/>
+            <result column="cd_type" property="cdType" jdbcType="TINYINT"/>
         </association>
     </resultMap>
     <insert id="insertSelective" parameterType="com.tangmo.shengmei.entity.ShopCart">
@@ -66,10 +64,10 @@
 
     <select id="selectListByUserId" resultMap="BaseResultMap">
         SELECT sc.sc_id,sc.user_id,sc.price,sc.pay_count,sc.sc_color,sc.sc_size,
-        cd.title,cd.content,cd.price_pre,cd.price_now,cd.img_id,cd.cd_type
+        cd.title,cd.price_now,cd.img_id,cd.cd_type,cd.cd_id
         FROM shop_cart sc LEFT JOIN commodity cd
         ON sc.cd_id = cd.cd_id
-        WHERE sc.user_id = #{userId} imit #{start},#{end}
+        WHERE sc.user_id = #{userId} limit #{start},#{end}
     </select>
 
     <delete id="deleteById">

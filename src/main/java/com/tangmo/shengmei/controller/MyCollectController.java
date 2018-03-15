@@ -110,6 +110,6 @@ public class MyCollectController extends BaseController {
      */
     @DeleteMapping("/multi")
     public Result deleteMultiView(@RequestParam Integer[] mcId){
-        return commodityService.delMultiViewRecord(mcId);
+        return myCollectService.delMultiMyCollect(mcId);
     }
 }

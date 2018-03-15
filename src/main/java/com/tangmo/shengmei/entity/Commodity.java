@@ -18,6 +18,7 @@ public class Commodity implements Serializable{
     private String username;
     private String avatarId;
     private String imgId;
+    private String[] imgList;
     private String title;
     private String content;
     private Byte cdType;
@@ -33,6 +34,16 @@ public class Commodity implements Serializable{
     private String district;
     private Byte cdClass;
     private Integer star;
+
+    public void setImgId(String imgId) {
+        if(imgId == null){
+            this.imgList = new String[]{};
+        }
+        String[] list = imgId.split(",");
+        this.imgId = imgId;
+        this.imgList = list;
+    }
+
     private String condition;
     private Double discountFee;
     private Double expressFee;

@@ -58,4 +58,10 @@ public class ShopVerifyServiceImpl implements ShopVerifyService {
     public Result searchSvInfo(Byte state,Integer start, Integer end) {
         return ResultUtil.success(shopVerifyDao.selectByState(state, start, end));
     }
+
+    @Override
+    public Result changeSvInfo(ShopVerify shopVerify) {
+        shopVerifyDao.updateSvInfo(shopVerify);
+        return ResultUtil.success();
+    }
 }

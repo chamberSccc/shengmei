@@ -23,8 +23,8 @@ public class ShopCartController extends BaseController{
      *                   {
      *                      userId:"用户id",
      *                      cdId:"商品id",
-     *                      price:"商品jiage",
-     *                      cdCount:"商品数量",
+     *                      price:"商品价格",
+     *                      payCount:"商品数量",
      *                      scColor:"商品颜色,
      *                      scSize:"商品规格
      *                   }
@@ -58,6 +58,8 @@ public class ShopCartController extends BaseController{
      *                        scId: 1,
      *                        userId:"用户id",
      *                        cdId:"商品id",
+     *                        title:商品标题,
+     *                        payCount:购买数量
      *                        price:"商品价格",
      *                        cdCount:"商品数量",
      *                        scColor:"商品颜色,
@@ -67,7 +69,9 @@ public class ShopCartController extends BaseController{
      *                        scId: 1,
      *                        userId:"用户id",
      *                        cdId:"商品id",
-     *                        price:"商品价格2",
+     *                        priceNow:"商品价格2",
+     *                        payCount:购买数量
+     *                        price:"商品价格",
      *                        cdCount:"商品数量2",
      *                        scColor:"商品颜色,
      *                        scSize:"商品规格",

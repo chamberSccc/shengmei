@@ -22,7 +22,7 @@ public class ShopGoodsServiceImpl implements ShopGoodsService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Result addShopGoods(ShopGoods shopGoods) {
+    public Result addShopService(ShopGoods shopGoods) {
         if (shopGoods.getUserId() == null) {
             return ResultUtil.error("用户信息不存在");
         }
@@ -35,7 +35,7 @@ public class ShopGoodsServiceImpl implements ShopGoodsService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Result changeShopGoods(ShopGoods shopGoods) {
+    public Result changeShopService(ShopGoods shopGoods) {
         if (shopGoods.getSgId() == null) {
             return ResultUtil.error("主键为空");
         }

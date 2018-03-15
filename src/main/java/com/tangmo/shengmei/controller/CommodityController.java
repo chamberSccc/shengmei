@@ -41,8 +41,6 @@ public class CommodityController extends BaseController {
      *                      cdColor:"商品颜色,多种颜色以逗号分隔,
      *                      cdSize:"商品规格,多种规格以逗号分隔",
      *                      imgId:商品图片Id,
-     *                      discountFee:打折费用,
-     *                      expressFee:物流费用
      *                   }
      * @apiSuccess (success) {POST} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
      * @apiSuccess (success) {POST} data 返回数据
@@ -84,11 +82,10 @@ public class CommodityController extends BaseController {
      *                      cdId:"商品信息主键",
      *                      title:"标题是什么",
      *                      content:"内容是什么",
-     *                      pricePre:"原价",
      *                      priceNow:"现价",
      *                      cdType:"商品类型",
      *                      cdCount:"商品数量",
-     *                      file:商品图片,
+     *                      imgId:商品图片,
      *                      discountFee:"打折费用",
      *                      expressFee:"物流费用"
      *                   }
@@ -98,8 +95,8 @@ public class CommodityController extends BaseController {
      *                    {"code":"success"}
      */
     @PutMapping("")
-    public Result changeCommodity(Commodity commodity,MultipartFile file){
-        return commodityService.changeCommodity(commodity,file);
+    public Result changeCommodity(@RequestBody Commodity commodity){
+        return commodityService.changeCommodity(commodity,null);
     }
 
     /**

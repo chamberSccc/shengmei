@@ -182,4 +182,12 @@ public class CommodityServiceImpl implements CommodityService {
     public Result searchSellRecord(Integer userId, Byte state, Integer start, Integer end) {
         return ResultUtil.success(commodityDao.selectSellRecord(userId,state, start, end));
     }
+
+    private String[] thansImgToArray(String src){
+        if(src == null){
+            return new String[]{};
+        }
+        String[] list = src.split(",");
+        return list;
+    }
 }

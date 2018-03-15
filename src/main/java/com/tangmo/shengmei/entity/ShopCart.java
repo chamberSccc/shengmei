@@ -1,5 +1,6 @@
 package com.tangmo.shengmei.entity;
 
+import com.tangmo.shengmei.entity.vo.ShopCartCdVO;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -19,5 +20,5 @@ public class ShopCart implements Serializable{
     private Integer payCount;
     private String scColor;
     private String scSize;
-    private Commodity commodity;
+    private ShopCartCdVO commodity;
 }

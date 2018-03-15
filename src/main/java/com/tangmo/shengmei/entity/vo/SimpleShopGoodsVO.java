@@ -10,7 +10,7 @@ import java.io.Serializable;
  * @description 店铺服务列表简要信息vo
  */
 @Data
-public class SimpleShopGoosVO implements Serializable {
+public class SimpleShopGoodsVO implements Serializable {
     private static final long serialVersionUID = 1L;
     private Integer sgId;
     private String shopName;

@@ -13,7 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
  * @description
  */
 @RestController
-@RequestMapping("/shop/verify")
+@RequestMapping("/shop")
 public class ShopVerifyController extends BaseController{
 
     /**
@@ -41,7 +41,7 @@ public class ShopVerifyController extends BaseController{
      * @apiSuccessExample {json} 返回样例:
      *                    {"code":"success"}
      */
-    @PostMapping("")
+    @PostMapping("/verify")
     public Result addShopVerify(@RequestBody ShopVerify shopVerify){
         if(shopVerify == null){
             return ResultUtil.fail();
@@ -51,6 +51,29 @@ public class ShopVerifyController extends BaseController{
             return ResultUtil.error("确认图片信息是否上传完整");
         }
         return shopVerifyService.addShopVerify(shopVerify);
+    }
+
+    /**
+     * @api {PUT} /shop/info 修改商家信息
+     * @apiGroup ShopVerify
+     * @apiVersion 0.0.1
+     * @apiDescription 修改商家信息
+     * @apiParamExample {json} 请求样例:
+     *                   {
+     *                      svId: 信息主键,
+     *                      userId:"用户Id",
+     *                      shopName:"店铺名称",
+     *                      shopIntro:"店铺描述",
+     *                      shopAddress:"店铺地址",
+     *                   }
+     * @apiSuccess (success) {PUT} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccess (success) {PUT} data 返回数据
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success"}
+     */
+    @PutMapping("/info")
+    public Result changeShopVerify(@RequestBody ShopVerify shopVerify){
+        return shopVerifyService.changeSvInfo(shopVerify);
     }
 
 }

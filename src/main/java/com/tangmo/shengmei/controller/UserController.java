@@ -106,13 +106,14 @@ public class UserController extends BaseController{
     }
 
     /**
-     * @api {PUT} /user/change 修改用户信息
+     * @api {PUT} /user 修改用户信息
      * @apiGroup User
      * @apiVersion 0.0.1
      * @apiDescription 修改用户信息
      * @apiParam {User} user 用户信息对象
      * @apiParamExample {json} 请求样例:
      *                   {
+     *                      userId:1
      *                      username:"姓名",
      *                      mobile:"18710889234",
      *                      province:"省份",
@@ -371,6 +372,7 @@ public class UserController extends BaseController{
      *                     [{
      *                        brId: 1,
      *                        title: "商品信息标题1",
+     *                        goodsId:"商品Id",
      *                        imgId:"商品图片",
      *                        content: "商品信息内容1",
      *                        amount:"价格",
@@ -405,6 +407,7 @@ public class UserController extends BaseController{
      *                        title: "商品信息标题1",
      *                        imgId:"商品图片",
      *                        content: "商品信息内容1",
+     *                        goodsId:"商品Id",
      *                        amount:"价格",
      *                        brCount:"购买数量",
      *                        createTime:"购买时间"

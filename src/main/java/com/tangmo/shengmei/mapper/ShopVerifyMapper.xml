@@ -46,4 +46,20 @@
         logo_img,shop_intro,shop_name,license_img,shop_state,createtime
         FROM shop_verify limit #{start},#{end}
     </select>
+
+    <update id="updateSvInfo" parameterType="com.tangmo.shengmei.entity.ShopVerify">
+        UPDATE shop_verify
+        <set>
+            <if test="shopName != null">
+                shop_name = #{shopName},
+            </if>
+            <if test="shopIntro != null">
+                shop_intro = #{shopIntro},
+            </if>
+            <if test="shopAddress != null">
+                shop_address = #{shopAddress},
+            </if>
+        </set>
+        WHERE sv_id = #{svId,jdbcType=INTEGER}
+    </update>
 </mapper>

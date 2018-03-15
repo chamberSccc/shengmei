@@ -47,4 +47,12 @@ public interface ShopVerifyDao {
      * @return
      */
     List<ShopVerify> selectAll(@Param("start") Integer start, @Param("end") Integer end);
+
+    /**
+     * 修改商家信息
+     *
+     * @param shopVerify
+     * @return
+     */
+    int updateSvInfo(ShopVerify shopVerify);
 }

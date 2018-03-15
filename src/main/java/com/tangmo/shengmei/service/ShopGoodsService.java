@@ -12,20 +12,20 @@ import com.tangmo.shengmei.utility.code.Result;
 public interface ShopGoodsService {
 
     /**
-     * 增加店铺商品信息
+     * 增加店铺服务信息
      *
      * @param shopGoods
      * @return
      */
-    Result addShopGoods(ShopGoods shopGoods);
+    Result addShopService(ShopGoods shopGoods);
 
     /**
-     * 修改店铺商品信息
+     * 修改店铺服务信息
      *
      * @param shopGoods
      * @return
      */
-    Result changeShopGoods(ShopGoods shopGoods);
+    Result changeShopService(ShopGoods shopGoods);
 
     /**
      * 删除指定店铺商品信息

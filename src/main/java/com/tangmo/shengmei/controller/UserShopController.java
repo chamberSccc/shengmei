@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.*;
  * @date 17/12/29
  * @description 用户店铺信息控制层
  */
-@RestController
-@RequestMapping("/shop")
 public class UserShopController extends BaseController {
 
     /**
