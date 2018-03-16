@@ -458,9 +458,11 @@ public class CommodityController extends BaseController {
      * @apiParam {CommodityDto} commodityDto 商品查询对象
      * @apiParamExample {json} 请求样例:
      *                   {
+     *                      cdType:商品类型,
      *                      city:"城市",
      *                      district:"区域",
      *                      cdClass:"商品分类",
+     *                      price:"价格排序 0,正序,1倒序"
      *                      priceStart:"价格开始区间",
      *                      priceEnd:"价格结束区间",
      *                      start:"分页开始索引,必填",

@@ -306,15 +306,17 @@
 
     <select id="selectCdByCondition" parameterType="com.tangmo.shengmei.entity.CommodityDto" resultMap="BaseResultMap">
         SELECT cd_id,img_id,title,content,cd_type,cd_count,price_pre,price_now,createtime,province,city,district,commodity.condition
-        FROM commodity WHERE is_sell = 0 AND cd_state = 1
+        FROM commodity WHERE is_sell = 0 AND cd_state = 1 AND cd_type = #{cdType}
         <if test="city != null"> AND city = #{city} </if>
         <if test="district != null"> AND district = #{district} </if>
         <if test="cdClass != null"> AND cd_class = #{cdClass} </if>
-        <if test="priceStart != null"> AND price_now = #{priceStart} </if>
-        <if test="priceEnd != null"> AND price_now = #{priceEnd} </if>
-        <if test="star == '0'"> ORDER BY star</if>
-        <if test="star == '1'">ORDER BY star DESC </if>
-        <if test="start != null">limit #{start},#{end} </if>
+        <if test="priceStart != null"> AND price_now &gt;= #{priceStart} </if>
+        <if test="priceEnd != null"> AND price_now &lt;= #{priceEnd} </if>
+        <if test="price == 0"> ORDER BY price_now</if>
+        <if test="price == 1">ORDER BY price_now DESC </if>
+        <if test="star == 0"> ORDER BY star</if>
+        <if test="star == 1">ORDER BY star DESC </if>
+        limit #{start},#{end}
     </select>
 
     <update id="updateCdStar">

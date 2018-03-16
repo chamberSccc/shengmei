@@ -12,10 +12,12 @@ import java.io.Serializable;
 @Data
 public class CommodityDto{
 
+    private Byte cdType;
     private Byte cdClass;
     private Boolean star;
     private Double priceStart;
     private Double priceEnd;
+    private Byte price;
     private String city;
     private String district;
     private Integer start;

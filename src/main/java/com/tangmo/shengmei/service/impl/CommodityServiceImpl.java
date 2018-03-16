@@ -143,8 +143,11 @@ public class CommodityServiceImpl implements CommodityService {
 
     @Override
     public Result selectByCondition(CommodityDto commodityDto) {
-        if(commodityDto.getEnd() == null){
-            return ResultUtil.fail();
+        if(commodityDto.getEnd() == null || commodityDto.getStart() == null){
+            return ResultUtil.error("无分页信息");
+        }
+        if(commodityDto.getCdType() == null){
+            return ResultUtil.error("无商品类型信息");
         }
         return ResultUtil.success(commodityDao.selectCdByCondition(commodityDto));
     }
