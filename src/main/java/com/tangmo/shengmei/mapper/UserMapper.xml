@@ -23,6 +23,7 @@
         <result column="city" property="city" jdbcType="VARCHAR"/>
         <result column="gender" property="gender" jdbcType="VARCHAR"/>
         <result column="avatar_id" property="avatarId" jdbcType="VARCHAR"/>
+        <result column="is_merchant" property="isMerchant" jdbcType="TINYINT"/>
     </resultMap>
 
     <resultMap id="WithDrawResultMap" type="com.tangmo.shengmei.entity.WithDrawInfo" >

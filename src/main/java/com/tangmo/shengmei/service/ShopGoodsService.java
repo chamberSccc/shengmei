@@ -28,6 +28,24 @@ public interface ShopGoodsService {
     Result changeShopService(ShopGoods shopGoods);
 
     /**
+     * 获取商品列表(通过类型)
+     *
+     * @param type
+     * @param start
+     * @param end
+     * @return
+     */
+    Result searchServiceByType(Byte type, Integer start, Integer end);
+
+    /**
+     * 获取服务详情
+     *
+     * @param sgId
+     * @return
+     */
+    Result searchServiceDetail(Integer sgId);
+
+    /**
      * 删除指定店铺商品信息
      *
      * @param sgId
@@ -47,6 +65,7 @@ public interface ShopGoodsService {
 
     /**
      * 获取精品商品列表
+     *
      * @param start
      * @param end
      * @return

@@ -16,7 +16,5 @@ public class SimpleShopGoodsVO implements Serializable {
     private String shopName;
     private String shopContent;
     private String imgId;
-    private Byte serviceType;
-    private String address;
     private Double price;
 }

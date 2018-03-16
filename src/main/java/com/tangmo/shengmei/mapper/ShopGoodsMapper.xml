@@ -4,12 +4,24 @@
     <resultMap id="BaseResultMap" type="com.tangmo.shengmei.entity.ShopGoods" >
         <id column="sg_id" property="sgId" jdbcType="INTEGER"/>
         <result column="us_id" property="usId" jdbcType="INTEGER"/>
-        <result column="goods_name" property="goodsName" jdbcType="VARCHAR"/>
-        <result column="goods_content" property="goodsContent" jdbcType="VARCHAR"/>
+        <result column="shop_name" property="shopName" jdbcType="VARCHAR"/>
+        <result column="shop_content" property="shopContent" jdbcType="VARCHAR"/>
         <result column="img_id" property="imgId" jdbcType="VARCHAR"/>
-        <result column="goods_type" property="goodsType" jdbcType="TINYINT"/>
-        <result column="goods_price" property="goodsPirce" jdbcType="DOUBLE"/>
-        <result column="createtime" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="service_type" property="serviceType" jdbcType="TINYINT"/>
+        <result column="price" property="price" jdbcType="DOUBLE"/>
+        <result column="address" property="address" jdbcType="VARCHAR"/>
+        <result column="mobile" property="mobile" jdbcType="VARCHAR"/>
+        <result column="discountNote" property="discountNote" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <resultMap id="SimpleResultMap" type="com.tangmo.shengmei.entity.vo.SimpleShopGoodsVO" >
+        <id column="sg_id" property="sgId" jdbcType="INTEGER"/>
+        <result column="us_id" property="usId" jdbcType="INTEGER"/>
+        <result column="shop_name" property="shopName" jdbcType="VARCHAR"/>
+        <result column="shop_content" property="shopContent" jdbcType="VARCHAR"/>
+        <result column="img_id" property="imgId" jdbcType="VARCHAR"/>
+        <result column="service_type" property="serviceType" jdbcType="TINYINT"/>
+        <result column="price" property="price" jdbcType="DOUBLE"/>
     </resultMap>
 
     <sql id="Base_Column_List" >
@@ -109,6 +121,15 @@
     <select id="selectListByUsId" resultMap="BaseResultMap">
         SELECT img_id,goods_name,goods_content,goods_type,goods_price
         FROM shop_goods WHERE us_id = #{usId}
+    </select>
+
+    <select id="selectByType" resultMap="SimpleResultMap">
+        SELECT sg_id,img_id,shop_name,shop_content,price
+        FROM shop_goods WHERE service_type = #{type} limit #{start},#{end}
+    </select>
+
+    <select id="selectById" resultMap="BaseResultMap">
+        SELECT * FROM shop_goods WHERE sg_id = #{sgId}
     </select>
 
     <select id="selectQlList">

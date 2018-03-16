@@ -44,6 +44,16 @@ public class ShopGoodsServiceImpl implements ShopGoodsService {
     }
 
     @Override
+    public Result searchServiceByType(Byte type, Integer start, Integer end) {
+        return ResultUtil.success(shopGoodsDao.selectByType(type, start, end));
+    }
+
+    @Override
+    public Result searchServiceDetail(Integer sgId) {
+        return ResultUtil.success(shopGoodsDao.selectById(sgId));
+    }
+
+    @Override
     @Transactional(rollbackFor = Exception.class)
     public Result delShopGoods(Integer sgId) {
         shopGoodsDao.deleteById(sgId);
