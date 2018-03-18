@@ -1,6 +1,7 @@
 package com.tangmo.shengmei.service;
 
 import com.tangmo.shengmei.entity.ShopGoods;
+import com.tangmo.shengmei.entity.ShopServiceDto;
 import com.tangmo.shengmei.utility.code.Result;
 
 /**
@@ -46,6 +47,14 @@ public interface ShopGoodsService {
     Result searchServiceDetail(Integer sgId);
 
     /**
+     * 筛选服务列表
+     *
+     * @param shopServiceDto
+     * @return
+     */
+    Result searchByCondition(ShopServiceDto shopServiceDto);
+
+    /**
      * 删除指定店铺商品信息
      *
      * @param sgId
@@ -55,20 +64,10 @@ public interface ShopGoodsService {
 
 
     /**
-     * 查询指定店铺下的商品信息
+     *
      *
      * @param usId
      * @return
      */
     Result searchShopGoods(Integer usId);
-
-
-    /**
-     * 获取精品商品列表
-     *
-     * @param start
-     * @param end
-     * @return
-     */
-    Result searchQlList(Integer start, Integer end);
 }

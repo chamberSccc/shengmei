@@ -15,6 +15,7 @@ public class ShopServiceVO {
     private Integer sgId;
     private Integer userId;
     private String userName;
+    private String avatarId;
     private String city;
     private String shopName;
     private String shopContent;
@@ -24,5 +25,5 @@ public class ShopServiceVO {
     private String discountNote;
     private String mobile;
     private String address;
-    private Date updateTime;
+    private Date createtime;
 }

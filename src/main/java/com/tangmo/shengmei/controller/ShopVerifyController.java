@@ -76,4 +76,35 @@ public class ShopVerifyController extends BaseController{
         return shopVerifyService.changeSvInfo(shopVerify);
     }
 
+    /**
+     * @api {GET} /shop/info/{userId} 查询商铺信息
+     * @apiGroup ShopVerify
+     * @apiVersion 0.0.1
+     * @apiDescription 查询商铺信息
+     * @apiParamExample {json} 请求样例：
+     *  /shop/info/1
+     * @apiParamExample {json} 返回样例:
+     *                   {
+     *                      userId:"用户Id",
+     *                      userName:"代表人姓名",
+     *                      idNumber:"收件人",
+     *                      mobile:"手机号",
+     *                      shopName:"店铺名称",
+     *                      shopIntro:"店铺描述",
+     *                      shopAddress:"店铺地址",
+     *                      idFrontImg:"身份证正面照",
+     *                      idRearImg:"身份证反面照",
+     *                      logoImg:"logo图片",
+     *                      licenseImg:"营业执照照片"
+     *                   }
+     * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccess (success) {GET} data 返回数据
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success"}
+     */
+    @GetMapping("/info/{userId}")
+    public Result searchShopInfo(@PathVariable Integer userId){
+        return shopVerifyService.searchSvInfo(userId);
+    }
+
 }

@@ -5,6 +5,7 @@ import com.tangmo.shengmei.controller.base.BaseController;
 import com.tangmo.shengmei.entity.Commodity;
 import com.tangmo.shengmei.entity.GoodsComment;
 import com.tangmo.shengmei.entity.ShopGoods;
+import com.tangmo.shengmei.entity.ShopServiceDto;
 import com.tangmo.shengmei.utility.code.Result;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.*;
@@ -34,7 +35,9 @@ public class ShopGoodsController extends BaseController{
      *                      address:"店铺地址",
      *                      imgId:图片Id,
      *                      discountNote:打折活动,
-     *                      mobile:手机号
+     *                      mobile:手机号,
+     *                      city:"城市",
+     *                      district:"区域"
      *                   }
      * @apiSuccess (success) {POST} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
      * @apiSuccess (success) {POST} data 返回数据
@@ -94,6 +97,8 @@ public class ShopGoodsController extends BaseController{
      *                        imgId:"商品图片",
      *                        shopContent: "店铺介绍",
      *                        price:"价格",
+     *                        city:"城市",
+     *                        district:"区域"
      *                      }
      *                     {
      *                        sgId: 2,
@@ -101,6 +106,8 @@ public class ShopGoodsController extends BaseController{
      *                        imgId:"商品图片",
      *                        shopContent: "店铺介绍",
      *                        price:"价格",
+     *                        city:"城市",
+     *                        district:"区域"
      *                     }]
      *                     }
      */
@@ -124,9 +131,7 @@ public class ShopGoodsController extends BaseController{
      *                      shopName:"标题是什么",
      *                      shopContent:"内容是什么",
      *                      imgId:"图片base64编码",
-     *                      province:"省",
      *                      city:"市",
-     *                      district:"区",
      *                      price:"商品价格",
      *                      address:"地址",
      *                      mobile:"手机",
@@ -137,6 +142,51 @@ public class ShopGoodsController extends BaseController{
     @GetMapping("/service/detail/{sgId}")
     public Result searchSgDetail(@PathVariable Integer sgId){
         return shopGoodsService.searchServiceDetail(sgId);
+    }
+
+    /**
+     * @api {GET} /shop/service/select 筛选服务列表
+     * @apiGroup ShopGoods
+     * @apiVersion 0.0.1
+     * @apiDescription 筛选服务列表
+     * @apiParamExample {json} 请求样例：
+     *                  {
+     *                      type:服务类型,
+     *                      city:"城市",
+     *                      price:"价格排序 0,正序,1倒序"
+     *                      priceStart:"价格开始区间",
+     *                      priceEnd:"价格结束区间",
+     *                      start:"分页开始索引,必填",
+     *                      end:"分页查询长度,必填",
+     *                   }
+     * @apiSuccess (200) {String} msg 信息
+     * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success",
+     *                     "data":{
+     *                     [{
+     *                        sgId: 1,
+     *                        shopName "店铺名",
+     *                        imgId:"商品图片",
+     *                        shopContent: "店铺介绍",
+     *                        price:"价格",
+     *                        city:"城市",
+     *                        district:"区域"
+     *                      }
+     *                     {
+     *                        sgId: 2,
+     *                        shopName: "店铺名",
+     *                        imgId:"商品图片",
+     *                        shopContent: "店铺介绍",
+     *                        price:"价格",
+     *                        city:"城市",
+     *                        district:"区域"
+     *                     }]
+     *                     }
+     */
+    @GetMapping("/service/select")
+    public Result searchByCondition(ShopServiceDto shopServiceDto){
+        return shopGoodsService.searchByCondition(shopServiceDto);
     }
 
     /**

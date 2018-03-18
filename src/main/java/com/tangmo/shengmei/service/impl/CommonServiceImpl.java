@@ -46,4 +46,9 @@ public class CommonServiceImpl implements CommonService {
         commonDao.deletePvById(pvId);
         return ResultUtil.success();
     }
+
+    @Override
+    public Result searchDistrict(String city) {
+        return ResultUtil.success(commonDao.selectDistrict(city));
+    }
 }

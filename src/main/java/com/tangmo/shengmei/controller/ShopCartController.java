@@ -85,7 +85,7 @@ public class ShopCartController extends BaseController{
     }
 
     /**
-     * @api {GET} /cart/{scId} 删除指定购物车信息
+     * @api {DELETE} /cart/{scId} 删除指定购物车信息
      * @apiGroup ShopCart
      * @apiVersion 0.0.1
      * @apiParam {int} scId 购物车表主键
@@ -93,7 +93,7 @@ public class ShopCartController extends BaseController{
      * @apiParamExample {json} 请求样例：
      *  /cart/12
      * @apiSuccess (200) {String} msg 信息
-     * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccess (success) {DELETE} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
      * @apiSuccessExample {json} 返回样例:
      *                    {"code":"success"}
      */

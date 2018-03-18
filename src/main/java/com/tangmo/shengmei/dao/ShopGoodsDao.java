@@ -2,6 +2,8 @@ package com.tangmo.shengmei.dao;
 
 import com.tangmo.shengmei.entity.GoodsComment;
 import com.tangmo.shengmei.entity.ShopGoods;
+import com.tangmo.shengmei.entity.ShopServiceDto;
+import com.tangmo.shengmei.entity.vo.ShopServiceVO;
 import com.tangmo.shengmei.entity.vo.SimpleShopGoodsVO;
 import org.apache.ibatis.annotations.Param;
 
@@ -72,7 +74,7 @@ public interface ShopGoodsDao {
      * @param sgId
      * @return
      */
-    ShopGoods selectById(Integer sgId);
+    ShopServiceVO selectById(Integer sgId);
 
     /**
      * 获取商品评论列表
@@ -84,6 +86,14 @@ public interface ShopGoodsDao {
      */
     List<GoodsComment> selectCommentByGoodsId(@Param("goodsId") Integer goodsId, @Param("start") Integer start,
                                               @Param("end") Integer end);
+
+    /**
+     * 根据条件筛选商品服务
+     *
+     * @param shopServiceDto
+     * @return
+     */
+    List<SimpleShopGoodsVO> selectByCondition(ShopServiceDto shopServiceDto);
 
 
 }

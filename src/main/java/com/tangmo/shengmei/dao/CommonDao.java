@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author boge
@@ -111,6 +112,14 @@ public interface CommonDao {
      * @return
      */
     int insertFeedBack(FeedBack feedBack);
+
+    /**
+     * 获取行政区域
+     *
+     * @param city
+     * @return
+     */
+    List<Map<String, Object>> selectDistrict(String city);
 
 
 }

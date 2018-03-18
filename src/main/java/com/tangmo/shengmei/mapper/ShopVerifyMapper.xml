@@ -30,7 +30,7 @@
 
     <select id="selectByUserId" resultMap="BaseResultMap">
         SELECT sv_id,id_number,mobile,user_id,user_name,id_front_img,id_rear_img,
-        logo_img,shop_intro,shop_name,license_img,shop_state,createtime
+        logo_img,shop_intro,shop_name,license_img,shop_state
          FROM shop_verify WHERE user_id = #{userId}
     </select>
 

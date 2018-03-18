@@ -40,4 +40,12 @@ public interface CommonService {
      * @return
      */
     Result delParamById(Integer pvId);
+
+    /**
+     * 获取区域
+     *
+     * @param city
+     * @return
+     */
+    Result searchDistrict(String city);
 }

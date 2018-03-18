@@ -3,13 +3,31 @@
 <mapper namespace="com.tangmo.shengmei.dao.ShopGoodsDao" >
     <resultMap id="BaseResultMap" type="com.tangmo.shengmei.entity.ShopGoods" >
         <id column="sg_id" property="sgId" jdbcType="INTEGER"/>
-        <result column="us_id" property="usId" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
         <result column="shop_name" property="shopName" jdbcType="VARCHAR"/>
         <result column="shop_content" property="shopContent" jdbcType="VARCHAR"/>
         <result column="img_id" property="imgId" jdbcType="VARCHAR"/>
         <result column="service_type" property="serviceType" jdbcType="TINYINT"/>
         <result column="price" property="price" jdbcType="DOUBLE"/>
         <result column="address" property="address" jdbcType="VARCHAR"/>
+        <result column="city" property="city" jdbcType="VARCHAR"/>
+        <result column="district" property="district" jdbcType="VARCHAR"/>
+        <result column="mobile" property="mobile" jdbcType="VARCHAR"/>
+        <result column="discountNote" property="discountNote" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <resultMap id="DetailResultMap" type="com.tangmo.shengmei.entity.vo.ShopServiceVO" >
+        <id column="sg_id" property="sgId" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="avatar_id" property="avatarId" jdbcType="VARCHAR"/>
+        <result column="shop_name" property="shopName" jdbcType="VARCHAR"/>
+        <result column="shop_content" property="shopContent" jdbcType="VARCHAR"/>
+        <result column="img_id" property="imgId" jdbcType="VARCHAR"/>
+        <result column="service_type" property="serviceType" jdbcType="TINYINT"/>
+        <result column="price" property="price" jdbcType="DOUBLE"/>
+        <result column="address" property="address" jdbcType="VARCHAR"/>
+        <result column="city" property="city" jdbcType="VARCHAR"/>
         <result column="mobile" property="mobile" jdbcType="VARCHAR"/>
         <result column="discountNote" property="discountNote" jdbcType="VARCHAR"/>
     </resultMap>
@@ -22,6 +40,8 @@
         <result column="img_id" property="imgId" jdbcType="VARCHAR"/>
         <result column="service_type" property="serviceType" jdbcType="TINYINT"/>
         <result column="price" property="price" jdbcType="DOUBLE"/>
+        <result column="city" property="city" jdbcType="VARCHAR"/>
+        <result column="district" property="district" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List" >
@@ -57,6 +77,12 @@
                 <if test="discountNote != null">
                     discount_note,
                 </if>
+                <if test="city != null">
+                    city,
+                </if>
+                <if test="district != null">
+                    district,
+                </if>
             </trim>
             <trim prefix="values (" suffix=")" suffixOverrides=",">
                 <if test="imgId != null">
@@ -86,6 +112,12 @@
                 <if test="discountNote != null">
                     #{discountNote,jdbcType=VARCHAR},
                 </if>
+                <if test="city != null">
+                    #{city,jdbcType=VARCHAR},
+                </if>
+                <if test="district != null">
+                    #{district,jdbcType=VARCHAR},
+                </if>
             </trim>
     </insert>
 
@@ -108,7 +140,7 @@
                 mobile = #{mobile},
             </if>
             <if test="address != null">
-                address = #{price},
+                address = #{address},
             </if>
             <if test="discountNote != null">
                 discount_note = #{discountNote},
@@ -124,12 +156,26 @@
     </select>
 
     <select id="selectByType" resultMap="SimpleResultMap">
-        SELECT sg_id,img_id,shop_name,shop_content,price
+        SELECT sg_id,img_id,shop_name,shop_content,price,city,district
         FROM shop_goods WHERE service_type = #{type} limit #{start},#{end}
     </select>
 
-    <select id="selectById" resultMap="BaseResultMap">
-        SELECT * FROM shop_goods WHERE sg_id = #{sgId}
+    <select id="selectByCondition" resultMap="SimpleResultMap">
+        SELECT sg_id,img_id,shop_name,shop_content,price,city,district
+        FROM shop_goods WHERE service_type = #{type}
+        <if test="city != null"> AND city = #{city} </if>
+        <if test="priceStart != null"> AND price_now &gt;= #{priceStart} </if>
+        <if test="priceEnd != null"> AND price_now &lt;= #{priceEnd} </if>
+        <if test="price == 0"> ORDER BY price_now</if>
+        <if test="price == 1">ORDER BY price_now DESC </if>
+        limit #{start},#{end}
+    </select>
+
+    <select id="selectById" resultMap="DetailResultMap">
+        SELECT sg.sg_id,sg.user_id,ui.username,ui.avatar_id,sg.city,sg.shop_name,sg.shop_content,
+         sg.img_id,sg.service_type,sg.price,sg.discount_note,sg.mobile,sg.address,sg.createtime
+         FROM shop_goods sg LEFT JOIN user_info ui on sg.user_id = ui.user_id
+         WHERE sg.sg_id = #{sgId}
     </select>
 
     <select id="selectQlList">

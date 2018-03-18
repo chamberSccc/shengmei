@@ -242,4 +242,29 @@ public class CommonController extends BaseController{
     public Result delParam(@PathVariable Integer pvId){
         return commonService.delParamById(pvId);
     }
+
+    /**
+     * @api {GET} /common/district 获取行政区域
+     * @apiGroup Common
+     * @apiVersion 0.0.1
+     * @apiDescription 获取行政区域
+     * @apiParamExample {json} 请求样例：
+     *          {
+     *              city: 西安
+     *          }
+     * @apiSuccess (200) {String} msg 信息
+     * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success",
+     *                     "data":{
+     *                     [{
+     *                        id: "主键",
+     *                        district:"区",
+     *                     ...]
+     *                     }
+     */
+    @GetMapping("/district")
+    public Result getDistrict(String city){
+        return commonService.searchDistrict(city);
+    }
 }

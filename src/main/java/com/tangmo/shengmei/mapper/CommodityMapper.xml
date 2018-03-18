@@ -10,8 +10,8 @@
         <result column="username" property="username" jdbcType="VARCHAR"/>
         <result column="avatar_id" property="avatarId" jdbcType="VARCHAR"/>
         <result column="condition" property="condition" jdbcType="VARCHAR"/>
-        <result column="cdColor" property="cdColor" jdbcType="VARCHAR"/>
-        <result column="cdSize" property="cdSize" jdbcType="VARCHAR"/>
+        <result column="cd_color" property="cdColor" jdbcType="VARCHAR"/>
+        <result column="cd_size" property="cdSize" jdbcType="VARCHAR"/>
         <result column="price_pre" property="pricePre" jdbcType="DOUBLE"/>
         <result column="price_now" property="priceNow" jdbcType="DOUBLE"/>
         <result column="province" property="province" jdbcType="VARCHAR"/>
@@ -271,7 +271,7 @@
     <select id="selectCommodityDetail" resultMap="BaseResultMap">
         SELECT cd.cd_id,cd.img_id,cd.title,cd.content,cd.cd_type,cd.cd_count,cd.price_pre,
         cd.price_now,cd.createtime,cd.province,cd.city,cd.district,cd.user_id,cd.condition,
-        ui.username,ui.avatar_id
+        ui.username,ui.avatar_id,cd.cd_color,cd.cd_size
         FROM commodity cd LEFT JOIN user_info ui ON cd.user_id = ui.user_id
         WHERE  cd.cd_id = #{cdId} AND is_sell = 0
     </select>

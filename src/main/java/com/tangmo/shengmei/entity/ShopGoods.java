@@ -22,6 +22,8 @@ public class ShopGoods implements Serializable {
     private Double price;
     private String discountNote;
     private String mobile;
+    private String city;
+    private String district;
     private String address;
     private Date createTime;
     private Date updateTime;

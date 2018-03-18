@@ -74,4 +74,7 @@
         DELETE FROM param_value WHERE pv_id = #{pvId}
     </delete>
 
+    <select id="selectDistrict" resultType="java.util.HashMap">
+        SELECT id,district FROM city_district WHERE city = #{city}
+    </select>
 </mapper>

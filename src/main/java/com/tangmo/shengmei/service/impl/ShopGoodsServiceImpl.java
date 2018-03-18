@@ -2,6 +2,7 @@ package com.tangmo.shengmei.service.impl;
 
 import com.tangmo.shengmei.dao.ShopGoodsDao;
 import com.tangmo.shengmei.entity.ShopGoods;
+import com.tangmo.shengmei.entity.ShopServiceDto;
 import com.tangmo.shengmei.service.ShopGoodsService;
 import com.tangmo.shengmei.utility.code.Result;
 import com.tangmo.shengmei.utility.code.ResultUtil;
@@ -54,6 +55,17 @@ public class ShopGoodsServiceImpl implements ShopGoodsService {
     }
 
     @Override
+    public Result searchByCondition(ShopServiceDto shopServiceDto) {
+        if (shopServiceDto.getStart() == null ||  shopServiceDto.getEnd() == null){
+            return ResultUtil.error("无分页信息");
+        }
+        if(shopServiceDto.getType() == null){
+            return ResultUtil.error("无商品分类信息");
+        }
+        return ResultUtil.success(shopGoodsDao.selectByCondition(shopServiceDto));
+    }
+
+    @Override
     @Transactional(rollbackFor = Exception.class)
     public Result delShopGoods(Integer sgId) {
         shopGoodsDao.deleteById(sgId);
@@ -63,10 +75,5 @@ public class ShopGoodsServiceImpl implements ShopGoodsService {
     @Override
     public Result searchShopGoods(Integer usId) {
         return null;
-    }
-
-    @Override
-    public Result searchQlList(Integer start, Integer end) {
-        return ResultUtil.success(shopGoodsDao.selectQlList(start, end));
     }
 }
