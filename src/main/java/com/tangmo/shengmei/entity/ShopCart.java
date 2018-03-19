@@ -21,4 +21,12 @@ public class ShopCart implements Serializable{
     private String scColor;
     private String scSize;
     private ShopCartCdVO commodity;
+
+
+    public ShopCartCdVO getCommodity() {
+        if(commodity == null){
+            return new ShopCartCdVO();
+        }
+        return commodity;
+    }
 }

@@ -128,9 +128,11 @@ public class ShopGoodsController extends BaseController{
      * @apiSuccessExample {json} 返回样例:
      *                    {"code":"success",
      *                     "data":{
+     *                      username:"发布人",
      *                      shopName:"标题是什么",
      *                      shopContent:"内容是什么",
      *                      imgId:"图片base64编码",
+     *                      imgList:"图片列表",
      *                      city:"市",
      *                      price:"商品价格",
      *                      address:"地址",

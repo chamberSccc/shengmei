@@ -5,7 +5,7 @@ import lombok.Data;
 /**
  * @author boge
  * @date 18/3/10
- * @description
+ * @description 退款数据
  */
 @Data
 public class GoodsReturn {

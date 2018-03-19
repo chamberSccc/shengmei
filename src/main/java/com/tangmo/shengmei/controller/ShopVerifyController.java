@@ -87,7 +87,7 @@ public class ShopVerifyController extends BaseController{
      *                   {
      *                      userId:"用户Id",
      *                      userName:"代表人姓名",
-     *                      idNumber:"收件人",
+     *                      idNumber:"身份证号",
      *                      mobile:"手机号",
      *                      shopName:"店铺名称",
      *                      shopIntro:"店铺描述",

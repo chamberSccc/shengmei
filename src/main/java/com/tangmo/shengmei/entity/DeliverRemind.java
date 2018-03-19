@@ -5,7 +5,7 @@ import lombok.Data;
 /**
  * @author boge
  * @date 18/3/10
- * @description
+ * @description 发货提醒数据
  */
 @Data
 public class DeliverRemind {

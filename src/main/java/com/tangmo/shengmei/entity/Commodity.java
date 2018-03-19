@@ -38,10 +38,11 @@ public class Commodity implements Serializable{
     public void setImgId(String imgId) {
         if(imgId == null){
             this.imgList = new String[]{};
+        }else {
+            String[] list = imgId.split(",");
+            this.imgId = list[0];
+            this.imgList = list;
         }
-        String[] list = imgId.split(",");
-        this.imgId = imgId;
-        this.imgList = list;
     }
 
     private String condition;

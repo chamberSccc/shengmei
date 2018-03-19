@@ -12,6 +12,7 @@
         <result column="logo_img" property="logoImg" jdbcType="VARCHAR"/>
         <result column="shop_intro" property="shopIntro" jdbcType="VARCHAR"/>
         <result column="shop_name" property="shopName" jdbcType="VARCHAR"/>
+        <result column="shop_address" property="shopAddress" jdbcType="VARCHAR"/>
         <result column="license_img" property="licenseImg" jdbcType="VARCHAR"/>
         <result column="createtime" property="createTime" jdbcType="TIMESTAMP"/>
         <result column="shop_state" property="shopState" jdbcType="TINYINT"/>
@@ -30,7 +31,7 @@
 
     <select id="selectByUserId" resultMap="BaseResultMap">
         SELECT sv_id,id_number,mobile,user_id,user_name,id_front_img,id_rear_img,
-        logo_img,shop_intro,shop_name,license_img,shop_state
+        logo_img,shop_intro,shop_name,license_img,shop_state,shop_address
          FROM shop_verify WHERE user_id = #{userId}
     </select>
 

@@ -31,7 +31,7 @@ public class FileController extends BaseController{
     }
 
     /**
-     * @api {POST} /upload/{userId} 上传用户图片
+     * @api {POST} /file/upload/{userId} 上传用户图片
      * @apiGroup User
      * @apiVersion 0.0.1
      * @apiDescription 上传用户图片

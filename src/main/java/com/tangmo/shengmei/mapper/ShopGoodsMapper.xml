@@ -29,7 +29,7 @@
         <result column="address" property="address" jdbcType="VARCHAR"/>
         <result column="city" property="city" jdbcType="VARCHAR"/>
         <result column="mobile" property="mobile" jdbcType="VARCHAR"/>
-        <result column="discountNote" property="discountNote" jdbcType="VARCHAR"/>
+        <result column="discount_note" property="discountNote" jdbcType="VARCHAR"/>
     </resultMap>
 
     <resultMap id="SimpleResultMap" type="com.tangmo.shengmei.entity.vo.SimpleShopGoodsVO" >
@@ -164,10 +164,10 @@
         SELECT sg_id,img_id,shop_name,shop_content,price,city,district
         FROM shop_goods WHERE service_type = #{type}
         <if test="city != null"> AND city = #{city} </if>
-        <if test="priceStart != null"> AND price_now &gt;= #{priceStart} </if>
-        <if test="priceEnd != null"> AND price_now &lt;= #{priceEnd} </if>
-        <if test="price == 0"> ORDER BY price_now</if>
-        <if test="price == 1">ORDER BY price_now DESC </if>
+        <if test="priceStart != null"> AND price &gt;= #{priceStart} </if>
+        <if test="priceEnd != null"> AND price &lt;= #{priceEnd} </if>
+        <if test="price == 0"> ORDER BY price</if>
+        <if test="price == 1">ORDER BY price DESC </if>
         limit #{start},#{end}
     </select>
 
