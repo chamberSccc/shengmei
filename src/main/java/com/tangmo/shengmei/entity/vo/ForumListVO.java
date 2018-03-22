@@ -20,6 +20,18 @@ public class ForumListVO {
     private Integer commentCount;
     private String content;
     private String mediaId;
-    private String imgList;
+    private String[] imgList;
+    private Byte cfType;
     private Date createTime;
+
+    public void setMediaId(String mediaId) {
+        if(mediaId == null){
+            this.imgList = new String[]{};
+        }else{
+            String[] list = mediaId.split(",");
+            this.mediaId = list[0];
+            this.imgList = list;
+        }
+        this.mediaId = mediaId;
+    }
 }

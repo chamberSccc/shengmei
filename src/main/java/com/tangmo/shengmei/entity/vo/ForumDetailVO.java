@@ -14,5 +14,16 @@ public class ForumDetailVO {
     private String userName;
     private String avatarId;
     private String mediaId;
-    private String imgList;
+    private String[] imgList;
+
+    public void setMediaId(String mediaId) {
+        if(mediaId == null){
+            this.imgList = new String[]{};
+        }else{
+            String[] list = mediaId.split(",");
+            this.mediaId = list[0];
+            this.imgList = list;
+        }
+        this.mediaId = mediaId;
+    }
 }
