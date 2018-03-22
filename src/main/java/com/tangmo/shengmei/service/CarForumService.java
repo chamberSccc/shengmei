@@ -2,6 +2,7 @@ package com.tangmo.shengmei.service;
 
 import com.tangmo.shengmei.entity.CarForum;
 import com.tangmo.shengmei.entity.ForumComment;
+import com.tangmo.shengmei.entity.ForumStar;
 import com.tangmo.shengmei.utility.code.Result;
 
 /**
@@ -27,4 +28,40 @@ public interface CarForumService {
      * @return
      */
     Result addForumComment(ForumComment forumComment);
+
+    /**
+     * 增加好评
+     *
+     * @param forumStar
+     * @return
+     */
+    Result addForumStar(ForumStar forumStar);
+
+    /**
+     * 车友圈列表
+     *
+     * @param type
+     * @param start
+     * @param end
+     * @return
+     */
+    Result searchForumList(Byte type, Integer start, Integer end);
+
+    /**
+     * 用户车友圈列表
+     *
+     * @param userId
+     * @param start
+     * @param end
+     * @return
+     */
+    Result searchForumList(Integer userId, Integer start, Integer end);
+
+    /**
+     * 车友圈详情
+     *
+     * @param cfId
+     * @return
+     */
+    Result searchForumDetail(Integer cfId);
 }

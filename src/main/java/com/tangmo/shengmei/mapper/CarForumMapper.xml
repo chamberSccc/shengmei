@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tangmo.shengmei.dao.CarForumDao">
+
+    <resultMap id="ListResultMap" type="com.tangmo.shengmei.entity.vo.ForumListVO" >
+        <id column="cf_id" property="cfId" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="username" property="userName" jdbcType="VARCHAR"/>
+        <result column="avatar_id" property="avatarId" jdbcType="VARCHAR"/>
+        <result column="media_id" property="mediaId" jdbcType="VARCHAR"/>
+        <result column="content" property="content" jdbcType="VARCHAR"/>
+        <result column="view_count" property="viewCount" jdbcType="INTEGER"/>
+        <result column="comment_count" property="commentCount" jdbcType="INTEGER"/>
+        <result column="star_count" property="starCount" jdbcType="INTEGER"/>
+        <result column="createtime" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <resultMap id="UserListResultMap" type="com.tangmo.shengmei.entity.vo.ForumUserListVO" >
+        <id column="cf_id" property="cfId" jdbcType="INTEGER"/>
+        <result column="media_id" property="mediaId" jdbcType="VARCHAR"/>
+        <result column="content" property="content" jdbcType="VARCHAR"/>
+        <result column="view_count" property="viewCount" jdbcType="INTEGER"/>
+        <result column="comment_count" property="commentCount" jdbcType="INTEGER"/>
+        <result column="star_count" property="starCount" jdbcType="INTEGER"/>
+        <result column="cf_type" property="cfType" jdbcType="TINYINT"/>
+        <result column="createtime" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <resultMap id="DetailResultMap" type="com.tangmo.shengmei.entity.vo.ForumDetailVO" >
+        <id column="cf_id" property="cfId" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="username" property="userName" jdbcType="VARCHAR"/>
+        <result column="avatar_id" property="avatarId" jdbcType="VARCHAR"/>
+        <result column="media_id" property="mediaId" jdbcType="VARCHAR"/>
+        <result column="content" property="content" jdbcType="VARCHAR"/>
+        <result column="view_count" property="viewCount" jdbcType="INTEGER"/>
+        <result column="comment_count" property="commentCount" jdbcType="INTEGER"/>
+        <result column="star_count" property="starCount" jdbcType="INTEGER"/>
+        <result column="createtime" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <resultMap id="CommentResultMap" type="com.tangmo.shengmei.entity.vo.ForumCommentVO" >
+        <id column="fc_id" property="fcId" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="username" property="userName" jdbcType="VARCHAR"/>
+        <result column="avatar_id" property="avatarId" jdbcType="VARCHAR"/>
+        <result column="content" property="content" jdbcType="VARCHAR"/>
+        <result column="createtime" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <insert id="insertCarForum" parameterType="com.tangmo.shengmei.entity.CarForum">
+        insert into car_forum (content,media_id,user_id,cf_type)
+         VALUES (#{content},#{mediaId},#{userId},#{cfType})
+    </insert>
+
+    <insert id="insertForumComment" parameterType="com.tangmo.shengmei.entity.ForumComment">
+        insert into forum_comment (content,user_id,cf_id)
+        VALUES (#{content},#{userId},#{cfId})
+    </insert>
+
+    <insert id="insertForumStar" parameterType="com.tangmo.shengmei.entity.ForumStar">
+        insert into forum_star (cf_id,user_id)
+        VALUES (#{cfId},#{userId})
+    </insert>
+
+    <select id="selectByType" resultMap="ListResultMap">
+        SELECT cf.cf_id,cf.content,cf.media_id,cf.user_id,ui.username,ui.avatar_id,cf.createtime,
+        cf.view_count,comment.comment_count,star.star_count
+        FROM car_forum cf INNER JOIN user_info ui ON cf.user_id = ui.user_id
+        INNER JOIN  (SELECT cf_id,COUNT(*) as comment_count FROM forum_comment GROUP BY cf_id) comment
+        ON cf.cf_id = comment.cf_id
+        INNER JOIN (SELECT cf_id,COUNT(*) as star_count FROM forum_star GROUP BY cf_id) star
+        ON cf.cf_id = star.cf_id
+        WHERE cf.cf_type = #{type}
+        limit #{start},#{end}
+    </select>
+
+    <select id="selectByTypeAndUser" resultMap="ListResultMap">
+        SELECT cf.cf_id,cf.content,cf.media_id,cf.createtime,
+        cf.view_count,comment.comment_count,star.star_count,cf.cf_type
+        FROM car_forum cf INNER JOIN user_info ui ON cf.user_id = ui.user_id
+        INNER JOIN  (SELECT cf_id,COUNT(*) as comment_count FROM forum_comment GROUP BY cf_id) comment
+        ON cf.cf_id = comment.cf_id
+        INNER JOIN (SELECT cf_id,COUNT(*) as star_count FROM forum_star GROUP BY cf_id) star
+        ON cf.cf_id = star.cf_id
+        WHERE cf.user_id = #{userId}
+        limit #{start},#{end}
+    </select>
+
+    <select id="selectById" resultMap="DetailResultMap">
+        SELECT cf.cf_id,cf.content,cf.media_id,cf.user_id,ui.username,ui.avatar_id,cf.createtime,
+        cf.view_count,comment.comment_count,star.star_count
+        FROM car_forum cf INNER JOIN user_info ui ON cf.user_id = ui.user_id
+        INNER JOIN  (SELECT cf_id,COUNT(*) as comment_count FROM forum_comment GROUP BY cf_id) comment
+        ON cf.cf_id = comment.cf_id
+        INNER JOIN (SELECT cf_id,COUNT(*) as star_count FROM forum_star GROUP BY cf_id) star
+        ON cf.cf_id = star.cf_id
+        cf.cf_id = #{cfId}
+    </select>
+
+    <update id="updateViewCount">
+        UPDATE car_forum SET view_count = view_count + 1 WHERE cf_id = #{cfId}
+    </update>
+</mapper>

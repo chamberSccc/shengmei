@@ -51,6 +51,8 @@ public class BaseController {
     protected DeliverRemindService deliverRemindService;
     @Resource
     protected GoodsReturnService goodsReturnService;
+    @Resource
+    protected CarForumService carForumService;
     /**
      * 得到request对象
      */
