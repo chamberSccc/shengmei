@@ -14,7 +14,7 @@ spring:
       charset: UTF-8
       enabled: true
     multipart:
-      max-file-size: 6mb
+      max-file-size: 10mb
       max-request-size: 1024mb
 
 

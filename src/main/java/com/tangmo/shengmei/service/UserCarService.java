@@ -2,6 +2,7 @@ package com.tangmo.shengmei.service;
 
 import com.tangmo.shengmei.entity.UserCar;
 import com.tangmo.shengmei.utility.code.Result;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @author boge
@@ -42,4 +43,14 @@ public interface UserCarService {
      * @return
      */
     Result delUserCar(Integer ucId);
+
+
+    /**
+     * 违章信息补充
+     *
+     * @param carId
+     * @param file
+     * @return
+     */
+    Result uploadIllegalAttach(Integer carId, MultipartFile file);
 }

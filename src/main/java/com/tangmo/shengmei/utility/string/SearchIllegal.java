@@ -74,7 +74,7 @@ public class SearchIllegal {
                         //违章详细列表放回返回对象中
                         illegalInfo.setCarProvince(userCar.getCarProvince());
                         illegalInfo.setCarNum(userCar.getCarNum());
-                        illegalInfo.setIllegalDetails(detailList);
+                        illegalInfo.setList(detailList);
                     }
                 } else {
                     return null;

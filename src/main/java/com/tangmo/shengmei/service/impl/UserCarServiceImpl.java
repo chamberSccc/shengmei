@@ -2,11 +2,13 @@ package com.tangmo.shengmei.service.impl;
 
 import com.tangmo.shengmei.dao.UserCarDao;
 import com.tangmo.shengmei.entity.UserCar;
+import com.tangmo.shengmei.service.ImgFileService;
 import com.tangmo.shengmei.service.UserCarService;
 import com.tangmo.shengmei.utility.code.Result;
 import com.tangmo.shengmei.utility.code.ResultUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 
@@ -19,6 +21,8 @@ import javax.annotation.Resource;
 public class UserCarServiceImpl implements UserCarService {
     @Resource
     private UserCarDao userCarDao;
+    @Resource
+    private ImgFileService imgFileService;
     private static final int CAR_NUM_LENGTH = 5;
     private static final int CAR_PROVINCE_LENGTH = 2;
     @Override
@@ -55,5 +59,21 @@ public class UserCarServiceImpl implements UserCarService {
     public Result delUserCar(Integer ucId) {
         userCarDao.deleteById(ucId);
         return ResultUtil.success();
+    }
+
+    @Override
+    public Result uploadIllegalAttach(Integer carId, MultipartFile file) {
+        UserCar usercar = userCarDao.selectById(carId);
+        if(usercar == null){
+            return ResultUtil.error("信息有误");
+        }
+        Result result = imgFileService.uploadImg(usercar.getUserId(), file);
+        if(result.getCode().equals(Result.SUCCESS)){
+            String uuId = result.getData().toString();
+            userCarDao.updateIllegalAttach(carId,uuId);
+            return ResultUtil.success(uuId);
+        }else{
+            return result;
+        }
     }
 }

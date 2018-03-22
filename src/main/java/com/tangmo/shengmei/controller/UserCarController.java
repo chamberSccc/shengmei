@@ -4,6 +4,7 @@ import com.tangmo.shengmei.controller.base.BaseController;
 import com.tangmo.shengmei.entity.UserCar;
 import com.tangmo.shengmei.utility.code.Result;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @author boge
@@ -198,6 +199,25 @@ public class UserCarController extends BaseController {
     @GetMapping("/illegal/info/{carId}")
     public Result searchIllegalInfo(@PathVariable Integer carId){
         return illegalService.getCurrentIllegal(carId);
+    }
+
+    /**
+     * @api {POST} /car/illegal/attach/{carId} 违章信息补充
+     * @apiGroup UserCar
+     * @apiVersion 0.0.1
+     * @apiDescription 违章信息补充
+     * @apiParamExample {json} 请求样例:
+     *                   {
+     *                      file:"图片文件",
+     *                   }
+     * @apiSuccess (success) {POST} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccess (success) {POST} data 返回数据
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success"}
+     */
+    @PostMapping("/illegal/attach/{carId}")
+    public Result addillegalAttach(@PathVariable Integer carId,MultipartFile file){
+        return userCarService.uploadIllegalAttach(carId, file);
     }
 
     /**

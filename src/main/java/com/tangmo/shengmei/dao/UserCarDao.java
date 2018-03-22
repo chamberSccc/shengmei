@@ -2,6 +2,7 @@ package com.tangmo.shengmei.dao;
 
 import com.tangmo.shengmei.entity.UserCar;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -52,4 +53,13 @@ public interface UserCarDao {
      * @return
      */
     UserCar selectById(Integer ucId);
+
+    /**
+     * 更新违章补充信息
+     *
+     * @param carId
+     * @param imgId
+     * @return
+     */
+    int updateIllegalAttach(@Param("carId") Integer carId, @Param("imgId") String imgId);
 }

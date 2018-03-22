@@ -22,7 +22,7 @@ public class IllegalInfo {
     private Integer totalPrice;
     private Integer totalScore;
     private String msg;
-    private List<IllegalDetail> illegalDetails;
+    private List<IllegalDetail> list;
 
     public IllegalInfo() {
     }

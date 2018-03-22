@@ -93,4 +93,8 @@
     <delete id="deleteById">
         DELETE FROM user_car WHERE uc_id = #{ucId}
     </delete>
+
+    <update id="updateIllegalAttach">
+        UPDATE user_car SET attach = #{imgId} WHERE uc_id = #{carId}
+    </update>
 </mapper>

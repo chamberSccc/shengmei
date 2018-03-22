@@ -123,7 +123,7 @@
 
     <select id="selectConvList" resultMap="BaseResultMap">
         SELECT ci.ci_id,ci.user_id,ci.title,ci.content,ci.view_count,ui.username,
-        ui.avatar_id,if(valid_date &gt;now(),0,1) as is_expire,
+        ui.avatar_id,if(valid_date &gt;now(),1,0) as is_expire,
         ci.comment_count,ci.createtime,ci.province,ci.city,ci.district FROM convenient_info ci
         LEFT JOIN user_info ui ON ci.user_id = ui.user_id
         ORDER BY ci.createtime DESC
@@ -175,7 +175,7 @@
 
     <select id="selectByCiId" resultMap="BaseResultMap">
         SELECT ci.ci_id,ci.user_id,ci.title,ci.content,ci.view_count,
-        ui.username,ui.avatar_id,if(valid_date &gt;now(),0,1) as is_expire,
+        ui.username,ui.avatar_id,if(valid_date &gt;now(),1,0) as is_expire,
         ci.comment_count,ci.createtime,ci.province,ci.city,ci.district FROM convenient_info ci
         LEFT JOIN user_info ui ON ci.user_id = ui.user_id WHERE ci.ci_id = #{ciId}
         ORDER BY ci.createtime DESC
@@ -187,7 +187,7 @@
 
     <select id="selectByUserId" resultMap="BaseResultMap">
         SELECT ci.ci_id,ci.user_id,ci.title,ci.content,ci.view_count,ci.comment_count,
-        ci.createtime,if(valid_date &gt;now(),0,1) as is_expire,ci.province,ci.city,ci.district,ui.username,ui.avatar_id
+        ci.createtime,if(valid_date &gt;now(),1,0) as is_expire,ci.province,ci.city,ci.district,ui.username,ui.avatar_id
         FROM convenient_info ci LEFT JOIN user_info ui ON ci.user_id = ui.user_id
          WHERE ci.user_id = #{userId}
         ORDER BY ci.createtime DESC
@@ -196,7 +196,7 @@
 
     <select id="selectByIsExpire" resultMap="BaseResultMap">
         SELECT ci.ci_id,ci.user_id,ci.title,ci.content,ci.view_count,ci.comment_count,
-        ci.createtime,if(valid_date &gt;now(),0,1) as is_expire,ci.province,ci.city,ci.district,ui.username,ui.avatar_id
+        ci.createtime,if(valid_date &gt;now(),1,0) as is_expire,ci.province,ci.city,ci.district,ui.username,ui.avatar_id
         FROM convenient_info ci LEFT JOIN user_info ui ON ci.user_id = ui.user_id
         WHERE is_expire = #{type}
         ORDER BY ci.createtime DESC

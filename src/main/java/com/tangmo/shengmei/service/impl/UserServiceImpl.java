@@ -80,9 +80,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public Result uploadAvatar(Integer userId, MultipartFile file) {
         Result result = imgFileService.uploadImg(userId, file);
-        String uuId = result.getData().toString();
-        userDao.updateAvatar(userId,uuId);
-        return result;
+        if(result.getCode().equals(Result.SUCCESS)){
+            String uuId = result.getData().toString();
+            userDao.updateAvatar(userId,uuId);
+            return ResultUtil.success(uuId);
+        }else{
+            return result;
+        }
     }
 
     @Override

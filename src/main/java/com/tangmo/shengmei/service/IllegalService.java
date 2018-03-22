@@ -3,6 +3,7 @@ package com.tangmo.shengmei.service;
 import com.tangmo.shengmei.entity.IllegalInfo;
 import com.tangmo.shengmei.entity.UserCar;
 import com.tangmo.shengmei.utility.code.Result;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @author Chamber
@@ -58,4 +59,5 @@ public interface IllegalService {
      * @return
      */
     Result getCurrentLicenseScore(String fileId, String licenseId);
+
 }

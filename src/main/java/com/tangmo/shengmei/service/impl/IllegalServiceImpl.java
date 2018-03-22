@@ -11,6 +11,7 @@ import com.tangmo.shengmei.utility.string.SearchIllegal;
 import com.tangmo.shengmei.utility.string.SearchLicense;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 
@@ -78,6 +79,9 @@ public class IllegalServiceImpl implements IllegalService {
     @Override
     public Result getCurrentIllegal(Integer carId) {
         UserCar userCar = userCarDao.selectById(carId);
+        if(userCar == null){
+            return ResultUtil.error("车辆不存在");
+        }
         userCar.setIsSave((byte) 0);
         return ResultUtil.success(getCurrentIllegal(userCar));
     }
