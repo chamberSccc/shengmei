@@ -32,6 +32,7 @@ public class InterceptorConfig extends WebMvcConfigurerAdapter {
                 .excludePathPatterns("/user/login")
                 .excludePathPatterns("/user/pwd/reset")
                 .excludePathPatterns("/shop/goods/list/**")
-                .excludePathPatterns("/list/**");
+                .excludePathPatterns("/list/**")
+                .excludePathPatterns("/moments/list/**");
     }
 }

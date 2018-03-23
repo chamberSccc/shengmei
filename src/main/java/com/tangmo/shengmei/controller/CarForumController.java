@@ -78,7 +78,7 @@ public class CarForumController extends BaseController{
      *                    {"code":"success"}
      */
     @PostMapping("/comment")
-    public Result addForumComment(ForumComment forumComment){
+    public Result addForumComment(@RequestBody ForumComment forumComment){
         return carForumService.addForumComment(forumComment);
     }
 
@@ -97,8 +97,8 @@ public class CarForumController extends BaseController{
      * @apiSuccessExample {json} 返回样例:
      *                    {"code":"success"}
      */
-    @PostMapping("/comment")
-    public Result addForumStar(ForumStar forumStar){
+    @PostMapping("/star")
+    public Result addForumStar(@RequestBody ForumStar forumStar){
         return carForumService.addForumStar(forumStar);
     }
 
@@ -162,20 +162,20 @@ public class CarForumController extends BaseController{
      *                     }
      */
     @GetMapping("/list/video/{start}/{end}")
-    public Result getForumVideoList(@PathVariable Integer userId,@PathVariable Integer start,
-                                    @PathVariable Integer end){
+    public Result getForumVideoList(@PathVariable Integer start, @PathVariable Integer end){
         return carForumService.searchForumList(CarForumTypeConst.CAR_VIDEO,start,end);
     }
 
     /**
-     * @api {GET} /moments/user/forum/{userId}/{start}/{end} 我的车友圈列表
+     * @api {GET} /moments/forum/user/{userId}/{start}/{end} 我的车友圈列表
      * @apiGroup Forum
      * @apiVersion 0.0.1
+     * @apiParam {int} userId 用户Id
      * @apiParam {int} start 分页起始索引
      * @apiParam {int} end 查询列表长度
      * @apiDescription 我的车友圈列表
      * @apiParamExample {json} 请求样例：
-     *  /moments/user/forum/1/1/10
+     *  /moments/forum/user/forum/1/1/10
      * @apiSuccess (200) {String} msg 信息
      * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
      * @apiSuccessExample {json} 返回样例:
@@ -194,14 +194,69 @@ public class CarForumController extends BaseController{
      *                     ]
      *                     }
      */
-    @GetMapping("/user/forum/{userId}/{start}/{end}")
+    @GetMapping("/forum/user/{userId}/{start}/{end}")
     public Result getUserCarForumList(@PathVariable Integer userId,@PathVariable Integer start,
                                       @PathVariable Integer end){
         return carForumService.searchForumList(userId,start,end);
     }
 
+
+    /**
+     * @api {GET} /moments/detail/{cfId} 车友圈详情
+     * @apiGroup Forum
+     * @apiVersion 0.0.1
+     * @apiParam {int} cfId 车友圈Id
+     * @apiDescription 车友圈详情
+     * @apiParamExample {json} 请求样例：
+     *  /moments/detail/1
+     * @apiSuccess (200) {String} msg 信息
+     * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success",
+     *                     "data":{
+     *                        cfId: 主键,
+     *                        content: "车友圈内容",
+     *                        viewCount:"浏览数",
+     *                        commentCount:"评论数",
+     *                        starCount:"好评数",
+     *                        imgList:"图片数组",
+     *                        mediaId:"视频文件",
+     *                        cfType:0:车友圈,1:视频
+     *                     }
+     */
     @GetMapping("/detail/{cfId}")
     public Result getForumDetail(@PathVariable Integer cfId){
         return carForumService.searchForumDetail(cfId);
+    }
+
+    /**
+     * @api {GET} /moments/comment/{cfId}/{start}/{end} 车友圈评论
+     * @apiGroup Forum
+     * @apiVersion 0.0.1
+     * @apiParam {int} cfId 车友圈主键
+     * @apiParam {int} start 分页起始索引
+     * @apiParam {int} end 查询列表长度
+     * @apiDescription 车友圈评论
+     * @apiParamExample {json} 请求样例：
+     *  /moments/comment/1/1/10
+     * @apiSuccess (200) {String} msg 信息
+     * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success",
+     *                     "data":{
+     *                     [{
+     *                        fsId: 主键,
+     *                        content: "评论内容",
+     *                        userId:"用户Id",
+     *                        userName:"评论数",
+     *                        avatarId:"头像",
+     *                        createTime:"评论时间"
+     *                        },{...}
+     *                     ]
+     *                     }
+     */
+    @GetMapping("/comment/{cfId}/{start}/{end}")
+    public Result getForumComment(@PathVariable Integer cfId,@PathVariable Integer start,@PathVariable Integer end){
+        return carForumService.selectForumComment(cfId,start,end);
     }
 }

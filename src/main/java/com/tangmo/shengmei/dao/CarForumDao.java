@@ -3,6 +3,7 @@ package com.tangmo.shengmei.dao;
 import com.tangmo.shengmei.entity.CarForum;
 import com.tangmo.shengmei.entity.ForumComment;
 import com.tangmo.shengmei.entity.ForumStar;
+import com.tangmo.shengmei.entity.vo.ForumCommentVO;
 import com.tangmo.shengmei.entity.vo.ForumListVO;
 import com.tangmo.shengmei.entity.vo.ForumDetailVO;
 import org.apache.ibatis.annotations.Param;
@@ -78,4 +79,15 @@ public interface CarForumDao {
      * @return
      */
     ForumDetailVO selectById(Integer cfId);
+
+    /**
+     * 查询车友圈评论
+     *
+     * @param cfId
+     * @param start
+     * @param end
+     * @return
+     */
+    List<ForumCommentVO> selectForumComment(@Param("cfId") Integer cfId, @Param("start") Integer start,
+                                            @Param("end") Integer end);
 }

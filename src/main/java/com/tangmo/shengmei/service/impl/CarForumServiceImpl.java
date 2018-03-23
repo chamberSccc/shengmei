@@ -59,4 +59,9 @@ public class CarForumServiceImpl implements CarForumService{
         carForumDao.updateViewCount(cfId);
         return ResultUtil.success(carForumDao.selectById(cfId));
     }
+
+    @Override
+    public Result selectForumComment(Integer cfId, Integer start, Integer end) {
+        return ResultUtil.success(carForumDao.selectForumComment(cfId,start,end));
+    }
 }

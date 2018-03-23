@@ -64,4 +64,14 @@ public interface CarForumService {
      * @return
      */
     Result searchForumDetail(Integer cfId);
+
+    /**
+     * 查询车友圈评论
+     *
+     * @param cfId
+     * @param start
+     * @param end
+     * @return
+     */
+    Result selectForumComment(Integer cfId, Integer start, Integer end);
 }

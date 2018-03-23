@@ -9,6 +9,7 @@
         <result column="avatar_id" property="avatarId" jdbcType="VARCHAR"/>
         <result column="media_id" property="mediaId" jdbcType="VARCHAR"/>
         <result column="content" property="content" jdbcType="VARCHAR"/>
+        <result column="cf_type" property="cfType" jdbcType="TINYINT"/>
         <result column="view_count" property="viewCount" jdbcType="INTEGER"/>
         <result column="comment_count" property="commentCount" jdbcType="INTEGER"/>
         <result column="star_count" property="starCount" jdbcType="INTEGER"/>
@@ -19,10 +20,10 @@
         <id column="cf_id" property="cfId" jdbcType="INTEGER"/>
         <result column="media_id" property="mediaId" jdbcType="VARCHAR"/>
         <result column="content" property="content" jdbcType="VARCHAR"/>
+        <result column="cf_type" property="cfType" jdbcType="TINYINT"/>
         <result column="view_count" property="viewCount" jdbcType="INTEGER"/>
         <result column="comment_count" property="commentCount" jdbcType="INTEGER"/>
         <result column="star_count" property="starCount" jdbcType="INTEGER"/>
-        <result column="cf_type" property="cfType" jdbcType="TINYINT"/>
         <result column="createtime" property="createTime" jdbcType="TIMESTAMP"/>
     </resultMap>
 
@@ -64,26 +65,26 @@
     </insert>
 
     <select id="selectByType" resultMap="ListResultMap">
-        SELECT cf.cf_id,cf.content,cf.media_id,cf.user_id,ui.username,ui.avatar_id,cf.createtime,
-        cf.view_count,comment.comment_count,star.star_count
+        SELECT cf.cf_id,cf.content,cf.media_id,cf.user_id,ui.username,ui.avatar_id,cf.createtime,cf.cf_type,
+        cf.view_count,ifnull(comment.comment_count,0) comment_count,ifnull(star.star_count,0) star_count
         FROM car_forum cf INNER JOIN user_info ui ON cf.user_id = ui.user_id
-        INNER JOIN  (SELECT cf_id,COUNT(*) as comment_count FROM forum_comment GROUP BY cf_id) comment
+        LEFT JOIN  (SELECT cf_id,COUNT(*) as comment_count FROM forum_comment GROUP BY cf_id) comment
         ON cf.cf_id = comment.cf_id
-        INNER JOIN (SELECT cf_id,COUNT(*) as star_count FROM forum_star GROUP BY cf_id) star
+        LEFT JOIN (SELECT cf_id,COUNT(*) as star_count FROM forum_star GROUP BY cf_id) star
         ON cf.cf_id = star.cf_id
-        WHERE cf.cf_type = #{type}
+        WHERE cf.cf_type = #{type} ORDER BY cf.cf_id DESC
         limit #{start},#{end}
     </select>
 
-    <select id="selectByTypeAndUser" resultMap="ListResultMap">
-        SELECT cf.cf_id,cf.content,cf.media_id,cf.createtime,
-        cf.view_count,comment.comment_count,star.star_count,cf.cf_type
+    <select id="selectByTypeAndUser" resultMap="UserListResultMap">
+        SELECT cf.cf_id,cf.content,cf.media_id,cf.createtime, cf.cf_type,
+        cf.view_count,ifnull(comment.comment_count,0) comment_count,ifnull(star.star_count,0) star_count
         FROM car_forum cf INNER JOIN user_info ui ON cf.user_id = ui.user_id
-        INNER JOIN  (SELECT cf_id,COUNT(*) as comment_count FROM forum_comment GROUP BY cf_id) comment
+        LEFT JOIN  (SELECT cf_id,COUNT(*) as comment_count FROM forum_comment GROUP BY cf_id) comment
         ON cf.cf_id = comment.cf_id
-        INNER JOIN (SELECT cf_id,COUNT(*) as star_count FROM forum_star GROUP BY cf_id) star
+        LEFT JOIN (SELECT cf_id,COUNT(*) as star_count FROM forum_star GROUP BY cf_id) star
         ON cf.cf_id = star.cf_id
-        WHERE cf.user_id = #{userId}
+        WHERE cf.user_id = #{userId} ORDER BY cf.cf_id DESC
         limit #{start},#{end}
     </select>
 
@@ -94,8 +95,14 @@
         INNER JOIN  (SELECT cf_id,COUNT(*) as comment_count FROM forum_comment GROUP BY cf_id) comment
         ON cf.cf_id = comment.cf_id
         INNER JOIN (SELECT cf_id,COUNT(*) as star_count FROM forum_star GROUP BY cf_id) star
-        ON cf.cf_id = star.cf_id
-        cf.cf_id = #{cfId}
+        ON cf.cf_id = star.cf_id WHERE  cf.cf_id = #{cfId}
+    </select>
+
+    <select id="selectForumComment" resultMap="CommentResultMap">
+        SELECT fc.user_id,ui.username,ui.avatar_id,fc.createtime,fc.content FROM forum_comment fc
+        LEFT JOIN user_info ui ON fc.user_id = ui.user_id
+        WHERE fc.cf_id = #{cfId}
+        limit #{start},#{end}
     </select>
 
     <update id="updateViewCount">
