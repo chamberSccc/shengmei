@@ -79,10 +79,10 @@
                 recipient = #{recipient},
             </if>
             <if test="city != null">
-                city = #{recipient},
+                city = #{city},
             </if>
             <if test="district != null">
-                district = #{recipient},
+                district = #{district},
             </if>
             <if test="isDefault != null">
                 is_default = #{isDefault},
