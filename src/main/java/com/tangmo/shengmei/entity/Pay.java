@@ -15,6 +15,8 @@ public class Pay {
 	private String openid; //支付用户唯一open_id;
 	private String device_info;
 	private String out_refund_no;//商户退款单号;
+	private String pay_msg;
+	private String result_code;
 	
 	
 	public String getOut_refund_no() {

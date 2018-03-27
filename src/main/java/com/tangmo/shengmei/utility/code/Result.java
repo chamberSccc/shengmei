@@ -20,6 +20,7 @@ public class Result<T> implements Serializable {
     public static final String PWD_ERROR="pwd_error";
     public static final String CODE_ERROR="code_error";
     public static final String EXIST_INFO = "exist_info";
+    public static final String PENDING = "pending";
 
     private String code;
     private T data;
