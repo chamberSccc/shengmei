@@ -1,9 +1,11 @@
 package com.tangmo.shengmei.controller;
 
+import com.tangmo.shengmei.constant.ParamConst;
 import com.tangmo.shengmei.controller.base.BaseController;
 import com.tangmo.shengmei.dao.AdminDao;
 import com.tangmo.shengmei.entity.AdminInfo;
 import com.tangmo.shengmei.entity.GoodsTypeItem;
+import com.tangmo.shengmei.entity.ParamValue;
 import com.tangmo.shengmei.entity.ReportDto;
 import com.tangmo.shengmei.utility.code.Result;
 import com.tangmo.shengmei.utility.code.ResultUtil;
@@ -265,14 +267,191 @@ public class AdminController extends BaseController{
         return illegalService.getIllegalList(start, end);
     }
 
-//    @GetMapping("/test")
-//    public Result test(){
-//        try {
-//            SearchIllegal.searchScore();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//
-//        return null;
-//    }
+    /**
+     * @api {GET} /admin/goods/type 获取商品类型列表
+     * @apiGroup Common
+     * @apiVersion 0.0.1
+     * @apiDescription 获取商品类型列表
+     * @apiParamExample {json} 请求样例：
+     *  /admin/goods/type
+     * @apiSuccess (200) {String} msg 信息
+     * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success",
+     *                     "data":{
+     *                     [{
+     *                        id: "类型主键",
+     *                        name:名称,
+     *                        value: "对应数字值"},
+     *                     ...]
+     *                     }
+     */
+    @GetMapping("/goods/type")
+    public Result getGoodsType(){
+        return adminService.searchGoodsType();
+    }
+
+    /**
+     * @api {GET} /admin/goods/class/{type} 获取商品分类列表
+     * @apiGroup Common
+     * @apiVersion 0.0.1
+     * @apiDescription 获取商品分类列表
+     * @apiParamExample {json} 请求样例：
+     *  /admin/goods/class/1
+     * @apiSuccess (200) {String} msg 信息
+     * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success",
+     *                     "data":{
+     *                     [{
+     *                        id: "分类主键",
+     *                        name:"名称",
+     *                        gtId: "对应商品类型主键",
+     *                        value:"对应数字值"},
+     *                     ...]
+     *                     }
+     */
+    @GetMapping("/goods/class/{type}")
+    public Result getCarClass(@PathVariable Integer type){
+        return adminService.searchGoodsTypeItem(type);
+    }
+
+
+    /**
+     * @api {POST} /admin/goods/color 增加商品颜色
+     * @apiGroup Admin
+     * @apiVersion 0.0.1
+     * @apiDescription 增加商品颜色
+     * @apiParam {ParamValue} paramValue 参数对象
+     * @apiParamExample {json} 请求样例:
+     *                   {
+     *                      paramValue:"参数值"
+     *                   }
+     * @apiSuccess (success) {POST} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccess (success) {POST} data 返回数据
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success"}
+     */
+    @PostMapping("/goods/color")
+    public Result addGoodsColor(@RequestBody ParamValue paramValue){
+        paramValue.setParamType(ParamConst.GOODS_COLOR);
+        return null;
+    }
+
+    /**
+     * @api {POST} /admin/goods/size 增加商品规格
+     * @apiGroup Admin
+     * @apiVersion 0.0.1
+     * @apiDescription 增加商品规格
+     * @apiParam {ParamValue} paramValue 参数对象
+     * @apiParamExample {json} 请求样例:
+     *                   {
+     *                      paramValue:"参数值"
+     *                   }
+     * @apiSuccess (success) {POST} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccess (success) {POST} data 返回数据
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success"}
+     */
+    @PostMapping("/goods/size")
+    public Result addGoodSize(@RequestBody ParamValue paramValue){
+        paramValue.setParamType(ParamConst.GOODS_SIZE);
+        return commonService.addParamValue(paramValue);
+    }
+
+    /**
+     * @api {POST} /admin/goods/condition 增加商品新旧程度
+     * @apiGroup Admin
+     * @apiVersion 0.0.1
+     * @apiDescription 增加商品规格
+     * @apiParam {ParamValue} paramValue 参数对象
+     * @apiParamExample {json} 请求样例:
+     *                   {
+     *                      paramValue:"参数值"
+     *                   }
+     * @apiSuccess (success) {POST} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccess (success) {POST} data 返回数据
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success"}
+     */
+    @PostMapping("/goods/condition")
+    public Result addGoodCondition(@RequestBody ParamValue paramValue){
+        paramValue.setParamType(ParamConst.GOODS_CONDITION);
+        return commonService.addParamValue(paramValue);
+    }
+
+    /**
+     * @api {GET} /admin/goods/color 获取商品颜色列表
+     * @apiGroup Admin
+     * @apiVersion 0.0.1
+     * @apiDescription 获取商品颜色列表
+     * @apiParamExample {json} 请求样例：
+     *  /admin/goods/color
+     * @apiSuccess (200) {String} msg 信息
+     * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success",
+     *                     "data":{
+     *                     [{
+     *                        pvId: "主键",
+     *                        paramType:"类型",
+     *                        paramValue: "参数值"
+     *                        },
+     *                     ...]
+     *                     }
+     */
+    @GetMapping("/goods/color")
+    public Result getGoodsColor(){
+        return commonService.searchParamByType(ParamConst.GOODS_COLOR);
+    }
+
+    /**
+     * @api {GET} /admin/goods/condition 获取商品新旧程度列表
+     * @apiGroup Admin
+     * @apiVersion 0.0.1
+     * @apiDescription 获取商品颜色列表
+     * @apiParamExample {json} 请求样例：
+     *  /admin/goods/condition
+     * @apiSuccess (200) {String} msg 信息
+     * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success",
+     *                     "data":{
+     *                     [{
+     *                        pvId: "主键",
+     *                        paramType:"类型",
+     *                        paramValue: "参数值"
+     *                        },
+     *                     ...]
+     *                     }
+     */
+    @GetMapping("/goods/condition")
+    public Result getGoodsCondition(){
+        return commonService.searchParamByType(ParamConst.GOODS_CONDITION);
+    }
+
+    /**
+     * @api {GET} /admin/goods/size 获取商品规格列表
+     * @apiGroup Admin
+     * @apiVersion 0.0.1
+     * @apiDescription 获取商品规格列表
+     * @apiParamExample {json} 请求样例：
+     *  /admin/goods/size
+     * @apiSuccess (200) {String} msg 信息
+     * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success",
+     *                     "data":{
+     *                     [{
+     *                        pvId: "主键",
+     *                        paramType:"类型",
+     *                        paramValue: "参数值"
+     *                        },
+     *                     ...]
+     *                     }
+     */
+    @GetMapping("/goods/size")
+    public Result getGoodSize(){
+        return commonService.searchParamByType(ParamConst.GOODS_SIZE);
+    }
 }

@@ -27,6 +27,7 @@ public class TokenInterceptor extends HandlerInterceptorAdapter {
         String ip = request.getRemoteAddr();
         String token = request.getHeader("token");
         String user = request.getHeader("userId");
+        String admin_token = request.getHeader("admin_token");
         if (token == null || user == null) {
             return false;
         }

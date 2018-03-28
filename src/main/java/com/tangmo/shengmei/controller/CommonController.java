@@ -66,68 +66,6 @@ public class CommonController extends BaseController{
     }
 
 
-    /**
-     * @api {POST} /common/goods/color 增加商品颜色
-     * @apiGroup Admin
-     * @apiVersion 0.0.1
-     * @apiDescription 增加商品颜色
-     * @apiParam {ParamValue} paramValue 参数对象
-     * @apiParamExample {json} 请求样例:
-     *                   {
-     *                      paramValue:"参数值"
-     *                   }
-     * @apiSuccess (success) {POST} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
-     * @apiSuccess (success) {POST} data 返回数据
-     * @apiSuccessExample {json} 返回样例:
-     *                    {"code":"success"}
-     */
-    @PostMapping("/goods/color")
-    public Result addGoodsColor(@RequestBody ParamValue paramValue){
-        paramValue.setParamType(ParamConst.GOODS_COLOR);
-        return null;
-    }
-
-    /**
-     * @api {POST} /common/goods/size 增加商品规格
-     * @apiGroup Admin
-     * @apiVersion 0.0.1
-     * @apiDescription 增加商品规格
-     * @apiParam {ParamValue} paramValue 参数对象
-     * @apiParamExample {json} 请求样例:
-     *                   {
-     *                      paramValue:"参数值"
-     *                   }
-     * @apiSuccess (success) {POST} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
-     * @apiSuccess (success) {POST} data 返回数据
-     * @apiSuccessExample {json} 返回样例:
-     *                    {"code":"success"}
-     */
-    @PostMapping("/goods/size")
-    public Result addGoodSize(@RequestBody ParamValue paramValue){
-        paramValue.setParamType(ParamConst.GOODS_SIZE);
-        return commonService.addParamValue(paramValue);
-    }
-
-    /**
-     * @api {POST} /common/goods/condition 增加商品新旧程度
-     * @apiGroup Admin
-     * @apiVersion 0.0.1
-     * @apiDescription 增加商品规格
-     * @apiParam {ParamValue} paramValue 参数对象
-     * @apiParamExample {json} 请求样例:
-     *                   {
-     *                      paramValue:"参数值"
-     *                   }
-     * @apiSuccess (success) {POST} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
-     * @apiSuccess (success) {POST} data 返回数据
-     * @apiSuccessExample {json} 返回样例:
-     *                    {"code":"success"}
-     */
-    @PostMapping("/goods/condition")
-    public Result addGoodCondition(@RequestBody ParamValue paramValue){
-        paramValue.setParamType(ParamConst.GOODS_CONDITION);
-        return commonService.addParamValue(paramValue);
-    }
 
     /**
      * @api {GET} /common/goods/color 获取商品颜色列表
