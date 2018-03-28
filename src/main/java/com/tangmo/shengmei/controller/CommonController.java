@@ -68,7 +68,7 @@ public class CommonController extends BaseController{
 
     /**
      * @api {POST} /common/goods/color 增加商品颜色
-     * @apiGroup Common
+     * @apiGroup Admin
      * @apiVersion 0.0.1
      * @apiDescription 增加商品颜色
      * @apiParam {ParamValue} paramValue 参数对象
@@ -89,7 +89,7 @@ public class CommonController extends BaseController{
 
     /**
      * @api {POST} /common/goods/size 增加商品规格
-     * @apiGroup Common
+     * @apiGroup Admin
      * @apiVersion 0.0.1
      * @apiDescription 增加商品规格
      * @apiParam {ParamValue} paramValue 参数对象
@@ -110,7 +110,7 @@ public class CommonController extends BaseController{
 
     /**
      * @api {POST} /common/goods/condition 增加商品新旧程度
-     * @apiGroup Common
+     * @apiGroup Admin
      * @apiVersion 0.0.1
      * @apiDescription 增加商品规格
      * @apiParam {ParamValue} paramValue 参数对象
@@ -131,7 +131,7 @@ public class CommonController extends BaseController{
 
     /**
      * @api {GET} /common/goods/color 获取商品颜色列表
-     * @apiGroup Common
+     * @apiGroup Admin
      * @apiVersion 0.0.1
      * @apiDescription 获取商品颜色列表
      * @apiParamExample {json} 请求样例：
@@ -156,7 +156,7 @@ public class CommonController extends BaseController{
 
     /**
      * @api {GET} /common/goods/condition 获取商品新旧程度列表
-     * @apiGroup Common
+     * @apiGroup Admin
      * @apiVersion 0.0.1
      * @apiDescription 获取商品颜色列表
      * @apiParamExample {json} 请求样例：
@@ -181,7 +181,7 @@ public class CommonController extends BaseController{
 
     /**
      * @api {GET} /common/goods/size 获取商品规格列表
-     * @apiGroup Common
+     * @apiGroup Admin
      * @apiVersion 0.0.1
      * @apiDescription 获取商品规格列表
      * @apiParamExample {json} 请求样例：

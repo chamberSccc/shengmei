@@ -12,6 +12,7 @@ public class WeChatPayResultBean {
 	private Long timeStamp;
 	private String package2;
 	private String sign;
+	private String out_trade_no;
 
 	@Override
 	public String toString() {

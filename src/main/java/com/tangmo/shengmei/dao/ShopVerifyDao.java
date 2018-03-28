@@ -55,4 +55,13 @@ public interface ShopVerifyDao {
      * @return
      */
     int updateSvInfo(ShopVerify shopVerify);
+
+    /**
+     * 修改商家审核信息
+     *
+     * @param svId
+     * @param state
+     * @return
+     */
+    int updateSvState(@Param("svId") Integer svId, @Param("state") Byte state);
 }

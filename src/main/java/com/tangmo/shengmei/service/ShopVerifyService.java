@@ -54,4 +54,13 @@ public interface ShopVerifyService {
      * @return
      */
     Result changeSvInfo(ShopVerify shopVerify);
+
+    /**
+     * 修改商家审核信息
+     *
+     * @param svId
+     * @param state
+     * @return
+     */
+    Result updateSvState(Integer svId, Byte state);
 }

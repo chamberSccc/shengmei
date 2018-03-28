@@ -41,7 +41,7 @@ public class PayController {
 	@GetMapping("/wechat")
 	public Result pay(){
 //		String userId = userid.toString();
-		String notify_url ="http://hitmcz.natappfree.cc/pay/callback";
+		String notify_url ="http://hjcriv.natappfree.cc/pay/callback";
 		PayCallBackBean payCallBackBean = new PayCallBackBean();
 		//生成随机字符串
 		String nonce_str = PayUtil.getRandomString(6);
@@ -126,7 +126,7 @@ public class PayController {
 		weChatPayResultBean.setPrepayId(prepay_id);
 		weChatPayResultBean.setTimeStamp(timeStamp);
 		weChatPayResultBean.setSign(Paysign);
-		System.out.println(notify_url);
+		weChatPayResultBean.setOut_trade_no(out_trade_no);
 		return ResultUtil.success(weChatPayResultBean);
 	}
 
@@ -154,7 +154,7 @@ public class PayController {
 
     @GetMapping("/result/{trade_no}")
     public Result getPayResult(@PathVariable String trade_no){
-        return null;
+        return payService.selectByTradeNo(trade_no);
     }
     private String returnXML(String return_code) {
         return "<xml><return_code><![CDATA["

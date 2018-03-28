@@ -18,22 +18,13 @@ public interface PayDao {
      * @param pay
      * @return
      */
-    int addPrePay(Pay pay);
+    int insertPay(Pay pay);
 
     /**
-     * 更新支付状态
+     * 查询订单信息
      *
-     * @param prepayId
+     * @param tradeNo
      * @return
      */
-    int updatePayStatus(Integer prepayId);
-
-    /**
-     * 失败时更新信息
-     *
-     * @param prepayId
-     * @param msg
-     * @return
-     */
-    int updatePayFailStatus(@Param("prepayId") Integer prepayId,@Param("msg") String msg);
+    Pay selectByTradeNo(String tradeNo);
 }

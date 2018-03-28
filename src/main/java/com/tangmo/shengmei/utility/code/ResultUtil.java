@@ -58,5 +58,5 @@ public class ResultUtil {
 
     public static Result existInfo(){return createResult(Result.EXIST_INFO);}
 
-    public static Result pending(){return ResultUtil.pending();}
+    public static Result pending(){return createResult(Result.PENDING);}
 }

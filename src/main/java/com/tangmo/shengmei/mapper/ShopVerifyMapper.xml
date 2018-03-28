@@ -63,4 +63,8 @@
         </set>
         WHERE sv_id = #{svId,jdbcType=INTEGER}
     </update>
+
+    <update id="updateSvState">
+        UPDATE shop_verify SET shop_state = #{state} WHERE sv_id = #{svId}
+    </update>
 </mapper>

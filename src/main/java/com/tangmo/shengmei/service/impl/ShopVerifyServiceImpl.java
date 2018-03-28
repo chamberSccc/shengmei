@@ -64,4 +64,10 @@ public class ShopVerifyServiceImpl implements ShopVerifyService {
         shopVerifyDao.updateSvInfo(shopVerify);
         return ResultUtil.success();
     }
+
+    @Override
+    public Result updateSvState(Integer svId, Byte state) {
+        shopVerifyDao.updateSvState(svId, state);
+        return ResultUtil.success();
+    }
 }
