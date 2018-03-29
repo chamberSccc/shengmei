@@ -37,4 +37,13 @@ public interface PayService {
      * @return
      */
     Result selectByTradeNo(String tradeNo);
+
+    /**
+     * 获取微信预支付信息
+     *
+     * @param goId 订单Id
+     * @param userId 用户Id
+     * @return
+     */
+    Result getWeChatPayInfo(Integer goId, Integer userId);
 }

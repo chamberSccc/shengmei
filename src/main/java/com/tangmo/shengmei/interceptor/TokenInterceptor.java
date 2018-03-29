@@ -24,10 +24,10 @@ public class TokenInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+
         BeanFactory factory = WebApplicationContextUtils.getRequiredWebApplicationContext(request.getServletContext());
+        adminService = (AdminService) factory.getBean("adminService");
         String ip = request.getRemoteAddr();
-        String token = request.getHeader("token");
-        String user = request.getHeader("userId");
         String url = request.getRequestURI();
         //这里判断管理员的token
         if(url.startsWith("/admin")){
@@ -36,7 +36,6 @@ public class TokenInterceptor extends HandlerInterceptorAdapter {
             if(admin_token==null || admin==null){
                 return false;
             }
-            adminService = (AdminService) factory.getBean("adminService");
             if(adminService.verifyToken(Integer.parseInt(admin),admin_token)){
                 return true;
             }else{
@@ -45,6 +44,8 @@ public class TokenInterceptor extends HandlerInterceptorAdapter {
         }
 
         //此处判断正常用户请求header逻辑
+        String token = request.getHeader("token");
+        String user = request.getHeader("userId");
         if (token == null || user == null) {
             return false;
         }
