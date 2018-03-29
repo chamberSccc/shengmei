@@ -22,7 +22,6 @@ public class GoodsOrder {
     private String transNumber;
     private Double goodsPrice;
 
-
     /**物流*/
     private Double expressFee;
     private Double discountFee;

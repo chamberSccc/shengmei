@@ -39,6 +39,9 @@ public class SearchIllegal {
         try {
             //第三方接口查询
             result = HttpUtil.sendGet(url);
+            if(result.equals("")){
+               return null;
+            }
             JSONObject json = JSONObject.parseObject(result);
             if (json.getIntValue("status") != 0) {
                 log.error(json.getString("msg"));

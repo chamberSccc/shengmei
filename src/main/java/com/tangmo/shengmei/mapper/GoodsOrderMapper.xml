@@ -50,10 +50,10 @@
         <result column="is_default" property="isDefault" jdbcType="TINYINT"/>
     </resultMap>
 
-    <insert id="insertGo" parameterType="com.tangmo.shengmei.entity.GoodsOrder">
-        insert into goods_order (go_id,cd_id,ua_id,user_id,go_count,order_state,
+    <insert id="insertGo" parameterType="com.tangmo.shengmei.entity.GoodsOrder" useGeneratedKeys="true" keyProperty="goId">
+        insert into goods_order (cd_id,ua_id,user_id,go_count,order_state,
         order_number,express_fee,discount_fee,pay_fee,cd_size,cd_color)
-         VALUES (#{goId},#{cdId},#{uaId},#{userId},#{goCount},#{orderState},
+         VALUES (#{cdId},#{uaId},#{userId},#{goCount},#{orderState},
          #{orderNumber},#{expressFee},#{discountFee},#{payFee},#{cdSize},#{cdColor})
     </insert>
 

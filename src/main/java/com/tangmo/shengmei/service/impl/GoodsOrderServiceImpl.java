@@ -44,7 +44,8 @@ public class GoodsOrderServiceImpl implements GoodsOrderService {
             return ResultUtil.error("该商品商家暂未标注价格");
         }
         goodsOrderSimple.setPayFee(goodsOrderSimple.getGoCount() * commodity.getPriceNow());
-        return ResultUtil.success(goodsOrderDao.insertGo(goodsOrderSimple));
+        goodsOrderDao.insertGo(goodsOrderSimple);
+        return ResultUtil.success(goodsOrderSimple.getGoId());
     }
 
     @Override

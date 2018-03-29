@@ -1,5 +1,6 @@
 package com.tangmo.shengmei.service;
 
+import com.tangmo.shengmei.entity.IllegalOrder;
 import com.tangmo.shengmei.entity.Pay;
 import com.tangmo.shengmei.entity.WeChatPayResultBean;
 import com.tangmo.shengmei.utility.code.Result;
@@ -39,15 +40,6 @@ public interface PayService {
     Result selectByTradeNo(String tradeNo);
 
     /**
-     * 支付订单时获取预支付信息
-     *
-     * @param total_fee
-     * @param orderNo
-     * @return
-     */
-    WeChatPayResultBean getWeChatPayInfo(Integer total_fee, String orderNo);
-
-    /**
      * 更新微信回调的支付结果
      *
      * @param map
@@ -64,5 +56,21 @@ public interface PayService {
      */
     Result payOrder(Integer userId, Integer goId);
 
+    /**
+     * 支付违章订单
+     * @param illegalOrder
+     * @return
+     */
+    Result payIllegalOrder(IllegalOrder illegalOrder);
 
+
+    /**
+     * 支付订单时获取预支付信息
+     *
+     * @param total_fee 总金额
+     * @param orderNo 订单号
+     * @param url 回调地址
+     * @return
+     */
+    WeChatPayResultBean getWeChatPayInfo(Integer total_fee, String orderNo,String url);
 }

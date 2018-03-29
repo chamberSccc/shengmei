@@ -57,21 +57,9 @@ public class IllegalServiceImpl implements IllegalService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        //如果有错误msg
-        if(illegalInfo.getMsg()!= null){
-            return ResultUtil.success(illegalInfo);
-        }
         if(userCar.getIsSave() == 1){
             userCarDao.insertSelective(userCar);
             illegalInfo.setCarId(userCar.getUcId());
-        }
-        //数据库保存用户最新的违章信息
-        illegalInfo.setUserId(userCar.getUserId());
-        IllegalInfo illegalInfo1 = illegalDao.selectByCarId(userCar.getUcId());
-        if(illegalInfo1 == null){
-            illegalDao.insertSelective(illegalInfo);
-        }else{
-            illegalDao.updateSelective(illegalInfo);
         }
         return ResultUtil.success(illegalInfo);
     }

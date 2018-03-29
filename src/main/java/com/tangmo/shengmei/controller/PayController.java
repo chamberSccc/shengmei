@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.*;
 
+import com.tangmo.shengmei.entity.IllegalOrder;
 import com.tangmo.shengmei.entity.Pay;
 import com.tangmo.shengmei.entity.PayCallBackBean;
 import com.tangmo.shengmei.entity.WeChatPayResultBean;
@@ -53,43 +54,50 @@ public class PayController {
      * @apiParamExample {json} 请求样例：
      *               {
      *                   userId:"用户id",
-     *                   illegalList:[1,2,3,4]   违章id illegalId数组
+     *                   totalFee:"总费用(单位为分)",
+     *                   illegalIds:[1,2,3,4]   违章id illegalId数组
      *               }
      * @apiSuccess (200) {String} msg 信息
      * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
      */
     @PostMapping("/wechat/illegal")
-    public Result payIllegalOrder(){
+    public Result payIllegalOrder(@RequestBody IllegalOrder illegalOrder){
         return null;
     }
 
     /**
-     * 微信的支付回调接口
+     * 微信的支付回调接口(订单)
      *
      * @param request
      * @return
      * @throws IOException
      * @throws DocumentException
      */
-    @PostMapping("/callback")
-    public String callBack(HttpServletRequest request) throws IOException, DocumentException {
-        BufferedReader reader = null;
-
-        reader = request.getReader();
-        String line = "";
-        StringBuffer inputString = new StringBuffer();
-        while ((line = reader.readLine()) != null) {
-            inputString.append(line);
+    @PostMapping("/order/callback")
+    public String callBack(HttpServletRequest request){
+        Map<String,String> smap = null;
+        try {
+            smap = getCallBackInfo(request);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return returnXML(smap.get("return_code"));
         }
+        //商品数量-1,通知商家,检查库存是否足够
+        payService.updatePayResult(smap);
+        return returnXML(smap.get("return_code"));
+    }
 
-        SortedMap<String, String> smap = new TreeMap<String, String>();
-        Document doc = DocumentHelper.parseText(inputString.toString());
-        Element root = doc.getRootElement();
-        for (Iterator iterator = root.elementIterator(); iterator.hasNext(); ) {
-            Element e = (Element) iterator.next();
-            smap.put(e.getName(), e.getText());
+    @PostMapping("/illegal/callback")
+    public String illegalCallBack(HttpServletRequest request){
+        Map<String,String> smap = null;
+        try {
+            smap = getCallBackInfo(request);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return returnXML(smap.get("return_code"));
         }
         payService.updatePayResult(smap);
+        //缴费违章代缴
         return returnXML(smap.get("return_code"));
     }
 
@@ -113,5 +121,25 @@ public class PayController {
         return "<xml><return_code><![CDATA["
                 + return_code
                 + "]]></return_code><return_msg><![CDATA[OK]]></return_msg></xml>";
+    }
+
+    private Map<String,String> getCallBackInfo(HttpServletRequest request) throws DocumentException, IOException {
+        BufferedReader reader = null;
+
+        reader = request.getReader();
+        String line = "";
+        StringBuffer inputString = new StringBuffer();
+        while ((line = reader.readLine()) != null) {
+            inputString.append(line);
+        }
+        //微信返回的XML格式解析,用map接收
+        SortedMap<String, String> smap = new TreeMap<String, String>();
+        Document doc = DocumentHelper.parseText(inputString.toString());
+        Element root = doc.getRootElement();
+        for (Iterator iterator = root.elementIterator(); iterator.hasNext(); ) {
+            Element e = (Element) iterator.next();
+            smap.put(e.getName(), e.getText());
+        }
+        return smap;
     }
 }

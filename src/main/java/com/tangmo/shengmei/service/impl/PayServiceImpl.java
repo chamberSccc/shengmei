@@ -1,14 +1,13 @@
 package com.tangmo.shengmei.service.impl;
 
+import com.tangmo.shengmei.constant.NotifyUrlConst;
 import com.tangmo.shengmei.dao.GoodsOrderDao;
 import com.tangmo.shengmei.dao.PayDao;
-import com.tangmo.shengmei.entity.GoodsOrder;
-import com.tangmo.shengmei.entity.Pay;
-import com.tangmo.shengmei.entity.PayCallBackBean;
-import com.tangmo.shengmei.entity.WeChatPayResultBean;
+import com.tangmo.shengmei.entity.*;
 import com.tangmo.shengmei.service.PayService;
 import com.tangmo.shengmei.utility.code.Result;
 import com.tangmo.shengmei.utility.code.ResultUtil;
+import com.tangmo.shengmei.utility.string.OrderRelated;
 import com.tangmo.shengmei.utility.wechat.*;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
@@ -71,14 +70,61 @@ public class PayServiceImpl implements PayService{
     }
 
     @Override
-    public WeChatPayResultBean getWeChatPayInfo(Integer total_fee,String order_no) {
-        String notify_url ="http://hjcriv.natappfree.cc/pay/callback";
+    @Transactional
+    public int updatePayResult(Map<String, String> map) {
+        Pay pay = new Pay();
+        pay.setReturn_msg(map.get("return_msg"));
+        pay.setResult_code(map.get("result_code"));
+        pay.setOut_trade_no(map.get("out_trade_no"));
+        //更新支付信息
+        payDao.updateResultByNo(pay);
+        goodsOrderDao.updateOrderDone(pay.getOut_trade_no());
+        return 1;
+    }
+
+    @Override
+    @Transactional
+    public Result payOrder(Integer userId,Integer goId) {
+        //存储预付信息预付
+        GoodsOrder goodsOrder = goodsOrderDao.selectById(goId);
+        int fee = (int) (goodsOrder.getPayFee()* 100);
+        String orderNo = goodsOrder.getOrderNumber();
+        WeChatPayResultBean payResultBean = getWeChatPayInfo(fee,orderNo,NotifyUrlConst.ORDER_URL);
+        if(payResultBean == null){
+            return ResultUtil.error("微信服务故障");
+        }
+        payResultBean.setUserId(userId);
+        Pay pay = new Pay(payResultBean);
+        pay.setPayTarget("商城订单");
+        addPayInfo(pay);
+        return ResultUtil.success(payResultBean);
+    }
+
+    @Override
+    public Result payIllegalOrder(IllegalOrder illegalOrder) {
+        Integer userId = illegalOrder.getUserId();
+        String orderNo = OrderRelated.getIllegalOrderNo(illegalOrder.getUserId());
+        Integer fee = illegalOrder.getTotalFee();
+        WeChatPayResultBean payResultBean = getWeChatPayInfo(fee,orderNo,NotifyUrlConst.ORDER_URL);
+        if(payResultBean == null){
+            return ResultUtil.error("微信服务故障");
+        }
+        payResultBean.setUserId(userId);
+        Pay pay = new Pay(payResultBean);
+        pay.setPayTarget("违章代缴");
+        addPayInfo(pay);
+        return ResultUtil.success(payResultBean);
+    }
+
+
+    @Override
+    public WeChatPayResultBean getWeChatPayInfo(Integer total_fee,String order_no,String url) {
+        String notify_url = url;
         PayCallBackBean payCallBackBean = new PayCallBackBean();
         //生成随机字符串
         String nonce_str = PayUtil.getRandomString(6);
         //订单号
         String out_trade_no = order_no;
-        //订单编号
         payCallBackBean.setOrdercode(out_trade_no);
         payCallBackBean.setPayway("微信支付");
 
@@ -162,35 +208,5 @@ public class PayServiceImpl implements PayService{
         weChatPayResultBean.setOut_trade_no(out_trade_no);
         weChatPayResultBean.setTotal_fee(total_fee);
         return weChatPayResultBean;
-    }
-
-    @Override
-    @Transactional
-    public int updatePayResult(Map<String, String> map) {
-        Pay pay = new Pay();
-        pay.setReturn_msg(map.get("return_msg"));
-        pay.setResult_code(map.get("result_code"));
-        pay.setOut_trade_no(map.get("out_trade_no"));
-        //更新支付信息
-        payDao.updateResultByNo(pay);
-        goodsOrderDao.updateOrderDone(pay.getOut_trade_no());
-        return 1;
-    }
-
-    @Override
-    @Transactional
-    public Result payOrder(Integer userId,Integer goId) {
-        //存储预付信息预付
-        GoodsOrder goodsOrder = goodsOrderDao.selectById(goId);
-        int fee = (int) (goodsOrder.getGoodsPrice()* 100);
-        WeChatPayResultBean payResultBean = getWeChatPayInfo(fee,goodsOrder.getOrderNumber());
-        if(payResultBean == null){
-            return ResultUtil.error("微信服务故障");
-        }
-        payResultBean.setUserId(userId);
-        Pay pay = new Pay(payResultBean);
-        pay.setPayTarget("订单");
-        addPayInfo(pay);
-        return ResultUtil.success(payResultBean);
     }
 }
