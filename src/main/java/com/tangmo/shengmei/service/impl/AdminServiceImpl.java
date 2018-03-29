@@ -90,4 +90,18 @@ public class AdminServiceImpl implements AdminService {
     public void addAccessCount(String ip) {
         commonDao.insertAccessCount(ip);
     }
+
+    @Override
+    public Boolean verifyToken(Integer userId, String token) {
+        String adminToken = adminDao.selectTokenById(userId);
+        if(adminToken == null){
+            return false;
+        }else{
+            if(adminToken.equals(token)){
+                return true;
+            }else{
+                return false;
+            }
+        }
+    }
 }

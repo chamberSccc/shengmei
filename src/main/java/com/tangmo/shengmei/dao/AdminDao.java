@@ -4,6 +4,7 @@ package com.tangmo.shengmei.dao;
 import com.tangmo.shengmei.entity.AdminInfo;
 import com.tangmo.shengmei.entity.ReportDto;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -18,7 +19,7 @@ import java.util.Objects;
 public interface AdminDao {
 
     /**
-     * y用户消费报表
+     * 用户消费报表
      *
      * @param reportDto
      * @return
@@ -40,6 +41,14 @@ public interface AdminDao {
      * @return
      */
     AdminInfo selectByAccount(String account);
+
+    /**
+     * 查询用户token信息
+     *
+     * @param userId
+     * @return
+     */
+    String selectTokenById(@Param("userId") Integer userId);
 
 
 }

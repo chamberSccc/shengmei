@@ -34,11 +34,15 @@
     </select>
 
     <insert id="insertAdmin" parameterType="com.tangmo.shengmei.entity.AdminInfo">
-        insert into admin_info (account,password) VALUES (#{account},#{password})
+        insert into admin_info (account,password,token) VALUES (#{account},#{password},#{token})
     </insert>
 
     <select id="selectByAccount" resultMap="AdminResultMap">
         SELECT password FROM admin_info WHERE account = #{account}
+    </select>
+
+    <select id="selectTokenById" resultType="java.lang.String">
+        SELECT token FROM admin_info WHERE admin_id = #{userId}
     </select>
 
 </mapper>

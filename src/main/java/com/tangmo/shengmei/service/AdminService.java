@@ -73,4 +73,13 @@ public interface AdminService {
      * @param ip
      */
     void addAccessCount(String ip);
+
+    /**
+     * 查询管理员登录信息,验证token
+     *
+     * @param userId
+     * @param token
+     * @return
+     */
+    Boolean verifyToken(Integer userId, String token);
 }

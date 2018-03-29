@@ -22,6 +22,7 @@ public class IllegalInfo {
     private Integer totalPrice;
     private Integer totalScore;
     private String msg;
+    private Date createTime;
     private List<IllegalDetail> list;
 
     public IllegalInfo() {

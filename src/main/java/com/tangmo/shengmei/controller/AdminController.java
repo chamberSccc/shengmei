@@ -262,7 +262,7 @@ public class AdminController extends BaseController{
      *                        canHandle:"是否可以代缴"}]
      *                     }
      */
-    @GetMapping("/illegal/{start}/{end}")
+    @GetMapping("/car/illegal/{start}/{end}")
     public Result getIllegalInfo(@PathVariable Integer start,@PathVariable Integer end){
         return illegalService.getIllegalList(start, end);
     }
