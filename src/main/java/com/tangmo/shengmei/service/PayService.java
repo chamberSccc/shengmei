@@ -39,12 +39,13 @@ public interface PayService {
     Result selectByTradeNo(String tradeNo);
 
     /**
-     * 获取微信预支付信息
+     * 支付订单时获取预支付信息
      *
-     * @param total_fee 费用
+     * @param total_fee
+     * @param orderNo
      * @return
      */
-    WeChatPayResultBean getWeChatPayInfo(Integer total_fee);
+    WeChatPayResultBean getWeChatPayInfo(Integer total_fee, String orderNo);
 
     /**
      * 更新微信回调的支付结果
@@ -61,7 +62,7 @@ public interface PayService {
      * @param userId
      * @return
      */
-    Result payOrder(Integer userId,Integer goId);
+    Result payOrder(Integer userId, Integer goId);
 
 
 }

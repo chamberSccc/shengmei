@@ -155,7 +155,8 @@ public class UserCarController extends BaseController {
      *                            content:"违章内容",
      *                            score:"扣分",
      *                            price:"金额",
-     *                            time:"违章时间"
+     *                            time:"违章时间",
+     *                            illegalId:"违章Id"
      *                        }
      *                        ]
      *                     }
@@ -191,7 +192,8 @@ public class UserCarController extends BaseController {
      *                            content:"违章内容",
      *                            score:"扣分",
      *                            price:"金额",
-     *                            time:"违章时间"
+     *                            time:"违章时间",
+     *                            illegalId:"违章Id"
      *                        }
      *                        ]
      *                     }

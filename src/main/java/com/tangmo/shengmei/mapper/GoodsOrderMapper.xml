@@ -94,6 +94,10 @@
         UPDATE goods_order SET order_state = #{state} WHERE go_id = #{goId}
     </update>
 
+    <update id="updateOrderDone">
+        UPDATE goods_order SET order_state = 1,pay_time = now() WHERE order_number = #{orderNum}
+    </update>
+
     <delete id="deleteById">
         DELETE FROM goods_order WHERE go_id = #{goId}
     </delete>

@@ -46,6 +46,24 @@ public class PayController {
     }
 
     /**
+     * @api {POST} /pay/wechat/illegal 微信支付违章订单
+     * @apiGroup Pay
+     * @apiVersion 0.0.1
+     * @apiDescription 微信支付违章订单
+     * @apiParamExample {json} 请求样例：
+     *               {
+     *                   userId:"用户id",
+     *                   illegalList:[1,2,3,4]   违章id illegalId数组
+     *               }
+     * @apiSuccess (200) {String} msg 信息
+     * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     */
+    @PostMapping("/wechat/illegal")
+    public Result payIllegalOrder(){
+        return null;
+    }
+
+    /**
      * 微信的支付回调接口
      *
      * @param request

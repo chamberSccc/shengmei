@@ -71,6 +71,14 @@ public interface GoodsOrderDao {
     int updateOrderState(@Param("goId") Integer goId, @Param("state") Byte state);
 
     /**
+     * 修改订单为交易完成
+     *
+     * @param orderNum
+     * @return
+     */
+    int updateOrderDone(String orderNum);
+
+    /**
      * 删除订单
      *
      * @param goId

@@ -21,7 +21,7 @@ public class Pay {
 	private String return_msg;
 	private String result_code;
 	private Integer userId;
-	private Integer goId;
+	private String payTarget;
 
 	public Pay() {
 	}

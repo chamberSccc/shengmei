@@ -1,6 +1,8 @@
 package com.tangmo.shengmei.service.impl;
 
+import com.tangmo.shengmei.dao.GoodsOrderDao;
 import com.tangmo.shengmei.dao.PayDao;
+import com.tangmo.shengmei.entity.GoodsOrder;
 import com.tangmo.shengmei.entity.Pay;
 import com.tangmo.shengmei.entity.PayCallBackBean;
 import com.tangmo.shengmei.entity.WeChatPayResultBean;
@@ -13,6 +15,7 @@ import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.*;
@@ -26,6 +29,8 @@ import java.util.*;
 public class PayServiceImpl implements PayService{
     @Resource
     private PayDao payDao;
+    @Resource
+    private GoodsOrderDao goodsOrderDao;
 
     String Key = "C0FB5394A44C380BE3297B69A23A7D3D";
     String appid = "wx7329bea10eb17a5e"; //应用ID 必填：true
@@ -66,13 +71,13 @@ public class PayServiceImpl implements PayService{
     }
 
     @Override
-    public WeChatPayResultBean getWeChatPayInfo(Integer total_fee) {
+    public WeChatPayResultBean getWeChatPayInfo(Integer total_fee,String order_no) {
         String notify_url ="http://hjcriv.natappfree.cc/pay/callback";
         PayCallBackBean payCallBackBean = new PayCallBackBean();
         //生成随机字符串
         String nonce_str = PayUtil.getRandomString(6);
         //订单号
-        String out_trade_no = DateUtil.DateToString(new Date(),"yyyyMMddHHmmssSSS");
+        String out_trade_no = order_no;
         //订单编号
         payCallBackBean.setOrdercode(out_trade_no);
         payCallBackBean.setPayway("微信支付");
@@ -160,16 +165,32 @@ public class PayServiceImpl implements PayService{
     }
 
     @Override
+    @Transactional
     public int updatePayResult(Map<String, String> map) {
         Pay pay = new Pay();
         pay.setReturn_msg(map.get("return_msg"));
         pay.setResult_code(map.get("result_code"));
         pay.setOut_trade_no(map.get("out_trade_no"));
-        return payDao.updateResultByNo(pay);
+        //更新支付信息
+        payDao.updateResultByNo(pay);
+        goodsOrderDao.updateOrderDone(pay.getOut_trade_no());
+        return 1;
     }
 
     @Override
+    @Transactional
     public Result payOrder(Integer userId,Integer goId) {
-        return null;
+        //存储预付信息预付
+        GoodsOrder goodsOrder = goodsOrderDao.selectById(goId);
+        int fee = (int) (goodsOrder.getGoodsPrice()* 100);
+        WeChatPayResultBean payResultBean = getWeChatPayInfo(fee,goodsOrder.getOrderNumber());
+        if(payResultBean == null){
+            return ResultUtil.error("微信服务故障");
+        }
+        payResultBean.setUserId(userId);
+        Pay pay = new Pay(payResultBean);
+        pay.setPayTarget("订单");
+        addPayInfo(pay);
+        return ResultUtil.success(payResultBean);
     }
 }

@@ -69,7 +69,7 @@ public class CommonController extends BaseController{
 
     /**
      * @api {GET} /common/goods/color 获取商品颜色列表
-     * @apiGroup Admin
+     * @apiGroup Common
      * @apiVersion 0.0.1
      * @apiDescription 获取商品颜色列表
      * @apiParamExample {json} 请求样例：
@@ -94,7 +94,7 @@ public class CommonController extends BaseController{
 
     /**
      * @api {GET} /common/goods/condition 获取商品新旧程度列表
-     * @apiGroup Admin
+     * @apiGroup Common
      * @apiVersion 0.0.1
      * @apiDescription 获取商品颜色列表
      * @apiParamExample {json} 请求样例：
@@ -119,7 +119,7 @@ public class CommonController extends BaseController{
 
     /**
      * @api {GET} /common/goods/size 获取商品规格列表
-     * @apiGroup Admin
+     * @apiGroup Common
      * @apiVersion 0.0.1
      * @apiDescription 获取商品规格列表
      * @apiParamExample {json} 请求样例：

@@ -68,6 +68,7 @@ public class SearchIllegal {
                                 illegalDetail.setScore(list_obj.getString("score"));
                                 illegalDetail.setCanHandle(list_obj.getString("canhandle"));
                                 illegalDetail.setHandleFee(list_obj.getString("handlefee"));
+                                illegalDetail.setIllegalId(list_obj.getString("illegalid"));
                                 detailList.add(illegalDetail);
                             }
                         }

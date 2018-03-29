@@ -18,6 +18,7 @@ public class IllegalDetail {
     private String score;
     private String price;
     private String time;
+    private String illegalId;
 
     public IllegalDetail() {
     }

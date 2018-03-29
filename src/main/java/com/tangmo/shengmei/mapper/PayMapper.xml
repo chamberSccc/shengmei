@@ -10,8 +10,8 @@
 
     </sql>
     <insert id="insertPay" parameterType="com.tangmo.shengmei.entity.Pay">
-        INSERT INTO pay_info (out_trade_no,user_id,trade_type,return_msg,result_code,total_fee)
-        VALUES (#{out_trade_no},#{userId},#{trade_type},#{return_msg},#{result_code},#{total_fee})
+        INSERT INTO pay_info (out_trade_no,user_id,trade_type,return_msg,result_code,total_fee,pay_target)
+        VALUES (#{out_trade_no},#{userId},#{trade_type},#{return_msg},#{result_code},#{total_fee},#{payTarget})
     </insert>
 
     <select id="selectByTradeNo" resultMap="BaseResultMap">
