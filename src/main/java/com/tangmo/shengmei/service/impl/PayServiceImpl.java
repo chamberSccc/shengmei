@@ -167,4 +167,9 @@ public class PayServiceImpl implements PayService{
         pay.setOut_trade_no(map.get("out_trade_no"));
         return payDao.updateResultByNo(pay);
     }
+
+    @Override
+    public Result payOrder(Integer userId,Integer goId) {
+        return null;
+    }
 }

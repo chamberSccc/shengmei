@@ -28,10 +28,21 @@ public class PayController {
     @Resource
     private PayService payService;
 
-
-    @GetMapping("/wechat/order/{goId}")
-    public Result payOrder(@PathVariable Integer goId) {
-        return null;
+    /**
+     * @api {GET} /pay/wechat/order/{userId}/{goId} 微信支付订单
+     * @apiGroup Pay
+     * @apiVersion 0.0.1
+     * @apiParam {int} userId 用户Id
+     * @apiParam {int} goId 订单Id
+     * @apiDescription 微信支付订单
+     * @apiParamExample {json} 请求样例：
+     *  /pay/wechat/order/1/15
+     * @apiSuccess (200) {String} msg 信息
+     * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     */
+    @GetMapping("/wechat/order/{userId}/{goId}")
+    public Result payOrder(@PathVariable Integer userId,@PathVariable Integer goId) {
+        return payService.payOrder(userId, goId);
     }
 
     /**

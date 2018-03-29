@@ -60,7 +60,7 @@ public class AdminController extends BaseController{
     }
 
     /**
-     * @api {GET} admin/conv/{type}/{start}/{end} 获取失效/未失效便民信息
+     * @api {GET} /admin/conv/{type}/{start}/{end} 获取失效/未失效便民信息
      * @apiGroup Admin
      * @apiVersion 0.0.1
      * @apiParam {int} type 是否失效

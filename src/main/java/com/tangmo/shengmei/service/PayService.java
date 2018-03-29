@@ -54,5 +54,14 @@ public interface PayService {
      */
     int updatePayResult(Map<String, String> map);
 
+    /**
+     * 支付订单
+     *
+     * @param goId
+     * @param userId
+     * @return
+     */
+    Result payOrder(Integer userId,Integer goId);
+
 
 }
