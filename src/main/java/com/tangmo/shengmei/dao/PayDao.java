@@ -27,4 +27,12 @@ public interface PayDao {
      * @return
      */
     Pay selectByTradeNo(String tradeNo);
+
+    /**
+     * 更新预支付结果
+     *
+     * @param pay
+     * @return
+     */
+    int updateResultByNo(Pay pay);
 }

@@ -22,86 +22,25 @@ public class Pay {
 	private String result_code;
 	private Integer userId;
 	private Integer goId;
-	
-	
-	public String getOut_refund_no() {
-		return out_refund_no;
+
+	public Pay() {
 	}
-	public void setOut_refund_no(String out_refund_no) {
-		this.out_refund_no = out_refund_no;
-	}
-	public String getDevice_info() {
-		return device_info;
-	}
-	public void setDevice_info(String device_info) {
-		this.device_info = device_info;
-	}
-	public String getAppid() {
-		return appid;
-	}
-	public void setAppid(String appid) {
+
+	public Pay(String appid, String mch_id, String nonce_str, String sign, String body) {
 		this.appid = appid;
-	}
-	public String getMch_id() {
-		return mch_id;
-	}
-	public void setMch_id(String mch_id) {
 		this.mch_id = mch_id;
-	}
-	public String getNonce_str() {
-		return nonce_str;
-	}
-	public void setNonce_str(String nonce_str) {
 		this.nonce_str = nonce_str;
-	}
-	public String getSign() {
-		return sign;
-	}
-	public void setSign(String sign) {
 		this.sign = sign;
-	}
-	public String getBody() {
-		return body;
-	}
-	public void setBody(String body) {
 		this.body = body;
 	}
-	public String getOut_trade_no() {
-		return out_trade_no;
+
+	public Pay(WeChatPayResultBean weChatPayResultBean){
+		this.out_trade_no = weChatPayResultBean.getOut_trade_no();
+		this.userId = weChatPayResultBean.getUserId();
+		this.trade_type = weChatPayResultBean.getTrade_type();
+		this.total_fee = weChatPayResultBean.getTotal_fee();
 	}
-	public void setOut_trade_no(String out_trade_no) {
-		this.out_trade_no = out_trade_no;
-	}
-	public int getTotal_fee() {
-		return total_fee;
-	}
-	public void setTotal_fee(int total_fee) {
-		this.total_fee = total_fee;
-	}
-	public String getSpbill_create_ip() {
-		return spbill_create_ip;
-	}
-	public void setSpbill_create_ip(String spbill_create_ip) {
-		this.spbill_create_ip = spbill_create_ip;
-	}
-	public String getNotify_url() {
-		return notify_url;
-	}
-	public void setNotify_url(String notify_url) {
-		this.notify_url = notify_url;
-	}
-	public String getTrade_type() {
-		return trade_type;
-	}
-	public void setTrade_type(String trade_type) {
-		this.trade_type = trade_type;
-	}
-	public String getOpenid() {
-		return openid;
-	}
-	public void setOpenid(String openid) {
-		this.openid = openid;
-	}
+
 	@Override
 	public String toString() {
 		return "Pay [appid=" + appid + ", mch_id=" + mch_id + ", nonce_str="

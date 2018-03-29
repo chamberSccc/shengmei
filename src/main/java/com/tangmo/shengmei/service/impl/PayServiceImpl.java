@@ -32,7 +32,7 @@ public class PayServiceImpl implements PayService{
     String mch_id = "1495087612";//商户号    必填：true
     String spbill_create_ip="111.230.242.116"; //终端IP 必填：true
     String device_info="WEB";//设备号  必填：false
-    String body = "test";//商品描述 必填：true
+    String body = "shengmei goods";//商品描述 必填：true
     String trade_type="APP";//交易类型  必填：true
 
     private WeChatPayResultBean weChatPayResultBean;
@@ -46,9 +46,6 @@ public class PayServiceImpl implements PayService{
     @Override
     public Result addPayInfo(Map<String, String> map) {
         Pay pay = new Pay();
-        pay.setOut_trade_no(map.get("out_trade_no"));
-        pay.setTotal_fee(Integer.parseInt(map.get("total_fee")));
-        pay.setTrade_type(map.get("trade_type"));
         pay.setReturn_msg(map.get("return_msg"));
         pay.setResult_code(map.get("result_code"));
         return addPayInfo(pay);
@@ -69,9 +66,7 @@ public class PayServiceImpl implements PayService{
     }
 
     @Override
-    public Result getWeChatPayInfo(Integer goId, Integer userId) {
-        int total_fee = 1;
-        String user = userId.toString();
+    public WeChatPayResultBean getWeChatPayInfo(Integer total_fee) {
         String notify_url ="http://hjcriv.natappfree.cc/pay/callback";
         PayCallBackBean payCallBackBean = new PayCallBackBean();
         //生成随机字符串
@@ -109,8 +104,6 @@ public class PayServiceImpl implements PayService{
         pay.setSpbill_create_ip(spbill_create_ip);
         pay.setTrade_type(trade_type);
         pay.setTotal_fee(total_fee);
-        pay.setUserId(userId);
-        pay.setGoId(goId);
 
         Xstreamutil.stream.alias("xml", Pay.class);
         String xml=Xstreamutil.stream.toXML(pay).replace("__", "_");
@@ -122,7 +115,7 @@ public class PayServiceImpl implements PayService{
             System.out.println(requestxml);
         } catch (Exception e) {
             e.printStackTrace();
-            return ResultUtil.fail();
+            return null;
         }
 
         try {
@@ -139,7 +132,7 @@ public class PayServiceImpl implements PayService{
             }
         } catch (DocumentException e) {
             e.printStackTrace();
-            return ResultUtil.fail();
+            return null;
         }
 
         Long timeStamp = System.currentTimeMillis()/1000;
@@ -160,7 +153,18 @@ public class PayServiceImpl implements PayService{
         weChatPayResultBean.setPrepayId(prepay_id);
         weChatPayResultBean.setTimeStamp(timeStamp);
         weChatPayResultBean.setSign(Paysign);
+        weChatPayResultBean.setTrade_type(trade_type);
         weChatPayResultBean.setOut_trade_no(out_trade_no);
-        return ResultUtil.success(weChatPayResultBean);
+        weChatPayResultBean.setTotal_fee(total_fee);
+        return weChatPayResultBean;
+    }
+
+    @Override
+    public int updatePayResult(Map<String, String> map) {
+        Pay pay = new Pay();
+        pay.setReturn_msg(map.get("return_msg"));
+        pay.setResult_code(map.get("result_code"));
+        pay.setOut_trade_no(map.get("out_trade_no"));
+        return payDao.updateResultByNo(pay);
     }
 }

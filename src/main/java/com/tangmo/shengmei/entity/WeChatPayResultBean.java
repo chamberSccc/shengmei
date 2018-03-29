@@ -7,12 +7,14 @@ public class WeChatPayResultBean {
 	
 	private String partnerId;
 	private String prepayId;
-	private String userId;
+	private Integer userId;
 	private String nonceStr;
 	private Long timeStamp;
 	private String package2;
 	private String sign;
 	private String out_trade_no;
+	private int total_fee;
+	private String trade_type;
 
 	@Override
 	public String toString() {

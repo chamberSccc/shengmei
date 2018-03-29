@@ -41,9 +41,18 @@ public interface PayService {
     /**
      * 获取微信预支付信息
      *
-     * @param goId 订单Id
-     * @param userId 用户Id
+     * @param total_fee 费用
      * @return
      */
-    Result getWeChatPayInfo(Integer goId, Integer userId);
+    WeChatPayResultBean getWeChatPayInfo(Integer total_fee);
+
+    /**
+     * 更新微信回调的支付结果
+     *
+     * @param map
+     * @return
+     */
+    int updatePayResult(Map<String, String> map);
+
+
 }

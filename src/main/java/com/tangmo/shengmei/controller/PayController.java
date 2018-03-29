@@ -27,21 +27,21 @@ import javax.servlet.http.HttpServletResponse;
 public class PayController {
     @Resource
     private PayService payService;
-	String Key = "C0FB5394A44C380BE3297B69A23A7D3D";
-	String appid = "wx7329bea10eb17a5e"; //应用ID 必填：true
-	String mch_id = "1495087612";//商户号    必填：true
-	String spbill_create_ip="111.230.242.116"; //终端IP 必填：true
-	String device_info="WEB";//设备号  必填：false
-	String body = "test";//商品描述 必填：true
-	String trade_type="APP";//交易类型  必填：true
 
-	int total_fee=1;    //总金额  单位（分） 必填：true
 
-	@GetMapping("/wechat")
-	public Result pay(){
-		return null;
-	}
+    @GetMapping("/wechat/order/{goId}")
+    public Result payOrder(@PathVariable Integer goId) {
+        return null;
+    }
 
+    /**
+     * 微信的支付回调接口
+     *
+     * @param request
+     * @return
+     * @throws IOException
+     * @throws DocumentException
+     */
     @PostMapping("/callback")
     public String callBack(HttpServletRequest request) throws IOException, DocumentException {
         BufferedReader reader = null;
@@ -56,18 +56,30 @@ public class PayController {
         SortedMap<String, String> smap = new TreeMap<String, String>();
         Document doc = DocumentHelper.parseText(inputString.toString());
         Element root = doc.getRootElement();
-        for (Iterator iterator = root.elementIterator(); iterator.hasNext();) {
+        for (Iterator iterator = root.elementIterator(); iterator.hasNext(); ) {
             Element e = (Element) iterator.next();
             smap.put(e.getName(), e.getText());
         }
-        payService.addPayInfo(smap);
+        payService.updatePayResult(smap);
         return returnXML(smap.get("return_code"));
     }
 
+    /**
+     * 前台获取预支付信息
+     *
+     * @param trade_no
+     * @return
+     */
     @GetMapping("/result/{trade_no}")
-    public Result getPayResult(@PathVariable String trade_no){
+    public Result getPayResult(@PathVariable String trade_no) {
         return payService.selectByTradeNo(trade_no);
     }
+
+    /**
+     * 微信回调之后,通知微信回调成功XML
+     * @param return_code
+     * @return
+     */
     private String returnXML(String return_code) {
         return "<xml><return_code><![CDATA["
                 + return_code
