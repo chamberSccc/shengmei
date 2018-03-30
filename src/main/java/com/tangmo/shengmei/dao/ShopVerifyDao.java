@@ -30,7 +30,7 @@ public interface ShopVerifyDao {
     ShopVerify selectByUserId(Integer userId);
 
     /**
-     * 根据审核状态查询
+     * 根据审核状态查询(前台分页)
      *
      * @param state
      * @param start
@@ -38,6 +38,14 @@ public interface ShopVerifyDao {
      * @return
      */
     List<ShopVerify> selectByState(@Param("state") Byte state, @Param("start") Integer start, @Param("end") Integer end);
+
+    /**
+     * 根据审核状态查询
+     *
+     * @param state
+     * @return
+     */
+    List<ShopVerify> selectPageByState(@Param("state") Byte state);
 
     /**
      * 查询所有的信息

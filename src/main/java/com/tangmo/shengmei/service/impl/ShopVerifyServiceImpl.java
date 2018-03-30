@@ -4,6 +4,7 @@ import com.tangmo.shengmei.dao.ShopVerifyDao;
 import com.tangmo.shengmei.entity.ShopVerify;
 import com.tangmo.shengmei.service.ImgFileService;
 import com.tangmo.shengmei.service.ShopVerifyService;
+import com.tangmo.shengmei.utility.code.Page;
 import com.tangmo.shengmei.utility.code.Result;
 import com.tangmo.shengmei.utility.code.ResultUtil;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author boge
@@ -57,6 +59,17 @@ public class ShopVerifyServiceImpl implements ShopVerifyService {
     @Override
     public Result searchSvInfo(Byte state,Integer start, Integer end) {
         return ResultUtil.success(shopVerifyDao.selectByState(state, start, end));
+    }
+
+    @Override
+    public Result searchSvInfo(Byte state, Page page) {
+        if(page == null){
+            return ResultUtil.fail();
+        }
+        page.startPage();
+        List<ShopVerify> list = shopVerifyDao.selectPageByState(state);
+        page.setResult(list);
+        return page;
     }
 
     @Override

@@ -7,6 +7,7 @@ import com.tangmo.shengmei.entity.AdminInfo;
 import com.tangmo.shengmei.entity.GoodsTypeItem;
 import com.tangmo.shengmei.entity.ParamValue;
 import com.tangmo.shengmei.entity.ReportDto;
+import com.tangmo.shengmei.utility.code.Page;
 import com.tangmo.shengmei.utility.code.Result;
 import com.tangmo.shengmei.utility.code.ResultUtil;
 import org.springframework.web.bind.annotation.*;
@@ -60,15 +61,13 @@ public class AdminController extends BaseController{
     }
 
     /**
-     * @api {GET} /admin/conv/{type}/{start}/{end} 获取失效/未失效便民信息
+     * @api {GET} /admin/conv/{type} 获取失效/未失效便民信息
      * @apiGroup Admin
      * @apiVersion 0.0.1
      * @apiParam {int} type 是否失效
-     * @apiParam {int} start 分页起始索引
-     * @apiParam {int} end 查询列表长度
      * @apiDescription 获取失效/未失效便民信息
      * @apiParamExample {json} 请求样例：
-     *  admin/conv/1/1/10
+     *  admin/conv/1
      * @apiSuccess (200) {String} msg 信息
      * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
      * @apiSuccessExample {json} 返回样例:
@@ -88,21 +87,19 @@ public class AdminController extends BaseController{
      *                     ]
      *                     }
      */
-    @GetMapping("/conv/{type}/{start}/{end}")
-    public Result getConvInfo(@PathVariable Byte type,@PathVariable Integer start, @PathVariable Integer end){
-        return convInfoService.searchConvList(start,end);
+    @GetMapping("/conv/{type}")
+    public Result getConvInfo(@PathVariable Byte type,Page page){
+        return convInfoService.searchConvList(type,page);
     }
 
     /**
-     * @api {GET} /admin/commodity/{type}/{start}/{end} 获取指定类型商品
+     * @api {GET} /admin/commodity/{type} 获取指定类型商品
      * @apiGroup Admin
      * @apiVersion 0.0.1
      * @apiParam {byte} type 商品类型
-     * @apiParam {int} start 分页起始索引
-     * @apiParam {int} end 查询列表长度
      * @apiDescription 获取指定类型商品 区分全新汽配,二手汽配...
      * @apiParamExample {json} 请求样例：
-     *  /admin/commodity/1/0/10
+     *  /admin/commodity/1
      * @apiSuccess (200) {String} msg 信息
      * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
      * @apiSuccessExample {json} 返回样例:
@@ -127,9 +124,9 @@ public class AdminController extends BaseController{
      *                     }]
      *                     }
      */
-    @GetMapping("/commodity/{type}/{start}/{end}")
-    public Result getCommodityList(@PathVariable Integer start, @PathVariable Integer end,@PathVariable Byte type){
-        return commodityService.searchCdList(type,start,end);
+    @GetMapping("/commodity/{type}")
+    public Result getCommodityList(@PathVariable Byte type,Page page){
+        return commodityService.searchCdList(type,page);
     }
 
     /**
@@ -481,18 +478,18 @@ public class AdminController extends BaseController{
      * @apiSuccessExample {json} 返回样例:
      *                    {"code":"success"}
      */
-    @GetMapping("/shop/unverify/{start}/{end}")
-    public Result searchUnverify(@PathVariable Integer start,@PathVariable Integer end){
-        return shopVerifyService.searchSvInfo((byte) 0,start,end);
+    @GetMapping("/shop/unverify")
+    public Result searchUnverify(Page page){
+        return shopVerifyService.searchSvInfo((byte) 0,page);
     }
 
     /**
-     * @api {GET} /admin/shop/verify/{start}/{end} 查询已审核商铺信息
+     * @api {GET} /admin/shop/verify 查询已审核商铺信息
      * @apiGroup Admin
      * @apiVersion 0.0.1
      * @apiDescription 查询已审核商铺信息
      * @apiParamExample {json} 请求样例：
-     *  /admin/shop/verify/0/10
+     *  /admin/shop/verify
      * @apiParamExample {json} 返回样例:
      *                   {
      *                      userId:"用户Id",
@@ -512,9 +509,9 @@ public class AdminController extends BaseController{
      * @apiSuccessExample {json} 返回样例:
      *                    {"code":"success"}
      */
-    @GetMapping("/shop/verify/{start}/{end}")
-    public Result searchVerify(@PathVariable Integer start,@PathVariable Integer end){
-        return shopVerifyService.searchSvInfo((byte) 1,start,end);
+    @GetMapping("/shop/verify")
+    public Result searchVerify(Page page){
+        return shopVerifyService.searchSvInfo((byte) 1,page);
     }
 
     /**

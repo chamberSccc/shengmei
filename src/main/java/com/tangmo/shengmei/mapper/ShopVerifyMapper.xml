@@ -42,6 +42,12 @@
         limit #{start},#{end}
     </select>
 
+    <select id="selectPageByState" resultMap="BaseResultMap">
+        SELECT sv_id,id_number,mobile,user_id,user_name,id_front_img,id_rear_img,
+        logo_img,shop_intro,shop_name,license_img,shop_state,createtime
+        FROM shop_verify WHERE shop_state = #{state}
+    </select>
+
     <select id="selectAll" resultMap="BaseResultMap">
         SELECT sv_id,id_number,mobile,user_id,user_name,id_front_img,id_rear_img,
         logo_img,shop_intro,shop_name,license_img,shop_state,createtime

@@ -126,7 +126,15 @@
         SELECT ci.ci_id,ci.user_id,ci.title,ci.content,ci.view_count,ui.username,
         ui.avatar_id,if(valid_date &gt;now(),1,0) as is_expire,ci.valid_date,
         ci.comment_count,ci.createtime,ci.province,ci.city,ci.district FROM convenient_info ci
-        LEFT JOIN user_info ui ON ci.user_id = ui.user_id
+        LEFT JOIN user_info ui ON ci.user_id = ui.user_id limit #{start},#{end}
+        ORDER BY ci.createtime DESC
+    </select>
+
+    <select id="selectPageConv" resultMap="BaseResultMap">
+        SELECT ci.ci_id,ci.user_id,ci.title,ci.content,ci.view_count,ui.username,
+        ui.avatar_id,if(valid_date &gt;now(),1,0) as is_expire,ci.valid_date,
+        ci.comment_count,ci.createtime,ci.province,ci.city,ci.district FROM convenient_info ci
+        LEFT JOIN user_info ui ON ci.user_id = ui.user_id WHERE ci.is_expire = #{state}
         ORDER BY ci.createtime DESC
     </select>
 

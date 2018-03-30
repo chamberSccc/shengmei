@@ -1,6 +1,7 @@
 package com.tangmo.shengmei.service;
 
 import com.tangmo.shengmei.entity.ShopVerify;
+import com.tangmo.shengmei.utility.code.Page;
 import com.tangmo.shengmei.utility.code.Result;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -46,6 +47,15 @@ public interface ShopVerifyService {
      * @return
      */
     Result searchSvInfo(Byte state, Integer start, Integer end);
+
+    /**
+     * 后台上家审核信息分页
+     *
+     * @param state
+     * @param page
+     * @return
+     */
+    Result searchSvInfo(Byte state, Page page);
 
     /**
      * 修改商家信息

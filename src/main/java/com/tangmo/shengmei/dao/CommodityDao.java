@@ -43,7 +43,7 @@ public interface CommodityDao {
     int deleteById(Integer cdId);
 
     /**
-     * 返回某一类型商品信息
+     * 返回某一类型商品信息(前台分页)
      *
      * @param cdType 商品类型
      * @param start  开始索引
@@ -51,6 +51,14 @@ public interface CommodityDao {
      * @return
      */
     List<Commodity> selectListByType(@Param("cdType") Byte cdType, @Param("start") Integer start, @Param("end") Integer end);
+
+    /**
+     * 查询某一类型商品信息
+     *
+     * @param cdType
+     * @return
+     */
+    List<Commodity> selectPageByType(Byte cdType);
 
     /**
      * 根据用户id查询商品信息

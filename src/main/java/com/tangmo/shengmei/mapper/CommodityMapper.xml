@@ -205,6 +205,12 @@
           FROM commodity WHERE cd_type = #{cdType} AND is_sell = 0 AND cd_state = 1 limit #{start},#{end}
     </select>
 
+    <select id="selectPageByType" resultMap="BaseResultMap">
+        SELECT cd_id,user_id,img_id,title,content,cd_type,price_pre,
+        price_now,createtime,province,city,district,commodity.condition
+        FROM commodity WHERE cd_type = #{cdType} AND is_sell = 0 AND cd_state = 1
+    </select>
+
     <select id="selectListByUserId" resultMap="BaseResultMap">
         SELECT cd_id,user_id,img_id,title,content,cd_type,
         price_pre,price_now,createtime,province,city,district,commodity.condition

@@ -2,6 +2,7 @@ package com.tangmo.shengmei.service;
 
 import com.tangmo.shengmei.entity.ConvComment;
 import com.tangmo.shengmei.entity.ConvInfo;
+import com.tangmo.shengmei.utility.code.Page;
 import com.tangmo.shengmei.utility.code.Result;
 
 /**
@@ -36,6 +37,15 @@ public interface ConvInfoService {
      * @return
      */
     Result searchConvList(Integer start, Integer end);
+
+    /**
+     * 后台便民信息分页列表
+     *
+     * @param type
+     * @param page
+     * @return
+     */
+    Result searchConvList(Byte type, Page page);
 
     /**
      * 查询便民信息详细信息

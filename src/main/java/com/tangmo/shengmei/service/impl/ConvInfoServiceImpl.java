@@ -4,12 +4,14 @@ import com.tangmo.shengmei.dao.ConvInfoDao;
 import com.tangmo.shengmei.entity.ConvComment;
 import com.tangmo.shengmei.entity.ConvInfo;
 import com.tangmo.shengmei.service.ConvInfoService;
+import com.tangmo.shengmei.utility.code.Page;
 import com.tangmo.shengmei.utility.code.Result;
 import com.tangmo.shengmei.utility.code.ResultUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author boge
@@ -45,6 +47,17 @@ public class ConvInfoServiceImpl implements ConvInfoService {
     @Override
     public Result searchConvList(Integer start, Integer end) {
         return ResultUtil.success(convInfoDao.selectConvList(start,end));
+    }
+
+    @Override
+    public Result searchConvList(Byte type, Page page) {
+        if(page == null){
+            return ResultUtil.success();
+        }
+        page.startPage();
+        List<ConvInfo> list = convInfoDao.selectPageConv(type);
+        page.setResult(list);
+        return page;
     }
 
     @Override

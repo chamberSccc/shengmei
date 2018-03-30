@@ -41,6 +41,14 @@ public interface ConvInfoDao {
     List<ConvInfo> selectConvList(@Param("start") Integer start, @Param("end") Integer end);
 
     /**
+     * page分页便民信息列表
+     *
+     * @param state
+     * @return
+     */
+    List<ConvInfo> selectPageConv(Byte state);
+
+    /**
      * 便民信息浏览量+1
      *
      * @param ciId 便民信息主键
@@ -105,7 +113,7 @@ public interface ConvInfoDao {
     /**
      * 获取失效,未失效便民列表
      *
-     * @param type 是否失效
+     * @param type  是否失效
      * @param start
      * @param end
      * @return

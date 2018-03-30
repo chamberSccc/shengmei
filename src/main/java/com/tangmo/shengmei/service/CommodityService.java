@@ -3,6 +3,7 @@ package com.tangmo.shengmei.service;
 import com.tangmo.shengmei.entity.Commodity;
 import com.tangmo.shengmei.entity.CommodityDto;
 import com.tangmo.shengmei.entity.GoodsComment;
+import com.tangmo.shengmei.utility.code.Page;
 import com.tangmo.shengmei.utility.code.Result;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -48,6 +49,14 @@ public interface CommodityService {
      * @return
      */
     Result searchCdList(Byte cdType, Integer start, Integer end);
+
+    /**
+     * 获取分页商品列表
+     *
+     * @param cdType
+     * @return
+     */
+    Result searchCdList(Byte cdType,Page page);
 
     /**
      * 查询指定用户的商品信息
@@ -186,11 +195,12 @@ public interface CommodityService {
 
     /**
      * 查询上架/下架商品销售记录
+     *
      * @param userId
      * @param state
      * @param start
      * @param end
      * @return
      */
-    Result searchSellRecord(Integer userId, Byte state,Integer start, Integer end);
+    Result searchSellRecord(Integer userId, Byte state, Integer start, Integer end);
 }

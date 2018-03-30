@@ -7,6 +7,7 @@ import com.tangmo.shengmei.dao.UserDao;
 import com.tangmo.shengmei.entity.*;
 import com.tangmo.shengmei.service.CommodityService;
 import com.tangmo.shengmei.service.ImgFileService;
+import com.tangmo.shengmei.utility.code.Page;
 import com.tangmo.shengmei.utility.code.Result;
 import com.tangmo.shengmei.utility.code.ResultUtil;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author boge
@@ -72,6 +74,17 @@ public class CommodityServiceImpl implements CommodityService {
     @Override
     public Result searchCdList(Byte cdType, Integer start, Integer end) {
         return ResultUtil.success(commodityDao.selectListByType(cdType, start, end));
+    }
+
+    @Override
+    public Result searchCdList(Byte cdType, Page page) {
+        if(page == null){
+            return ResultUtil.fail();
+        }
+        page.startPage();
+        List<Commodity> list = commodityDao.selectPageByType(cdType);
+        page.setResult(list);
+        return page;
     }
 
     @Override
