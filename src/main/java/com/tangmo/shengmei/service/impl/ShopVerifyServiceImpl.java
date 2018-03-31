@@ -63,9 +63,6 @@ public class ShopVerifyServiceImpl implements ShopVerifyService {
 
     @Override
     public Result searchSvInfo(Byte state, Page page) {
-        if(page == null){
-            return ResultUtil.fail();
-        }
         page.startPage();
         List<ShopVerify> list = shopVerifyDao.selectPageByState(state);
         page.setResult(list);

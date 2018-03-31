@@ -57,20 +57,29 @@ public interface PayService {
     Result payOrder(Integer userId, Integer goId);
 
     /**
-     * 支付违章订单
+     * 支付违章订单预支付
+     *
      * @param illegalOrder
      * @return
      */
-    Result payIllegalOrder(IllegalOrder illegalOrder);
+    Result payIllegalPreOrder(IllegalOrder illegalOrder);
+
+    /**
+     * 微信回调成功后支付违章订单
+     *
+     * @param map
+     * @return
+     */
+    Result payIllegalOrder(Map<String, String> map);
 
 
     /**
      * 支付订单时获取预支付信息
      *
      * @param total_fee 总金额
-     * @param orderNo 订单号
-     * @param url 回调地址
+     * @param orderNo   订单号
+     * @param url       回调地址
      * @return
      */
-    WeChatPayResultBean getWeChatPayInfo(Integer total_fee, String orderNo,String url);
+    WeChatPayResultBean getWeChatPayInfo(Integer total_fee, String orderNo, String url);
 }

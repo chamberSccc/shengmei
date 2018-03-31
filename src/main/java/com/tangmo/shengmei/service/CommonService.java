@@ -48,4 +48,29 @@ public interface CommonService {
      * @return
      */
     Result searchDistrict(String city);
+
+    /**
+     * 增加行政区域
+     *
+     * @param city
+     * @param district
+     * @return
+     */
+    Result addDistrict(String city, String district);
+
+    /**
+     * 参数格式删除区域
+     *
+     * @param district
+     * @return
+     */
+    Result delDistrict(String district);
+
+    /**
+     * 删除商品规格
+     *
+     * @param pvId
+     * @return
+     */
+    Result delCdSize(Integer pvId);
 }

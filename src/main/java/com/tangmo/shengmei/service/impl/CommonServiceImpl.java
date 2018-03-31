@@ -51,4 +51,22 @@ public class CommonServiceImpl implements CommonService {
     public Result searchDistrict(String city) {
         return ResultUtil.success(commonDao.selectDistrict(city));
     }
+
+    @Override
+    public Result addDistrict(String city, String district) {
+        commonDao.insertDistrict(city,district);
+        return ResultUtil.success();
+    }
+
+    @Override
+    public Result delDistrict(String district) {
+        commonDao.deleteDistrict(district);
+        return ResultUtil.success();
+    }
+
+    @Override
+    public Result delCdSize(Integer pvId) {
+        commonDao.deleteCdSize(pvId);
+        return ResultUtil.success();
+    }
 }

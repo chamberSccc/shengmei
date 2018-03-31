@@ -61,6 +61,11 @@
         VALUES (#{userId},#{content},#{mobile},#{imgId})
     </insert>
 
+    <insert id="insertDistrict">
+        insert into city_district(city,district)
+        VALUES (#{city},#{district})
+    </insert>
+
     <update id="updateParamValue" parameterType="com.tangmo.shengmei.entity.ParamValue">
         UPDATE param_value SET param_value = #{paramValue}
         WHERE pv_id = #{pvId,jdbcType=INTEGER}
@@ -77,4 +82,12 @@
     <select id="selectDistrict" resultType="java.util.HashMap">
         SELECT id,district FROM city_district WHERE city = #{city}
     </select>
+
+    <delete id="deleteDistrict">
+        DELETE FROM city_district WHERE district = #{district}
+    </delete>
+
+    <delete id="deleteCdSize">
+        DELETE FROM param_value WHERE pv_id = #{pvId}
+    </delete>
 </mapper>

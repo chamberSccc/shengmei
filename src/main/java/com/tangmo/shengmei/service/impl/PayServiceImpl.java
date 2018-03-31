@@ -2,12 +2,18 @@ package com.tangmo.shengmei.service.impl;
 
 import com.tangmo.shengmei.constant.NotifyUrlConst;
 import com.tangmo.shengmei.dao.GoodsOrderDao;
+import com.tangmo.shengmei.dao.IllegalHandleDao;
 import com.tangmo.shengmei.dao.PayDao;
+import com.tangmo.shengmei.dao.UserDao;
 import com.tangmo.shengmei.entity.*;
+import com.tangmo.shengmei.entity.vo.UserVO;
 import com.tangmo.shengmei.service.PayService;
+import com.tangmo.shengmei.utility.JisuData.SearchIllegalOrder;
 import com.tangmo.shengmei.utility.code.Result;
 import com.tangmo.shengmei.utility.code.ResultUtil;
 import com.tangmo.shengmei.utility.string.OrderRelated;
+import com.tangmo.shengmei.utility.string.SearchIllegal;
+import com.tangmo.shengmei.utility.string.StringUtil;
 import com.tangmo.shengmei.utility.wechat.*;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
@@ -30,6 +36,10 @@ public class PayServiceImpl implements PayService{
     private PayDao payDao;
     @Resource
     private GoodsOrderDao goodsOrderDao;
+    @Resource
+    private UserDao userDao;
+    @Resource
+    private IllegalHandleDao illegalHandleDao;
 
     String Key = "C0FB5394A44C380BE3297B69A23A7D3D";
     String appid = "wx7329bea10eb17a5e"; //应用ID 必填：true
@@ -101,7 +111,7 @@ public class PayServiceImpl implements PayService{
     }
 
     @Override
-    public Result payIllegalOrder(IllegalOrder illegalOrder) {
+    public Result payIllegalPreOrder(IllegalOrder illegalOrder) {
         Integer userId = illegalOrder.getUserId();
         String orderNo = OrderRelated.getIllegalOrderNo(illegalOrder.getUserId());
         Integer fee = illegalOrder.getTotalFee();
@@ -113,7 +123,37 @@ public class PayServiceImpl implements PayService{
         Pay pay = new Pay(payResultBean);
         pay.setPayTarget("违章代缴");
         addPayInfo(pay);
+        //增加自己的违章代缴信息
+        UserVO user = userDao.selectById(pay.getUserId());
+        IllegalHandle illegalHandle = new IllegalHandle();
+        illegalHandle.setMobile(user.getMobile());
+        illegalHandle.setUserId(illegalOrder.getUserId());
+        illegalHandle.setOutOrderNo(pay.getOut_trade_no());
+        illegalHandle.setIllegalId(StringUtil.converToString(illegalOrder.getIllegalIds()));
+        illegalHandleDao.insertIllegalHandle(illegalHandle);
         return ResultUtil.success(payResultBean);
+    }
+
+    @Override
+    public Result payIllegalOrder(Map<String, String> map) {
+        Pay pay = new Pay();
+        pay.setReturn_msg(map.get("return_msg"));
+        pay.setResult_code(map.get("result_code"));
+        pay.setOut_trade_no(map.get("out_trade_no"));
+        payDao.updateResultByNo(pay);
+        if(pay.getReturn_msg()!= null){
+            //提交极速订单
+            IllegalHandle illegalHandle = illegalHandleDao.selectByOutTradeNo(pay.getOut_trade_no());
+            try {
+                SearchIllegalOrder.searchHandleInfo(illegalHandle);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            //更新代缴信息
+            illegalHandleDao.updateByOutTradeNo(illegalHandle);
+            //还未处理回调
+        }
+        return null;
     }
 
 

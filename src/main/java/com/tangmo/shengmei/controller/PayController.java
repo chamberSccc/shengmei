@@ -37,12 +37,12 @@ public class PayController {
      * @apiParam {int} goId 订单Id
      * @apiDescription 微信支付订单
      * @apiParamExample {json} 请求样例：
-     *  /pay/wechat/order/1/15
+     * /pay/wechat/order/1/15
      * @apiSuccess (200) {String} msg 信息
      * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
      */
     @GetMapping("/wechat/order/{userId}/{goId}")
-    public Result payOrder(@PathVariable Integer userId,@PathVariable Integer goId) {
+    public Result payOrder(@PathVariable Integer userId, @PathVariable Integer goId) {
         return payService.payOrder(userId, goId);
     }
 
@@ -52,17 +52,17 @@ public class PayController {
      * @apiVersion 0.0.1
      * @apiDescription 微信支付违章订单
      * @apiParamExample {json} 请求样例：
-     *               {
-     *                   userId:"用户id",
-     *                   totalFee:"总费用(单位为分)",
-     *                   illegalIds:[1,2,3,4]   违章id illegalId数组
-     *               }
+     *                  {
+     *                  userId:"用户id",
+     *                  totalFee:"总费用(单位为分)",
+     *                  illegalIds:[1,2,3,4]   违章id illegalId数组
+     *                  }
      * @apiSuccess (200) {String} msg 信息
      * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
      */
     @PostMapping("/wechat/illegal")
-    public Result payIllegalOrder(@RequestBody IllegalOrder illegalOrder){
-        return null;
+    public Result payIllegalOrder(@RequestBody IllegalOrder illegalOrder) {
+        return payService.payIllegalPreOrder(illegalOrder);
     }
 
     /**
@@ -74,8 +74,8 @@ public class PayController {
      * @throws DocumentException
      */
     @PostMapping("/order/callback")
-    public String callBack(HttpServletRequest request){
-        Map<String,String> smap = null;
+    public String callBack(HttpServletRequest request) {
+        Map<String, String> smap = null;
         try {
             smap = getCallBackInfo(request);
         } catch (Exception e) {
@@ -88,8 +88,8 @@ public class PayController {
     }
 
     @PostMapping("/illegal/callback")
-    public String illegalCallBack(HttpServletRequest request){
-        Map<String,String> smap = null;
+    public String illegalCallBack(HttpServletRequest request) {
+        Map<String, String> smap = null;
         try {
             smap = getCallBackInfo(request);
         } catch (Exception e) {
@@ -114,6 +114,7 @@ public class PayController {
 
     /**
      * 微信回调之后,通知微信回调成功XML
+     *
      * @param return_code
      * @return
      */
@@ -123,7 +124,15 @@ public class PayController {
                 + "]]></return_code><return_msg><![CDATA[OK]]></return_msg></xml>";
     }
 
-    private Map<String,String> getCallBackInfo(HttpServletRequest request) throws DocumentException, IOException {
+    /**
+     * 解析微信支付回调信息
+     *
+     * @param request
+     * @return
+     * @throws DocumentException
+     * @throws IOException
+     */
+    private Map<String, String> getCallBackInfo(HttpServletRequest request) throws DocumentException, IOException {
         BufferedReader reader = null;
 
         reader = request.getReader();

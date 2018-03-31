@@ -266,7 +266,7 @@ public class AdminController extends BaseController{
 
     /**
      * @api {GET} /admin/goods/type 获取商品类型列表
-     * @apiGroup Common
+     * @apiGroup Admin
      * @apiVersion 0.0.1
      * @apiDescription 获取商品类型列表
      * @apiParamExample {json} 请求样例：
@@ -290,7 +290,7 @@ public class AdminController extends BaseController{
 
     /**
      * @api {GET} /admin/goods/class/{type} 获取商品分类列表
-     * @apiGroup Common
+     * @apiGroup Admin
      * @apiVersion 0.0.1
      * @apiDescription 获取商品分类列表
      * @apiParamExample {json} 请求样例：
@@ -453,12 +453,12 @@ public class AdminController extends BaseController{
     }
 
     /**
-     * @api {GET} /admin/shop/unverify/{start}/{end} 查询未审核商铺信息
+     * @api {GET} /admin/shop/unverify 查询未审核商铺信息
      * @apiGroup Admin
      * @apiVersion 0.0.1
      * @apiDescription 查询未审核商铺信息
      * @apiParamExample {json} 请求样例：
-     *  /admin/shop/unverify/0/10
+     *  /admin/shop/unverify
      * @apiParamExample {json} 返回样例:
      *                   {
      *                      userId:"用户Id",
@@ -530,4 +530,86 @@ public class AdminController extends BaseController{
     public Result verifyInfo(@PathVariable Integer svId){
         return shopVerifyService.updateSvState(svId, (byte) 1);
     }
+
+    /**
+     * @api {GET} /district 获取行政区域
+     * @apiGroup Admin
+     * @apiVersion 0.0.1
+     * @apiDescription 获取行政区域
+     * @apiParamExample {json} 请求样例：
+     *          {
+     *              city: 西安
+     *          }
+     * @apiSuccess (200) {String} msg 信息
+     * @apiSuccess (success) {GET} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success",
+     *                     "data":{
+     *                     [{
+     *                        id: "主键",
+     *                        district:"区",
+     *                     ...]
+     *                     }
+     */
+    @GetMapping("/district")
+    public Result getDistrict(String city){
+        return commonService.searchDistrict(city);
+    }
+
+    /**
+     * @api {POST} /admin/district 增加区域
+     * @apiGroup Admin
+     * @apiVersion 0.0.1
+     * @apiDescription 增加区域
+     * @apiParamExample {json} 请求样例:
+     *              {
+     *                  city:西安,
+     *                  district:新城区
+     *              }
+     * @apiSuccess (success) {PUT} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccess (success) {PUT} data 返回数据
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success"}
+     */
+    @PostMapping("/district")
+    public Result addDistrict(String city,String district){
+        return commonService.addDistrict(city, district);
+    }
+
+    /**
+     * @api {DELETE} /admin/district 删除区域
+     * @apiGroup Admin
+     * @apiVersion 0.0.1
+     * @apiDescription 删除区域
+     * @apiParam {int} mcId 浏览记录主键
+     * @apiParamExample {json} 请求样例:
+     *      /admin/district
+     * @apiSuccess (success) {DELETE} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccess (success) {DELETE} data 返回数据
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success"}
+     */
+    @DeleteMapping("/district")
+    public Result delDistrict(@RequestParam String district){
+        return commonService.delDistrict(district);
+    }
+
+    /**
+     * @api {DELETE} /admin/goods/size/{pvId} 删除区域
+     * @apiGroup Admin
+     * @apiVersion 0.0.1
+     * @apiDescription 删除区域
+     * @apiParam {int} mcId 浏览记录主键
+     * @apiParamExample {json} 请求样例:
+     *      /admin/goods/size/1
+     * @apiSuccess (success) {DELETE} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccess (success) {DELETE} data 返回数据
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success"}
+     */
+    @DeleteMapping("/goods/size/{pvId}")
+    public Result delCdSize(@PathVariable Integer pvId){
+        return commonService.delCdSize(pvId);
+    }
+
 }

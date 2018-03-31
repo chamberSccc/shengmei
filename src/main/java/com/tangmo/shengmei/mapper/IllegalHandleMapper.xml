@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tangmo.shengmei.dao.IllegalHandleDao" >
+
+    <resultMap id="BaseResultMap" type="com.tangmo.shengmei.entity.IllegalHandle" >
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="outorderno" property="outOrderNo" jdbcType="VARCHAR"/>
+        <result column="illegalid" property="illegalId" jdbcType="VARCHAR"/>
+        <result column="mobile" property="mobile" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List" >
+
+    </sql>
+    <insert id="insertIllegalHandle" parameterType="com.tangmo.shengmei.entity.IllegalHandle">
+        INSERT INTO illegal_handle (user_id,illegalid,outorderno,mobile)
+        VALUES (#{userId},#{illegalId},#{outOrderNo},#{mobile})
+    </insert>
+
+    <update id="updateByOutTradeNo">
+        UPDATE illegal_handle SET car_no = #{carNo},illegal_mount = #{illegalMount},pay_fee=#{payFee},
+        orderno=#{orderNo},state=#{state},serviceFee = #{serviceFee}
+    </update>
+
+    <select id="selectByOutTradeNo">
+        SELECT outorderno,user_id,illegal_id FROM illegal_handle WHERE outorderno = #{outOrderNo}
+    </select>
+</mapper>

@@ -32,7 +32,7 @@ public class FileController extends BaseController{
 
     /**
      * @api {POST} /file/upload/{userId} 上传用户图片
-     * @apiGroup User
+     * @apiGroup File
      * @apiVersion 0.0.1
      * @apiDescription 上传用户图片
      * @apiParamExample {json} 请求样例:

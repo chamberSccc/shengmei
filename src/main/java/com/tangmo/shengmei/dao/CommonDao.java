@@ -121,5 +121,30 @@ public interface CommonDao {
      */
     List<Map<String, Object>> selectDistrict(String city);
 
+    /**
+     * 增加商品分类
+     *
+     * @param city
+     * @param district
+     * @return
+     */
+    int insertDistrict(@Param("city") String city, @Param("district") String district);
+
+    /**
+     * 删除区域信息
+     *
+     * @param district
+     * @return
+     */
+    int deleteDistrict(String district);
+
+    /**
+     * 删除商品规格信息
+     *
+     * @param pvId
+     * @return
+     */
+    int deleteCdSize(Integer pvId);
+
 
 }

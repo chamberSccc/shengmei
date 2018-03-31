@@ -3,6 +3,7 @@
 <mapper namespace="com.tangmo.shengmei.dao.PayDao" >
 
     <resultMap id="BaseResultMap" type="com.tangmo.shengmei.entity.Pay" >
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
         <result column="out_trade_no" property="out_trade_no" jdbcType="VARCHAR"/>
         <result column="return_msg" property="return_msg" jdbcType="VARCHAR"/>
     </resultMap>
@@ -15,7 +16,7 @@
     </insert>
 
     <select id="selectByTradeNo" resultMap="BaseResultMap">
-        SELECT out_trade_no,return_msg FROM pay_info WHERE out_trade_no = #{tradeNo}
+        SELECT out_trade_no,return_msg,user_id FROM pay_info WHERE out_trade_no = #{tradeNo}
     </select>
 
     <update id="updateByTradeNo">
