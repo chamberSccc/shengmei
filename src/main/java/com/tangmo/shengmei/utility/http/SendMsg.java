@@ -24,11 +24,13 @@ public class SendMsg {
     public static final String APPKEY = "da8c4213b24d8dd2";// 你的appkey
     public static final String REMOTE_URL = "http://api.jisuapi.com/sms/send";
 //    public static final String mobile = "18710829325";// 手机号
-    public static String content = "您的短信验证码为:@,请不要将验证码告诉他人，如非本人操作，请忽略本短信.【省美科技】";// utf-8
 
-    public static void sendMsg(String mobile) throws Exception {
+
+    public static String sendMsg(String mobile) throws Exception {
+        String content = "您的短信验证码为:@,请在1分钟内按照页面提交验证码,切勿将验证码泄漏于他人.【省美科技】";// utf-8
         String result = null;
-        content = content.replace("@", RandomString.sixRandomNumber());
+        String code = RandomString.sixRandomNumber();
+        content = content.replace("@", code);
         String url = REMOTE_URL + "?mobile=" + mobile + "&content=" + URLEncoder.encode(content, "utf-8") + "&appkey="
                 + APPKEY;
 
@@ -46,5 +48,6 @@ public class SendMsg {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return code;
     }
 }

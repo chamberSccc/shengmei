@@ -67,10 +67,10 @@ public interface CommonService {
     Result delDistrict(String district);
 
     /**
-     * 删除商品规格
+     * 删除商品参数
      *
      * @param pvId
      * @return
      */
-    Result delCdSize(Integer pvId);
+    Result delParamValue(Integer pvId);
 }

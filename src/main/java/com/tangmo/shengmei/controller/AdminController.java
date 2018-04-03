@@ -372,9 +372,27 @@ public class AdminController extends BaseController{
      *                    {"code":"success"}
      */
     @PostMapping("/goods/condition")
-    public Result addGoodCondition(@RequestBody ParamValue paramValue){
+    public Result addGoodsCondition(@RequestBody ParamValue paramValue){
         paramValue.setParamType(ParamConst.GOODS_CONDITION);
         return commonService.addParamValue(paramValue);
+    }
+
+    /**
+     * @api {DELETE} /admin/goods/condition/{pvId} 删除商品规格
+     * @apiGroup Admin
+     * @apiVersion 0.0.1
+     * @apiDescription 删除商品规格
+     * @apiParam {int} pvId 主键
+     * @apiParamExample {json} 请求样例:
+     *      /admin/goods/condition/1
+     * @apiSuccess (success) {DELETE} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccess (success) {DELETE} data 返回数据
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success"}
+     */
+    @DeleteMapping("/goods/condition/{pvId}")
+    public Result delGoodsCondition(@PathVariable Integer pvId){
+        return commonService.delParamValue(pvId);
     }
 
     /**
@@ -595,11 +613,11 @@ public class AdminController extends BaseController{
     }
 
     /**
-     * @api {DELETE} /admin/goods/size/{pvId} 删除区域
+     * @api {DELETE} /admin/goods/size/{pvId} 删除商品规格
      * @apiGroup Admin
      * @apiVersion 0.0.1
-     * @apiDescription 删除区域
-     * @apiParam {int} mcId 浏览记录主键
+     * @apiDescription 删除商品规格
+     * @apiParam {int} pvId 主键
      * @apiParamExample {json} 请求样例:
      *      /admin/goods/size/1
      * @apiSuccess (success) {DELETE} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
@@ -609,7 +627,7 @@ public class AdminController extends BaseController{
      */
     @DeleteMapping("/goods/size/{pvId}")
     public Result delCdSize(@PathVariable Integer pvId){
-        return commonService.delCdSize(pvId);
+        return commonService.delParamValue(pvId);
     }
 
 }

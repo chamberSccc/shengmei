@@ -219,7 +219,12 @@ public class UserController extends BaseController{
      */
     @GetMapping("/mobile/auth/{mobile}")
     public Result getAuthCode(@PathVariable String mobile){
-         String code = RandomString.sixRandomNumber();
+        String code = null;
+        try {
+            code = SendMsg.sendMsg(mobile);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         this.getSession().setAttribute(mobile,code);
         return ResultUtil.success(code);
     }

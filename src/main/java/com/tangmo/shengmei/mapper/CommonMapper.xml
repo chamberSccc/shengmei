@@ -87,7 +87,7 @@
         DELETE FROM city_district WHERE district = #{district}
     </delete>
 
-    <delete id="deleteCdSize">
+    <delete id="deleteParamValue">
         DELETE FROM param_value WHERE pv_id = #{pvId}
     </delete>
 </mapper>

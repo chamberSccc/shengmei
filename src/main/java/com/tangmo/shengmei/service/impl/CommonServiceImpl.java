@@ -65,8 +65,8 @@ public class CommonServiceImpl implements CommonService {
     }
 
     @Override
-    public Result delCdSize(Integer pvId) {
-        commonDao.deleteCdSize(pvId);
+    public Result delParamValue(Integer pvId) {
+        commonDao.deleteParamValue(pvId);
         return ResultUtil.success();
     }
 }

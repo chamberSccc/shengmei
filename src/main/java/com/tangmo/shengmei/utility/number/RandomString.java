@@ -1,5 +1,7 @@
 package com.tangmo.shengmei.utility.number;
 
+import java.util.Random;
+
 /**
  * @author Chamber
  * @date 2018/1/17.
@@ -12,8 +14,12 @@ public class RandomString {
      * @return
      */
     public static String sixRandomNumber() {
-        int number = (int) ((Math.random() * 9 + 1) * 100000);
-        String result = String.valueOf(number);
+        Random random = new Random();
+        String result="";
+        for (int i=0;i<6;i++)
+        {
+            result+=random.nextInt(10);
+        }
         return result;
     }
 }

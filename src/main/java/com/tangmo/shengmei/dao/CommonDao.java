@@ -144,7 +144,7 @@ public interface CommonDao {
      * @param pvId
      * @return
      */
-    int deleteCdSize(Integer pvId);
+    int deleteParamValue(Integer pvId);
 
 
 }
