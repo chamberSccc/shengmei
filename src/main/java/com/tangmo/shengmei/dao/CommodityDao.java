@@ -198,4 +198,12 @@ public interface CommodityDao {
      */
     List<CdManageVO> selectSellRecord(@Param("userId") Integer userId, @Param("state") Byte state,
                                       @Param("start") Integer start, @Param("end") Integer end);
+
+    /**
+     * 商品数量减少
+     *
+     * @param cdId
+     * @return
+     */
+    int updateCdCount(@Param("cdId") Integer cdId,@Param("count") Integer count);
 }

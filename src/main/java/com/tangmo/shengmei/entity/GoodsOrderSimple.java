@@ -6,7 +6,7 @@ import java.sql.Date;
 
 /**
  * @author Chamber
- * @date 2018/3/8.
+ * @date 2018/3/8. 订单列表展示信息
  */
 @Data
 public class GoodsOrderSimple {

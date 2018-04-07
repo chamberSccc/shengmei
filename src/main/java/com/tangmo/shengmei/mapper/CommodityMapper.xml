@@ -356,4 +356,8 @@
         WHERE cd.cd_state = #{state}
         limit #{start},#{end}
     </select>
+
+    <update id="updateCdCount">
+        UPDATE commodity SET cd_count = cd_count-#{count} WHERE cd_id = #{cdId}
+    </update>
 </mapper>

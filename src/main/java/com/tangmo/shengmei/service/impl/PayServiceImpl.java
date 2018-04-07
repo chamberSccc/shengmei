@@ -1,10 +1,7 @@
 package com.tangmo.shengmei.service.impl;
 
 import com.tangmo.shengmei.constant.NotifyUrlConst;
-import com.tangmo.shengmei.dao.GoodsOrderDao;
-import com.tangmo.shengmei.dao.IllegalHandleDao;
-import com.tangmo.shengmei.dao.PayDao;
-import com.tangmo.shengmei.dao.UserDao;
+import com.tangmo.shengmei.dao.*;
 import com.tangmo.shengmei.entity.*;
 import com.tangmo.shengmei.entity.vo.UserVO;
 import com.tangmo.shengmei.service.PayService;
@@ -40,6 +37,8 @@ public class PayServiceImpl implements PayService{
     private UserDao userDao;
     @Resource
     private IllegalHandleDao illegalHandleDao;
+    @Resource
+    private CommodityDao commodityDao;
 
     String Key = "C0FB5394A44C380BE3297B69A23A7D3D";
     String appid = "wx7329bea10eb17a5e"; //应用ID 必填：true
@@ -88,7 +87,13 @@ public class PayServiceImpl implements PayService{
         pay.setOut_trade_no(map.get("out_trade_no"));
         //更新支付信息
         payDao.updateResultByNo(pay);
+        //更新订单状态
         goodsOrderDao.updateOrderDone(pay.getOut_trade_no());
+        //商品数量-1,增加买入记录
+        GoodsOrder goodsOrder = goodsOrderDao.selectByOrderNo(pay.getOut_trade_no());
+        Integer cdId = goodsOrder.getCdId();
+        commodityDao.updateCdCount(cdId,goodsOrder.getGoCount());
+        //增加卖出记录
         return 1;
     }
 
@@ -97,6 +102,11 @@ public class PayServiceImpl implements PayService{
     public Result payOrder(Integer userId,Integer goId) {
         //存储预付信息预付
         GoodsOrder goodsOrder = goodsOrderDao.selectById(goId);
+        //商品信息查询数量
+        Commodity commodity = commodityDao.selectCommodityDetail(goodsOrder.getCdId());
+        if(goodsOrder.getGoCount() > commodity.getCdCount()){
+            return ResultUtil.error("商品存货不足");
+        }
         int fee = (int) (goodsOrder.getPayFee()* 100);
         String orderNo = goodsOrder.getOrderNumber();
         WeChatPayResultBean payResultBean = getWeChatPayInfo(fee,orderNo,NotifyUrlConst.ORDER_URL);

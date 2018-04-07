@@ -16,7 +16,7 @@ public class OrderRelated {
     private static String date;
 
     /**
-     * 生成商城订单编号
+     * 生成商品订单编号
      *
      * @return
      */
@@ -35,7 +35,7 @@ public class OrderRelated {
     }
 
     /**
-     * 生成商城订单编号
+     * 生成违章代缴订单编号
      *
      * @return
      */

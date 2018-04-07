@@ -102,4 +102,8 @@
         DELETE FROM goods_order WHERE go_id = #{goId}
     </delete>
 
+    <select id="selectByOrderNo" resultMap="BaseResultMap">
+        SELECT cd_id,go_count,merchant_id,user_id FROM goods_order WHERE order_number = #{orderNum}
+    </select>
+
 </mapper>

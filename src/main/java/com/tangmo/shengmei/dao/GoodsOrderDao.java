@@ -87,10 +87,11 @@ public interface GoodsOrderDao {
     int deleteById(Integer goId);
 
     /**
-     * 查询订单编号
+     * 根据订单编号查询订单信息
      *
-     * @param goId
+     * @param orderNum
      * @return
      */
-    String selectExpress(Integer goId);
+    GoodsOrder selectByOrderNo(String orderNum);
+
 }
