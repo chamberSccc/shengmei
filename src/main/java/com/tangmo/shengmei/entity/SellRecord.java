@@ -15,9 +15,12 @@ public class SellRecord implements Serializable {
     private static final long serialVersionUID = 1L;
     private Integer srId;
     private Integer userId;
-    private Integer amount;
+    private Double amount;
     private Byte isShow;
     private Date createTime;
+    private Integer srCount;
+    private String srColor;
+    private String srSize;
 
     /**
      * 商品简要信息
@@ -27,7 +30,18 @@ public class SellRecord implements Serializable {
     private String title;
     private String content;
     private Double price;
-    private Integer srCount;
-    private String srColor;
-    private String srSize;
+
+
+
+    public SellRecord() {
+    }
+
+    public SellRecord(GoodsOrder goodsOrder){
+        this.userId = goodsOrder.getUserId();
+        this.srCount = goodsOrder.getGoCount();
+        this.goodsId = goodsOrder.getCdId();
+        this.srColor = goodsOrder.getCdColor();
+        this.srSize = goodsOrder.getCdSize();
+        this.amount = goodsOrder.getPayFee();
+    }
 }

@@ -24,9 +24,9 @@ public class ShopVerifyServiceImpl implements ShopVerifyService {
     @Resource
     private ShopVerifyDao shopVerifyDao;
 
-    private static final Byte NOT_VERIFY = 0;
-    private static final Byte VERIFY = 1;
 
+    private static final Byte VERIFY = 1;
+    private static final Byte NOT_VERIFY = 0;
     @Override
     @Transactional
     public Result addShopVerify(ShopVerify shopVerify) {

@@ -9,7 +9,6 @@ import com.tangmo.shengmei.utility.JisuData.SearchIllegalOrder;
 import com.tangmo.shengmei.utility.code.Result;
 import com.tangmo.shengmei.utility.code.ResultUtil;
 import com.tangmo.shengmei.utility.string.OrderRelated;
-import com.tangmo.shengmei.utility.string.SearchIllegal;
 import com.tangmo.shengmei.utility.string.StringUtil;
 import com.tangmo.shengmei.utility.wechat.*;
 import org.dom4j.Document;
@@ -39,6 +38,8 @@ public class PayServiceImpl implements PayService{
     private IllegalHandleDao illegalHandleDao;
     @Resource
     private CommodityDao commodityDao;
+    @Resource
+    private GoodsRecordDao goodsRecordDao;
 
     String Key = "C0FB5394A44C380BE3297B69A23A7D3D";
     String appid = "wx7329bea10eb17a5e"; //应用ID 必填：true
@@ -78,6 +79,15 @@ public class PayServiceImpl implements PayService{
         }
     }
 
+    /**
+     * 1:回调通知后更新自己的支付信息表,更新result_code为SUCCESS
+     * 2:更新订单表为已购买
+     * 3:商品数量减去此次购买数量
+     * 4:增加买入记录和卖出记录
+     * todo 通知商家
+     * @param map
+     * @return
+     */
     @Override
     @Transactional
     public int updatePayResult(Map<String, String> map) {
@@ -89,18 +99,22 @@ public class PayServiceImpl implements PayService{
         payDao.updateResultByNo(pay);
         //更新订单状态
         goodsOrderDao.updateOrderDone(pay.getOut_trade_no());
-        //商品数量-1,增加买入记录
+        //商品数量-此次购买数量,
         GoodsOrder goodsOrder = goodsOrderDao.selectByOrderNo(pay.getOut_trade_no());
         Integer cdId = goodsOrder.getCdId();
         commodityDao.updateCdCount(cdId,goodsOrder.getGoCount());
-        //增加卖出记录
+        //增加卖出记录,买入记录
+        SellRecord sellRecord = new SellRecord(goodsOrder);
+        goodsRecordDao.insertSellRecord(sellRecord);
+        BuyRecord buyRecord = new BuyRecord(goodsOrder);
+        goodsRecordDao.insertBuyRecord(buyRecord);
         return 1;
     }
 
     @Override
     @Transactional
     public Result payOrder(Integer userId,Integer goId) {
-        //存储预付信息预付
+        //查询订单信息
         GoodsOrder goodsOrder = goodsOrderDao.selectById(goId);
         //商品信息查询数量
         Commodity commodity = commodityDao.selectCommodityDetail(goodsOrder.getCdId());
@@ -161,7 +175,8 @@ public class PayServiceImpl implements PayService{
             }
             //更新代缴信息
             illegalHandleDao.updateByOutTradeNo(illegalHandle);
-            //还未处理回调
+            //// TODO: 18/4/7
+
         }
         return null;
     }

@@ -7,7 +7,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 /**
  * @author boge
  * @date 18/1/15
- * @description
+ * @description 拦截器,匹配app登录和未登录两种状态下可访问的接口
  */
 
 @Configuration

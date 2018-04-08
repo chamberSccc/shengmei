@@ -102,8 +102,12 @@
         DELETE FROM goods_order WHERE go_id = #{goId}
     </delete>
 
-    <select id="selectByOrderNo" resultMap="BaseResultMap">
-        SELECT cd_id,go_count,merchant_id,user_id FROM goods_order WHERE order_number = #{orderNum}
+    <select id="selectByOrderNo" resultMap="DetailResultMap">
+        SELECT gor.go_id,gor.cd_id,cd.title,cd.content,gor.pay_fee,cd.img_id,gor.cd_size,gor.user_id,gor.express_no,
+        gor.order_state,gor.ua_id,gor.pay_fee,gor.trans_number,gor.express_fee,gor.cd_color,gor.go_count,cd.user_id  merchant_id,
+        gor.discount_fee,gor.pay_fee,gor.pay_time,gor.createtime,gor.order_number,cd.price_now FROM goods_order gor
+        INNER JOIN commodity cd ON gor.cd_id = cd.cd_id
+        WHERE gor.order_number = #{orderNum}
     </select>
 
 </mapper>

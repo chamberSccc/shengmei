@@ -49,7 +49,7 @@ public interface ShopVerifyService {
     Result searchSvInfo(Byte state, Integer start, Integer end);
 
     /**
-     * 后台上家审核信息分页
+     * 后台商家审核信息分页
      *
      * @param state
      * @param page
