@@ -34,12 +34,14 @@ public class Commodity implements Serializable{
     private String district;
     private Byte cdClass;
     private Integer star;
+    private String imgIds;
 
     public void setImgId(String imgId) {
         if(imgId == null){
             this.imgList = new String[]{};
         }else {
             String[] list = imgId.split(",");
+            this.imgIds = imgId;
             this.imgId = list[0];
             this.imgList = list;
         }

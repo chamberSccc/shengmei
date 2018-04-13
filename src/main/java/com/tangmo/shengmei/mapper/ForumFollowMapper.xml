@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tangmo.shengmei.dao.ForumFollowDao" >
+
+    <sql id="Base_Column_List" >
+
+    </sql>
+    <insert id="insertFollow">
+        INSERT INTO forum_follow (user_id,cf_id)
+        VALUES (#{userId},#{forumId})
+    </insert>
+
+    <delete id="deleteFollow">
+        DELETE FROM forum_follow WHERE user_id = #{userId} AND cf_id = #{forumId}
+    </delete>
+
+    <select id="selectFollow">
+        SELECT id FROM forum_follow WHERE user_id = #{userId} AND cf_id = #{forumId}
+    </select>
+</mapper>

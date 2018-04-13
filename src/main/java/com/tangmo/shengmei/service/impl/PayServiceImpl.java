@@ -46,7 +46,7 @@ public class PayServiceImpl implements PayService{
     String mch_id = "1495087612";//商户号    必填：true
     String spbill_create_ip="111.230.242.116"; //终端IP 必填：true
     String device_info="WEB";//设备号  必填：false
-    String body = "shengmei goods";//商品描述 必填：true
+    String body = "省美APP商品";//商品描述 必填：true
     String trade_type="APP";//交易类型  必填：true
 
     private WeChatPayResultBean weChatPayResultBean;
@@ -68,13 +68,13 @@ public class PayServiceImpl implements PayService{
     @Override
     public Result selectByTradeNo(String tradeNo) {
         Pay pay = payDao.selectByTradeNo(tradeNo);
-        if(pay == null){
+        if(pay.getReturn_msg() == null){
             return ResultUtil.pending();
         }else{
-            if (pay.getReturn_msg()!= null){
-                return ResultUtil.error(pay.getReturn_msg());
-            }else{
+            if (pay.getReturn_msg().equals("SUCCESS")){
                 return ResultUtil.success();
+            }else{
+                return ResultUtil.error(pay.getReturn_msg());
             }
         }
     }
@@ -84,6 +84,7 @@ public class PayServiceImpl implements PayService{
      * 2:更新订单表为已购买
      * 3:商品数量减去此次购买数量
      * 4:增加买入记录和卖出记录
+     * 5:商户余额增加
      * todo 通知商家
      * @param map
      * @return
@@ -108,6 +109,8 @@ public class PayServiceImpl implements PayService{
         goodsRecordDao.insertSellRecord(sellRecord);
         BuyRecord buyRecord = new BuyRecord(goodsOrder);
         goodsRecordDao.insertBuyRecord(buyRecord);
+        //增加商户余额
+        userDao.updateBalance(goodsOrder.getMerchantId(),goodsOrder.getPayFee());
         return 1;
     }
 
@@ -134,6 +137,15 @@ public class PayServiceImpl implements PayService{
         return ResultUtil.success(payResultBean);
     }
 
+    /**
+     *
+     * @param illegalOrder
+     * @return
+     *
+     * 1:拿到微信回调信息
+     * 2:增加预支付信息
+     * 3:增加自己的违章代缴信息
+     */
     @Override
     public Result payIllegalPreOrder(IllegalOrder illegalOrder) {
         Integer userId = illegalOrder.getUserId();

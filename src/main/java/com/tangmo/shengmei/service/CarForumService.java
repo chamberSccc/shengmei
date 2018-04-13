@@ -66,6 +66,15 @@ public interface CarForumService {
     Result searchForumDetail(Integer cfId);
 
     /**
+     * 登录用户查看车友圈详情
+     *
+     * @param cfId
+     * @param userId
+     * @return
+     */
+    Result searchForumDetail(Integer cfId, Integer userId);
+
+    /**
      * 查询车友圈评论
      *
      * @param cfId
@@ -74,4 +83,22 @@ public interface CarForumService {
      * @return
      */
     Result selectForumComment(Integer cfId, Integer start, Integer end);
+
+    /**
+     * 关注车友圈
+     *
+     * @param userId
+     * @param cfId
+     * @return
+     */
+    Result followForum(Integer userId, Integer cfId);
+
+    /**
+     * 车友圈取消关注
+     *
+     * @param userId
+     * @param cfId
+     * @return
+     */
+    Result unfollowForum(Integer userId, Integer cfId);
 }

@@ -37,6 +37,7 @@
         <result column="view_count" property="viewCount" jdbcType="INTEGER"/>
         <result column="comment_count" property="commentCount" jdbcType="INTEGER"/>
         <result column="star_count" property="starCount" jdbcType="INTEGER"/>
+        <result column="isFollow" property="isFollow" jdbcType="TINYINT"/>
         <result column="createtime" property="createTime" jdbcType="TIMESTAMP"/>
     </resultMap>
 
@@ -95,7 +96,22 @@
         LEFT JOIN  (SELECT cf_id,COUNT(*) as comment_count FROM forum_comment GROUP BY cf_id) comment
         ON cf.cf_id = comment.cf_id
         LEFT JOIN (SELECT cf_id,COUNT(*) as star_count FROM forum_star GROUP BY cf_id) star
-        ON cf.cf_id = star.cf_id WHERE  cf.cf_id = #{cfId}
+        ON cf.cf_id = star.cf_id
+        WHERE  cf.cf_id = #{cfId}
+    </select>
+
+    <select id="selectByIdAndUserId" resultMap="DetailResultMap">
+        SELECT cf.cf_id,cf.content,cf.media_id,cf.user_id,ui.username,ui.avatar_id,cf.createtime,
+        cf.view_count,ifnull(comment.comment_count,0) comment_count,ifnull(star.star_count,0) star_count,
+        if(ff.id is NULL ,0,1) isFollow
+        FROM car_forum cf INNER JOIN user_info ui ON cf.user_id = ui.user_id
+        LEFT JOIN  (SELECT cf_id,COUNT(*) as comment_count FROM forum_comment GROUP BY cf_id) comment
+        ON cf.cf_id = comment.cf_id
+        LEFT JOIN (SELECT cf_id,COUNT(*) as star_count FROM forum_star GROUP BY cf_id) star
+        ON cf.cf_id = star.cf_id
+        LEFT JOIN (SELECT id,cf_id FROM forum_follow WHERE user_id = #{userId}
+        AND cf_id = #{cfId}) ff ON cf.cf_id = ff.cf_id
+        WHERE  cf.cf_id = #{cfId}
     </select>
 
     <select id="selectForumComment" resultMap="CommentResultMap">

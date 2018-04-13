@@ -111,7 +111,7 @@
             </trim>
             <trim prefix="values (" suffix=")" suffixOverrides=",">
                 <if test="imgId != null">
-                    #{imgId,jdbcType=VARCHAR},
+                    #{imgIds,jdbcType=VARCHAR},
                 </if>
                 <if test="userId != null">
                     #{userId,jdbcType=INTEGER},
@@ -347,13 +347,14 @@
         UPDATE commodity SET cd_state = #{state} WHERE cd_id = #{cdId}
     </update>
 
-    <select id="selectSellRecord" resultMap="CdManageResultMap">
+    <select id="selectCdManageRecord" resultMap="CdManageResultMap">
         SELECT cd.cd_id,cd.price_now,cd.title,cd.img_id,
         cd.cd_count,ifnull(sell.sell_count,0) sell_count FROM commodity cd
-        LEFT JOIN
-        (SELECT goods_id,COUNT(goods_id) sell_count FROM sell_record WHERE user_id = #{userId} GROUP BY goods_id) sell
+        INNER JOIN
+        (SELECT goods_id,COUNT(goods_id) sell_count FROM sell_record WHERE user_id = #{userId}
+          GROUP BY goods_id) sell
         ON cd.cd_id = sell.goods_id
-        WHERE cd.cd_state = #{state}
+        WHERE cd.cd_state = #{state} AND cd.cd_type != 7
         limit #{start},#{end}
     </select>
 

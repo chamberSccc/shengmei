@@ -118,7 +118,7 @@
     </update>
 
     <update id="updateMobile">
-        UPDATE user_info SET mobile = #{mobile} WHERE mobile = #{mobile}
+        UPDATE user_info SET mobile = #{mobile} WHERE user_id = #{userId}
     </update>
 
     <select id="selectByMobile" resultMap="BaseResultMap">
@@ -183,4 +183,8 @@
     <select id="selectTokenByUserId" resultType="java.lang.String">
         SELECT token FROM user_info WHERE user_id = #{userId}
     </select>
+
+    <update id="updateBalance">
+        UPDATE user_info SET balance = balance+#{fee} WHERE user_id = #{userId}
+    </update>
 </mapper>

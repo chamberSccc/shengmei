@@ -84,6 +84,7 @@ public class PayController {
         }
         //商品数量-1,通知商家,检查库存是否足够
         payService.updatePayResult(smap);
+        System.out.println("微信回调成功");
         return returnXML(smap.get("return_code"));
     }
 

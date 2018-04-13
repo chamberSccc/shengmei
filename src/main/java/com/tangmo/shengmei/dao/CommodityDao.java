@@ -196,8 +196,8 @@ public interface CommodityDao {
      * @param end
      * @return
      */
-    List<CdManageVO> selectSellRecord(@Param("userId") Integer userId, @Param("state") Byte state,
-                                      @Param("start") Integer start, @Param("end") Integer end);
+    List<CdManageVO> selectCdManageRecord(@Param("userId") Integer userId, @Param("state") Byte state,
+                                          @Param("start") Integer start, @Param("end") Integer end);
 
     /**
      * 商品数量减少

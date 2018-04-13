@@ -23,7 +23,10 @@ public class SearchLicense {
             result = HttpUtil.sendGet(url);
             JSONObject json = JSONObject.parseObject(result);
             if (json.getIntValue("status") != 0) {
-                return null;
+                String msg = json.getString("msg");
+                LicenseScore licenseScore1 = new LicenseScore();
+                licenseScore1.setMsg(msg);
+                return licenseScore1;
             } else {
                 JSONObject resultarr = json.getJSONObject("result");
                 licenseScore = new LicenseScore();

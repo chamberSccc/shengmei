@@ -20,6 +20,7 @@ public class ForumDetailVO {
     private Integer viewCount;
     private Integer starCount;
     private Integer commentCount;
+    private Byte isFollow;
     private Date createTime;
     private String[] imgList;
 

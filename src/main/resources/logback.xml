@@ -26,7 +26,7 @@
 
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!--日志文件输出的文件名-->
-            <FileNamePattern>${LOGS}/emls_log_%d{yyyy-MM-dd}.log</FileNamePattern>
+            <FileNamePattern>${LOGS}/shengmei_log_%d{yyyy-MM-dd}.log</FileNamePattern>
             <!--最大保留天数-->
             <MaxHistory>30</MaxHistory>
         </rollingPolicy>
@@ -45,7 +45,7 @@
 
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!--日志文件输出的文件名-->
-            <FileNamePattern>${LOGS}/emls_db_log_%d{yyyy-MM-dd}.log</FileNamePattern>
+            <FileNamePattern>${LOGS}/shengmei_db_log_%d{yyyy-MM-dd}.log</FileNamePattern>
             <!--最大保留天数-->
             <MaxHistory>30</MaxHistory>
         </rollingPolicy>
@@ -56,6 +56,9 @@
         </triggeringPolicy>
     </appender>
 
+    <logger name="com.tangmo.shengmei.aop" level="INFO" addtivity="false">
+        <appender-ref ref="FILE"/>
+    </logger>
     <logger name="com.tangmo.shengmei.controller..*" level="INFO" addtivity="false">
         <appender-ref ref="FILE"/>
     </logger>

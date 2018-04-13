@@ -44,7 +44,7 @@ public interface UserDao {
     /**
      * 更新用户的商家状态
      *
-     * @param userId      用户id
+     * @param userId 用户id
      * @param status 状态
      * @return
      */
@@ -128,8 +128,18 @@ public interface UserDao {
 
     /**
      * 查询登录信息
+     *
      * @param userId
      * @return
      */
     User selectLoginById(Integer userId);
+
+    /**
+     * 增加余额
+     *
+     * @param userId
+     * @param fee
+     * @return
+     */
+    int updateBalance(@Param("userId") Integer userId,@Param("fee") Double fee);
 }

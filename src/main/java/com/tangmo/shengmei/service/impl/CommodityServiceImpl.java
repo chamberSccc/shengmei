@@ -196,7 +196,7 @@ public class CommodityServiceImpl implements CommodityService {
 
     @Override
     public Result searchSellRecord(Integer userId, Byte state, Integer start, Integer end) {
-        return ResultUtil.success(commodityDao.selectSellRecord(userId,state, start, end));
+        return ResultUtil.success(commodityDao.selectCdManageRecord(userId,state, start, end));
     }
 
     private String[] thansImgToArray(String src){

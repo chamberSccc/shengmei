@@ -11,10 +11,10 @@ public class NotifyUrlConst {
     /**
      * 商城订单回调接口地址
      */
-    public static final String ORDER_URL ="http://hjcriv.natappfree.cc/pay/order/callback";
+    public static final String ORDER_URL =" http://8ixnc8.natappfree.cc/pay/order/callback";
 
     /**
      * 违章代缴订单回调接口地址
      */
-    public static final String ILLEGAL_URL = "http://hjcriv.natappfree.cc/pay/illegal/callback";
+    public static final String ILLEGAL_URL = "111.230.242.116:8080/pay/illegal/callback";
 }

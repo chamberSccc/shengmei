@@ -48,8 +48,12 @@
     </select>
 
     <insert id="insertAccessCount">
-        INSERT INTO access_count (ip) VALUES (#{ip})
+        INSERT INTO access_count(ip) VALUE #{ip}
     </insert>
+
+    <select id="selectAccessIp" resultType="java.lang.String">
+        SELECT ip FROM access_count WHERE ip = #{ip} AND DATE(createtime) = curdate()
+    </select>
 
     <insert id="insertParamValue" parameterType="com.tangmo.shengmei.entity.ParamValue">
         INSERT INTO param_value (param_type,param_value)

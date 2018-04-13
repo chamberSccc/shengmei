@@ -15,4 +15,5 @@ public class LicenseScore {
     private String licenseId;
     private String Score;
     private String validDate;
+    private String msg;
 }

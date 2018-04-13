@@ -226,6 +226,10 @@ public class CarForumController extends BaseController{
      */
     @GetMapping("/detail/{cfId}")
     public Result getForumDetail(@PathVariable Integer cfId){
+        Object userId = getRequest().getHeader("userId");
+        if(userId != null){
+            return carForumService.searchForumDetail(cfId, (Integer) userId);
+        }
         return carForumService.searchForumDetail(cfId);
     }
 
@@ -245,7 +249,7 @@ public class CarForumController extends BaseController{
      *                    {"code":"success",
      *                     "data":{
      *                     [{
-     *                        fsId: 主键,
+     *                        cfId: 主键,
      *                        content: "评论内容",
      *                        userId:"用户Id",
      *                        userName:"评论数",
@@ -258,5 +262,42 @@ public class CarForumController extends BaseController{
     @GetMapping("/comment/{cfId}/{start}/{end}")
     public Result getForumComment(@PathVariable Integer cfId,@PathVariable Integer start,@PathVariable Integer end){
         return carForumService.selectForumComment(cfId,start,end);
+    }
+
+    /**
+     * @api {POST} /moments/follow 关注车友圈
+     * @apiGroup Forum
+     * @apiVersion 0.0.1
+     * @apiDescription 增加车友圈
+     * @apiParamExample {json} 请求样例:
+     *                   {
+     *                      userId:"用户Id",
+     *                      cfId:"车友圈Id"
+     *                   }
+     * @apiSuccess (success) {POST} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccess (success) {POST} data 返回数据
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success"}
+     */
+    @PostMapping("/follow")
+    public Result followForum(Integer userId,Integer cfId){
+        return carForumService.followForum(userId, cfId);
+    }
+
+    /**
+     * @api {DELETE} /moments/unfollow/{userId}/{cfId} 关注车友圈
+     * @apiGroup Forum
+     * @apiVersion 0.0.1
+     * @apiDescription 增加车友圈
+     * @apiParamExample {json} 请求样例:
+     *                   /moments/unfollow/1/1
+     * @apiSuccess (success) {DELETE} code success:请求成功； fail:请求失败；offline：掉线；param_error：请求参数错误;
+     * @apiSuccess (success) {DELETE} data 返回数据
+     * @apiSuccessExample {json} 返回样例:
+     *                    {"code":"success"}
+     */
+    @DeleteMapping("/unfollow/{userId}/{cfId}")
+    public Result unFollowForum(@PathVariable Integer userId,@PathVariable Integer cfId){
+        return carForumService.unfollowForum(userId, cfId);
     }
 }

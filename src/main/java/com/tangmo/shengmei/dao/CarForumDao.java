@@ -73,12 +73,20 @@ public interface CarForumDao {
     int updateViewCount(Integer cfId);
 
     /**
-     * 增加详情
+     * 查看详情
      *
      * @param cfId
      * @return
      */
     ForumDetailVO selectById(Integer cfId);
+
+    /**
+     * 用户查看详情
+     *
+     * @param cfId
+     * @return
+     */
+    ForumDetailVO selectByIdAndUserId(Integer cfId,Integer userId);
 
     /**
      * 查询车友圈评论
