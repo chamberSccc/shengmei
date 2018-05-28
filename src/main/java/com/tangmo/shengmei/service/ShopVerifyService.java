@@ -66,7 +66,7 @@ public interface ShopVerifyService {
     Result changeSvInfo(ShopVerify shopVerify);
 
     /**
-     * 修改商家审核信息
+     * 修改商家审核状态
      *
      * @param svId
      * @param state

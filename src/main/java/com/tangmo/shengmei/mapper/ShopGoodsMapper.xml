@@ -160,6 +160,11 @@
         FROM shop_goods WHERE service_type = #{type} limit #{start},#{end}
     </select>
 
+    <select id="selectUserShopGoods" resultMap="SimpleResultMap">
+        SELECT sg_id,img_id,shop_name,shop_content,price,city,district
+        FROM shop_goods WHERE user_id = #{userId} limit #{start},#{end}
+    </select>
+
     <select id="selectByCondition" resultMap="SimpleResultMap">
         SELECT sg_id,img_id,shop_name,shop_content,price,city,district
         FROM shop_goods WHERE service_type = #{type}

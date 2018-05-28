@@ -50,6 +50,11 @@ public class ShopGoodsServiceImpl implements ShopGoodsService {
     }
 
     @Override
+    public Result searchUserService(Integer userId, Integer start, Integer end) {
+        return ResultUtil.success(shopGoodsDao.selectUserShopGoods(userId, start, end));
+    }
+
+    @Override
     public Result searchServiceDetail(Integer sgId) {
         return ResultUtil.success(shopGoodsDao.selectById(sgId));
     }

@@ -86,7 +86,7 @@ public interface CarForumDao {
      * @param cfId
      * @return
      */
-    ForumDetailVO selectByIdAndUserId(Integer cfId,Integer userId);
+    ForumDetailVO selectByIdAndUserId(@Param("cfId") Integer cfId,@Param("userId") Integer userId);
 
     /**
      * 查询车友圈评论

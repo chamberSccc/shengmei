@@ -74,6 +74,14 @@ public interface CommonDao {
     int insertAccessCount(String ip);
 
     /**
+     * 查询访问ip
+     *
+     * @param ip
+     * @return
+     */
+    String selectAccessIp(String ip);
+
+    /**
      * 增加参数值
      *
      * @param paramValue

@@ -48,7 +48,7 @@
                 goods_id,
             </if>
             <if test="brCount != null">
-                br_ount,
+                br_count,
             </if>
             <if test="brColor != null">
                 br_color,
@@ -98,7 +98,7 @@
                 goods_id,
             </if>
             <if test="srCount != null">
-                sr_ount,
+                sr_count,
             </if>
             <if test="srColor != null">
                 sr_color,

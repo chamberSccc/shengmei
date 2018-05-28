@@ -92,6 +92,11 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
+    public String searchAccessIp(String ip) {
+        return commonDao.selectAccessIp(ip);
+    }
+
+    @Override
     public Boolean verifyToken(Integer userId, String token) {
         String adminToken = adminDao.selectTokenById(userId);
         if(adminToken == null){

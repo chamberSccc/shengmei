@@ -16,10 +16,10 @@
     </insert>
 
     <select id="selectByTradeNo" resultMap="BaseResultMap">
-        SELECT out_trade_no,return_msg,user_id FROM pay_info WHERE out_trade_no = #{tradeNo}
+        SELECT out_trade_no,result_code,user_id FROM pay_info WHERE out_trade_no = #{tradeNo}
     </select>
 
-    <update id="updateByTradeNo">
+    <update id="updateResultByNo">
         UPDATE pay_info SET result_code = #{result_code},return_msg = #{return_msg} WHERE
         out_trade_no = #{out_trade_no}
     </update>

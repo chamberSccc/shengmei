@@ -6,6 +6,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
+
 /**
  * @author boge
  * @date 18/1/5
@@ -31,6 +35,33 @@ public class FileController extends BaseController{
     }
 
     /**
+     * 播放视频
+     * @param response
+     * @param rfId
+     */
+    @GetMapping("/video/{rfId}")
+    public void playVideo(HttpServletRequest request,HttpServletResponse response,@PathVariable String rfId){
+        imgFileService.playVideo(request,response, rfId);
+    }
+
+
+    public void player2(HttpServletRequest request, HttpServletResponse response){String path  = request.getServletPath();
+//        path = path.replaceAll("/crm/player", "");
+//        String recordPath = "";
+//        if(path.contains("ivr")){
+//            recordPath = System.getProperty("app");
+//        }else{
+//            recordPath=ConfigFactory.getString(CommonConstants.RECORD_PATH); //硬盘存放路径
+//        }
+//        path = recordPath+path;
+
+
+    }
+
+
+
+
+    /**
      * @api {POST} /file/upload/{userId} 上传用户图片
      * @apiGroup File
      * @apiVersion 0.0.1
@@ -47,5 +78,16 @@ public class FileController extends BaseController{
     @PostMapping("/upload/{userId}")
     public Result loadFeedbackImg(@PathVariable Integer userId, MultipartFile file){
         return imgFileService.uploadImg(userId,file);
+    }
+
+    @PostMapping("/video/upload/{userId}")
+    public String loadVideo(@PathVariable Integer userId, MultipartFile file){
+        Result result = imgFileService.uploadImg(userId,file);
+        String code = result.getCode();
+        if(code.equals("success")){
+            return result.getData().toString();
+        }else{
+            return null;
+        }
     }
 }

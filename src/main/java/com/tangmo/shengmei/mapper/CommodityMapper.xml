@@ -350,11 +350,11 @@
     <select id="selectCdManageRecord" resultMap="CdManageResultMap">
         SELECT cd.cd_id,cd.price_now,cd.title,cd.img_id,
         cd.cd_count,ifnull(sell.sell_count,0) sell_count FROM commodity cd
-        INNER JOIN
+        LEFT JOIN
         (SELECT goods_id,COUNT(goods_id) sell_count FROM sell_record WHERE user_id = #{userId}
           GROUP BY goods_id) sell
         ON cd.cd_id = sell.goods_id
-        WHERE cd.cd_state = #{state} AND cd.cd_type != 7
+        WHERE cd.cd_state = #{state} AND cd.cd_type != 7 AND cd.user_id = #{userId}
         limit #{start},#{end}
     </select>
 

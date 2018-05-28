@@ -250,8 +250,16 @@ public class ShopGoodsController extends BaseController{
      *                    {"code":"success"}
      */
     @PutMapping("/goods")
-    public Result changeCommodity(@RequestBody Commodity commodity){
+    public Result changeShopGoods(@RequestBody Commodity commodity){
         return commodityService.changeCommodity(commodity,null);
+    }
+
+    /**
+     * 查询发布的服务信息
+     */
+    @GetMapping("/service/{userId}/{start}/{end}")
+    public Result getUserShopGoods(@PathVariable Integer userId,@PathVariable Integer start,@PathVariable Integer end){
+        return shopGoodsService.searchUserService(userId, start, end);
     }
 
 }

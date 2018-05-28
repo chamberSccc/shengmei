@@ -55,9 +55,12 @@ public class TokenInterceptor extends HandlerInterceptorAdapter {
             userService = (UserService) factory.getBean("userService");
         }
         //增加日活量
-//        if (ip != null) {
-//            adminService.addAccessCount(ip);
-//        }
+        if (ip != null) {
+            String result = adminService.searchAccessIp(ip);
+            if(result!=null){
+                adminService.addAccessCount(ip);
+            }
+        }
         String checkToken = userService.selectToken(userId);
         //检查头部请求
         if (!checkToken.equals(token)) {

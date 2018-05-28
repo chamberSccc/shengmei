@@ -20,7 +20,6 @@ public class ShopServiceVO {
     private String shopName;
     private String shopContent;
     private String imgId;
-    private String[] imgList;
     private Byte serviceType;
     private Double price;
     private String discountNote;
@@ -28,11 +27,15 @@ public class ShopServiceVO {
     private String address;
     private Date createtime;
 
+    private String[] imgList;
+    private String imgIds;
+
     public void setImgId(String imgId) {
         if(imgId == null){
             this.imgList = new String[]{};
         }else {
             String[] list = imgId.split(",");
+            this.imgIds = imgId;
             this.imgId = list[0];
             this.imgList = list;
         }

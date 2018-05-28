@@ -75,6 +75,14 @@ public interface AdminService {
     void addAccessCount(String ip);
 
     /**
+     * 查询今天是否访问过
+     *
+     * @param ip
+     * @return
+     */
+    String searchAccessIp(String ip);
+
+    /**
      * 查询管理员登录信息,验证token
      *
      * @param userId

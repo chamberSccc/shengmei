@@ -68,13 +68,13 @@ public class PayServiceImpl implements PayService{
     @Override
     public Result selectByTradeNo(String tradeNo) {
         Pay pay = payDao.selectByTradeNo(tradeNo);
-        if(pay.getReturn_msg() == null){
+        if(pay.getResult_code() == null){
             return ResultUtil.pending();
         }else{
-            if (pay.getReturn_msg().equals("SUCCESS")){
+            if (pay.getResult_code().equals("SUCCESS")){
                 return ResultUtil.success();
             }else{
-                return ResultUtil.error(pay.getReturn_msg());
+                return ResultUtil.error(pay.getResult_code());
             }
         }
     }

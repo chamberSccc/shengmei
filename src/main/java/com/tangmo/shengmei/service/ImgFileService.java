@@ -5,6 +5,9 @@ import com.tangmo.shengmei.utility.code.Result;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 /**
  * @author boge
  * @date 17/12/22
@@ -39,6 +42,14 @@ public interface ImgFileService {
      * @return
      */
     ResponseEntity<byte[]> downloadFile(String rfId, String userAgent);
+
+    /**
+     * 播放视频
+     *
+     * @param response
+     * @param rfId
+     */
+    void playVideo(HttpServletRequest request,HttpServletResponse response, String rfId);
 
     /**
      * 上传文件

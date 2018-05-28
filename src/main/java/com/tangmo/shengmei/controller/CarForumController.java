@@ -228,7 +228,7 @@ public class CarForumController extends BaseController{
     public Result getForumDetail(@PathVariable Integer cfId){
         Object userId = getRequest().getHeader("userId");
         if(userId != null){
-            return carForumService.searchForumDetail(cfId, (Integer) userId);
+            return carForumService.searchForumDetail(cfId, Integer.valueOf(userId.toString()));
         }
         return carForumService.searchForumDetail(cfId);
     }
